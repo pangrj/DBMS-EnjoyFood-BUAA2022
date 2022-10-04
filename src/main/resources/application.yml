@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/databasetest
+    username: root
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+mybatis:
+    mapper-locations: classpath:Mapper/*.xml
+    type-aliases-package: com.example.databasebackend.Entity
+
+server:
+  port: 18099
+
