@@ -8,4 +8,10 @@
     <insert id="registerNewStudent" parameterType="Student">
         insert into `student` (`s_id`, `s_password`) values (#{s_id}, #{s_password})
     </insert>
+
+    <update id="modifyStudentMessage" parameterType="Student">
+        update `student`
+        set s_password = #{s_password}, s_name = #{s_name}, s_dorm = #{s_dorm}, s_gender = #{s_gender}
+        where s_id = #{s_id}
+    </update>
 </mapper>

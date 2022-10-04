@@ -20,4 +20,9 @@ public class StudentServiceImp implements StudentService {
     public void registerNewStudent(Student studentNew) {
         studentDao.registerNewStudent(studentNew);
     }
+
+    @Override
+    public void modifyStudentMessage(Student student) {
+        studentDao.modifyStudentMessage(student);
+    }
 }
