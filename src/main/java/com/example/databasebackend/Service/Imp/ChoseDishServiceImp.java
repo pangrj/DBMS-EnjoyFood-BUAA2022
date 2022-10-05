@@ -21,4 +21,9 @@ public class ChoseDishServiceImp implements ChoseDishService {
     public void deleteChose(Integer s_id, Integer d_id) {
         choseDishDao.deleteChose(s_id, d_id);
     }
+
+    @Override
+    public ChoseMenu search(Integer s_id, Integer d_id) {
+        return choseDishDao.search(s_id, d_id);
+    }
 }

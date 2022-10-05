@@ -64,8 +64,18 @@ public class ChoseDishController {
         Map<String, Object> ret = new HashMap<>();
 
         try {
+            ChoseMenu choseMenu = choseDishService.search(s_id, d_id);
             Student student = studentService.selectById(s_id);
-            if (student == null) {
+            if (choseMenu == null) {
+                ret.put("success", false);
+                ret.put("message", "No Such Order!");
+            } else {
+                choseDishService.deleteChose(s_id, d_id);
+                ret.put("success", true);
+                ret.put("message", "Delete Success!");
+            }
+
+            /*if (student == null) {
                 ret.put("success", false);
                 ret.put("message", "No Such Student!");
             } else {
@@ -78,7 +88,7 @@ public class ChoseDishController {
                     ret.put("success", true);
                     ret.put("message", "Delete Success!");
                 }
-            }
+            }*/
         } catch (Exception e) {
             e.printStackTrace();
             ret.put("success", false);

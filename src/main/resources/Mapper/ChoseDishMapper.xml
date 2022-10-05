@@ -10,5 +10,10 @@
         DELETE FROM `chose_menu`
         WHERE d_id = #{d_id} AND s_id = #{s_id}
     </delete>
+    <select id="search" resultType="ChoseMenu">
+        SELECT * FROM `chose_menu`
+        WHERE d_id = #{d_id} AND s_id = #{s_id}
+    </select>
+
 </mapper>
 

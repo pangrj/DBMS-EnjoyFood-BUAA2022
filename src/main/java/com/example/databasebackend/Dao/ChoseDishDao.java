@@ -8,4 +8,6 @@ public interface ChoseDishDao {
     void addChose(ChoseMenu choseMenu);
 
     void deleteChose(Integer s_id, Integer d_id);
+
+    ChoseMenu search(Integer s_id, Integer d_id);
 }
