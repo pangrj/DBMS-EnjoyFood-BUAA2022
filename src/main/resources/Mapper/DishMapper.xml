@@ -4,4 +4,10 @@
     <select id="searchByName" resultType="Dish">
         select * from `menu` where d_name = #{d_name}
     </select>
+    <select id="showAllDishes" resultType="Dish">
+        select * from `menu`
+    </select>
+    <select id="searchById" resultType="Dish">
+        select * from `menu` where d_id = #{d_id}
+    </select>
 </mapper>

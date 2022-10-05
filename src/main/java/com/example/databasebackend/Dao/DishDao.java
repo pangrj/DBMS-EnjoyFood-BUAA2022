@@ -8,4 +8,8 @@ import java.util.List;
 @Mapper
 public interface DishDao {
     List<Dish> searchByName(String d_name);
+
+    List<Dish> showAllDishes();
+
+    Dish searchById(Integer d_id);
 }

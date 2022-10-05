@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtdd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.databasebackend.Dao.ChoseDishDao">
+    <insert id="addChose" parameterType="ChoseMenu">
+        insert into `chose_menu`
+        (id,s_id, d_id)
+        values (#{id},#{s_id},#{d_id})
+    </insert>
+    <delete id="deleteChose">
+        DELETE FROM `chose_menu`
+        WHERE d_id = #{d_id} AND s_id = #{s_id}
+    </delete>
+</mapper>
+
