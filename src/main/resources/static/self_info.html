@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>UserInfo</title>
+    <style type="text/css">
+        body {
+            background: url('background_AniRes.jpg') no-repeat;
+            background-size: 100% 130%;
+        }
+
+        .Content-Main {
+            max-width: 500px;
+            margin: auto;
+            margin-top: 10%;
+            border: none;
+            border-radius: 5px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+            text-shadow: 1px 1px 1px #444;
+            /* color: #D3D3D3; */
+            color: #ffffff90;
+            background-color: #00000060;
+        }
+
+        #title_bar {
+            display: block;
+            height: 120px;
+        }
+
+        .title {
+            width: 50%;
+            display: inline;
+            float: left;
+        }
+
+        .title h1 {
+            padding: 8px 0px 10px 10px;
+            display: block;
+            /* border-bottom: 1px solid #444; */
+        }
+
+        .text1 {
+            font-size: medium;
+            margin-left: 3px;
+            border-bottom: 1px solid #444;
+        }
+
+        .fileInputContainer {
+            height: 99px;
+            width: 99px;
+            margin: 20px 20px 20px 20px;
+            border: none;
+            background-color: #D3D3D3;
+            background: url("empty_head_white.png");
+            background-size: cover;
+            overflow: hidden;
+            position: relative;
+            display: inline;
+            float: right;
+        }
+
+        .fileInput {
+            height: 106px;
+            border: none;
+            font-size: 300px;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            cursor: pointer;
+            position: absolute;
+        }
+
+        .Content-Main label {
+            margin: 0px 0px 5px;
+            display: block;
+        }
+
+        .Content-Main label>span {
+            width: 15%;
+            float: left;
+            text-align: right;
+            padding-right: 10px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .Main-sex {
+            padding-right: 13px;
+            padding-bottom: 13px;
+            font-weight: bold;
+            line-height: 4px;
+        }
+
+        .Main-sex input[type=checkbox] {
+            margin-top: 6px;
+            vertical-align: middle;
+        }
+
+        .Content-Main input[type="text"],
+        .Content-Main input[type="email"],
+        .Content-Main textarea {
+            height: 25px;
+            width: 70%;
+            line-height: 15px;
+            padding: 5px 0px 5px 5px;
+            margin-bottom: 16px;
+            margin-right: 6px;
+            margin-top: 2px;
+            border: none;
+            border-radius: 2px;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            outline: 0 none;
+            background: #DFDFDF;
+            color: #525252;
+        }
+
+        .Content-Main textarea {
+            height: 100px;
+            width: 70%;
+            padding: 5px 0px 0px 5px;
+        }
+
+        .Content-Main .submit {
+            /* padding: 5px 20px 5px 20px;
+            margin-bottom: 8px;
+            border: none;
+            border-radius: 4px;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px #FFE477;
+            box-shadow: 1px 1px 1px #3D3D3D;
+            -moz-box-shadow: 1px 1px 1px #3D3D3D;
+            -webkit-box-shadow: 1px 1px 1px #3D3D3D;
+            color: #585858;
+            background: #f6ff0a;
+            font-size: medium; */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 60%;
+            height: 40px;
+            border-radius: 10px;
+            border: 0;
+            color: #fff;
+            text-align: center;
+            line-height: 30px;
+            font-size: 18px;
+            background-image: linear-gradient(to left, #30cfd0, #330867);
+        }
+
+        .Content-Main .submit:hover {
+            color: #333;
+            background-color: #EBEBEB;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="Content-Main">
+        <div id="title_bar">
+            <div class="title">
+                <h1>个人信息</h1>
+                <span class="text1">请在文本框中完善您的个人信息：</span>
+            </div>
+            <div class="fileInputContainer">
+                <!--两个div并排显示-->
+                <input class="fileInput" id="" type="file" name="">
+            </div>
+        </div>
+        <form action="" method="post" class="form-userInfo"></form>
+        <label>
+            <span>姓名:</span>
+            <input type="text" name="name" placeholder="Your Full Name">
+        </label>
+        <label class="Main-sex">
+            <span>性别:</span>
+            <input type="radio" checked class="man" name="sex">男
+            <input type="radio" class="women" name="sex">女
+        </label>
+        <label>
+            <span>邮箱:</span>
+            <input type="email" name="email" placeholder="@.com">
+        </label>
+        <label>
+            <span>电话:</span>
+            <input type="text" name="phone" placeholder="Please input 11 number">
+        </label>
+        <label>
+            <span>Message:</span>
+            <textarea id="message" name="message" placeholder="Your message to us"></textarea>
+        </label>
+        <label style="text-align: center;">
+            <input type="button" class="submit" value="提交">
+        </label>
+        </form>
+    </div>
+</body>
+
+</html>

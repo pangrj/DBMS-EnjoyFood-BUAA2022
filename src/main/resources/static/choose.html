@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <title>Choose</title>
+    <style>
+        body {
+            background: url('take_order.jpg') no-repeat;
+            background-size: 100% 200%;
+        }
+
+
+        .jump_buttons {
+            height: 70px;
+            width: 80%;
+            margin: 20px auto 0 auto;
+            /* vertical-align: middle; */
+        }
+
+        .jump_buttons button {
+            /* display: block; */
+            width: 18%;
+            float: right;
+            margin-top: 10px;
+            margin-right: 20px;
+            background-color: #00000060;
+            color: #ccc;
+            border-radius: 18px;
+            font-size: medium;
+        }
+
+        .search_box {
+            height: 70px;
+            width: 80%;
+            margin: 15px auto 0 auto;
+        }
+
+        .search_form {
+            position: relative;
+        }
+
+        .search {
+            width: 80%;
+            height: 45px;
+            border-radius: 18px;
+            outline: none;
+            border: 1px solid #ccc;
+            position: absolute;
+            left: 10%;
+            padding-left: 20px;
+            padding-top: 5px;
+            font-size: large;
+        }
+
+        .btn {
+            height: 40px;
+            width: 40px;
+            position: absolute;
+            background: url("search_btn.jpg") no-repeat;
+            background-size: cover;
+            top: 6px;
+            right: 9%;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .table {
+            height: 200px;
+        }
+    </style>
+    <script>
+        function gotoInfo() {
+            window.location.href = "self_info.html";
+        }
+
+    </script>
+</head>
+
+<body onload="showTable()">
+<div class="jump_buttons">
+    <button onclick="gotoInfo()" style="float:right;" title="查看修改与个人信息"> Information</button>
+</div>
+<div class="search_box">
+    <form action="" class="search_form">
+        <input type="text" class="search" id="search_box" placeholder="搜索">
+        <input type="button" name="" id="" class="btn" onclick="searchFood()">
+    </form>
+</div>
+<div class="table">
+
+</div>
+<section class="result">
+    <table id="result_table" style="width: 1200px; margin-left: 150px">
+        <tr>
+            <th align="center" valign="middle">菜品编号</th>
+            <th align="center" valign="middle">菜品名称</th>
+            <th align="center" valign="middle">菜品种类</th>
+            <th align="center" valign="middle">菜系</th>
+            <th align="center" valign="middle">热量</th>
+            <th align="center" valign="middle">价格</th>
+        </tr>
+        <!-- <tr v-for= "p in list">
+            <td>{{ p.id }}</td>
+            <td>{{ p.name }}</td>
+            <td>{{ p.type }}</td>
+            <td>{{ p.type2 }}</td>
+            <td>{{ p.calory }}</td>
+            <td>{{ p.price }}</td>
+        </tr> -->
+        <tbody id="tbodydata"></tbody>
+    </table>
+</section>
+
+</body>
+
+<script>
+    function showTable() {
+        $.ajax({
+            type: 'get',
+            async: true,
+            url: "http://localhost:18099/menu",
+            dataType: 'json',
+            success: function (data) {
+                var str = "";
+                alert("success");
+                alert(data);
+                alert(JSON.stringify(data.dishes));
+                for (i in data.dishes) {
+                    alert(JSON.stringify(i));
+                    alert(JSON.stringify(data.dishes[i].d_id));
+                    str += "<tr>" +
+                        "<td align='center'>" + data.dishes[i].d_id + "</td>" +
+                        "<td align='center'>" + data.dishes[i].d_name + "</td>" +
+                        "<td align='center'>" + data.dishes[i].d_category + "</td>" +
+                        "<td align='center'>" + data.dishes[i].d_cuisine + "</td>" +
+                        "<td align='center'>" + data.dishes[i].d_calories + "</td>" +
+                        "<td align='center'>" + data.dishes[i].d_price + "</td>" +
+                        // "<td>\n" +
+                        // "<a href=\"#\">修改</a>\n" +
+                        // "<a href=\"#\">删除</a>\n" +
+                        // "</td>" +
+                        "<td>" + "<input type=\"checkbox\" onclick = \"selectFood()\"/>" + "</td>"
+                    "</tr>";
+                }
+                document.getElementById("tbodydata").innerHTML = str;
+            },
+            error: function (data) {
+                alert("wrong!");
+            }
+        });
+    }
+
+    function searchFood() {
+        var searchInfo = $("#search_box").val();//通过id获取输入框中用户输入的值
+        $.ajax({
+            type: 'post',
+            url: 'http://localhost:18099',
+            //这里的/login对应LoginServlet类中注解的urlPatterns="/login"
+            data: {'searchfo': searchInfo},
+            traditional: true,
+            async: false,
+            dataType: 'json',
+            success: function (data) {//成功的事件
+                alert("成功提交搜索数据！");
+            },
+            error: function (data) {//失败的事件
+                alert("搜索内容提交失败！");
+            }
+        });
+        showTable();
+    }
+
+    function selectFood() {
+        var select_id = $(this);
+        $("#result_table").on("click", ":checkbox", function (event) {
+            $("#text").val($(this).closest("tr").find("td").eq(0).text() + "--" + $(this).closest("tr").find("td").eq(1).text());
+        });
+    };
+</script>
+
+
+</html>
