@@ -87,7 +87,7 @@
                 data: JSON.stringify({'s_id': parseInt(user.username), 's_password': user.password}),
                 dataType: 'json',
                 contentType: "application/json",
-                success: function () {
+                success: function (data) {
                     window.sessionStorage.setItem("s_id", user.username);
                     if (data.success) {
                         alert(json.message);
