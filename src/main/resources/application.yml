@@ -6,6 +6,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  sql:
+    init:
+      schema-locations:
+        - classpath:sql/initial.sql
+      mode: always
 mybatis:
     mapper-locations: classpath:Mapper/*.xml
     type-aliases-package: com.example.databasebackend.Entity

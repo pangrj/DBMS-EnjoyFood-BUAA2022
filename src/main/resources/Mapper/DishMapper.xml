@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtdd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.databasebackend.Dao.DishDao">
     <select id="searchByName" resultType="Dish">
-        select * from `menu` where d_name = #{d_name}
+        select * from `dish` where d_name = #{d_name}
     </select>
     <select id="showAllDishes" resultType="Dish">
-        select * from `menu`
+        select * from `dish`
     </select>
     <select id="searchById" resultType="Dish">
-        select * from `menu` where d_id = #{d_id}
+        select * from `dish` where d_id = #{d_id}
     </select>
 </mapper>
