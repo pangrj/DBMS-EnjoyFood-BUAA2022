@@ -90,10 +90,10 @@
                 success: function (data) {
                     window.sessionStorage.setItem("s_id", user.username);
                     if (data.success) {
-                        alert(json.message);
+                        alert(data.message);
                         window.location.href = "choose.html";
                     } else {
-                        alert(json.message);
+                        alert(data.message);
                     }
                 },
                 error: function () {
