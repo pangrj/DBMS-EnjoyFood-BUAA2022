@@ -1,7 +1,9 @@
 package com.example.databasebackend.Controller;
 
 import com.example.databasebackend.Entity.Dish;
+import com.example.databasebackend.Entity.Student;
 import com.example.databasebackend.Service.DishService;
+import com.example.databasebackend.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,12 +42,14 @@ public class DishController {
     }
 
     @ResponseBody
-    @GetMapping("/menu")
-    public Map<String, Object> menu() {
+    @PostMapping("/menu")
+    public Map<String, Object> menu(@RequestBody Map<String, Object> request) {
         Map<String, Object> ret = new HashMap<>();
+        Integer s_id = (Integer) request.get("s_id");
         List<Dish> dishes = new ArrayList<>();
         try {
-            dishes = dishService.showAllDishes();
+            // dishes = dishService.showAllDishes();
+            dishes = dishService.showNotSelectDishes(s_id);
             ret.put("success", true);
             ret.put("message", "初始化菜单界面请求成功!");
             ret.put("dishes", dishes);

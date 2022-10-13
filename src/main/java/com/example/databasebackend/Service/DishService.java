@@ -10,4 +10,6 @@ public interface DishService {
     List<Dish> showAllDishes();
 
     Dish searchById(Integer d_id);
+
+    List<Dish> showNotSelectDishes(Integer s_id);
 }

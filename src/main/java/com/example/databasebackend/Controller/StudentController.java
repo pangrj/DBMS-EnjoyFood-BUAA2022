@@ -37,7 +37,7 @@ public class StudentController {
 
                 studentService.registerNewStudent(studentNew);
                 ret.put("success", true);
-                ret.put("message", "login success!");
+                ret.put("message", "register success!");
             }
         } catch (Exception e) {
             e.printStackTrace();

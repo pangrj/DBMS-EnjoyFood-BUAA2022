@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -28,7 +30,7 @@ public class ChoseDishController {
     public Map<String, Object> choseDish(@RequestBody Map<String, Integer> request) {
         Integer s_id = request.get("s_id");
         Integer d_id = request.get("d_id");
-
+        List<Dish> dishes = new ArrayList<>();
         Map<String, Object> ret = new HashMap<>();
 
         try {
@@ -42,10 +44,19 @@ public class ChoseDishController {
                     ret.put("success", false);
                     ret.put("message", "No Such Dish!");
                 } else {
-                    ChoseMenu choseMenu = new ChoseMenu(s_id, d_id);
-                    choseDishService.addChose(choseMenu);
-                    ret.put("success", true);
-                    ret.put("message", "Chose Success!");
+                    ChoseMenu existMenu = choseDishService.search(s_id, d_id);
+                    if (existMenu != null) {
+                        ret.put("success", false);
+                        ret.put("message", "Already chose this dish!");
+                    }else {
+                        ChoseMenu choseMenu = new ChoseMenu(s_id, d_id);
+
+                        choseDishService.addChose(choseMenu);
+                        dishes = dishService.showNotSelectDishes(s_id);
+                        ret.put("success", true);
+                        ret.put("message", "Chose Success!");
+                        ret.put("dishes", dishes);
+                    }
                 }
             }
         } catch (Exception e) {
@@ -60,9 +71,8 @@ public class ChoseDishController {
     public Map<String, Object> deleteDish(@RequestBody Map<String, Integer> request) {
         Integer s_id = request.get("s_id");
         Integer d_id = request.get("d_id");
-
+        List<Dish> dishes = new ArrayList<>();
         Map<String, Object> ret = new HashMap<>();
-
         try {
             ChoseMenu choseMenu = choseDishService.search(s_id, d_id);
             Student student = studentService.selectById(s_id);
@@ -71,24 +81,11 @@ public class ChoseDishController {
                 ret.put("message", "No Such Order!");
             } else {
                 choseDishService.deleteChose(s_id, d_id);
+                dishes = dishService.showNotSelectDishes(s_id);
                 ret.put("success", true);
                 ret.put("message", "Delete Success!");
+                ret.put("dishes", dishes);
             }
-
-            /*if (student == null) {
-                ret.put("success", false);
-                ret.put("message", "No Such Student!");
-            } else {
-                Dish dish = dishService.searchById(d_id);
-                if (dish == null) {
-                    ret.put("success", false);
-                    ret.put("message", "No Such Dish!");
-                } else {
-                    choseDishService.deleteChose(s_id, d_id);
-                    ret.put("success", true);
-                    ret.put("message", "Delete Success!");
-                }
-            }*/
         } catch (Exception e) {
             e.printStackTrace();
             ret.put("success", false);
