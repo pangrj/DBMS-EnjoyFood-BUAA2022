@@ -89,7 +89,12 @@
                 contentType: "application/json",
                 success: function () {
                     window.sessionStorage.setItem("s_id", user.username);
-                    window.location.href = "choose.html";
+                    if (data.success) {
+                        alert(json.message);
+                        window.location.href = "choose.html";
+                    } else {
+                        alert(json.message);
+                    }
                 },
                 error: function () {
                     alert("登录信息提交失败");
