@@ -46,12 +46,12 @@ public class DishController {
         List<Dish> dishes = new ArrayList<>();
         try {
             dishes = dishService.showAllDishes();
-            ret.put("success", "true!");
+            ret.put("success", true);
             ret.put("message", "初始化菜单界面请求成功!");
             ret.put("dishes", dishes);
         } catch (Exception e) {
             e.printStackTrace();
-            ret.put("success", "false");
+            ret.put("success", false);
             ret.put("message", "初始化菜单界面请求错误!");
         }
 
