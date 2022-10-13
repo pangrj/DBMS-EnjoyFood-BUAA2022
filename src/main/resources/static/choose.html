@@ -10,8 +10,8 @@
     <title>Choose</title>
     <style>
         body {
-            background: url('take_order.jpg') no-repeat;
-            background-size: 100% 200%;
+            background: url('take_order.jpg') no-repeat fixed top center;
+            background-size: cover;
         }
 
 
@@ -27,7 +27,7 @@
             width: 18%;
             float: right;
             margin-top: 10px;
-            margin-right: 20px;
+            margin-right: 100px;
             background-color: #00000060;
             color: #ccc;
             border-radius: 18px;
@@ -70,19 +70,18 @@
             cursor: pointer;
         }
 
-        .table {
-            height: 200px;
+        .result {
+            margin-top: 30px;
+        }
+
+        #result_table {
+            background-color: #FFEBCD;
+
         }
     </style>
-    <script>
-        function gotoInfo() {
-            window.location.href = "self_info.html";
-        }
-
-    </script>
 </head>
 
-<body onload="showTable()">
+<body onload="initTable()">
 <div class="jump_buttons">
     <button onclick="gotoInfo()" style="float:right;" title="查看修改与个人信息"> Information</button>
 </div>
@@ -92,9 +91,7 @@
         <input type="button" name="" id="" class="btn" onclick="searchFood()">
     </form>
 </div>
-<div class="table">
 
-</div>
 <section class="result">
     <table id="result_table" style="width: 1200px; margin-left: 150px">
         <tr>
@@ -104,6 +101,7 @@
             <th align="center" valign="middle">菜系</th>
             <th align="center" valign="middle">热量</th>
             <th align="center" valign="middle">价格</th>
+            <th align="center" valign="middle">操作</th>
         </tr>
         <!-- <tr v-for= "p in list">
             <td>{{ p.id }}</td>
@@ -115,43 +113,47 @@
         </tr> -->
         <tbody id="tbodydata"></tbody>
     </table>
+
 </section>
 
 </body>
 
 <script>
-    function showTable() {
+    function gotoInfo() {
+        window.location.href = "self_info.html";
+    }
+
+    function showTable(data) { //输入的data应该是一个json
+        var str = "";
+        for (i in data.dishes) {
+            str += "<tr>" +
+                "<td align='center'>" + data.dishes[i].d_id + "</td>" +
+                "<td align='center'>" + data.dishes[i].d_name + "</td>" +
+                "<td align='center'>" + data.dishes[i].d_category + "</td>" +
+                "<td align='center'>" + data.dishes[i].d_cuisine + "</td>" +
+                "<td align='center'>" + data.dishes[i].d_calories + "</td>" +
+                "<td align='center'>" + data.dishes[i].d_price + "</td>" +
+                // "<td>\n" +
+                // "<a href=\"#\">修改</a>\n" +
+                // "<a href=\"#\">删除</a>\n" +
+                // "</td>" +
+                "<td align='center'>" + "<input type=\"button\" onclick = \"selectFood(this)\" value='选择菜品' /> " + "</td>"
+            "</tr>";
+        }
+        document.getElementById("tbodydata").innerHTML = str;
+    }
+
+    function initTable() {
         $.ajax({
             type: 'get',
             async: true,
             url: "http://localhost:18099/menu",
             dataType: 'json',
             success: function (data) {
-                var str = "";
-                alert("success");
-                alert(data);
-                alert(JSON.stringify(data.dishes));
-                for (i in data.dishes) {
-                    alert(JSON.stringify(i));
-                    alert(JSON.stringify(data.dishes[i].d_id));
-                    str += "<tr>" +
-                        "<td align='center'>" + data.dishes[i].d_id + "</td>" +
-                        "<td align='center'>" + data.dishes[i].d_name + "</td>" +
-                        "<td align='center'>" + data.dishes[i].d_category + "</td>" +
-                        "<td align='center'>" + data.dishes[i].d_cuisine + "</td>" +
-                        "<td align='center'>" + data.dishes[i].d_calories + "</td>" +
-                        "<td align='center'>" + data.dishes[i].d_price + "</td>" +
-                        // "<td>\n" +
-                        // "<a href=\"#\">修改</a>\n" +
-                        // "<a href=\"#\">删除</a>\n" +
-                        // "</td>" +
-                        "<td>" + "<input type=\"checkbox\" onclick = \"selectFood()\"/>" + "</td>"
-                    "</tr>";
-                }
-                document.getElementById("tbodydata").innerHTML = str;
+                showTable(data);
             },
             error: function (data) {
-                alert("wrong!");
+                alert("菜品表格初始化失败");
             }
         });
     }
@@ -160,28 +162,45 @@
         var searchInfo = $("#search_box").val();//通过id获取输入框中用户输入的值
         $.ajax({
             type: 'post',
-            url: 'http://localhost:18099',
-            //这里的/login对应LoginServlet类中注解的urlPatterns="/login"
-            data: {'searchfo': searchInfo},
+            url: 'http://localhost:18099/searchByName',
+            data: JSON.stringify({'d_name': searchInfo}),
             traditional: true,
             async: false,
             dataType: 'json',
+            contentType: "application/json",
             success: function (data) {//成功的事件
                 alert("成功提交搜索数据！");
+                alert(JSON.stringify({'d_name': searchInfo}))
+                showTable(data);
             },
-            error: function (data) {//失败的事件
+            error: function () {//失败的事件
                 alert("搜索内容提交失败！");
             }
         });
-        showTable();
     }
 
-    function selectFood() {
-        var select_id = $(this);
-        $("#result_table").on("click", ":checkbox", function (event) {
-            $("#text").val($(this).closest("tr").find("td").eq(0).text() + "--" + $(this).closest("tr").find("td").eq(1).text());
+    function selectFood(val) {
+        var s_id = sessionStorage.getItem("s_id");
+        var value = $(val).parent().parent().find("td"); //找到该行的所有td
+        var select_id = value.eq(0).text(); //获取第一列的值
+        $.ajax({
+            type: 'post',
+            url: 'http://localhost:18099/choseDish',
+            data: JSON.stringify({'s_id': parseInt(s_id),'d_id': parseInt(select_id)}),
+            traditional: true,
+            async: true,
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (data) {//成功的事件
+                alert("成功提交菜品选择结果！");
+                alert(JSON.stringify({'s_id': parseInt(s_id),'d_id': parseInt(select_id)}));
+                //showTable(data);
+            },
+            error: function () {//失败的事件
+                alert("菜品选择失败！");
+            }
         });
-    };
+    }
 </script>
 
 

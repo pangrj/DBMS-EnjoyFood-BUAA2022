@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <title>Login</title>
     <style>
         body {
@@ -41,7 +42,7 @@
             border: 0;
             width: 80%;
             font-size: 15px;
-            color: #fff;
+            color: black;
             background: transparent;
             border-bottom: 2px solid #fff;
             padding: 5px 10px;
@@ -74,8 +75,28 @@
     </style>
 
     <script>
-        function gotoChoose() {
-            window.location.href = "choose.html";
+        function login() {
+            var user = {};
+            user.username = document.getElementById("input_username").value;
+            user.password = document.getElementById("input_password").value;
+
+            $.ajax({
+                type: 'post',
+                async: true,
+                url: "http://localhost:18099/login",
+                data: JSON.stringify({'s_id': parseInt(user.username), 's_password': user.password}),
+                dataType: 'json',
+                contentType: "application/json",
+                success: function () {
+                    window.sessionStorage.setItem("s_id", user.username);
+                    window.location.href = "choose.html";
+                },
+                error: function () {
+                    alert("登录信息提交失败");
+                    alert(JSON.stringify({'s_id': user.username, 's_password': user.password}));
+                }
+            });
+
         }
         /*
         // username: [a-zA-Z0-9_-]{4-16}
@@ -132,12 +153,12 @@
 <div class="login_box">
     <h2>登录点菜系统</h2>
     <div class="input_box">
-       <input id = "input_username" type="username" placeholder="请输入用户名">
+        <input id = "input_username" type="username" placeholder="请输入用户名">
     </div>
     <div class="input_box">
         <input id = "input_password" type="password" placeholder="请输入密码">
     </div>
-    <button onclick="gotoChoose()">登入</button>
+    <button onclick="login()">登入</button>
 </div>
 </body>
 </html>
