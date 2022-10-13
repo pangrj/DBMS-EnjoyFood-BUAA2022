@@ -119,6 +119,7 @@
 </body>
 
 <script>
+    var s_id = sessionStorage.getItem("s_id");
     function gotoInfo() {
         window.location.href = "self_info.html";
     }
@@ -145,10 +146,12 @@
 
     function initTable() {
         $.ajax({
-            type: 'get',
+            type: 'post',
             async: true,
             url: "http://localhost:18099/menu",
+            data: JSON.stringify({'s_id': parseInt(s_id)}),
             dataType: 'json',
+            contentType: "application/json",
             success: function (data) {
                 showTable(data);
             },
@@ -180,7 +183,6 @@
     }
 
     function selectFood(val) {
-        var s_id = sessionStorage.getItem("s_id");
         var value = $(val).parent().parent().find("td"); //找到该行的所有td
         var select_id = value.eq(0).text(); //获取第一列的值
         $.ajax({
@@ -193,8 +195,7 @@
             contentType: "application/json",
             success: function (data) {//成功的事件
                 alert("成功提交菜品选择结果！");
-                alert(JSON.stringify({'s_id': parseInt(s_id),'d_id': parseInt(select_id)}));
-                //showTable(data);
+                showTable(data);
             },
             error: function () {//失败的事件
                 alert("菜品选择失败！");

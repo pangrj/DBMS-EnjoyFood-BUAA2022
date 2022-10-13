@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <title>UserInfo</title>
     <style type="text/css">
         body {
@@ -13,7 +14,7 @@
         .Content-Main {
             max-width: 500px;
             margin: auto;
-            margin-top: 10%;
+            margin-top: 5%;
             border: none;
             border-radius: 5px;
             -moz-border-radius: 5px;
@@ -100,7 +101,8 @@
 
         .Content-Main input[type="text"],
         .Content-Main input[type="email"],
-        .Content-Main textarea {
+        .Content-Main input[type="password"],
+        .Content-Main textarea{
             height: 25px;
             width: 70%;
             line-height: 15px;
@@ -172,6 +174,10 @@
         </div>
         <form action="" method="post" class="form-userInfo"></form>
         <label>
+            <span>学号:</span>
+            <input type="text" name="id" placeholder="Your Full Name">
+        </label>
+        <label>
             <span>姓名:</span>
             <input type="text" name="name" placeholder="Your Full Name">
         </label>
@@ -181,22 +187,39 @@
             <input type="radio" class="women" name="sex">女
         </label>
         <label>
-            <span>邮箱:</span>
-            <input type="email" name="email" placeholder="@.com">
+            <span>密码:</span>
+            <input type="password" name="password" placeholder="">
         </label>
         <label>
-            <span>电话:</span>
-            <input type="text" name="phone" placeholder="Please input 11 number">
+            <span>宿舍:</span>
+            <input type="text" name="dorm" placeholder="宿舍信息">
         </label>
         <label>
             <span>Message:</span>
             <textarea id="message" name="message" placeholder="Your message to us"></textarea>
         </label>
         <label style="text-align: center;">
-            <input type="button" class="submit" value="提交">
+            <input type="button" class="submit" value="提交" onclick="updateInfo()">
         </label>
         </form>
     </div>
 </body>
+
+<script>
+    function updateInfo() {
+        $.ajax({
+            type: 'get',
+            async: true,
+            url: "http://localhost:18099/menu",
+            dataType: 'json',
+            success: function (data) {
+                showTable(data);
+            },
+            error: function (data) {
+                alert("菜品表格初始化失败");
+            }
+        });
+    }
+</script>
 
 </html>
