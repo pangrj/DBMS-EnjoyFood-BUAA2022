@@ -11,10 +11,30 @@
             background-size: 100% 130%;
         }
 
+        .jump_buttons {
+            height: 70px;
+            width: 80%;
+            margin: 20px auto 0 auto;
+            /* vertical-align: middle; */
+        }
+
+        .jump_buttons button {
+            /* display: block; */
+            width: 18%;
+            float: right;
+            margin-top: 10px;
+            margin-right: 100px;
+            background-color: #00000060;
+            color: #ccc;
+            border-radius: 18px;
+            font-size: medium;
+        }
+
+
         .Content-Main {
             max-width: 500px;
             margin: auto;
-            margin-top: 5%;
+            /*margin-top: 5%;*/
             border: none;
             border-radius: 5px;
             -moz-border-radius: 5px;
@@ -22,7 +42,7 @@
             font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
             text-shadow: 1px 1px 1px #444;
             /* color: #D3D3D3; */
-            color: #ffffff90;
+            color: azure;
             background-color: #00000060;
         }
 
@@ -157,10 +177,36 @@
             color: #333;
             background-color: #EBEBEB;
         }
+
+        .food_info{
+            max-width: 1000px;
+            margin: auto;
+            margin-top: 5%;
+            border: none;
+            border-radius: 5px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+            text-shadow: 1px 1px 1px #444;
+            /* color: #D3D3D3; */
+            color: azure;
+            background-color: #00000060;
+        }
+
+        .food_info_title {
+            font-size: large;
+        }
+
+        .food_info table{
+            width: 100%;
+        }
     </style>
 </head>
 
-<body>
+<body  onload="initTable()">
+<div class="jump_buttons">
+    <button onclick="gotoChoose()" style="float:right;" title=""> 返回菜品选择页面</button>
+</div>
     <div class="Content-Main">
         <div id="title_bar">
             <div class="title">
@@ -175,11 +221,11 @@
         <form action="" method="post" class="form-userInfo"></form>
         <label>
             <span>学号:</span>
-            <input type="text" name="id" placeholder="Your Full Name">
+            <input type="text" id="id" readonly="readonly">
         </label>
         <label>
             <span>姓名:</span>
-            <input type="text" name="name" placeholder="Your Full Name">
+            <input type="text" id="name" placeholder="Your Full Name">
         </label>
         <label class="Main-sex">
             <span>性别:</span>
@@ -188,35 +234,144 @@
         </label>
         <label>
             <span>密码:</span>
-            <input type="password" name="password" placeholder="">
+            <input type="password" id="password" placeholder="">
         </label>
         <label>
             <span>宿舍:</span>
-            <input type="text" name="dorm" placeholder="宿舍信息">
+            <input type="text" id="dorm" placeholder="宿舍信息">
         </label>
         <label>
             <span>Message:</span>
             <textarea id="message" name="message" placeholder="Your message to us"></textarea>
         </label>
         <label style="text-align: center;">
-            <input type="button" class="submit" value="提交" onclick="updateInfo()">
+            <input type="button" class="submit" value="提交信息更新" onclick="updateInfo()">
         </label>
         </form>
+    </div>
+
+    <div class="food_info">
+        <p class="food_info_title"> 已选菜品 </p>
+        <table id="result_table">
+            <tr>
+                <th align="center" valign="middle">菜品编号</th>
+                <th align="center" valign="middle">菜品名称</th>
+                <th align="center" valign="middle">菜品种类</th>
+                <th align="center" valign="middle">菜系</th>
+                <th align="center" valign="middle">热量</th>
+                <th align="center" valign="middle">价格</th>
+                <th align="center" valign="middle">操作</th>
+            </tr>
+            <!-- <tr v-for= "p in list">
+                <td>{{ p.id }}</td>
+                <td>{{ p.name }}</td>
+                <td>{{ p.type }}</td>
+                <td>{{ p.type2 }}</td>
+                <td>{{ p.calory }}</td>
+                <td>{{ p.price }}</td>
+            </tr> -->
+            <tbody id="tbodydata"></tbody>
+        </table>
     </div>
 </body>
 
 <script>
+    var s_id = sessionStorage.getItem("s_id");
+    document.getElementById("id").value = s_id;
+
+    function gotoChoose() {
+        window.location.href = "choose.html";
+    }
     function updateInfo() {
+        var password = document.getElementById("password").value;
+        var name = document.getElementById("name").value;
+        var dorm = document.getElementById("dorm").value;
+        var gender = $("[name='sex']").filter(":checked").value;
+
         $.ajax({
-            type: 'get',
+            type: 'post',
+            async: false,
+            url: "http://localhost:18099/modify",
+            data:JSON.stringify({'s_id':parseInt(s_id),
+                's_password':password, 's_name':name, 's_dorm':dorm, 's_gender':gender}),
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (data) {
+                if (data.success) {
+                    alert(data.message);
+                } else {
+                    alert(data.message);
+                }
+            },
+            error: function (data) {
+                alert("信息更新失败");
+            }
+        });
+    }
+
+    function showTable(data) { //输入的data应该是一个json
+        var str = "";
+        for (i in data.dishes) {
+            str += "<tr>" +
+                "<td align='center'>" + data.dishes[i].d_id + "</td>" +
+                "<td align='center'>" + data.dishes[i].d_name + "</td>" +
+                "<td align='center'>" + data.dishes[i].d_category + "</td>" +
+                "<td align='center'>" + data.dishes[i].d_cuisine + "</td>" +
+                "<td align='center'>" + data.dishes[i].d_calories + "</td>" +
+                "<td align='center'>" + data.dishes[i].d_price + "</td>" +
+                // "<td>\n" +
+                // "<a href=\"#\">修改</a>\n" +
+                // "<a href=\"#\">删除</a>\n" +
+                // "</td>" +
+                "<td align='center'>" + "<input type=\"button\" onclick = \"deleteFood(this)\" value='删除菜品' /> " + "</td>"
+            "</tr>";
+        }
+        document.getElementById("tbodydata").innerHTML = str;
+    }
+
+    function initTable() {
+        $.ajax({
+            type: 'post',
             async: true,
             url: "http://localhost:18099/menu",
+            data: JSON.stringify({'s_id': parseInt(s_id)}),
             dataType: 'json',
+            contentType: "application/json",
             success: function (data) {
-                showTable(data);
+                if (data.success) {
+                    alert(data.message);
+                    showTable(data);
+                } else {
+                    alert(data.message);
+                }
             },
             error: function (data) {
                 alert("菜品表格初始化失败");
+            }
+        });
+    }
+
+    function deleteFood(val) {
+        var value = $(val).parent().parent().find("td"); //找到该行的所有td
+        var select_id = value.eq(0).text(); //获取第一列的值
+        $.ajax({
+            type: 'post',
+            url: 'http://localhost:18099/deleteDish',
+            data: JSON.stringify({'s_id': parseInt(s_id),'d_id': parseInt(select_id)}),
+            traditional: true,
+            async: true,
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (data) {//成功的事件
+                if (data.success) {
+                    alert(data.message);
+                    showTable(data);
+                } else {
+                    alert(data.message);
+                }
+            },
+            error: function () {//失败的事件
+                alert("菜品选择失败！");
             }
         });
     }

@@ -153,7 +153,12 @@
             dataType: 'json',
             contentType: "application/json",
             success: function (data) {
-                showTable(data);
+                if (data.success) {
+                    alert(data.message);
+                    showTable(data);
+                } else {
+                    alert(data.message);
+                }
             },
             error: function (data) {
                 alert("菜品表格初始化失败");
@@ -172,9 +177,12 @@
             dataType: 'json',
             contentType: "application/json",
             success: function (data) {//成功的事件
-                alert("成功提交搜索数据！");
-                alert(JSON.stringify({'d_name': searchInfo}))
-                showTable(data);
+                if (data.success) {
+                    alert(data.message);
+                    showTable(data);
+                } else {
+                    alert(data.message);
+                }
             },
             error: function () {//失败的事件
                 alert("搜索内容提交失败！");
@@ -194,8 +202,12 @@
             dataType: 'json',
             contentType: "application/json",
             success: function (data) {//成功的事件
-                alert("成功提交菜品选择结果！");
-                showTable(data);
+                if (data.success) {
+                    alert(data.message);
+                    showTable(data);
+                } else {
+                    alert(data.message);
+                }
             },
             error: function () {//失败的事件
                 alert("菜品选择失败！");
