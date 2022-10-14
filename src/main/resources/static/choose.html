@@ -15,7 +15,6 @@
             background-size: cover;
         }
 
-
         .jump_buttons {
             height: 70px;
             width: 80%;
@@ -29,7 +28,7 @@
             float: right;
             margin-top: 10px;
             margin-right: 100px;
-            background-color: #00000060;
+            background-color: rgba(0, 0, 0, 0.50);
             color: azure;
             border-radius: 18px;
             font-size: medium;
@@ -38,7 +37,7 @@
         .search_box {
             height: 70px;
             width: 80%;
-            margin: 15px auto 0 auto;
+            margin: 10px auto 0 auto;
         }
 
         .search_form {
@@ -72,12 +71,31 @@
         }
 
         .result {
-            margin-top: 30px;
+            margin-top: 5px;
         }
 
         #result_table {
-            background-color: #FFEBCD;
+            background-color: rgba(239, 231, 224, 0.7);
+        }
 
+        #result_table th {
+            font-size: large;
+            border: none;
+            border-bottom:5px solid rgba(139, 69, 19, 0.80);
+            height: 60px;
+        }
+
+        #result_table td {
+            font-size: larger;
+            font-weight: bold;
+            color: #063849FF;
+            height: 40px;
+        }
+
+        #result_table input{
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #B6A889E4;
         }
     </style>
 </head>
@@ -104,14 +122,6 @@
             <th align="center" valign="middle">价格</th>
             <th align="center" valign="middle">操作</th>
         </tr>
-        <!-- <tr v-for= "p in list">
-            <td>{{ p.id }}</td>
-            <td>{{ p.name }}</td>
-            <td>{{ p.type }}</td>
-            <td>{{ p.type2 }}</td>
-            <td>{{ p.calory }}</td>
-            <td>{{ p.price }}</td>
-        </tr> -->
         <tbody id="tbodydata"></tbody>
     </table>
 

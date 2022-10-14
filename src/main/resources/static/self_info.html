@@ -7,8 +7,9 @@
     <title>UserInfo</title>
     <style type="text/css">
         body {
-            background: url('background_AniRes.jpg') no-repeat;
-            background-size: 100% 130%;
+            background-size: cover;
+            height:100%;
+            background: url('login.jpg') no-repeat fixed center;
         }
 
         .jump_buttons {
@@ -24,7 +25,7 @@
             float: right;
             margin-top: 10px;
             margin-right: 100px;
-            background-color: #00000060;
+            background-color: rgba(0, 0, 0, 0.50);
             color: azure;
             border-radius: 18px;
             font-size: medium;
@@ -194,13 +195,30 @@
         }
 
         .food_info_title {
-            font-size: large;
+            font-size: xx-large;
             font-weight: bold;
         }
 
         .food_info table{
             width: 100%;
+        }
+
+        #result_table th {
+            font-size: large;
+            border: none;
+            /*border-bottom:5px solid rgba(139, 69, 19, 0.80);*/
+        }
+
+        #result_table td {
             font-size: larger;
+            font-weight: bold;
+            /*color: #063849FF;*/
+            height: 40px;
+        }
+
+        #result_table input{
+            font-size: 15px;
+            /*background-color: darkgoldenrod;*/
         }
     </style>
 </head>
