@@ -108,7 +108,7 @@ public class ChoseDishController {
             } else {
                 dishes = dishService.showSelectDishes(s_id);
                 ret.put("success", true);
-                ret.put("message", "Delete Success!");
+                ret.put("message", "Jump Success!");
                 ret.put("dishes", dishes);
             }
         } catch (Exception e) {

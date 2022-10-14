@@ -25,7 +25,7 @@
             margin-top: 10px;
             margin-right: 100px;
             background-color: #00000060;
-            color: #ccc;
+            color: azure;
             border-radius: 18px;
             font-size: medium;
         }
@@ -181,7 +181,6 @@
         .food_info{
             max-width: 1000px;
             margin: auto;
-            margin-top: 5%;
             border: none;
             border-radius: 5px;
             -moz-border-radius: 5px;
@@ -191,14 +190,17 @@
             /* color: #D3D3D3; */
             color: azure;
             background-color: #00000060;
+            text-align: center;
         }
 
         .food_info_title {
             font-size: large;
+            font-weight: bold;
         }
 
         .food_info table{
             width: 100%;
+            font-size: larger;
         }
     </style>
 </head>
@@ -333,13 +335,13 @@
         $.ajax({
             type: 'post',
             async: true,
-            url: "http://localhost:18099/menu",
+            url: "http://localhost:18099/showSelectDishes",
             data: JSON.stringify({'s_id': parseInt(s_id)}),
             dataType: 'json',
             contentType: "application/json",
             success: function (data) {
                 if (data.success) {
-                    alert(data.message);
+                    //alert(data.message);
                     showTable(data);
                 } else {
                     alert(data.message);
@@ -365,7 +367,7 @@
             success: function (data) {//成功的事件
                 if (data.success) {
                     alert(data.message);
-                    showTable(data);
+                    initTable(); //更新当前选了那些菜
                 } else {
                     alert(data.message);
                 }

@@ -29,7 +29,7 @@
             margin-top: 10px;
             margin-right: 100px;
             background-color: #00000060;
-            color: #ccc;
+            color: azure;
             border-radius: 18px;
             font-size: medium;
         }
@@ -83,7 +83,7 @@
 
 <body onload="initTable()">
 <div class="jump_buttons">
-    <button onclick="gotoInfo()" style="float:right;" title="查看修改与个人信息"> Information</button>
+    <button onclick="gotoInfo()" title="查看与修改个人信息">查看与修改与个人信息</button>
 </div>
 <div class="search_box">
     <form action="" class="search_form">
@@ -154,7 +154,7 @@
             contentType: "application/json",
             success: function (data) {
                 if (data.success) {
-                    alert(data.message);
+                    //alert(data.message);
                     showTable(data);
                 } else {
                     alert(data.message);

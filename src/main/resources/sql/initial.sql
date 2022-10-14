@@ -28,10 +28,11 @@ CREATE table IF NOT EXISTS `dish`
 
 truncate table `dish`;
 INSERT INTO `dish` (d_id, d_name, d_category, d_cuisine, d_calories, d_price)
-VALUES (123456, 'dsada', 'dadsa', 'dsada', 213, 123),
-       (123457, 'dsada', 'dadsa', 'dsada', 213, 123),
-       (123458, 'dsada', 'dadsa', 'dsada', 213, 123),
-       (123459, 'dsada', 'dadsa', 'dsada', 213, 123);
+VALUES (123456, '卤肉饭', '套饭', '粤菜', 413, 12),
+       (123457, '宫爆鸡丁', '荤菜', '川菜', 213, 8),
+       (123458, '烤冷面', '小食', '东北菜', 160, 8),
+       (123459, '麻婆豆腐', '素菜', '川菜', 100, 5),
+       (123460, '冬阴功汤', '汤菜', '泰式', 200, 10);
 
 CREATE table IF NOT EXISTS `chose_menu`
 (
