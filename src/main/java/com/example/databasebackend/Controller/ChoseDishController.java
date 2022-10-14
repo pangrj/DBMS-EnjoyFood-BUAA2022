@@ -48,7 +48,7 @@ public class ChoseDishController {
                     if (existMenu != null) {
                         ret.put("success", false);
                         ret.put("message", "Already chose this dish!");
-                    }else {
+                    } else {
                         ChoseMenu choseMenu = new ChoseMenu(s_id, d_id);
 
                         choseDishService.addChose(choseMenu);
@@ -93,5 +93,31 @@ public class ChoseDishController {
         }
         return ret;
     }
+
+    @PostMapping("/showSelectDishes")
+    public Map<String, Object> showSelectDishes(@RequestBody Map<String, Integer> request) {
+        Integer s_id = request.get("s_id");
+        Map<String, Object> ret = new HashMap<>();
+        List<Dish> dishes = new ArrayList<>();
+
+        try {
+            Student student = studentService.selectById(s_id);
+            if (student == null) {
+                ret.put("success", false);
+                ret.put("message", "No Such Student!");
+            } else {
+                dishes = dishService.showSelectDishes(s_id);
+                ret.put("success", true);
+                ret.put("message", "Delete Success!");
+                ret.put("dishes", dishes);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ret.put("success", false);
+            ret.put("message", "Show Error!");
+        }
+        return ret;
+    }
+
 
 }

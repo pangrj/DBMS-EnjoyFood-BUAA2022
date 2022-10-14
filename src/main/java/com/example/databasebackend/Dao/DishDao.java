@@ -14,4 +14,6 @@ public interface DishDao {
     Dish searchById(Integer d_id);
 
     List<Dish> showNotSelectDishes(Integer s_id);
+
+    List<Dish> showSelectDishes(Integer s_id);
 }

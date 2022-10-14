@@ -32,4 +32,9 @@ public class DishServiceImp implements DishService {
     public List<Dish> showNotSelectDishes(Integer s_id) {
         return dishDao.showNotSelectDishes(s_id);
     }
+
+    @Override
+    public List<Dish> showSelectDishes(Integer s_id) {
+        return dishDao.showSelectDishes(s_id);
+    }
 }

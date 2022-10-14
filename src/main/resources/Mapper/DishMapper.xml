@@ -18,4 +18,12 @@
         from chose_menu
         where s_id = #{s_id})
     </select>
+    <select id="showSelectDishes" resultType="Dish">
+        select *
+        from `dish`
+        where d_id in
+        (select d_id
+        from chose_menu
+        where s_id = #{s_id})
+    </select>
 </mapper>
