@@ -231,8 +231,8 @@
         </label>
         <label class="Main-sex">
             <span>性别:</span>
-            <input type="radio" checked class="man" name="sex">男
-            <input type="radio" class="women" name="sex">女
+            <input type="radio" checked="checked" class="man" name="sex" value="man">男
+            <input type="radio" class="woman" name="sex" value="woman">女
         </label>
         <label>
             <span>密码:</span>
@@ -288,7 +288,7 @@
         var password = document.getElementById("password").value;
         var name = document.getElementById("name").value;
         var dorm = document.getElementById("dorm").value;
-        var gender = $("[name='sex']").filter(":checked").value;
+        var gender = $("input[name='sex']:checked").val();
 
         $.ajax({
             type: 'post',
@@ -300,6 +300,8 @@
             contentType: "application/json",
             success: function (data) {
                 if (data.success) {
+                    alert(JSON.stringify({'s_id':parseInt(s_id),
+                        's_password':password, 's_name':name, 's_dorm':dorm, 's_gender':gender}))
                     alert(data.message);
                 } else {
                     alert(data.message);
