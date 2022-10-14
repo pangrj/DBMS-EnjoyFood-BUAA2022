@@ -60,8 +60,12 @@ public class StudentController {
         Map<String, Object> ret = new HashMap<>();
 
         try {
+
             Student student = studentService.selectById(s_id);
-            if (student == null) {
+            if (s_password.length() == 0) {
+                ret.put("success", false);
+                ret.put("message", "请输入正确的密码!");
+            } else if (student == null) {
                 ret.put("success", false);
                 ret.put("message", "未找到学生!");
             } else {
