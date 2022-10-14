@@ -8,19 +8,21 @@
     <title>Login</title>
     <style>
         body {
-            background: url('background_AniRes.jpg') no-repeat;
-            background-size: 100% 150%;
+            background-size: cover;
+            height:100%;
+            background: url('background_AniRes.jpg') no-repeat fixed center;
         }
 
         .login_box {
             width: 20%;
             height: 280px;
-            background-color: #FFEBCD;
+            /*background-color: #FFEBCD;*/
             margin: auto;
             margin-top: 8%;
             text-align: center;
             border-radius: 40px/50px;
             padding: 50px 50px;
+            background-color: #00000060;
         }
 
         h2 {
@@ -42,13 +44,17 @@
             border: 0;
             width: 80%;
             font-size: 15px;
-            color: black;
+            color: azure;
             background: transparent;
             border-bottom: 2px solid #fff;
             padding: 5px 10px;
             outline: none;
             margin-top: 15px;
             margin-bottom: 15px;
+        }
+
+        ::placeholder{
+            color: azure;
         }
 
         button {

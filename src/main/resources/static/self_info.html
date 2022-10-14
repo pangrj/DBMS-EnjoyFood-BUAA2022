@@ -300,8 +300,6 @@
             contentType: "application/json",
             success: function (data) {
                 if (data.success) {
-                    alert(JSON.stringify({'s_id':parseInt(s_id),
-                        's_password':password, 's_name':name, 's_dorm':dorm, 's_gender':gender}))
                     alert(data.message);
                 } else {
                     alert(data.message);
