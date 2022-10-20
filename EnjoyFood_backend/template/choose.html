@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <title>Choose</title>
+    <style>
+        body {
+            {% load static %}
+            background: url({% static 'user/choose/take_order.jpg' %}) no-repeat fixed center;
+            height: 100%;
+            background-size: cover;
+        }
+
+        .jump_buttons {
+            height: 70px;
+            width: 80%;
+            margin: 20px auto 0 auto;
+            /* vertical-align: middle; */
+        }
+
+        .jump_buttons button {
+            /* display: block; */
+            width: 18%;
+            float: right;
+            margin-top: 10px;
+            margin-right: 100px;
+            background-color: rgba(0, 0, 0, 0.50);
+            color: azure;
+            border-radius: 18px;
+            font-size: medium;
+        }
+
+        .search_box {
+            height: 70px;
+            width: 80%;
+            margin: 10px auto 0 auto;
+        }
+
+        .search_form {
+            position: relative;
+        }
+
+        .search {
+            width: 80%;
+            height: 45px;
+            border-radius: 18px;
+            outline: none;
+            border: 1px solid #ccc;
+            position: absolute;
+            left: 10%;
+            padding-left: 20px;
+            padding-top: 5px;
+            font-size: large;
+        }
+
+        .btn {
+            {% load static %}
+            height: 40px;
+            width: 40px;
+            position: absolute;
+            background: url({% static 'user/choose/search_btn.jpg' %}) no-repeat;
+            background-size: cover;
+            top: 6px;
+            right: 9%;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 5px;
+        }
+
+        #result_table {
+            background-color: rgba(239, 231, 224, 0.7);
+        }
+
+        #result_table th {
+            font-size: large;
+            border: none;
+            border-bottom:5px solid rgba(139, 69, 19, 0.80);
+            height: 60px;
+        }
+
+        #result_table td {
+            font-size: larger;
+            font-weight: bold;
+            color: #063849FF;
+            height: 40px;
+        }
+
+        #result_table input{
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #B6A889E4;
+        }
+    </style>
+</head>
+
+<body onload="initTable()">
+<div class="jump_buttons">
+    <button onclick="gotoInfo()" title="查看与修改个人信息">查看与修改个人信息</button>
+</div>
+<div class="search_box">
+    <form action="" class="search_form">
+        <input type="text" class="search" id="search_box" placeholder="搜索">
+        <input type="button" name="" id="" class="btn" onclick="searchFood()">
+    </form>
+</div>
+
+<section class="result">
+    <table id="result_table" style="width: 1200px; margin-left: 150px">
+        <tr>
+            <th align="center" valign="middle">菜品编号</th>
+            <th align="center" valign="middle">菜品名称</th>
+            <th align="center" valign="middle">菜品种类</th>
+            <th align="center" valign="middle">菜系</th>
+            <th align="center" valign="middle">热量</th>
+            <th align="center" valign="middle">价格</th>
+            <th align="center" valign="middle">操作</th>
+        </tr>
+        <tbody id="tbodydata"></tbody>
+    </table>
+
+</section>
+
+</body>
+
+<script>
+    var s_id = sessionStorage.getItem("s_id");
+    function gotoInfo() {
+        window.location.href = "self_info.html";
+    }
+
+    function showTable(data) { //输入的data应该是一个json
+        var str = "";
+        for (i in data.dishes) {
+            str += "<tr>" +
+                "<td align='center'>" + data.dishes[i].d_id + "</td>" +
+                "<td align='center'>" + data.dishes[i].d_name + "</td>" +
+                "<td align='center'>" + data.dishes[i].d_category + "</td>" +
+                "<td align='center'>" + data.dishes[i].d_cuisine + "</td>" +
+                "<td align='center'>" + data.dishes[i].d_calories + "</td>" +
+                "<td align='center'>" + data.dishes[i].d_price + "</td>" +
+                // "<td>\n" +
+                // "<a href=\"#\">修改</a>\n" +
+                // "<a href=\"#\">删除</a>\n" +
+                // "</td>" +
+                "<td align='center'>" + "<input type=\"button\" onclick = \"selectFood(this)\" value='选择菜品' /> " + "</td>"
+            "</tr>";
+        }
+        document.getElementById("tbodydata").innerHTML = str;
+    }
+
+    function initTable() {
+        $.ajax({
+            type: 'post',
+            async: true,
+            url: "http://localhost:18099/menu",
+            data: JSON.stringify({'s_id': parseInt(s_id)}),
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (data) {
+                if (data.success) {
+                    //alert(data.message);
+                    showTable(data);
+                } else {
+                    alert(data.message);
+                }
+            },
+            error: function (data) {
+                alert("菜品表格初始化失败");
+            }
+        });
+    }
+
+    function searchFood() {
+        var searchInfo = $("#search_box").val();//通过id获取输入框中用户输入的值
+        $.ajax({
+            type: 'post',
+            url: 'http://localhost:18099/searchByName',
+            data: JSON.stringify({'d_name': searchInfo}),
+            traditional: true,
+            async: false,
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (data) {//成功的事件
+                if (data.success) {
+                    alert(data.message);
+                    showTable(data);
+                } else {
+                    alert(data.message);
+                }
+            },
+            error: function () {//失败的事件
+                alert("搜索内容提交失败！");
+            }
+        });
+    }
+
+    function selectFood(val) {
+        var value = $(val).parent().parent().find("td"); //找到该行的所有td
+        var select_id = value.eq(0).text(); //获取第一列的值
+        $.ajax({
+            type: 'post',
+            url: 'http://localhost:18099/choseDish',
+            data: JSON.stringify({'s_id': parseInt(s_id),'d_id': parseInt(select_id)}),
+            traditional: true,
+            async: true,
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (data) {//成功的事件
+                if (data.success) {
+                    alert(data.message);
+                    showTable(data);
+                } else {
+                    alert(data.message);
+                }
+            },
+            error: function () {//失败的事件
+                alert("菜品选择失败！");
+            }
+        });
+    }
+</script>
+
+
+</html>

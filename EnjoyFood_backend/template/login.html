@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <title>Login</title>
+    <style>
+        body {
+            {% load static %}
+            background-size: cover;
+            height:100%;
+            background: url({% static 'login.jpg' %}) no-repeat fixed center;
+        }
+
+        .login_box {
+            width: 20%;
+            height: 280px;
+            /*background-color: #FFEBCD;*/
+            margin: auto;
+            margin-top: 8%;
+            text-align: center;
+            border-radius: 40px/50px;
+            padding: 50px 50px;
+            background-color: #00000060;
+        }
+
+        h2 {
+            color: #FF8C00;
+            margin-top: 5%;
+            margin-bottom: 12%;
+        }
+
+        .input-box {
+            margin-top: 50%;
+            margin-bottom: 50%;
+        }
+
+        span {
+            color: #FF8C00;
+        }
+
+        input {
+            border: 0;
+            width: 80%;
+            font-size: 15px;
+            color: azure;
+            background: transparent;
+            border-bottom: 2px solid #fff;
+            padding: 5px 10px;
+            outline: none;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        ::placeholder{
+            color: azure;
+        }
+
+        button {
+            margin-top: 40px;
+            width: 60%;
+            height: 40px;
+            border-radius: 10px;
+            border: 0;
+            color: #fff;
+            text-align: center;
+            line-height: 30px;
+            font-size: 18px;
+            background-image: linear-gradient(to right, #30cfd0, #330867);
+        }
+
+        button:hover {
+            color: #333;
+            background-color: #EBEBEB;
+        }
+
+        #sign_up {
+            margin-top: 45%;
+            margin-left: 60%;
+        }
+
+        a {
+            color: #b94648;
+        }
+    </style>
+
+    <script>
+        function login() {
+            var user = {};
+            user.username = document.getElementById("input_username").value;
+            user.password = document.getElementById("input_password").value;
+
+            $.ajax({
+                type: 'post',
+                async: true,
+                url: "/login/",
+                data: JSON.stringify({'s_id': parseInt(user.username), 's_password': user.password}),
+                dataType: 'json',
+                contentType: "application/json",
+                success: function (data) {
+                    window.sessionStorage.setItem("s_id", user.username);
+                    if (data.success) {
+                        alert(data.message);
+                        window.location.href = "/user/choose/";
+                    } else {
+                        alert(data.message);
+                    }
+                },
+                error: function () {
+
+                    alert("登录信息提交失败");
+                    alert(JSON.stringify({'s_id': user.username, 's_password': user.password}));
+                }
+            });
+
+        }
+        /*
+        // username: [a-zA-Z0-9_-]{4-16}
+        function usernameValidateForm() {
+            var x = document.forms["usernameForm"]["username"].value;
+            if (x == null || x == "") {
+                alert("用户名必须填写");
+                return false;
+            } else if (x.length < 4) {
+                alert("用户名过短");
+                return false;
+            } else if (x.length > 16) {
+                alert("用户名过长");
+                return false;
+            } else {
+                var i = 0;
+                while (i < x.length) {
+                    if (x[i] == '_' || x[i] >= '0' && x[i] <= '9' ||
+                        || x[i] >= 'a' && x[i] < 'z' || x[i] >= 'A' && x[i] <= 'Z') {
+                        i = i + 1;
+                    } else {
+                        alert("用户名不符合规定")
+                        return false;
+                    }
+                }
+            }
+        }
+
+        // password: {4-16}
+        function passwordValidateForm() {
+            var x = document.forms["passwordForm"]["password"].value;
+            if (x == null || x == "") {
+                alert("密码必须填写");
+                return false;
+            } else if (x.length < 4) {
+                alert("密码过短");
+                return false;
+            } else if (x.length > 16) {
+                alert("密码过长");
+                return false;
+            }
+        }*/
+        function getInput(){
+            var user = new Object();
+            user.username = document.getElementById("input_username").value;
+            user.password = document.getElementById("input_password").value;
+            return user.toString();
+        }
+    </script>
+
+</head>
+
+<body>
+<div class="login_box">
+    <h2>登录点菜系统</h2>
+    <div class="input_box">
+        <input id = "input_username" type="username" placeholder="请输入用户名">
+    </div>
+    <div class="input_box">
+        <input id = "input_password" type="password" placeholder="请输入密码">
+    </div>
+    <button onclick="login()">登入</button>
+</div>
+</body>
+</html>
