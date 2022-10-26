@@ -16,13 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from student.views import *
-
-from ChoseMenu.views import choose
+from Dish.views import *
+from ChoseMenu.views import *
 
 urlpatterns = [
     path('', home),
     path('login/', login, name='login/'),
     path('register/', register),
+
+    path('menu/', showNotSelectMenu),
+    path('addDish/', addDish),
 
     path('user/choose/', choose),
     path('admin/', admin.site.urls),

@@ -16,6 +16,7 @@ def home(request):
 def register(request):
     if request.method == 'POST':
         new_s_id = request.POST.get('s_id')
+        print(new_s_id)
         new_s_password = request.POST.get('s_password')
         new_student = Student(s_id=new_s_id, s_password=new_s_password)
     else:
