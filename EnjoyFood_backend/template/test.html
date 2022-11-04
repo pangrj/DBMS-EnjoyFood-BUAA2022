@@ -4,8 +4,8 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<meta name="robots" content="NONE,NOARCHIVE">
-	<title>IntegrityError
-		at /login/</title>
+	<title>AttributeError
+		at /select/choose/</title>
 	<style type="text/css">
 		html * {
 			padding: 0;
@@ -313,9 +313,9 @@
 
 <body>
 	<div id="summary">
-		<h1>IntegrityError
-			at /login/</h1>
-		<pre class="exception_value">NOT NULL constraint failed: student_student.s_password</pre>
+		<h1>AttributeError
+			at /select/choose/</h1>
+		<pre class="exception_value">&#x27;dict&#x27; object has no attribute &#x27;headers&#x27;</pre>
 		<table class="meta">
 
 			<tr>
@@ -324,62 +324,62 @@
 			</tr>
 			<tr>
 				<th>Request URL:</th>
-				<td>http://localhost:18099/login/</td>
+				<td>http://localhost:18099/select/choose/</td>
 			</tr>
 
 			<tr>
 				<th>Django Version:</th>
-				<td>4.1.2</td>
+				<td>4.1</td>
 			</tr>
 
 			<tr>
 				<th>Exception Type:</th>
-				<td>IntegrityError</td>
+				<td>AttributeError</td>
 			</tr>
 
 
 			<tr>
 				<th>Exception Value:</th>
 				<td>
-					<pre>NOT NULL constraint failed: student_student.s_password</pre>
+					<pre>&#x27;dict&#x27; object has no attribute &#x27;headers&#x27;</pre>
 				</td>
 			</tr>
 
 
 			<tr>
 				<th>Exception Location:</th>
-				<td><span class="fname">C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\backends\sqlite3\base.py</span>,
-					line 357, in execute</td>
+				<td><span class="fname">C:\Users\pangy\anaconda3\envs\DB\lib\site-packages\django\middleware\clickjacking.py</span>,
+					line 34, in process_response</td>
 			</tr>
 
 
 			<tr>
 				<th>Raised during:</th>
-				<td>student.views.login</td>
+				<td>ChoseMenu.views.choose</td>
 			</tr>
 
 			<tr>
 				<th>Python Executable:</th>
-				<td>C:\Users\pangy\AppData\Local\Programs\Python\Python39\python.exe</td>
+				<td>C:\Users\pangy\anaconda3\envs\DB\python.exe</td>
 			</tr>
 			<tr>
 				<th>Python Version:</th>
-				<td>3.9.6</td>
+				<td>3.10.6</td>
 			</tr>
 			<tr>
 				<th>Python Path:</th>
 				<td>
-					<pre>[&#x27;D:\\LearningMaterials\\大三上\\数据库\\大作业\\任务二\\DBMS-EnjoyFood-BUAA2022\\EnjoyFood_backend&#x27;,
- &#x27;C:\\Users\\pangy\\AppData\\Local\\Programs\\Python\\Python39\\python39.zip&#x27;,
- &#x27;C:\\Users\\pangy\\AppData\\Local\\Programs\\Python\\Python39\\DLLs&#x27;,
- &#x27;C:\\Users\\pangy\\AppData\\Local\\Programs\\Python\\Python39\\lib&#x27;,
- &#x27;C:\\Users\\pangy\\AppData\\Local\\Programs\\Python\\Python39&#x27;,
- &#x27;C:\\Users\\pangy\\AppData\\Local\\Programs\\Python\\Python39\\lib\\site-packages&#x27;]</pre>
+					<pre>[&#x27;C:\\Users\\pangy\\PycharmProjects\\DBMS-EnjoyFood-BUAA2022\\EnjoyFood_backend&#x27;,
+ &#x27;C:\\Users\\pangy\\anaconda3\\envs\\DB\\python310.zip&#x27;,
+ &#x27;C:\\Users\\pangy\\anaconda3\\envs\\DB\\DLLs&#x27;,
+ &#x27;C:\\Users\\pangy\\anaconda3\\envs\\DB\\lib&#x27;,
+ &#x27;C:\\Users\\pangy\\anaconda3\\envs\\DB&#x27;,
+ &#x27;C:\\Users\\pangy\\anaconda3\\envs\\DB\\lib\\site-packages&#x27;]</pre>
 				</td>
 			</tr>
 			<tr>
 				<th>Server time:</th>
-				<td>Thu, 20 Oct 2022 15:08:42 +0000</td>
+				<td>Fri, 04 Nov 2022 02:28:20 +0000</td>
 			</tr>
 		</table>
 	</div>
@@ -397,332 +397,73 @@
 
 				<li class="frame django">
 
-					<code class="fname">C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\backends\utils.py</code>,
-					line 89, in _execute
-
-
-
-					<div class="context" id="c2411401489152">
-
-						<ol start="82" class="pre-context" id="pre2411401489152">
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>    def _execute(self, sql, params, *ignored_wrapper_args):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>        self.db.validate_no_broken_transaction()</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>        with self.db.wrap_database_errors:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>            if params is None:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>                # params default might be backend specific.</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>                return self.cursor.execute(sql)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>            else:</pre>
-							</li>
-
-						</ol>
-
-						<ol start="89" class="context-line">
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>                return self.cursor.execute(sql, params)</pre> <span>…</span></li>
-						</ol>
-
-						<ol start='90' class="post-context" id="post2411401489152">
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>    def _executemany(self, sql, param_list, *ignored_wrapper_args):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>        self.db.validate_no_broken_transaction()</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>        with self.db.wrap_database_errors:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>            return self.cursor.executemany(sql, param_list)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre></pre>
-							</li>
-
-						</ol>
-
-					</div>
-
-
-
-
-					<details>
-						<summary class="commands">Local vars</summary>
-
-						<table class="vars" id="v2411401489152">
-							<thead>
-								<tr>
-									<th>Variable</th>
-									<th>Value</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<tr>
-									<td>ignored_wrapper_args</td>
-									<td class="code">
-										<pre>(False,
- {&#x27;connection&#x27;: &lt;DatabaseWrapper vendor=&#x27;sqlite&#x27; alias=&#x27;default&#x27;&gt;,
-  &#x27;cursor&#x27;: &lt;django.db.backends.utils.CursorDebugWrapper object at 0x00000231729C7850&gt;})</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>params</td>
-									<td class="code">
-										<pre>(None, None, None, None, None)</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>self</td>
-									<td class="code">
-										<pre>&lt;django.db.backends.utils.CursorDebugWrapper object at 0x00000231729C7850&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>sql</td>
-									<td class="code">
-										<pre>(&#x27;INSERT INTO &quot;student_student&quot; (&quot;s_id&quot;, &quot;s_password&quot;, &quot;s_name&quot;, &quot;s_dorm&quot;, &#x27;
- &#x27;&quot;s_gender&quot;) VALUES (%s, %s, %s, %s, %s)&#x27;)</pre>
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
-					</details>
-
-				</li>
-
-
-				<li class="frame django">
-
-					<code class="fname">C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\backends\sqlite3\base.py</code>,
-					line 357, in execute
-
-
-
-					<div class="context" id="c2411401542080">
-
-						<ol start="350" class="pre-context" id="pre2411401542080">
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>    you&#x27;ll need to use &quot;%%s&quot;.</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>    &quot;&quot;&quot;</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>    def execute(self, query, params=None):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>        if params is None:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>            return Database.Cursor.execute(self, query)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>        query = self.convert_query(query)</pre>
-							</li>
-
-						</ol>
-
-						<ol start="357" class="context-line">
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>        return Database.Cursor.execute(self, query, params)</pre> <span>…</span>
-							</li>
-						</ol>
-
-						<ol start='358' class="post-context" id="post2411401542080">
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>    def executemany(self, query, param_list):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>        query = self.convert_query(query)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>        return Database.Cursor.executemany(self, query, param_list)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>    def convert_query(self, query):</pre>
-							</li>
-
-						</ol>
-
-					</div>
-
-
-
-
-					<details>
-						<summary class="commands">Local vars</summary>
-
-						<table class="vars" id="v2411401542080">
-							<thead>
-								<tr>
-									<th>Variable</th>
-									<th>Value</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<tr>
-									<td>params</td>
-									<td class="code">
-										<pre>(None, None, None, None, None)</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>query</td>
-									<td class="code">
-										<pre>(&#x27;INSERT INTO &quot;student_student&quot; (&quot;s_id&quot;, &quot;s_password&quot;, &quot;s_name&quot;, &quot;s_dorm&quot;, &#x27;
- &#x27;&quot;s_gender&quot;) VALUES (?, ?, ?, ?, ?)&#x27;)</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>self</td>
-									<td class="code">
-										<pre>&lt;django.db.backends.sqlite3.base.SQLiteCursorWrapper object at 0x00000231729B4700&gt;</pre>
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
-					</details>
-
-				</li>
-
-
-				<li class="cause">
-					<h3>
-
-						The above exception (NOT NULL constraint failed: student_student.s_password) was the direct
-						cause of the following exception:
-
-					</h3>
-				</li>
-
-				<li class="frame django">
-
-					<code class="fname">C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\core\handlers\exception.py</code>,
+					<code class="fname">C:\Users\pangy\anaconda3\envs\DB\lib\site-packages\django\core\handlers\exception.py</code>,
 					line 55, in inner
 
 
 
-					<div class="context" id="c2411401487168">
+					<div class="context" id="c2313019813632">
 
-						<ol start="48" class="pre-context" id="pre2411401487168">
+						<ol start="48" class="pre-context" id="pre2313019813632">
 
-							<li onclick="toggle('pre2411401487168', 'post2411401487168')">
+							<li onclick="toggle('pre2313019813632', 'post2313019813632')">
 								<pre></pre>
 							</li>
 
-							<li onclick="toggle('pre2411401487168', 'post2411401487168')">
+							<li onclick="toggle('pre2313019813632', 'post2313019813632')">
 								<pre>        return inner</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401487168', 'post2411401487168')">
+							<li onclick="toggle('pre2313019813632', 'post2313019813632')">
 								<pre>    else:</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401487168', 'post2411401487168')">
+							<li onclick="toggle('pre2313019813632', 'post2313019813632')">
 								<pre></pre>
 							</li>
 
-							<li onclick="toggle('pre2411401487168', 'post2411401487168')">
+							<li onclick="toggle('pre2313019813632', 'post2313019813632')">
 								<pre>        @wraps(get_response)</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401487168', 'post2411401487168')">
+							<li onclick="toggle('pre2313019813632', 'post2313019813632')">
 								<pre>        def inner(request):</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401487168', 'post2411401487168')">
+							<li onclick="toggle('pre2313019813632', 'post2313019813632')">
 								<pre>            try:</pre>
 							</li>
 
 						</ol>
 
 						<ol start="55" class="context-line">
-							<li onclick="toggle('pre2411401487168', 'post2411401487168')">
+							<li onclick="toggle('pre2313019813632', 'post2313019813632')">
 								<pre>                response = get_response(request)</pre> <span>…</span></li>
 						</ol>
 
-						<ol start='56' class="post-context" id="post2411401487168">
+						<ol start='56' class="post-context" id="post2313019813632">
 
-							<li onclick="toggle('pre2411401487168', 'post2411401487168')">
+							<li onclick="toggle('pre2313019813632', 'post2313019813632')">
 								<pre>            except Exception as exc:</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401487168', 'post2411401487168')">
+							<li onclick="toggle('pre2313019813632', 'post2313019813632')">
 								<pre>                response = response_for_exception(request, exc)</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401487168', 'post2411401487168')">
+							<li onclick="toggle('pre2313019813632', 'post2313019813632')">
 								<pre>            return response</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401487168', 'post2411401487168')">
+							<li onclick="toggle('pre2313019813632', 'post2313019813632')">
 								<pre></pre>
 							</li>
 
-							<li onclick="toggle('pre2411401487168', 'post2411401487168')">
+							<li onclick="toggle('pre2313019813632', 'post2313019813632')">
 								<pre>        return inner</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401487168', 'post2411401487168')">
+							<li onclick="toggle('pre2313019813632', 'post2313019813632')">
 								<pre></pre>
 							</li>
 
@@ -736,7 +477,7 @@
 					<details>
 						<summary class="commands">Local vars</summary>
 
-						<table class="vars" id="v2411401487168">
+						<table class="vars" id="v2313019813632">
 							<thead>
 								<tr>
 									<th>Variable</th>
@@ -748,21 +489,21 @@
 								<tr>
 									<td>exc</td>
 									<td class="code">
-										<pre>IntegrityError(&#x27;NOT NULL constraint failed: student_student.s_password&#x27;)</pre>
+										<pre>AttributeError(&quot;&#x27;dict&#x27; object has no attribute &#x27;headers&#x27;&quot;)</pre>
 									</td>
 								</tr>
 
 								<tr>
 									<td>get_response</td>
 									<td class="code">
-										<pre>&lt;bound method BaseHandler._get_response of &lt;django.core.handlers.wsgi.WSGIHandler object at 0x0000023172238160&gt;&gt;</pre>
+										<pre>&lt;XFrameOptionsMiddleware get_response=BaseHandler._get_response&gt;</pre>
 									</td>
 								</tr>
 
 								<tr>
 									<td>request</td>
 									<td class="code">
-										<pre>&lt;WSGIRequest: POST &#x27;/login/&#x27;&gt;</pre>
+										<pre>&lt;WSGIRequest: POST &#x27;/select/choose/&#x27;&gt;</pre>
 									</td>
 								</tr>
 
@@ -775,75 +516,75 @@
 
 				<li class="frame django">
 
-					<code class="fname">C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\core\handlers\base.py</code>,
-					line 197, in _get_response
+					<code class="fname">C:\Users\pangy\anaconda3\envs\DB\lib\site-packages\django\utils\deprecation.py</code>,
+					line 138, in __call__
 
 
 
-					<div class="context" id="c2411401488960">
+					<div class="context" id="c2313019334016">
 
-						<ol start="190" class="pre-context" id="pre2411401488960">
+						<ol start="131" class="pre-context" id="pre2313019334016">
 
-							<li onclick="toggle('pre2411401488960', 'post2411401488960')">
-								<pre></pre>
+							<li onclick="toggle('pre2313019334016', 'post2313019334016')">
+								<pre>        if self._is_coroutine:</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401488960', 'post2411401488960')">
-								<pre>        if response is None:</pre>
+							<li onclick="toggle('pre2313019334016', 'post2313019334016')">
+								<pre>            return self.__acall__(request)</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401488960', 'post2411401488960')">
-								<pre>            wrapped_callback = self.make_view_atomic(callback)</pre>
+							<li onclick="toggle('pre2313019334016', 'post2313019334016')">
+								<pre>        response = None</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401488960', 'post2411401488960')">
-								<pre>            # If it is an asynchronous view, run it in a subthread.</pre>
+							<li onclick="toggle('pre2313019334016', 'post2313019334016')">
+								<pre>        if hasattr(self, &quot;process_request&quot;):</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401488960', 'post2411401488960')">
-								<pre>            if asyncio.iscoroutinefunction(wrapped_callback):</pre>
+							<li onclick="toggle('pre2313019334016', 'post2313019334016')">
+								<pre>            response = self.process_request(request)</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401488960', 'post2411401488960')">
-								<pre>                wrapped_callback = async_to_sync(wrapped_callback)</pre>
+							<li onclick="toggle('pre2313019334016', 'post2313019334016')">
+								<pre>        response = response or self.get_response(request)</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401488960', 'post2411401488960')">
-								<pre>            try:</pre>
+							<li onclick="toggle('pre2313019334016', 'post2313019334016')">
+								<pre>        if hasattr(self, &quot;process_response&quot;):</pre>
 							</li>
 
 						</ol>
 
-						<ol start="197" class="context-line">
-							<li onclick="toggle('pre2411401488960', 'post2411401488960')">
-								<pre>                response = wrapped_callback(request, *callback_args, **callback_kwargs)</pre>
+						<ol start="138" class="context-line">
+							<li onclick="toggle('pre2313019334016', 'post2313019334016')">
+								<pre>            response = self.process_response(request, response)</pre>
 								<span>…</span></li>
 						</ol>
 
-						<ol start='198' class="post-context" id="post2411401488960">
+						<ol start='139' class="post-context" id="post2313019334016">
 
-							<li onclick="toggle('pre2411401488960', 'post2411401488960')">
-								<pre>            except Exception as e:</pre>
+							<li onclick="toggle('pre2313019334016', 'post2313019334016')">
+								<pre>        return response</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401488960', 'post2411401488960')">
-								<pre>                response = self.process_exception_by_middleware(e, request)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401488960', 'post2411401488960')">
-								<pre>                if response is None:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401488960', 'post2411401488960')">
-								<pre>                    raise</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401488960', 'post2411401488960')">
+							<li onclick="toggle('pre2313019334016', 'post2313019334016')">
 								<pre></pre>
 							</li>
 
-							<li onclick="toggle('pre2411401488960', 'post2411401488960')">
-								<pre>        # Complain if the view returned None (a common error).</pre>
+							<li onclick="toggle('pre2313019334016', 'post2313019334016')">
+								<pre>    async def __acall__(self, request):</pre>
+							</li>
+
+							<li onclick="toggle('pre2313019334016', 'post2313019334016')">
+								<pre>        &quot;&quot;&quot;</pre>
+							</li>
+
+							<li onclick="toggle('pre2313019334016', 'post2313019334016')">
+								<pre>        Async version of __call__ that is swapped in when an async request</pre>
+							</li>
+
+							<li onclick="toggle('pre2313019334016', 'post2313019334016')">
+								<pre>        is running.</pre>
 							</li>
 
 						</ol>
@@ -856,7 +597,7 @@
 					<details>
 						<summary class="commands">Local vars</summary>
 
-						<table class="vars" id="v2411401488960">
+						<table class="vars" id="v2313019334016">
 							<thead>
 								<tr>
 									<th>Variable</th>
@@ -866,51 +607,23 @@
 							<tbody>
 
 								<tr>
-									<td>callback</td>
-									<td class="code">
-										<pre>&lt;function login at 0x000002317273CE50&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>callback_args</td>
-									<td class="code">
-										<pre>()</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>callback_kwargs</td>
-									<td class="code">
-										<pre>{}</pre>
-									</td>
-								</tr>
-
-								<tr>
 									<td>request</td>
 									<td class="code">
-										<pre>&lt;WSGIRequest: POST &#x27;/login/&#x27;&gt;</pre>
+										<pre>&lt;WSGIRequest: POST &#x27;/select/choose/&#x27;&gt;</pre>
 									</td>
 								</tr>
 
 								<tr>
 									<td>response</td>
 									<td class="code">
-										<pre>None</pre>
+										<pre>{&#x27;message&#x27;: &#x27;No Such Student&#x27;, &#x27;success&#x27;: False}</pre>
 									</td>
 								</tr>
 
 								<tr>
 									<td>self</td>
 									<td class="code">
-										<pre>&lt;django.core.handlers.wsgi.WSGIHandler object at 0x0000023172238160&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>wrapped_callback</td>
-									<td class="code">
-										<pre>&lt;function login at 0x000002317273CE50&gt;</pre>
+										<pre>&lt;XFrameOptionsMiddleware get_response=BaseHandler._get_response&gt;</pre>
 									</td>
 								</tr>
 
@@ -921,72 +634,77 @@
 				</li>
 
 
-				<li class="frame user">
+				<li class="frame django">
 
-					<code class="fname">D:\LearningMaterials\大三上\数据库\大作业\任务二\DBMS-EnjoyFood-BUAA2022\EnjoyFood_backend\student\views.py</code>,
-					line 30, in login
+					<code class="fname">C:\Users\pangy\anaconda3\envs\DB\lib\site-packages\django\middleware\clickjacking.py</code>,
+					line 34, in process_response
 
 
 
-					<div class="context" id="c2411401541888">
+					<div class="context" id="c2313019332672">
 
-						<ol start="23" class="pre-context" id="pre2411401541888">
+						<ol start="27" class="pre-context" id="pre2313019332672">
 
-							<li onclick="toggle('pre2411401541888', 'post2411401541888')">
-								<pre>def login(request):</pre>
+							<li onclick="toggle('pre2313019332672', 'post2313019332672')">
+								<pre>        if response.get(&quot;X-Frame-Options&quot;) is not None:</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401541888', 'post2411401541888')">
-								<pre>    if request.method == &#x27;POST&#x27;:</pre>
+							<li onclick="toggle('pre2313019332672', 'post2313019332672')">
+								<pre>            return response</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401541888', 'post2411401541888')">
-								<pre>        print(request)</pre>
+							<li onclick="toggle('pre2313019332672', 'post2313019332672')">
+								<pre></pre>
 							</li>
 
-							<li onclick="toggle('pre2411401541888', 'post2411401541888')">
-								<pre>        new_s_id = request.POST.get(&#x27;s_id&#x27;)</pre>
+							<li onclick="toggle('pre2313019332672', 'post2313019332672')">
+								<pre>        # Don&#x27;t set it if they used @xframe_options_exempt</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401541888', 'post2411401541888')">
-								<pre>        new_s_password = request.POST.get(&#x27;s_password&#x27;)</pre>
+							<li onclick="toggle('pre2313019332672', 'post2313019332672')">
+								<pre>        if getattr(response, &quot;xframe_options_exempt&quot;, False):</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401541888', 'post2411401541888')">
-								<pre>        print(new_s_password)</pre>
+							<li onclick="toggle('pre2313019332672', 'post2313019332672')">
+								<pre>            return response</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401541888', 'post2411401541888')">
-								<pre>        new_student = Student(s_id=new_s_id, s_password=new_s_password)</pre>
+							<li onclick="toggle('pre2313019332672', 'post2313019332672')">
+								<pre></pre>
 							</li>
 
 						</ol>
 
-						<ol start="30" class="context-line">
-							<li onclick="toggle('pre2411401541888', 'post2411401541888')">
-								<pre>        new_student.save()</pre> <span>…</span></li>
+						<ol start="34" class="context-line">
+							<li onclick="toggle('pre2313019332672', 'post2313019332672')">
+								<pre>        response.headers[&quot;X-Frame-Options&quot;] = self.get_xframe_options_value(</pre>
+								<span>…</span></li>
 						</ol>
 
-						<ol start='31' class="post-context" id="post2411401541888">
+						<ol start='35' class="post-context" id="post2313019332672">
 
-							<li onclick="toggle('pre2411401541888', 'post2411401541888')">
-								<pre>        ret = {&#x27;success&#x27;: True, &#x27;message&#x27;: &quot;register success&quot;}</pre>
+							<li onclick="toggle('pre2313019332672', 'post2313019332672')">
+								<pre>            request,</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401541888', 'post2411401541888')">
-								<pre>        return JsonResponse(ret)</pre>
+							<li onclick="toggle('pre2313019332672', 'post2313019332672')">
+								<pre>            response,</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401541888', 'post2411401541888')">
-								<pre>    else:</pre>
+							<li onclick="toggle('pre2313019332672', 'post2313019332672')">
+								<pre>        )</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401541888', 'post2411401541888')">
-								<pre>        ret = {&#x27;success&#x27;: True, &#x27;message&#x27;: &quot;register success&quot;}</pre>
+							<li onclick="toggle('pre2313019332672', 'post2313019332672')">
+								<pre>        return response</pre>
 							</li>
 
-							<li onclick="toggle('pre2411401541888', 'post2411401541888')">
-								<pre>        return JsonResponse(ret)</pre>
+							<li onclick="toggle('pre2313019332672', 'post2313019332672')">
+								<pre></pre>
+							</li>
+
+							<li onclick="toggle('pre2313019332672', 'post2313019332672')">
+								<pre>    def get_xframe_options_value(self, request, response):</pre>
 							</li>
 
 						</ol>
@@ -999,7 +717,7 @@
 					<details>
 						<summary class="commands">Local vars</summary>
 
-						<table class="vars" id="v2411401541888">
+						<table class="vars" id="v2313019332672">
 							<thead>
 								<tr>
 									<th>Variable</th>
@@ -1007,2058 +725,25 @@
 								</tr>
 							</thead>
 							<tbody>
-
-								<tr>
-									<td>new_s_id</td>
-									<td class="code">
-										<pre>None</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>new_s_password</td>
-									<td class="code">
-										<pre>None</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>new_student</td>
-									<td class="code">
-										<pre>&lt;Student: Student object (None)&gt;</pre>
-									</td>
-								</tr>
 
 								<tr>
 									<td>request</td>
 									<td class="code">
-										<pre>&lt;WSGIRequest: POST &#x27;/login/&#x27;&gt;</pre>
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
-					</details>
-
-				</li>
-
-
-				<li class="frame django">
-
-					<code class="fname">C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\models\base.py</code>,
-					line 812, in save
-
-
-
-					<div class="context" id="c2411401542400">
-
-						<ol start="805" class="pre-context" id="pre2411401542400">
-
-							<li onclick="toggle('pre2411401542400', 'post2411401542400')">
-								<pre>            for field in self._meta.concrete_fields:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542400', 'post2411401542400')">
-								<pre>                if not field.primary_key and not hasattr(field, &quot;through&quot;):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542400', 'post2411401542400')">
-								<pre>                    field_names.add(field.attname)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542400', 'post2411401542400')">
-								<pre>            loaded_fields = field_names.difference(deferred_fields)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542400', 'post2411401542400')">
-								<pre>            if loaded_fields:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542400', 'post2411401542400')">
-								<pre>                update_fields = frozenset(loaded_fields)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542400', 'post2411401542400')">
-								<pre></pre>
-							</li>
-
-						</ol>
-
-						<ol start="812" class="context-line">
-							<li onclick="toggle('pre2411401542400', 'post2411401542400')">
-								<pre>        self.save_base(</pre> <span>…</span></li>
-						</ol>
-
-						<ol start='813' class="post-context" id="post2411401542400">
-
-							<li onclick="toggle('pre2411401542400', 'post2411401542400')">
-								<pre>            using=using,</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542400', 'post2411401542400')">
-								<pre>            force_insert=force_insert,</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542400', 'post2411401542400')">
-								<pre>            force_update=force_update,</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542400', 'post2411401542400')">
-								<pre>            update_fields=update_fields,</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542400', 'post2411401542400')">
-								<pre>        )</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542400', 'post2411401542400')">
-								<pre></pre>
-							</li>
-
-						</ol>
-
-					</div>
-
-
-
-
-					<details>
-						<summary class="commands">Local vars</summary>
-
-						<table class="vars" id="v2411401542400">
-							<thead>
-								<tr>
-									<th>Variable</th>
-									<th>Value</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<tr>
-									<td>deferred_fields</td>
-									<td class="code">
-										<pre>set()</pre>
+										<pre>&lt;WSGIRequest: POST &#x27;/select/choose/&#x27;&gt;</pre>
 									</td>
 								</tr>
 
 								<tr>
-									<td>force_insert</td>
+									<td>response</td>
 									<td class="code">
-										<pre>False</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>force_update</td>
-									<td class="code">
-										<pre>False</pre>
+										<pre>{&#x27;message&#x27;: &#x27;No Such Student&#x27;, &#x27;success&#x27;: False}</pre>
 									</td>
 								</tr>
 
 								<tr>
 									<td>self</td>
 									<td class="code">
-										<pre>&lt;Student: Student object (None)&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>update_fields</td>
-									<td class="code">
-										<pre>None</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>using</td>
-									<td class="code">
-										<pre>&#x27;default&#x27;</pre>
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
-					</details>
-
-				</li>
-
-
-				<li class="frame django">
-
-					<code class="fname">C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\models\base.py</code>,
-					line 863, in save_base
-
-
-
-					<div class="context" id="c2411401490112">
-
-						<ol start="856" class="pre-context" id="pre2411401490112">
-
-							<li onclick="toggle('pre2411401490112', 'post2411401490112')">
-								<pre>            context_manager = transaction.atomic(using=using, savepoint=False)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490112', 'post2411401490112')">
-								<pre>        else:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490112', 'post2411401490112')">
-								<pre>            context_manager = transaction.mark_for_rollback_on_error(using=using)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490112', 'post2411401490112')">
-								<pre>        with context_manager:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490112', 'post2411401490112')">
-								<pre>            parent_inserted = False</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490112', 'post2411401490112')">
-								<pre>            if not raw:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490112', 'post2411401490112')">
-								<pre>                parent_inserted = self._save_parents(cls, using, update_fields)</pre>
-							</li>
-
-						</ol>
-
-						<ol start="863" class="context-line">
-							<li onclick="toggle('pre2411401490112', 'post2411401490112')">
-								<pre>            updated = self._save_table(</pre> <span>…</span></li>
-						</ol>
-
-						<ol start='864' class="post-context" id="post2411401490112">
-
-							<li onclick="toggle('pre2411401490112', 'post2411401490112')">
-								<pre>                raw,</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490112', 'post2411401490112')">
-								<pre>                cls,</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490112', 'post2411401490112')">
-								<pre>                force_insert or parent_inserted,</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490112', 'post2411401490112')">
-								<pre>                force_update,</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490112', 'post2411401490112')">
-								<pre>                using,</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490112', 'post2411401490112')">
-								<pre>                update_fields,</pre>
-							</li>
-
-						</ol>
-
-					</div>
-
-
-
-
-					<details>
-						<summary class="commands">Local vars</summary>
-
-						<table class="vars" id="v2411401490112">
-							<thead>
-								<tr>
-									<th>Variable</th>
-									<th>Value</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<tr>
-									<td>cls</td>
-									<td class="code">
-										<pre>&lt;class &#x27;student.models.Student&#x27;&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>context_manager</td>
-									<td class="code">
-										<pre>&lt;contextlib._GeneratorContextManager object at 0x00000231729C7700&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>force_insert</td>
-									<td class="code">
-										<pre>False</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>force_update</td>
-									<td class="code">
-										<pre>False</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>meta</td>
-									<td class="code">
-										<pre>&lt;Options for Student&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>origin</td>
-									<td class="code">
-										<pre>&lt;class &#x27;student.models.Student&#x27;&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>parent_inserted</td>
-									<td class="code">
-										<pre>False</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>raw</td>
-									<td class="code">
-										<pre>False</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>self</td>
-									<td class="code">
-										<pre>&lt;Student: Student object (None)&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>update_fields</td>
-									<td class="code">
-										<pre>None</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>using</td>
-									<td class="code">
-										<pre>&#x27;default&#x27;</pre>
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
-					</details>
-
-				</li>
-
-
-				<li class="frame django">
-
-					<code class="fname">C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\models\base.py</code>,
-					line 1006, in _save_table
-
-
-
-					<div class="context" id="c2411401542592">
-
-						<ol start="999" class="pre-context" id="pre2411401542592">
-
-							<li onclick="toggle('pre2411401542592', 'post2411401542592')">
-								<pre>                    )[&quot;_order__max&quot;]</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542592', 'post2411401542592')">
-								<pre>                )</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542592', 'post2411401542592')">
-								<pre>            fields = meta.local_concrete_fields</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542592', 'post2411401542592')">
-								<pre>            if not pk_set:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542592', 'post2411401542592')">
-								<pre>                fields = [f for f in fields if f is not meta.auto_field]</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542592', 'post2411401542592')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542592', 'post2411401542592')">
-								<pre>            returning_fields = meta.db_returning_fields</pre>
-							</li>
-
-						</ol>
-
-						<ol start="1006" class="context-line">
-							<li onclick="toggle('pre2411401542592', 'post2411401542592')">
-								<pre>            results = self._do_insert(</pre> <span>…</span></li>
-						</ol>
-
-						<ol start='1007' class="post-context" id="post2411401542592">
-
-							<li onclick="toggle('pre2411401542592', 'post2411401542592')">
-								<pre>                cls._base_manager, using, fields, returning_fields, raw</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542592', 'post2411401542592')">
-								<pre>            )</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542592', 'post2411401542592')">
-								<pre>            if results:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542592', 'post2411401542592')">
-								<pre>                for value, field in zip(results[0], returning_fields):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542592', 'post2411401542592')">
-								<pre>                    setattr(self, field.attname, value)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542592', 'post2411401542592')">
-								<pre>        return updated</pre>
-							</li>
-
-						</ol>
-
-					</div>
-
-
-
-
-					<details>
-						<summary class="commands">Local vars</summary>
-
-						<table class="vars" id="v2411401542592">
-							<thead>
-								<tr>
-									<th>Variable</th>
-									<th>Value</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<tr>
-									<td>cls</td>
-									<td class="code">
-										<pre>&lt;class &#x27;student.models.Student&#x27;&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>fields</td>
-									<td class="code">
-										<pre>[&lt;django.db.models.fields.IntegerField: s_id&gt;,
- &lt;django.db.models.fields.CharField: s_password&gt;,
- &lt;django.db.models.fields.CharField: s_name&gt;,
- &lt;django.db.models.fields.CharField: s_dorm&gt;,
- &lt;django.db.models.fields.CharField: s_gender&gt;]</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>force_insert</td>
-									<td class="code">
-										<pre>False</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>force_update</td>
-									<td class="code">
-										<pre>False</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>meta</td>
-									<td class="code">
-										<pre>&lt;Options for Student&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>non_pks</td>
-									<td class="code">
-										<pre>[&lt;django.db.models.fields.CharField: s_password&gt;,
- &lt;django.db.models.fields.CharField: s_name&gt;,
- &lt;django.db.models.fields.CharField: s_dorm&gt;,
- &lt;django.db.models.fields.CharField: s_gender&gt;]</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>pk_set</td>
-									<td class="code">
-										<pre>False</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>pk_val</td>
-									<td class="code">
-										<pre>None</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>raw</td>
-									<td class="code">
-										<pre>False</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>returning_fields</td>
-									<td class="code">
-										<pre>[]</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>self</td>
-									<td class="code">
-										<pre>&lt;Student: Student object (None)&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>update_fields</td>
-									<td class="code">
-										<pre>None</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>updated</td>
-									<td class="code">
-										<pre>False</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>using</td>
-									<td class="code">
-										<pre>&#x27;default&#x27;</pre>
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
-					</details>
-
-				</li>
-
-
-				<li class="frame django">
-
-					<code class="fname">C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\models\base.py</code>,
-					line 1047, in _do_insert
-
-
-
-					<div class="context" id="c2411401542528">
-
-						<ol start="1040" class="pre-context" id="pre2411401542528">
-
-							<li onclick="toggle('pre2411401542528', 'post2411401542528')">
-								<pre>        return filtered._update(values) &gt; 0</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542528', 'post2411401542528')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542528', 'post2411401542528')">
-								<pre>    def _do_insert(self, manager, using, fields, returning_fields, raw):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542528', 'post2411401542528')">
-								<pre>        &quot;&quot;&quot;</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542528', 'post2411401542528')">
-								<pre>        Do an INSERT. If returning_fields is defined then this method should</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542528', 'post2411401542528')">
-								<pre>        return the newly created data for the model.</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542528', 'post2411401542528')">
-								<pre>        &quot;&quot;&quot;</pre>
-							</li>
-
-						</ol>
-
-						<ol start="1047" class="context-line">
-							<li onclick="toggle('pre2411401542528', 'post2411401542528')">
-								<pre>        return manager._insert(</pre> <span>…</span></li>
-						</ol>
-
-						<ol start='1048' class="post-context" id="post2411401542528">
-
-							<li onclick="toggle('pre2411401542528', 'post2411401542528')">
-								<pre>            [self],</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542528', 'post2411401542528')">
-								<pre>            fields=fields,</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542528', 'post2411401542528')">
-								<pre>            returning_fields=returning_fields,</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542528', 'post2411401542528')">
-								<pre>            using=using,</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542528', 'post2411401542528')">
-								<pre>            raw=raw,</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542528', 'post2411401542528')">
-								<pre>        )</pre>
-							</li>
-
-						</ol>
-
-					</div>
-
-
-
-
-					<details>
-						<summary class="commands">Local vars</summary>
-
-						<table class="vars" id="v2411401542528">
-							<thead>
-								<tr>
-									<th>Variable</th>
-									<th>Value</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<tr>
-									<td>fields</td>
-									<td class="code">
-										<pre>[&lt;django.db.models.fields.IntegerField: s_id&gt;,
- &lt;django.db.models.fields.CharField: s_password&gt;,
- &lt;django.db.models.fields.CharField: s_name&gt;,
- &lt;django.db.models.fields.CharField: s_dorm&gt;,
- &lt;django.db.models.fields.CharField: s_gender&gt;]</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>manager</td>
-									<td class="code">
-										<pre>&lt;django.db.models.manager.Manager object at 0x00000231729B7460&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>raw</td>
-									<td class="code">
-										<pre>False</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>returning_fields</td>
-									<td class="code">
-										<pre>[]</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>self</td>
-									<td class="code">
-										<pre>&lt;Student: Student object (None)&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>using</td>
-									<td class="code">
-										<pre>&#x27;default&#x27;</pre>
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
-					</details>
-
-				</li>
-
-
-				<li class="frame django">
-
-					<code class="fname">C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\models\manager.py</code>,
-					line 85, in manager_method
-
-
-
-					<div class="context" id="c2411401542912">
-
-						<ol start="78" class="pre-context" id="pre2411401542912">
-
-							<li onclick="toggle('pre2411401542912', 'post2411401542912')">
-								<pre>    def check(self, **kwargs):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542912', 'post2411401542912')">
-								<pre>        return []</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542912', 'post2411401542912')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542912', 'post2411401542912')">
-								<pre>    @classmethod</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542912', 'post2411401542912')">
-								<pre>    def _get_queryset_methods(cls, queryset_class):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542912', 'post2411401542912')">
-								<pre>        def create_method(name, method):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542912', 'post2411401542912')">
-								<pre>            def manager_method(self, *args, **kwargs):</pre>
-							</li>
-
-						</ol>
-
-						<ol start="85" class="context-line">
-							<li onclick="toggle('pre2411401542912', 'post2411401542912')">
-								<pre>                return getattr(self.get_queryset(), name)(*args, **kwargs)</pre>
-								<span>…</span></li>
-						</ol>
-
-						<ol start='86' class="post-context" id="post2411401542912">
-
-							<li onclick="toggle('pre2411401542912', 'post2411401542912')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542912', 'post2411401542912')">
-								<pre>            manager_method.__name__ = method.__name__</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542912', 'post2411401542912')">
-								<pre>            manager_method.__doc__ = method.__doc__</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542912', 'post2411401542912')">
-								<pre>            return manager_method</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542912', 'post2411401542912')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542912', 'post2411401542912')">
-								<pre>        new_methods = {}</pre>
-							</li>
-
-						</ol>
-
-					</div>
-
-
-
-
-					<details>
-						<summary class="commands">Local vars</summary>
-
-						<table class="vars" id="v2411401542912">
-							<thead>
-								<tr>
-									<th>Variable</th>
-									<th>Value</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<tr>
-									<td>args</td>
-									<td class="code">
-										<pre>([&lt;Student: Student object (None)&gt;],)</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>kwargs</td>
-									<td class="code">
-										<pre>{&#x27;fields&#x27;: [&lt;django.db.models.fields.IntegerField: s_id&gt;,
-            &lt;django.db.models.fields.CharField: s_password&gt;,
-            &lt;django.db.models.fields.CharField: s_name&gt;,
-            &lt;django.db.models.fields.CharField: s_dorm&gt;,
-            &lt;django.db.models.fields.CharField: s_gender&gt;],
- &#x27;raw&#x27;: False,
- &#x27;returning_fields&#x27;: [],
- &#x27;using&#x27;: &#x27;default&#x27;}</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>name</td>
-									<td class="code">
-										<pre>&#x27;_insert&#x27;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>self</td>
-									<td class="code">
-										<pre>&lt;django.db.models.manager.Manager object at 0x00000231729B7460&gt;</pre>
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
-					</details>
-
-				</li>
-
-
-				<li class="frame django">
-
-					<code class="fname">C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\models\query.py</code>,
-					line 1790, in _insert
-
-
-
-					<div class="context" id="c2411401539776">
-
-						<ol start="1783" class="pre-context" id="pre2411401539776">
-
-							<li onclick="toggle('pre2411401539776', 'post2411401539776')">
-								<pre>        query = sql.InsertQuery(</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539776', 'post2411401539776')">
-								<pre>            self.model,</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539776', 'post2411401539776')">
-								<pre>            on_conflict=on_conflict,</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539776', 'post2411401539776')">
-								<pre>            update_fields=update_fields,</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539776', 'post2411401539776')">
-								<pre>            unique_fields=unique_fields,</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539776', 'post2411401539776')">
-								<pre>        )</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539776', 'post2411401539776')">
-								<pre>        query.insert_values(fields, objs, raw=raw)</pre>
-							</li>
-
-						</ol>
-
-						<ol start="1790" class="context-line">
-							<li onclick="toggle('pre2411401539776', 'post2411401539776')">
-								<pre>        return query.get_compiler(using=using).execute_sql(returning_fields)</pre>
-								<span>…</span></li>
-						</ol>
-
-						<ol start='1791' class="post-context" id="post2411401539776">
-
-							<li onclick="toggle('pre2411401539776', 'post2411401539776')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539776', 'post2411401539776')">
-								<pre>    _insert.alters_data = True</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539776', 'post2411401539776')">
-								<pre>    _insert.queryset_only = False</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539776', 'post2411401539776')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539776', 'post2411401539776')">
-								<pre>    def _batched_insert(</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539776', 'post2411401539776')">
-								<pre>        self,</pre>
-							</li>
-
-						</ol>
-
-					</div>
-
-
-
-
-					<details>
-						<summary class="commands">Local vars</summary>
-
-						<table class="vars" id="v2411401539776">
-							<thead>
-								<tr>
-									<th>Variable</th>
-									<th>Value</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<tr>
-									<td>fields</td>
-									<td class="code">
-										<pre>[&lt;django.db.models.fields.IntegerField: s_id&gt;,
- &lt;django.db.models.fields.CharField: s_password&gt;,
- &lt;django.db.models.fields.CharField: s_name&gt;,
- &lt;django.db.models.fields.CharField: s_dorm&gt;,
- &lt;django.db.models.fields.CharField: s_gender&gt;]</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>objs</td>
-									<td class="code">
-										<pre>[&lt;Student: Student object (None)&gt;]</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>on_conflict</td>
-									<td class="code">
-										<pre>None</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>query</td>
-									<td class="code">
-										<pre>&lt;django.db.models.sql.subqueries.InsertQuery object at 0x00000231729C7640&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>raw</td>
-									<td class="code">
-										<pre>False</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>returning_fields</td>
-									<td class="code">
-										<pre>[]</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>self</td>
-									<td class="code">
-										<pre>&lt;QuerySet []&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>unique_fields</td>
-									<td class="code">
-										<pre>None</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>update_fields</td>
-									<td class="code">
-										<pre>None</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>using</td>
-									<td class="code">
-										<pre>&#x27;default&#x27;</pre>
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
-					</details>
-
-				</li>
-
-
-				<li class="frame django">
-
-					<code class="fname">C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\models\sql\compiler.py</code>,
-					line 1660, in execute_sql
-
-
-
-					<div class="context" id="c2411401539904">
-
-						<ol start="1653" class="pre-context" id="pre2411401539904">
-
-							<li onclick="toggle('pre2411401539904', 'post2411401539904')">
-								<pre>            and len(self.query.objs) != 1</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539904', 'post2411401539904')">
-								<pre>            and not self.connection.features.can_return_rows_from_bulk_insert</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539904', 'post2411401539904')">
-								<pre>        )</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539904', 'post2411401539904')">
-								<pre>        opts = self.query.get_meta()</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539904', 'post2411401539904')">
-								<pre>        self.returning_fields = returning_fields</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539904', 'post2411401539904')">
-								<pre>        with self.connection.cursor() as cursor:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539904', 'post2411401539904')">
-								<pre>            for sql, params in self.as_sql():</pre>
-							</li>
-
-						</ol>
-
-						<ol start="1660" class="context-line">
-							<li onclick="toggle('pre2411401539904', 'post2411401539904')">
-								<pre>                cursor.execute(sql, params)</pre> <span>…</span></li>
-						</ol>
-
-						<ol start='1661' class="post-context" id="post2411401539904">
-
-							<li onclick="toggle('pre2411401539904', 'post2411401539904')">
-								<pre>            if not self.returning_fields:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539904', 'post2411401539904')">
-								<pre>                return []</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539904', 'post2411401539904')">
-								<pre>            if (</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539904', 'post2411401539904')">
-								<pre>                self.connection.features.can_return_rows_from_bulk_insert</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539904', 'post2411401539904')">
-								<pre>                and len(self.query.objs) &gt; 1</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401539904', 'post2411401539904')">
-								<pre>            ):</pre>
-							</li>
-
-						</ol>
-
-					</div>
-
-
-
-
-					<details>
-						<summary class="commands">Local vars</summary>
-
-						<table class="vars" id="v2411401539904">
-							<thead>
-								<tr>
-									<th>Variable</th>
-									<th>Value</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<tr>
-									<td>cursor</td>
-									<td class="code">
-										<pre>&lt;django.db.backends.utils.CursorDebugWrapper object at 0x00000231729C7850&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>opts</td>
-									<td class="code">
-										<pre>&lt;Options for Student&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>params</td>
-									<td class="code">
-										<pre>(None, None, None, None, None)</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>returning_fields</td>
-									<td class="code">
-										<pre>[]</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>self</td>
-									<td class="code">
-										<pre>&lt;SQLInsertCompiler model=Student connection=&lt;DatabaseWrapper vendor=&#x27;sqlite&#x27; alias=&#x27;default&#x27;&gt; using=&#x27;default&#x27;&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>sql</td>
-									<td class="code">
-										<pre>(&#x27;INSERT INTO &quot;student_student&quot; (&quot;s_id&quot;, &quot;s_password&quot;, &quot;s_name&quot;, &quot;s_dorm&quot;, &#x27;
- &#x27;&quot;s_gender&quot;) VALUES (%s, %s, %s, %s, %s)&#x27;)</pre>
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
-					</details>
-
-				</li>
-
-
-				<li class="frame django">
-
-					<code class="fname">C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\backends\utils.py</code>,
-					line 103, in execute
-
-
-
-					<div class="context" id="c2411401543232">
-
-						<ol start="96" class="pre-context" id="pre2411401543232">
-
-							<li onclick="toggle('pre2411401543232', 'post2411401543232')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543232', 'post2411401543232')">
-								<pre>class CursorDebugWrapper(CursorWrapper):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543232', 'post2411401543232')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543232', 'post2411401543232')">
-								<pre>    # XXX callproc isn&#x27;t instrumented at this time.</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543232', 'post2411401543232')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543232', 'post2411401543232')">
-								<pre>    def execute(self, sql, params=None):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543232', 'post2411401543232')">
-								<pre>        with self.debug_sql(sql, params, use_last_executed_query=True):</pre>
-							</li>
-
-						</ol>
-
-						<ol start="103" class="context-line">
-							<li onclick="toggle('pre2411401543232', 'post2411401543232')">
-								<pre>            return super().execute(sql, params)</pre> <span>…</span></li>
-						</ol>
-
-						<ol start='104' class="post-context" id="post2411401543232">
-
-							<li onclick="toggle('pre2411401543232', 'post2411401543232')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543232', 'post2411401543232')">
-								<pre>    def executemany(self, sql, param_list):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543232', 'post2411401543232')">
-								<pre>        with self.debug_sql(sql, param_list, many=True):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543232', 'post2411401543232')">
-								<pre>            return super().executemany(sql, param_list)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543232', 'post2411401543232')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543232', 'post2411401543232')">
-								<pre>    @contextmanager</pre>
-							</li>
-
-						</ol>
-
-					</div>
-
-
-
-
-					<details>
-						<summary class="commands">Local vars</summary>
-
-						<table class="vars" id="v2411401543232">
-							<thead>
-								<tr>
-									<th>Variable</th>
-									<th>Value</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<tr>
-									<td>__class__</td>
-									<td class="code">
-										<pre>&lt;class &#x27;django.db.backends.utils.CursorDebugWrapper&#x27;&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>params</td>
-									<td class="code">
-										<pre>(None, None, None, None, None)</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>self</td>
-									<td class="code">
-										<pre>&lt;django.db.backends.utils.CursorDebugWrapper object at 0x00000231729C7850&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>sql</td>
-									<td class="code">
-										<pre>(&#x27;INSERT INTO &quot;student_student&quot; (&quot;s_id&quot;, &quot;s_password&quot;, &quot;s_name&quot;, &quot;s_dorm&quot;, &#x27;
- &#x27;&quot;s_gender&quot;) VALUES (%s, %s, %s, %s, %s)&#x27;)</pre>
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
-					</details>
-
-				</li>
-
-
-				<li class="frame django">
-
-					<code class="fname">C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\backends\utils.py</code>,
-					line 67, in execute
-
-
-
-					<div class="context" id="c2411401543360">
-
-						<ol start="60" class="pre-context" id="pre2411401543360">
-
-							<li onclick="toggle('pre2411401543360', 'post2411401543360')">
-								<pre>            elif kparams is None:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543360', 'post2411401543360')">
-								<pre>                return self.cursor.callproc(procname, params)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543360', 'post2411401543360')">
-								<pre>            else:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543360', 'post2411401543360')">
-								<pre>                params = params or ()</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543360', 'post2411401543360')">
-								<pre>                return self.cursor.callproc(procname, params, kparams)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543360', 'post2411401543360')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543360', 'post2411401543360')">
-								<pre>    def execute(self, sql, params=None):</pre>
-							</li>
-
-						</ol>
-
-						<ol start="67" class="context-line">
-							<li onclick="toggle('pre2411401543360', 'post2411401543360')">
-								<pre>        return self._execute_with_wrappers(</pre> <span>…</span></li>
-						</ol>
-
-						<ol start='68' class="post-context" id="post2411401543360">
-
-							<li onclick="toggle('pre2411401543360', 'post2411401543360')">
-								<pre>            sql, params, many=False, executor=self._execute</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543360', 'post2411401543360')">
-								<pre>        )</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543360', 'post2411401543360')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543360', 'post2411401543360')">
-								<pre>    def executemany(self, sql, param_list):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543360', 'post2411401543360')">
-								<pre>        return self._execute_with_wrappers(</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543360', 'post2411401543360')">
-								<pre>            sql, param_list, many=True, executor=self._executemany</pre>
-							</li>
-
-						</ol>
-
-					</div>
-
-
-
-
-					<details>
-						<summary class="commands">Local vars</summary>
-
-						<table class="vars" id="v2411401543360">
-							<thead>
-								<tr>
-									<th>Variable</th>
-									<th>Value</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<tr>
-									<td>params</td>
-									<td class="code">
-										<pre>(None, None, None, None, None)</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>self</td>
-									<td class="code">
-										<pre>&lt;django.db.backends.utils.CursorDebugWrapper object at 0x00000231729C7850&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>sql</td>
-									<td class="code">
-										<pre>(&#x27;INSERT INTO &quot;student_student&quot; (&quot;s_id&quot;, &quot;s_password&quot;, &quot;s_name&quot;, &quot;s_dorm&quot;, &#x27;
- &#x27;&quot;s_gender&quot;) VALUES (%s, %s, %s, %s, %s)&#x27;)</pre>
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
-					</details>
-
-				</li>
-
-
-				<li class="frame django">
-
-					<code class="fname">C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\backends\utils.py</code>,
-					line 80, in _execute_with_wrappers
-
-
-
-					<div class="context" id="c2411401543424">
-
-						<ol start="73" class="pre-context" id="pre2411401543424">
-
-							<li onclick="toggle('pre2411401543424', 'post2411401543424')">
-								<pre>            sql, param_list, many=True, executor=self._executemany</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543424', 'post2411401543424')">
-								<pre>        )</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543424', 'post2411401543424')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543424', 'post2411401543424')">
-								<pre>    def _execute_with_wrappers(self, sql, params, many, executor):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543424', 'post2411401543424')">
-								<pre>        context = {&quot;connection&quot;: self.db, &quot;cursor&quot;: self}</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543424', 'post2411401543424')">
-								<pre>        for wrapper in reversed(self.db.execute_wrappers):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543424', 'post2411401543424')">
-								<pre>            executor = functools.partial(wrapper, executor)</pre>
-							</li>
-
-						</ol>
-
-						<ol start="80" class="context-line">
-							<li onclick="toggle('pre2411401543424', 'post2411401543424')">
-								<pre>        return executor(sql, params, many, context)</pre> <span>…</span></li>
-						</ol>
-
-						<ol start='81' class="post-context" id="post2411401543424">
-
-							<li onclick="toggle('pre2411401543424', 'post2411401543424')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543424', 'post2411401543424')">
-								<pre>    def _execute(self, sql, params, *ignored_wrapper_args):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543424', 'post2411401543424')">
-								<pre>        self.db.validate_no_broken_transaction()</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543424', 'post2411401543424')">
-								<pre>        with self.db.wrap_database_errors:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543424', 'post2411401543424')">
-								<pre>            if params is None:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401543424', 'post2411401543424')">
-								<pre>                # params default might be backend specific.</pre>
-							</li>
-
-						</ol>
-
-					</div>
-
-
-
-
-					<details>
-						<summary class="commands">Local vars</summary>
-
-						<table class="vars" id="v2411401543424">
-							<thead>
-								<tr>
-									<th>Variable</th>
-									<th>Value</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<tr>
-									<td>context</td>
-									<td class="code">
-										<pre>{&#x27;connection&#x27;: &lt;DatabaseWrapper vendor=&#x27;sqlite&#x27; alias=&#x27;default&#x27;&gt;,
- &#x27;cursor&#x27;: &lt;django.db.backends.utils.CursorDebugWrapper object at 0x00000231729C7850&gt;}</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>executor</td>
-									<td class="code">
-										<pre>&lt;bound method CursorWrapper._execute of &lt;django.db.backends.utils.CursorDebugWrapper object at 0x00000231729C7850&gt;&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>many</td>
-									<td class="code">
-										<pre>False</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>params</td>
-									<td class="code">
-										<pre>(None, None, None, None, None)</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>self</td>
-									<td class="code">
-										<pre>&lt;django.db.backends.utils.CursorDebugWrapper object at 0x00000231729C7850&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>sql</td>
-									<td class="code">
-										<pre>(&#x27;INSERT INTO &quot;student_student&quot; (&quot;s_id&quot;, &quot;s_password&quot;, &quot;s_name&quot;, &quot;s_dorm&quot;, &#x27;
- &#x27;&quot;s_gender&quot;) VALUES (%s, %s, %s, %s, %s)&#x27;)</pre>
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
-					</details>
-
-				</li>
-
-
-				<li class="frame django">
-
-					<code class="fname">C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\backends\utils.py</code>,
-					line 89, in _execute
-
-
-
-					<div class="context" id="c2411401490176">
-
-						<ol start="82" class="pre-context" id="pre2411401490176">
-
-							<li onclick="toggle('pre2411401490176', 'post2411401490176')">
-								<pre>    def _execute(self, sql, params, *ignored_wrapper_args):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490176', 'post2411401490176')">
-								<pre>        self.db.validate_no_broken_transaction()</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490176', 'post2411401490176')">
-								<pre>        with self.db.wrap_database_errors:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490176', 'post2411401490176')">
-								<pre>            if params is None:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490176', 'post2411401490176')">
-								<pre>                # params default might be backend specific.</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490176', 'post2411401490176')">
-								<pre>                return self.cursor.execute(sql)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490176', 'post2411401490176')">
-								<pre>            else:</pre>
-							</li>
-
-						</ol>
-
-						<ol start="89" class="context-line">
-							<li onclick="toggle('pre2411401490176', 'post2411401490176')">
-								<pre>                return self.cursor.execute(sql, params)</pre> <span>…</span></li>
-						</ol>
-
-						<ol start='90' class="post-context" id="post2411401490176">
-
-							<li onclick="toggle('pre2411401490176', 'post2411401490176')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490176', 'post2411401490176')">
-								<pre>    def _executemany(self, sql, param_list, *ignored_wrapper_args):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490176', 'post2411401490176')">
-								<pre>        self.db.validate_no_broken_transaction()</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490176', 'post2411401490176')">
-								<pre>        with self.db.wrap_database_errors:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490176', 'post2411401490176')">
-								<pre>            return self.cursor.executemany(sql, param_list)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401490176', 'post2411401490176')">
-								<pre></pre>
-							</li>
-
-						</ol>
-
-					</div>
-
-
-
-
-					<details>
-						<summary class="commands">Local vars</summary>
-
-						<table class="vars" id="v2411401490176">
-							<thead>
-								<tr>
-									<th>Variable</th>
-									<th>Value</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<tr>
-									<td>ignored_wrapper_args</td>
-									<td class="code">
-										<pre>(False,
- {&#x27;connection&#x27;: &lt;DatabaseWrapper vendor=&#x27;sqlite&#x27; alias=&#x27;default&#x27;&gt;,
-  &#x27;cursor&#x27;: &lt;django.db.backends.utils.CursorDebugWrapper object at 0x00000231729C7850&gt;})</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>params</td>
-									<td class="code">
-										<pre>(None, None, None, None, None)</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>self</td>
-									<td class="code">
-										<pre>&lt;django.db.backends.utils.CursorDebugWrapper object at 0x00000231729C7850&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>sql</td>
-									<td class="code">
-										<pre>(&#x27;INSERT INTO &quot;student_student&quot; (&quot;s_id&quot;, &quot;s_password&quot;, &quot;s_name&quot;, &quot;s_dorm&quot;, &#x27;
- &#x27;&quot;s_gender&quot;) VALUES (%s, %s, %s, %s, %s)&#x27;)</pre>
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
-					</details>
-
-				</li>
-
-
-				<li class="frame django">
-
-					<code class="fname">C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\utils.py</code>,
-					line 91, in __exit__
-
-
-
-					<div class="context" id="c2411401488256">
-
-						<ol start="84" class="pre-context" id="pre2411401488256">
-
-							<li onclick="toggle('pre2411401488256', 'post2411401488256')">
-								<pre>            db_exc_type = getattr(self.wrapper.Database, dj_exc_type.__name__)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401488256', 'post2411401488256')">
-								<pre>            if issubclass(exc_type, db_exc_type):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401488256', 'post2411401488256')">
-								<pre>                dj_exc_value = dj_exc_type(*exc_value.args)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401488256', 'post2411401488256')">
-								<pre>                # Only set the &#x27;errors_occurred&#x27; flag for errors that may make</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401488256', 'post2411401488256')">
-								<pre>                # the connection unusable.</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401488256', 'post2411401488256')">
-								<pre>                if dj_exc_type not in (DataError, IntegrityError):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401488256', 'post2411401488256')">
-								<pre>                    self.wrapper.errors_occurred = True</pre>
-							</li>
-
-						</ol>
-
-						<ol start="91" class="context-line">
-							<li onclick="toggle('pre2411401488256', 'post2411401488256')">
-								<pre>                raise dj_exc_value.with_traceback(traceback) from exc_value</pre>
-								<span>…</span></li>
-						</ol>
-
-						<ol start='92' class="post-context" id="post2411401488256">
-
-							<li onclick="toggle('pre2411401488256', 'post2411401488256')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401488256', 'post2411401488256')">
-								<pre>    def __call__(self, func):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401488256', 'post2411401488256')">
-								<pre>        # Note that we are intentionally not using @wraps here for performance</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401488256', 'post2411401488256')">
-								<pre>        # reasons. Refs #21109.</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401488256', 'post2411401488256')">
-								<pre>        def inner(*args, **kwargs):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401488256', 'post2411401488256')">
-								<pre>            with self:</pre>
-							</li>
-
-						</ol>
-
-					</div>
-
-
-
-
-					<details>
-						<summary class="commands">Local vars</summary>
-
-						<table class="vars" id="v2411401488256">
-							<thead>
-								<tr>
-									<th>Variable</th>
-									<th>Value</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<tr>
-									<td>db_exc_type</td>
-									<td class="code">
-										<pre>&lt;class &#x27;sqlite3.IntegrityError&#x27;&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>dj_exc_type</td>
-									<td class="code">
-										<pre>&lt;class &#x27;django.db.utils.IntegrityError&#x27;&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>dj_exc_value</td>
-									<td class="code">
-										<pre>IntegrityError(&#x27;NOT NULL constraint failed: student_student.s_password&#x27;)</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>exc_type</td>
-									<td class="code">
-										<pre>&lt;class &#x27;sqlite3.IntegrityError&#x27;&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>exc_value</td>
-									<td class="code">
-										<pre>IntegrityError(&#x27;NOT NULL constraint failed: student_student.s_password&#x27;)</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>self</td>
-									<td class="code">
-										<pre>&lt;django.db.utils.DatabaseErrorWrapper object at 0x0000023172B34460&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>traceback</td>
-									<td class="code">
-										<pre>&lt;traceback object at 0x0000023172BAAB00&gt;</pre>
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
-					</details>
-
-				</li>
-
-
-				<li class="frame django">
-
-					<code class="fname">C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\backends\utils.py</code>,
-					line 89, in _execute
-
-
-
-					<div class="context" id="c2411401489152">
-
-						<ol start="82" class="pre-context" id="pre2411401489152">
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>    def _execute(self, sql, params, *ignored_wrapper_args):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>        self.db.validate_no_broken_transaction()</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>        with self.db.wrap_database_errors:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>            if params is None:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>                # params default might be backend specific.</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>                return self.cursor.execute(sql)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>            else:</pre>
-							</li>
-
-						</ol>
-
-						<ol start="89" class="context-line">
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>                return self.cursor.execute(sql, params)</pre> <span>…</span></li>
-						</ol>
-
-						<ol start='90' class="post-context" id="post2411401489152">
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>    def _executemany(self, sql, param_list, *ignored_wrapper_args):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>        self.db.validate_no_broken_transaction()</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>        with self.db.wrap_database_errors:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre>            return self.cursor.executemany(sql, param_list)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401489152', 'post2411401489152')">
-								<pre></pre>
-							</li>
-
-						</ol>
-
-					</div>
-
-
-
-
-					<details>
-						<summary class="commands">Local vars</summary>
-
-						<table class="vars" id="v2411401489152">
-							<thead>
-								<tr>
-									<th>Variable</th>
-									<th>Value</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<tr>
-									<td>ignored_wrapper_args</td>
-									<td class="code">
-										<pre>(False,
- {&#x27;connection&#x27;: &lt;DatabaseWrapper vendor=&#x27;sqlite&#x27; alias=&#x27;default&#x27;&gt;,
-  &#x27;cursor&#x27;: &lt;django.db.backends.utils.CursorDebugWrapper object at 0x00000231729C7850&gt;})</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>params</td>
-									<td class="code">
-										<pre>(None, None, None, None, None)</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>self</td>
-									<td class="code">
-										<pre>&lt;django.db.backends.utils.CursorDebugWrapper object at 0x00000231729C7850&gt;</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>sql</td>
-									<td class="code">
-										<pre>(&#x27;INSERT INTO &quot;student_student&quot; (&quot;s_id&quot;, &quot;s_password&quot;, &quot;s_name&quot;, &quot;s_dorm&quot;, &#x27;
- &#x27;&quot;s_gender&quot;) VALUES (%s, %s, %s, %s, %s)&#x27;)</pre>
-									</td>
-								</tr>
-
-							</tbody>
-						</table>
-					</details>
-
-				</li>
-
-
-				<li class="frame django">
-
-					<code class="fname">C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\backends\sqlite3\base.py</code>,
-					line 357, in execute
-
-
-
-					<div class="context" id="c2411401542080">
-
-						<ol start="350" class="pre-context" id="pre2411401542080">
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>    you&#x27;ll need to use &quot;%%s&quot;.</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>    &quot;&quot;&quot;</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>    def execute(self, query, params=None):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>        if params is None:</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>            return Database.Cursor.execute(self, query)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>        query = self.convert_query(query)</pre>
-							</li>
-
-						</ol>
-
-						<ol start="357" class="context-line">
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>        return Database.Cursor.execute(self, query, params)</pre> <span>…</span>
-							</li>
-						</ol>
-
-						<ol start='358' class="post-context" id="post2411401542080">
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>    def executemany(self, query, param_list):</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>        query = self.convert_query(query)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>        return Database.Cursor.executemany(self, query, param_list)</pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre></pre>
-							</li>
-
-							<li onclick="toggle('pre2411401542080', 'post2411401542080')">
-								<pre>    def convert_query(self, query):</pre>
-							</li>
-
-						</ol>
-
-					</div>
-
-
-
-
-					<details>
-						<summary class="commands">Local vars</summary>
-
-						<table class="vars" id="v2411401542080">
-							<thead>
-								<tr>
-									<th>Variable</th>
-									<th>Value</th>
-								</tr>
-							</thead>
-							<tbody>
-
-								<tr>
-									<td>params</td>
-									<td class="code">
-										<pre>(None, None, None, None, None)</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>query</td>
-									<td class="code">
-										<pre>(&#x27;INSERT INTO &quot;student_student&quot; (&quot;s_id&quot;, &quot;s_password&quot;, &quot;s_name&quot;, &quot;s_dorm&quot;, &#x27;
- &#x27;&quot;s_gender&quot;) VALUES (?, ?, ?, ?, ?)&#x27;)</pre>
-									</td>
-								</tr>
-
-								<tr>
-									<td>self</td>
-									<td class="code">
-										<pre>&lt;django.db.backends.sqlite3.base.SQLiteCursorWrapper object at 0x00000231729B4700&gt;</pre>
+										<pre>&lt;XFrameOptionsMiddleware get_response=BaseHandler._get_response&gt;</pre>
 									</td>
 								</tr>
 
@@ -3075,7 +760,7 @@
 			<div id="pastebinTraceback" class="pastebin">
 				<input type="hidden" name="language" value="PythonConsole">
 				<input type="hidden" name="title"
-      value="IntegrityError at /login/">
+      value="AttributeError at /select/choose/">
 				<input type="hidden" name="source" value="Django Dpaste Agent">
 				<input type="hidden" name="poster" value="Django">
 				<textarea name="content" id="traceback_area" cols="140" rows="25">
@@ -3083,12 +768,14 @@ Environment:
 
 
 Request Method: POST
-Request URL: http://localhost:18099/login/
+Request URL: http://localhost:18099/select/choose/
 
-Django Version: 4.1.2
-Python Version: 3.9.6
+Django Version: 4.1
+Python Version: 3.10.6
 Installed Applications:
 [&#x27;student&#x27;,
+ &#x27;Dish&#x27;,
+ &#x27;ChoseMenu&#x27;,
  &#x27;django.contrib.admin&#x27;,
  &#x27;django.contrib.auth&#x27;,
  &#x27;django.contrib.contenttypes&#x27;,
@@ -3106,49 +793,15 @@ Installed Middleware:
 
 
 Traceback (most recent call last):
-  File "C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
-    return self.cursor.execute(sql, params)
-  File "C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\backends\sqlite3\base.py", line 357, in execute
-    return Database.Cursor.execute(self, query, params)
-
-The above exception (NOT NULL constraint failed: student_student.s_password) was the direct cause of the following exception:
-  File "C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+  File "C:\Users\pangy\anaconda3\envs\DB\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
     response = get_response(request)
-  File "C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-  File "D:\LearningMaterials\大三上\数据库\大作业\任务二\DBMS-EnjoyFood-BUAA2022\EnjoyFood_backend\student\views.py", line 30, in login
-    new_student.save()
-  File "C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\models\base.py", line 812, in save
-    self.save_base(
-  File "C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\models\base.py", line 863, in save_base
-    updated = self._save_table(
-  File "C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\models\base.py", line 1006, in _save_table
-    results = self._do_insert(
-  File "C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\models\base.py", line 1047, in _do_insert
-    return manager._insert(
-  File "C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
-    return getattr(self.get_queryset(), name)(*args, **kwargs)
-  File "C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\models\query.py", line 1790, in _insert
-    return query.get_compiler(using=using).execute_sql(returning_fields)
-  File "C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\models\sql\compiler.py", line 1660, in execute_sql
-    cursor.execute(sql, params)
-  File "C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\backends\utils.py", line 103, in execute
-    return super().execute(sql, params)
-  File "C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\backends\utils.py", line 67, in execute
-    return self._execute_with_wrappers(
-  File "C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
-    return executor(sql, params, many, context)
-  File "C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
-    return self.cursor.execute(sql, params)
-  File "C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\utils.py", line 91, in __exit__
-    raise dj_exc_value.with_traceback(traceback) from exc_value
-  File "C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
-    return self.cursor.execute(sql, params)
-  File "C:\Users\pangy\AppData\Local\Programs\Python\Python39\lib\site-packages\django\db\backends\sqlite3\base.py", line 357, in execute
-    return Database.Cursor.execute(self, query, params)
+  File "C:\Users\pangy\anaconda3\envs\DB\lib\site-packages\django\utils\deprecation.py", line 138, in __call__
+    response = self.process_response(request, response)
+  File "C:\Users\pangy\anaconda3\envs\DB\lib\site-packages\django\middleware\clickjacking.py", line 34, in process_response
+    response.headers[&quot;X-Frame-Options&quot;] = self.get_xframe_options_value(
 
-Exception Type: IntegrityError at /login/
-Exception Value: NOT NULL constraint failed: student_student.s_password
+Exception Type: AttributeError at /select/choose/
+Exception Value: &#x27;dict&#x27; object has no attribute &#x27;headers&#x27;
 </textarea>
 				<br><br>
 				<input type="submit" value="Share this traceback on a public website">
@@ -3263,9 +916,58 @@ Exception Value: NOT NULL constraint failed: student_student.s_password
 				</tr>
 
 				<tr>
+					<td>CONDA_DEFAULT_ENV</td>
+					<td class="code">
+						<pre>&#x27;DB&#x27;</pre>
+					</td>
+				</tr>
+
+				<tr>
+					<td>CONDA_EXE</td>
+					<td class="code">
+						<pre>&#x27;C:\\Users\\pangy\\anaconda3\\condabin\\..\\Scripts\\conda.exe&#x27;</pre>
+					</td>
+				</tr>
+
+				<tr>
+					<td>CONDA_EXES</td>
+					<td class="code">
+						<pre>&#x27;&quot;C:\\Users\\pangy\\anaconda3\\condabin\\..\\Scripts\\conda.exe&quot;  &#x27;</pre>
+					</td>
+				</tr>
+
+				<tr>
+					<td>CONDA_PREFIX</td>
+					<td class="code">
+						<pre>&#x27;C:\\Users\\pangy\\anaconda3\\envs\\DB&#x27;</pre>
+					</td>
+				</tr>
+
+				<tr>
+					<td>CONDA_PROMPT_MODIFIER</td>
+					<td class="code">
+						<pre>&#x27;(DB) &#x27;</pre>
+					</td>
+				</tr>
+
+				<tr>
+					<td>CONDA_PYTHON_EXE</td>
+					<td class="code">
+						<pre>&#x27;C:\\Users\\pangy\\anaconda3\\python.exe&#x27;</pre>
+					</td>
+				</tr>
+
+				<tr>
+					<td>CONDA_SHLVL</td>
+					<td class="code">
+						<pre>&#x27;1&#x27;</pre>
+					</td>
+				</tr>
+
+				<tr>
 					<td>CONTENT_LENGTH</td>
 					<td class="code">
-						<pre>&#x27;53&#x27;</pre>
+						<pre>&#x27;29&#x27;</pre>
 					</td>
 				</tr>
 
@@ -3322,6 +1024,13 @@ Exception Value: NOT NULL constraint failed: student_student.s_password
 					<td>GIT_INSTALL_ROOT</td>
 					<td class="code">
 						<pre>&#x27;C:\\Users\\pangy\\scoop\\apps\\git\\current&#x27;</pre>
+					</td>
+				</tr>
+
+				<tr>
+					<td>GUROBI_HOME</td>
+					<td class="code">
+						<pre>&#x27;C:\\ENVS\\win64&#x27;</pre>
 					</td>
 				</tr>
 
@@ -3447,30 +1156,31 @@ Exception Value: NOT NULL constraint failed: student_student.s_password
 				<tr>
 					<td>PATH</td>
 					<td class="code">
-						<pre>(&#x27;C:\\Program Files (x86)\\VMware\\VMware &#x27;
- &#x27;Workstation\\bin\\;C:\\VulkanSDK\\1.2.189.2\\Bin;C:\\Program Files\\Common &#x27;
+						<pre>(&#x27;C:\\Users\\pangy\\anaconda3\\envs\\DB;C:\\Users\\pangy\\anaconda3\\envs\\DB\\Library\\mingw-w64\\bin;C:\\Users\\pangy\\anaconda3\\envs\\DB\\Library\\usr\\bin;C:\\Users\\pangy\\anaconda3\\envs\\DB\\Library\\bin;C:\\Users\\pangy\\anaconda3\\envs\\DB\\Scripts;C:\\Users\\pangy\\anaconda3\\envs\\DB\\bin;C:\\Users\\pangy\\anaconda3\\condabin;C:\\ENVS\\win64\\bin;C:\\Program &#x27;
+ &#x27;Files (x86)\\VMware\\VMware &#x27;
+ &#x27;Workstation\\bin;C:\\VulkanSDK\\1.2.189.2\\Bin;C:\\Program Files\\Common &#x27;
  &#x27;Files\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common &#x27;
- &#x27;Files\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program &#x27;
+ &#x27;Files\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0;C:\\Windows\\System32\\OpenSSH;C:\\Program &#x27;
  &#x27;Files\\NVIDIA Corporation\\NVIDIA NvDLISR;C:\\Program Files (x86)\\NVIDIA &#x27;
  &#x27;Corporation\\PhysX\\Common;C:\\Program Files (x86)\\Git\\cmd;C:\\Program &#x27;
  &#x27;Files\\Polyspace\\R2021a\\runtime\\win64;C:\\Program &#x27;
  &#x27;Files\\Polyspace\\R2021a\\bin;C:\\Program &#x27;
  &#x27;Files\\Polyspace\\R2021a\\polyspace\\bin;C:\\Program &#x27;
  &#x27;Files\\Docker\\Docker\\resources\\bin;C:\\ProgramData\\DockerDesktop\\version-bin;C:\\Program &#x27;
- &#x27;Files\\北航云盘;C:\\Program Files\\PuTTY\\;C:\\Program &#x27;
- &#x27;Files\\dotnet\\;C:\\Program Files\\Bandizip\\;C:\\Program &#x27;
- &#x27;Files\\MySQL\\MySQL Server &#x27;
- &#x27;8.0\\bin;C:\\Users\\pangy\\AppData\\Local\\Programs\\Python\\Python39\\Lib\\site-packages\\django;&quot;C:\\Program &#x27;
+ &#x27;Files\\闁告牗顨夐崺鍛\ue1be\ue6f2閹寸姵纾?C:\\Program Files\\PuTTY;C:\\Program &#x27;
+ &#x27;Files\\dotnet;C:\\Program Files\\Bandizip;C:\\Program Files\\MySQL\\MySQL &#x27;
+ &#x27;Server &#x27;
+ &#x27;8.0\\bin;C:\\Users\\pangy\\AppData\\Local\\Programs\\Python\\Python39\\Lib\\site-packages\\django;C:\\Users\\pangy\\anaconda3;C:\\Users\\pangy\\anaconda3\\Library\\mingw-w64\\bin;C:\\Users\\pangy\\anaconda3\\Library\\usr\\bin;C:\\Users\\pangy\\anaconda3\\Library\\bin;C:\\Users\\pangy\\anaconda3\\Scripts;C:\\Program &#x27;
  &#x27;Files\\Java\\jdk1.8.0_321\\bin;C:\\Program &#x27;
- &#x27;Files\\Java\\jdk1.8.0_321\\jre\\bin;&quot;;C:\\Users\\pangy\\scoop\\apps\\openjdk\\current\\bin;C:\\Users\\pangy\\scoop\\shims;C:\\Users\\pangy\\AppData\\Local\\Programs\\Python\\Python39\\Scripts\\;C:\\Users\\pangy\\AppData\\Local\\Programs\\Python\\Python39\\;C:\\Users\\pangy\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\pangy\\AppData\\Local\\Programs\\Microsoft &#x27;
+ &#x27;Files\\Java\\jdk1.8.0_321\\jre\\bin;.;C:\\Users\\pangy\\scoop\\apps\\openjdk\\current\\bin;C:\\Users\\pangy\\scoop\\shims;C:\\Users\\pangy\\AppData\\Local\\Programs\\Python\\Python39\\Scripts;C:\\Users\\pangy\\AppData\\Local\\Programs\\Python\\Python39;C:\\Users\\pangy\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\pangy\\AppData\\Local\\Programs\\Microsoft &#x27;
  &#x27;VS Code\\bin;C:\\Program &#x27;
  &#x27;Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin;C:\\Program &#x27;
  &#x27;Files\\JetBrains\\PyCharm &#x27;
  &#x27;2021.1.3\\bin;C:\\ISE\\14.7\\ISE_DS\\ISE\\bin\\nt64;C:\\Program &#x27;
  &#x27;Files\\JetBrains\\IntelliJ IDEA &#x27;
- &#x27;2021.3.2\\bin;;C:\\Users\\pangy\\.dotnet\\tools;C:\\Program &#x27;
- &#x27;Files\\JetBrains\\CLion 2022.1.2\\bin;;C:\\Program &#x27;
- &#x27;Files\\JetBrains\\DataGrip 2022.2.2\\bin;;&#x27;)</pre>
+ &#x27;2021.3.2\\bin;.;C:\\Users\\pangy\\.dotnet\\tools;C:\\Program &#x27;
+ &#x27;Files\\JetBrains\\CLion 2022.1.2\\bin;.;C:\\Program &#x27;
+ &#x27;Files\\JetBrains\\DataGrip 2022.2.2\\bin;.&#x27;)</pre>
 					</td>
 				</tr>
 
@@ -3484,7 +1194,7 @@ Exception Value: NOT NULL constraint failed: student_student.s_password
 				<tr>
 					<td>PATH_INFO</td>
 					<td class="code">
-						<pre>&#x27;/login/&#x27;</pre>
+						<pre>&#x27;/select/choose/&#x27;</pre>
 					</td>
 				</tr>
 
@@ -3541,6 +1251,13 @@ Exception Value: NOT NULL constraint failed: student_student.s_password
 					<td>PROGRAMW6432</td>
 					<td class="code">
 						<pre>&#x27;C:\\Program Files&#x27;</pre>
+					</td>
+				</tr>
+
+				<tr>
+					<td>PROMPT</td>
+					<td class="code">
+						<pre>&#x27;(DB) $P$G&#x27;</pre>
 					</td>
 				</tr>
 
@@ -3675,7 +1392,7 @@ Exception Value: NOT NULL constraint failed: student_student.s_password
 				<tr>
 					<td>TERM_SESSION_ID</td>
 					<td class="code">
-						<pre>&#x27;19c9b56f-772a-49c9-97e9-7a3f1943a8fb&#x27;</pre>
+						<pre>&#x27;93aa6701-2fd5-4ab0-a2d4-9fb270e2a007&#x27;</pre>
 					</td>
 				</tr>
 
@@ -3746,14 +1463,14 @@ Exception Value: NOT NULL constraint failed: student_student.s_password
 				<tr>
 					<td>__INTELLIJ_COMMAND_HISTFILE__</td>
 					<td class="code">
-						<pre>&#x27;C:\\Users\\pangy\\AppData\\Local\\JetBrains\\PyCharm2022.2\\terminal\\history\\DBMS-EnjoyFood-BUAA2022-history&#x27;</pre>
+						<pre>&#x27;C:\\Users\\pangy\\AppData\\Local\\JetBrains\\PyCharm2022.2\\terminal\\history\\DBMS-EnjoyFood-BUAA2022-history1&#x27;</pre>
 					</td>
 				</tr>
 
 				<tr>
 					<td>wsgi.errors</td>
 					<td class="code">
-						<pre>&lt;colorama.ansitowin32.StreamWrapper object at 0x0000023171C0FFA0&gt;</pre>
+						<pre>&lt;_io.TextIOWrapper name=&#x27;&lt;stderr&gt;&#x27; mode=&#x27;w&#x27; encoding=&#x27;utf-8&#x27;&gt;</pre>
 					</td>
 				</tr>
 
@@ -3767,7 +1484,7 @@ Exception Value: NOT NULL constraint failed: student_student.s_password
 				<tr>
 					<td>wsgi.input</td>
 					<td class="code">
-						<pre>&lt;django.core.handlers.wsgi.LimitedStream object at 0x00000231729C7A30&gt;</pre>
+						<pre>&lt;django.core.handlers.wsgi.LimitedStream object at 0x0000021A8B5864D0&gt;</pre>
 					</td>
 				</tr>
 
@@ -3873,7 +1590,7 @@ Exception Value: NOT NULL constraint failed: student_student.s_password
 				<tr>
 					<td>BASE_DIR</td>
 					<td class="code">
-						<pre>WindowsPath(&#x27;D:/LearningMaterials/大三上/数据库/大作业/任务二/DBMS-EnjoyFood-BUAA2022/EnjoyFood_backend&#x27;)</pre>
+						<pre>WindowsPath(&#x27;C:/Users/pangy/PycharmProjects/DBMS-EnjoyFood-BUAA2022/EnjoyFood_backend&#x27;)</pre>
 					</td>
 				</tr>
 
@@ -3998,7 +1715,7 @@ Exception Value: NOT NULL constraint failed: student_student.s_password
              &#x27;CONN_MAX_AGE&#x27;: 0,
              &#x27;ENGINE&#x27;: &#x27;django.db.backends.sqlite3&#x27;,
              &#x27;HOST&#x27;: &#x27;&#x27;,
-             &#x27;NAME&#x27;: WindowsPath(&#x27;D:/LearningMaterials/大三上/数据库/大作业/任务二/DBMS-EnjoyFood-BUAA2022/EnjoyFood_backend/db.sqlite3&#x27;),
+             &#x27;NAME&#x27;: WindowsPath(&#x27;C:/Users/pangy/PycharmProjects/DBMS-EnjoyFood-BUAA2022/EnjoyFood_backend/db.sqlite3&#x27;),
              &#x27;OPTIONS&#x27;: {},
              &#x27;PASSWORD&#x27;: &#x27;********************&#x27;,
              &#x27;PORT&#x27;: &#x27;&#x27;,
@@ -4329,6 +2046,8 @@ Exception Value: NOT NULL constraint failed: student_student.s_password
 					<td>INSTALLED_APPS</td>
 					<td class="code">
 						<pre>[&#x27;student&#x27;,
+ &#x27;Dish&#x27;,
+ &#x27;ChoseMenu&#x27;,
  &#x27;django.contrib.admin&#x27;,
  &#x27;django.contrib.auth&#x27;,
  &#x27;django.contrib.contenttypes&#x27;,
@@ -4862,7 +2581,7 @@ Exception Value: NOT NULL constraint failed: student_student.s_password
 				<tr>
 					<td>STATICFILES_DIRS</td>
 					<td class="code">
-						<pre>[&#x27;D:\\LearningMaterials\\大三上\\数据库\\大作业\\任务二\\DBMS-EnjoyFood-BUAA2022\\EnjoyFood_backend\\static&#x27;]</pre>
+						<pre>[&#x27;C:\\Users\\pangy\\PycharmProjects\\DBMS-EnjoyFood-BUAA2022\\EnjoyFood_backend\\static&#x27;]</pre>
 					</td>
 				</tr>
 
