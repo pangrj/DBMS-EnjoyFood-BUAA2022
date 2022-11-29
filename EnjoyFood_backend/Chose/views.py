@@ -4,7 +4,7 @@ from django.core import serializers
 from django.http import JsonResponse
 from django.shortcuts import render
 
-from ChoseMenu.models import ChoseMenu
+from Chose.models import Chose
 from Dish.models import Dish
 from student.models import Student
 
@@ -13,8 +13,6 @@ from student.models import Student
 
 def choose(request):
     if request.method == "POST":
-
-        print(12)
         data = json.loads(request.body)
         s_id = data.get('s_id')
         d_id = data.get('d_id')
@@ -28,12 +26,12 @@ def choose(request):
             if len(dish_list) == 0:
                 ret = {"success": False, "message": "No Such Dish"}
             else:
-                if len(ChoseMenu.objects.filter(s_id__exact=s_id, d_id__exact=d_id)) != 0:
+                if len(Chose.objects.filter(s_id__exact=s_id, d_id__exact=d_id)) != 0:
                     ret = {"success": False, "message": "Already Choose"}
                 else:
-                    ChoseMenu.objects.create(s_id=s_id, d_id=d_id)
+                    Chose.objects.create(s_id=s_id, d_id=d_id)
                     dishes = Dish.objects.exclude(
-                        d_id__in=ChoseMenu.objects.filter(s_id__exact=s_id).values_list('d_id', flat=True))
+                        d_id__in=Chose.objects.filter(s_id__exact=s_id).values_list('d_id', flat=True))
                     retDishes = serializers.serialize('json', list(dishes))
                     ret = {"success": True, "message": "Choose success!", "dishes": retDishes}
         return JsonResponse(ret)
@@ -56,13 +54,13 @@ def delete_dish(request):
             if len(dish_list) == 0:
                 ret = {"success": False, "message": "No Such Dish"}
             else:
-                chosen_unit = ChoseMenu.objects.filter(s_id__exact=s_id, d_id__exact=d_id)
+                chosen_unit = Chose.objects.filter(s_id__exact=s_id, d_id__exact=d_id)
                 if len(chosen_unit) == 0:
                     ret = {"success": False, "message": "No Such Choose"}
                 else:
                     chosen_unit.delete()
                     dishes = Dish.objects.exclude(
-                        d_id__in=ChoseMenu.objects.filter(s_id__exact=s_id).values_list('d_id', flat=True))
+                        d_id__in=Chose.objects.filter(s_id__exact=s_id).values_list('d_id', flat=True))
                     ret_dishes = serializers.serialize('json', list(dishes))
                     ret = {"success": True, "message": "Delete Success!", "dishes": ret_dishes}
         return JsonResponse(ret)
@@ -81,7 +79,7 @@ def show_select_dishes(request):
             ret = {"success": False, "message": "No Such Student"}
         else:
             dishes = Dish.objects.filter(
-                d_id__in=ChoseMenu.objects.filter(s_id__exact=s_id).values_list('d_id', flat=True))
+                d_id__in=Chose.objects.filter(s_id__exact=s_id).values_list('d_id', flat=True))
             ret_dishes = serializers.serialize('json', list(dishes))
             ret = {"success": True, "message": "Get Selected Dishes Success!", "dishes": ret_dishes}
         return JsonResponse(ret)

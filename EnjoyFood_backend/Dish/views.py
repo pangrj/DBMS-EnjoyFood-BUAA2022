@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 from Dish.models import *
 
-from ChoseMenu.models import *
+from Chose.models import *
 from student.models import *
 
 
@@ -18,7 +18,7 @@ def showNotSelectMenu(request):
 
         # 找到此学生未选过的菜品
         dishes = Dish.objects.exclude(
-            d_id__in=ChoseMenu.objects.filter(s_id__exact=s_id).values_list('d_id', flat=True))
+            d_id__in=Chose.objects.filter(s_id__exact=s_id).values_list('d_id', flat=True))
         retDishes = serializers.serialize('json', list(dishes))
         ret = {'success': True, 'message': "Show success", 'dishes': retDishes}
 
@@ -51,7 +51,7 @@ def searchByName(request):
             ret = {'success': False, 'message': "Enter right student_id!"}
             return JsonResponse(ret)
         dishes = Dish.objects.exclude(
-            d_id__in=ChoseMenu.objects.filter(s_id__exact=s_id).values_list('d_id', flat=True)).filter(d_name=d_name)
+            d_id__in=Chose.objects.filter(s_id__exact=s_id).values_list('d_id', flat=True)).filter(d_name=d_name)
         # dishes = Dish.objects.filter(d_name=d_name)
         retDishes = serializers.serialize('json', list(dishes))
         if len(dishes) == 0:

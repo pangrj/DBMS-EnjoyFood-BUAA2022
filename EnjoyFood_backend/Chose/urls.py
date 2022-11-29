@@ -1,6 +1,6 @@
 from django.urls import path
 
-from ChoseMenu.views import *
+from Chose.views import *
 
 urlpatterns = [
     path("choose/", choose),

@@ -19,7 +19,7 @@ from django.urls import path, include
 import student
 from student.views import *
 from Dish.views import *
-from ChoseMenu.views import *
+from Chose.views import *
 
 urlpatterns = [
     path('', home),
@@ -28,7 +28,7 @@ urlpatterns = [
 
     path('dish/', include('Dish.urls')),
 
-    path('select/', include('ChoseMenu.urls')),
+    path('select/', include('Chose.urls')),
 
     path('user/choose/', choose),
     path('admin/', admin.site.urls),

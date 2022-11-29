@@ -15,10 +15,18 @@ def home(request):
 
 def register(request):
     if request.method == 'POST':
-        new_s_id = request.POST.get('s_id')
-        print(new_s_id)
-        new_s_password = request.POST.get('s_password')
-        new_student = Student(s_id=new_s_id, s_password=new_s_password)
+        data = json.loads(request.body)
+        new_s_id = data.get('s_id')
+        new_s_password = data.get('s_password')
+
+        student_list = Student.objects.filter(s_id__exact=new_s_id)
+
+        if len(student_list) == 0:
+            new_student = Student(s_id=new_s_id, s_password=new_s_password)
+            new_student.save()
+            ret = {'success': True, 'message': "register success"}
+        else:
+            ret = {'success': False, 'message': "The user has been registered!"}
     else:
         return render(request, context={'success': False, 'message': "register method error"})
 
