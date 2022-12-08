@@ -1,0 +1,340 @@
+<script>
+import EditInfoPage from './EditInfoPage.vue'
+import RecommendCard from './RecommendCard.vue'
+import {useRoute} from 'vue-router'
+import {ref, reactive} from 'vue'
+import { UploadFilled } from '@element-plus/icons-vue'
+
+export default {
+    components: { EditInfoPage, RecommendCard },
+    setup(){
+        let route = useRoute()
+        const userName = route.query.userName;
+        const passWord = route.query.passWord;
+        console.log(userName, passWord);
+        const dialogVisible = ref(false);
+        const information = reactive( {
+                username: userName,
+                id: userName,
+                password: passWord,
+                email : userName + "@buaa.edu.cn",
+                profilePhoto: '',
+            });
+
+        return {userName, passWord, dialogVisible, information};
+    },
+    data(){
+        return {
+            information: {
+                username: "pangrj",
+                id: '',
+                password: '',
+                email :"pangrj@buaa.edu.cn",
+                profilePhoto: '',
+            },
+        }
+    },
+
+    methods: {
+        async updateInfo(){
+            dialogVisible = false;
+            const {data:res} = await request.post(
+                '/student/modify',
+                {   s_id: information.id,
+                    s_passWord: information.passWord,
+                    s_name: information.username,
+                    s_dorm: '',
+                    s_gender: '',
+                }
+            )
+        }
+    }
+}
+
+const handleClose = () => {
+  ElMessageBox.confirm('Are you sure to close this dialog?')
+    .then(() => {
+      done()
+    })
+    .catch(() => {
+      // catch error
+    })
+}
+</script>
+
+<template>
+  <div class="InfomationPage">
+    <el-container>
+    <el-header>
+    <div class="infoBox">
+        <div class="Total">
+            <div class="TotalIn">
+            <div class="photo" >
+                <el-avatar :size="100" src= "./src/assets/avatar.jpg" />
+                
+            </div>
+            <div class="nameAndemail">
+                <h2>{{userName}}</h2>
+                <p inline='true'>
+                    <el-icon class="emailIcon"><Message /></el-icon>emial
+                </p>
+            </div>
+            </div>
+        </div>
+        <div class="Items">
+            <div class="ItemsIn">
+            <div class="leftItem">
+                <el-button plain @click="dialogVisible = true">
+                    <el-icon class="editIcon"><EditPen /></el-icon>
+                    Edit Information
+                </el-button>
+            </div>
+            <div class="rightItem">
+                <el-button plain @click="ClickSettings()">
+                    <el-icon class="setIcon"><Setting /></el-icon>
+                    Settings
+                </el-button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="moreInfo">
+    </div>
+    </el-header>
+    <el-container class = "down">
+    <el-aside width="25%">
+    </el-aside>
+
+    <el-main>
+        <h2></h2>
+            <div class="mainPart">
+            <el-collapse v-model="activeName" accordion>
+                <el-collapse-item name="1">
+                    <template #title style="font-weight: bold">
+                        <p> &nbsp &nbsp Up-to-Date Notices </p>
+                    </template>
+                    <div>
+                    Consistent with real life: in line with the process and logic of real
+                    life, and comply with languages and habits that the users are used to;
+                    </div>
+                    <div>
+                    Consistent within interface: all elements should be consistent, such
+                    as: design style, icons and texts, position of elements, etc.
+                    </div>
+                </el-collapse-item>
+                <el-collapse-item name="2">
+                    <template #title style="font-weight: bold">
+                        <p> &nbsp &nbsp Personal Recommendation </p>
+                    </template>
+                    <div>
+                        <RecommendCard />
+                    </div>
+                </el-collapse-item>
+                <el-collapse-item name="3">
+                    <template #title style="font-weight: bold">
+                        <p> &nbsp &nbsp My Plans </p>
+                    </template>
+                    <div>
+                    Simplify the process: keep operating process simple and intuitive;
+                    </div>
+                    <div>
+                    Definite and clear: enunciate your intentions clearly so that the
+                    users can quickly understand and make decisions;
+                    </div>
+                    <div>
+                    Easy to identify: the interface should be straightforward, which helps
+                    the users to identify and frees them from memorizing and recalling.
+                    </div>
+                </el-collapse-item>
+                <el-collapse-item name="4">
+                    <template #title style="font-weight: bold">
+                        <p> &nbsp &nbsp Others </p>
+                    </template>
+                    <div>
+                    Decision making: giving advices about operations is acceptable, but do
+                    not make decisions for the users;
+                    </div>
+                    <div>
+                    Controlled consequences: users should be granted the freedom to
+                    operate, including canceling, aborting or terminating current
+                    operation.
+                    </div>
+                </el-collapse-item>
+            </el-collapse>
+        </div>
+    </el-main>
+    <el-aside width="25%">
+    </el-aside>
+    </el-container>
+    </el-container>
+
+    <el-dialog
+        v-model="dialogVisible"
+        title="Tips"
+        width="30%"
+        :before-close="handleClose"
+    >
+        <span>Please edit your informaion</span>
+        <el-form
+        :label-position="labelPosition"
+        label-width="100px"
+        :model="right"
+        style="max-width: 460px; padding-top:20px"
+        >
+        <el-form-item label="username">
+        <el-input v-model="information.username" />
+        </el-form-item>
+        <el-form-item label="id">
+        <el-input v-model="information.id" />
+        </el-form-item>
+        <el-form-item label="email">
+        <el-input v-model="information.email" />
+        </el-form-item>
+        <el-form-item label="password">
+        <el-input v-model="information.password" />
+        </el-form-item>
+        </el-form>
+        <el-upload
+            class="upload-demo"
+            drag
+            action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+            multiple
+        >
+            <el-icon class="el-icon--upload"><upload-filled /></el-icon>
+            <div class="el-upload__text">
+                Drop profilePhoto here or <em>click to upload</em>
+            </div>
+            <template #tip>
+                <div class="el-upload__tip">
+                jpg/png files with a size less than 500kb
+                </div>
+            </template>
+        </el-upload>
+        <template #footer>
+            <span class="dialog-footer">
+            <el-button @click="dialogVisible = false">Cancel</el-button>
+            <el-button type="primary" @click="updateInfo()">
+            Confirm
+            </el-button>
+        </span>
+        </template>
+    </el-dialog>
+
+    </div>
+</template>
+
+<style>
+.InfomationPage{
+    background-color: #F8F8F8;
+    padding-top: 3%;
+}
+.down{
+    padding-top: 3%;
+}
+.InfoBox{
+    width: 100%;
+    overflow: hidden;
+    padding: 30px 50px 0px;
+}
+.Total{
+    width : 50%;
+    float: left;
+}
+.TotalIn{
+    display: flex;
+    width: auto;
+    height: auto;
+    padding: 13px 100px 8px;
+}
+.photo{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 120px;
+    height: auto;
+    margin: 0px 10px 0px 0px;
+}
+.nameAndemail{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
+}
+.emailIcon{
+    padding-right: 5px;
+}
+.Items{
+    flex-wrap: wrap;
+    width: 50%;
+    float: right;
+    overflow: visible;
+    height: auto;
+    justify-content: flex-end;
+    display: flex;
+}
+.ItemsIn{
+    display: flex;
+    flex-flow: row wrap;
+    margin: 0px;
+    overflow: visible;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100vw;
+    justify-content: flex-end;
+    height: 100%;
+}
+.leftItem{
+    width: 50%;
+    float: left; 
+    padding-top: 60px;
+}
+.rightItem{
+    width: 50%;
+    float: right;
+    padding-top: 60px;
+}
+.editIcon{
+    padding-right:  7px;
+}
+.setIcon{
+    padding-right: 7px;
+}
+.moreInfo{
+    height: 70%;
+}
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
+}
+.mainPart{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 5%;
+    padding-bottom: 80%;
+    background-color: #fff;
+    font-weight: bold;
+}
+header{
+
+}
+main{
+    padding-top: 5%;
+}
+h2{
+    font-size: 1.5em;
+    margin-block-end: 0.2em;
+    text-align: left;
+    font-weight: bold;
+}
+p{
+    font-size: 1.0em;
+    font-weight: bold;
+    margin-block-start: 0.5em;
+}
+el-collapse-item{
+    padding-left: 5%;
+    padding-right: 5%;
+    font-weight: bold;
+}
+</style>
