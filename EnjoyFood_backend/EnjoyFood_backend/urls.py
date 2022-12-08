@@ -24,13 +24,15 @@ from Chose.views import *
 urlpatterns = [
     path('', home),
 
+    path('Hello/', Hello),
+
     path('student/', include('student.urls')),
 
     path('dish/', include('Dish.urls')),
 
     path('select/', include('Chose.urls')),
 
-    path('user/choose/', choose),
+    # path('user/choose/', choose),
     path('admin/', admin.site.urls),
 
 ]
