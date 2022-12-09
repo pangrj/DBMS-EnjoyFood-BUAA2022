@@ -5,7 +5,7 @@ from django.http import JsonResponse
 
 from Chose.models import Chose
 from Dish.models import Dish
-from student.models import Student
+from User.models import User
 from util import RET
 
 
@@ -19,7 +19,7 @@ def choose(request):
         d_id = data.get('d_id')
         # ret = {}
 
-        student_list = Student.objects.filter(s_id__exact=s_id)
+        student_list = User.objects.filter(s_id__exact=s_id)
         if len(student_list) == 0:
             ret.code = 400
             ret.message = 'No Such Student'
@@ -59,7 +59,7 @@ def delete_dish(request):
         s_id = data.get('s_id')
         d_id = data.get('d_id')
 
-        student_list = Student.objects.filter(s_id__exact=s_id)
+        student_list = User.objects.filter(s_id__exact=s_id)
         if len(student_list) == 0:
             ret.code = 400
             ret.message = 'No Such Student'
@@ -96,7 +96,7 @@ def show_select_dishes(request):
     if request.method == "POST":
         data = json.loads(request.body)
         s_id = data.get('s_id')
-        student_list = Student.objects.filter(s_id__exact=s_id)
+        student_list = User.objects.filter(s_id__exact=s_id)
         if len(student_list) == 0:
             ret.code = 400
             ret.message = 'No Such Student'

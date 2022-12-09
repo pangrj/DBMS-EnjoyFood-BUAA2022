@@ -4,6 +4,25 @@ class RET:
         self.message = message
         self.data = {}
 
+    def get_code(self):
+        return self.code
+
+    def set_code(self, code):
+        self.code = code
+
+    def get_message(self):
+        return self.message
+
+    def set_message(self, message):
+        self.message = message
+
+    def get_data(self):
+        return self.data
+
+    def load_data(self, data):
+        if type(data) == dict:
+            self.data = dict(self.data, **data)
+
     def json_type(self):
         ret = {
             'code': self.code,

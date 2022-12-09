@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ['*']  # 允许全部IP访问项目
 # Application definition
 
 INSTALLED_APPS = [
-    'student',
+    'User',
     'Dish',
     'Chose',
     'django.contrib.admin',

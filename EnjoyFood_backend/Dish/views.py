@@ -7,7 +7,7 @@ from django.shortcuts import render
 from Dish.models import *
 
 from Chose.models import *
-from student.models import *
+from User.models import *
 from util import RET
 
 
@@ -57,7 +57,7 @@ def searchByName(request):
         data = json.loads(request.body)
         d_name = data.get("d_name")
         s_id = data.get('s_id')
-        if len(Student.objects.filter(s_id=s_id)) == 0:
+        if len(User.objects.filter(s_id=s_id)) == 0:
             ret.code = 400
             ret.message = 'Enter right student_id!'
             # ret = {'success': False, 'message': "Enter right student_id!"}

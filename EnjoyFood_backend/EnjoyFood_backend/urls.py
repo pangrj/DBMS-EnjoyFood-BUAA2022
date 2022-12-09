@@ -16,8 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-import student
-from student.views import *
+import User
+from User.views import *
 from Dish.views import *
 from Chose.views import *
 
@@ -26,7 +26,7 @@ urlpatterns = [
 
     path('Hello/', Hello),
 
-    path('student/', include('student.urls')),
+    path('User/', include('User.urls')),
 
     path('dish/', include('Dish.urls')),
 
