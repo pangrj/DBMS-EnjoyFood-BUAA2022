@@ -5,6 +5,9 @@ import {ref} from 'vue'
 const userName = ref('')
 const passWord = ref('')
 
+import ChooseView from './ChoosePage/ChooseView.vue';
+import ChosenView from './ChoosePage/ChosenView.vue';
+
 export default {
     setup(){
         let route = useRoute()
@@ -12,6 +15,10 @@ export default {
         passWord.value = route.query.passWord;
         console.log(userName, passWord);
         return {userName, passWord};
+    },
+    components: {
+        ChooseView,
+        ChosenView
     },
     data(){
         return {
@@ -45,7 +52,7 @@ export default {
 }
 </script>
 
-<template>
+<!-- <template>
     <div>
     <el-header class = "header">
         <h2 class = "name">{{userName}}</h2>
@@ -140,4 +147,94 @@ export default {
     padding-left: 250px;
     padding-top: 100px;
 }
+</style> -->
+<template>
+    <div class="common-layout">
+    <el-container>
+      <el-header>Header</el-header>
+      <el-main>
+        <!-- <template> -->
+        <el-row :gutter="20">
+            <!-- 左侧的选择栏 -->
+            <el-col :span="14"><div class="grid-content ep-bg-purple"> 
+                选择
+            </div></el-col>
+            <!-- 右侧的已选栏 -->
+            <el-col :span="10"><div class="grid-content ep-bg-purple">
+                已选
+            </div></el-col>
+        </el-row>
+    
+        <el-row :gutter="20" class="content">
+            <!-- 左侧的选择栏 -->
+            <el-col :span="14">
+                <div class="grid-content bg-purple"> 
+                <ChooseView></ChooseView>
+                </div>
+            </el-col>
+            <!-- 右侧的已选栏 -->
+            <el-col :span="10">
+                <div class="grid-content bg-purple">
+                <ChosenView></ChosenView>
+                </div>
+            </el-col>
+        </el-row>
+        <!-- </template> -->
+      </el-main>
+    </el-container>
+  </div>
+</template>
+
+<style scoped>
+.title {
+  height: 30px;
+}
+.content {
+  height: 400px;
+}
+.el-row {
+  margin-bottom: 20px;
+}
+.el-col {
+  border-radius: 4px;
+}
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+
+.el-header, .el-footer {
+    background-color: #B3C0D1;
+    color: #333;
+    text-align: center;
+    line-height: 60px;
+  }
+  
+  .el-aside {
+    background-color: #D3DCE6;
+    color: #333;
+    text-align: center;
+    line-height: 200px;
+  }
+  
+  .el-main {
+    background-color: #E9EEF3;
+    color: #333;
+    text-align: center;
+    /* line-height: 160px; */
+    height: 600px;
+  }
+  
+  body > .el-container {
+    margin-bottom: 40px;
+  }
+  
+  .el-container:nth-child(5) .el-aside,
+  .el-container:nth-child(6) .el-aside {
+    line-height: 260px;
+  }
+  
+  .el-container:nth-child(7) .el-aside {
+    line-height: 320px;
+  }
 </style>

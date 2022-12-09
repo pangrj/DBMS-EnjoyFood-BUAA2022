@@ -5,6 +5,7 @@ import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import router from './router'
 import axios from 'axios'
+import store from './store'
 
 import App from './App.vue'
 
@@ -17,6 +18,7 @@ app.config.globalProperties.$https = axios
 
 app.use(ElementPlus)
 app.use(router)
+app.use(store)
 app.mount('#app')
 
 // axios.defaults.baseURL = 'http://0.0.0.0:8000';
