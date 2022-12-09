@@ -20,7 +20,21 @@ export default {
                 email : userName + "@buaa.edu.cn",
                 profilePhoto: '',
             });
+        var data = new FormData();
+        data.append('name', '')
+        data.append('page_url', '')
 
+        /*this.createForm.file.forEach((file) => {
+        if (file.raw) {
+            data.append('new_files', file.raw)
+        }else{
+            data.append('old_files', file.page_file_id)
+        }
+        })*/
+
+        const settings = reactive( {
+            NightMode: false, 
+        });
         return {userName, passWord, dialogVisible, information};
     },
     data(){
@@ -178,7 +192,7 @@ const handleClose = () => {
         <el-form
         :label-position="labelPosition"
         label-width="100px"
-        :model="right"
+        :model="information"
         style="max-width: 460px; padding-top:20px"
         >
         <el-form-item label="username">
@@ -195,14 +209,13 @@ const handleClose = () => {
         </el-form-item>
         </el-form>
         <el-upload
-            class="upload-demo"
+            class="upload"
             drag
             action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
-            multiple
         >
             <el-icon class="el-icon--upload"><upload-filled /></el-icon>
             <div class="el-upload__text">
-                Drop profilePhoto here or <em>click to upload</em>
+                Drop profilePhoto here <em>click to upload</em>
             </div>
             <template #tip>
                 <div class="el-upload__tip">
