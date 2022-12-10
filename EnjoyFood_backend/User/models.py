@@ -4,22 +4,19 @@ from django.db import models
 # Create your models here.
 
 class User(models.Model):
-    u_id = models.IntegerField(primary_key=True, null=False)
+    # u_id = models.IntegerField(primary_key=True, null=False)
     u_password = models.CharField(max_length=20, null=False)
-    u_name = models.CharField(max_length=20, null=True, unique=True)
+    u_name = models.CharField(max_length=20, null=False, unique=True)
     u_position = models.CharField(max_length=30, null=True)
-    u_gender = models.BooleanField()
-    u_email = models.EmailField()
+    u_gender = models.BooleanField(null=True)
+    u_email = models.EmailField(null=True)
     u_age = models.IntegerField(null=True)
     u_height = models.IntegerField(null=True)
     u_weight = models.IntegerField(null=True)
-    u_avatar = models.FileField(upload_to='uploads/', null=True, verbose_name='头像')
+    # u_avatar = models.FileField(upload_to='uploads/', null=True, verbose_name='头像')
 
     def get_u_id(self):
-        return self.u_id
-
-    def set_u_id(self, u_id):
-        self.u_id = u_id
+        return self.id
 
     def get_u_password(self):
         return self.u_password

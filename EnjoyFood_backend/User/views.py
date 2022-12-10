@@ -32,7 +32,6 @@ def register(request):
         new_u_password = data.get('u_password')
 
         user_list = User.objects.filter(u_name__exact=new_u_name)
-
         if len(user_list) == 0:
             new_user = User(u_name=new_u_name, u_password=new_u_password)
             new_user.save()
@@ -51,10 +50,8 @@ def login(request):
     ret = RET.get_instance()
     if request.method == 'POST':
         data = json.loads(request.body)
-
         new_u_name = data.get('u_name')
         new_u_password = data.get('u_password')
-
         user_list = User.objects.filter(u_name=new_u_name)
         if len(user_list) == 1:
             user = user_list[0]
@@ -66,7 +63,7 @@ def login(request):
                 ret.set_message('password error')
         else:
             ret.set_code(401)
-            ret.set_message('more than 1 user')
+            ret.set_message('no such user!')
         return JsonResponse(ret.json_type())
     else:
         ret.Http_error()
