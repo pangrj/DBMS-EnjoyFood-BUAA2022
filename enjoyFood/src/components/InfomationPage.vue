@@ -155,28 +155,28 @@ const handleClose = () => {
             <el-collapse v-model="activeName" accordion>
                 <el-collapse-item name="1">
                     <template #title style="font-weight: bold">
-                        <p> &nbsp &nbsp Up-to-Date Notices </p>
+                        <p> Up-to-Date Notices </p>
                     </template>
                     <div>
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="2">
                     <template #title style="font-weight: bold">
-                        <p> &nbsp &nbsp Personal Information </p>
+                        <p> Personal Information </p>
                     </template>
                     <div>
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="3">
                     <template #title style="font-weight: bold">
-                        <p> &nbsp &nbsp My Plans </p>
+                        <p> My Plans </p>
                     </template>
                     <div>
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="4">
                     <template #title style="font-weight: bold">
-                        <p> &nbsp &nbsp Others </p>
+                        <p> Others </p>
                     </template>
                     <div>
                     </div>
@@ -356,6 +356,7 @@ p{
     font-size: 1.0em;
     font-weight: bold;
     margin-block-start: 0.5em;
+    margin-left: 5px;
 }
 el-collapse-item{
     padding-left: 5%;
