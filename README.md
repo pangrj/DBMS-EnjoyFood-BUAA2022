@@ -14,9 +14,10 @@ pip3 install -r requirements.txt
 pip install -r requirements.txt
 ```
 
+## Project Setup
+
 以下操作均在EnjoyFood_backend下进行
 
-## Project Setup
 第一步
 ```sh
 python manage.py makemigrations
