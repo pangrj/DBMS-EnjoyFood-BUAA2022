@@ -31,6 +31,8 @@ export default{
             else{
                 this.dialogVisible = true;
 
+                console.log(this.information.username, this.information.password)
+
                 const {code:res, message:mes} = await request.post(
                     '/user/register',
                     {   u_name: information.username,
@@ -47,8 +49,8 @@ export default{
 
             const {code:res, message:mes} = await request.post(
                 '/user/login',
-                {   u_name: userName,
-                    u_password: passWord,}
+                {   u_name: this.information.username,
+                    u_password: this.information.password,}
             )
             console.assert(res);
             console.assert(mes);

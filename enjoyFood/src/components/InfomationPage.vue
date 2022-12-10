@@ -11,13 +11,19 @@ export default {
         const userName = route.query.userName;
         const passWord = route.query.passWord;
         console.log(userName, passWord);
+
         const dialogVisible = ref(false);
         const information = reactive( {
-                username: userName,
-                id: userName,
-                password: passWord,
-                email : userName + "@buaa.edu.cn",
-                profilePhoto: '',
+                u_name: 'initial',
+                u_id: 'initial',
+                u_password: 'initial',
+                u_position: 'initial',
+                u_gender: true,
+                u_email : 'initial' + "@buaa.edu.cn",
+                u_photo: '',
+                u_age: '0',
+                u_height: '0',
+                u_weight: '0',
             });
 
         /*this.createForm.file.forEach((file) => {
@@ -39,6 +45,21 @@ export default {
     },
 
     methods: {
+        async initInfor(){
+            const ret = await request.post(
+                '/user/getInfor',
+                this.userName,
+            );
+            console.log(ret);
+            this.information.u_id = ret.u_id;
+            this.information.u_position = ret.u_position;
+            this.information.u_gender = ret.u_gender;
+            this.information.u_email = ret.u_email;
+            this.information.u_photo = ret.u_photo;
+            this.information.u_age = ret.u_age;
+            this.information.u_height = ret.u_height;
+            this.information.u_weight = ret.u_weight;
+        },
         async updateInfo(){
             this.dialogVisible = false;
             let formData = new FormData();
@@ -141,10 +162,9 @@ const handleClose = () => {
                 </el-collapse-item>
                 <el-collapse-item name="2">
                     <template #title style="font-weight: bold">
-                        <p> &nbsp &nbsp Personal Recommendation </p>
+                        <p> &nbsp &nbsp Personal Information </p>
                     </template>
                     <div>
-                        <RecommendCard />
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="3">

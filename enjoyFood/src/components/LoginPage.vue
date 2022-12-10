@@ -20,11 +20,11 @@ export default {
     },
     methods: {
         async onClickLogin(){
-            console.log(userName, passWord)
+            console.log(userName.value, passWord.value)
             const {code:res, message:mes} = await request.post(
                 '/user/login',
-                {   u_name: userName,
-                    u_password: passWord,}
+                {   u_name: userName.value,
+                    u_password: passWord.value,}
             )
             console.assert(res);
             console.assert(mes);
