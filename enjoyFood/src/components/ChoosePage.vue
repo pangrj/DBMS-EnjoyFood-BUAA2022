@@ -149,19 +149,18 @@ export default {
 }
 </style> -->
 <template>
-    <div class="common-layout">
+    <div class="ChoosePage">
     <el-container>
-      <el-header>Header</el-header>
+      <el-header>Enjoy Your Life</el-header>
       <el-main>
-        <!-- <template> -->
-        <el-row :gutter="20">
+        <el-row :gutter="20" class="choose_title">
             <!-- 左侧的选择栏 -->
             <el-col :span="14"><div class="grid-content ep-bg-purple"> 
-                选择
+                选择内容
             </div></el-col>
             <!-- 右侧的已选栏 -->
             <el-col :span="10"><div class="grid-content ep-bg-purple">
-                已选
+                已选内容
             </div></el-col>
         </el-row>
     
@@ -179,7 +178,25 @@ export default {
                 </div>
             </el-col>
         </el-row>
-        <!-- </template> -->
+
+        <el-row :gutter="20" class="conclusion">
+            <!-- 下方的总结栏 -->
+            <el-col :span="15">
+                <el-descriptions title="计划总结" direction="vertical" :column="2" :size="size" border>
+                    <el-descriptions-item label="摄入能量">500</el-descriptions-item>
+                    <el-descriptions-item label="消耗能量">100</el-descriptions-item>
+                </el-descriptions>
+            </el-col>
+            <el-col :span="8">
+                <div class="grid-content bg-purple">
+                    饼状图
+                </div>
+            </el-col>
+        </el-row>
+        <p></p>
+        <el-button type="success">确认提交</el-button>
+        
+
       </el-main>
     </el-container>
   </div>
@@ -190,10 +207,22 @@ export default {
   height: 30px;
 }
 .content {
-  height: 400px;
+  height: 300px;
 }
+
+.ChoosePage{
+    background: url('../assets/chopping_board.jpg') no-repeat center;
+    margin-bottom: 0px;
+}
+
+.choose_title{
+    font-size: large;
+    font-weight:bold;
+    color: antiquewhite;
+}
+
 .el-row {
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 .el-col {
   border-radius: 4px;
@@ -203,11 +232,13 @@ export default {
   min-height: 36px;
 }
 
-.el-header, .el-footer {
-    background-color: #B3C0D1;
+.el-header{
+    background-color: rgba(239, 231, 224, 0.7);
     color: #333;
     text-align: center;
     line-height: 60px;
+    font-family:fantasy;
+    font-size: large;
   }
   
   .el-aside {
@@ -218,7 +249,7 @@ export default {
   }
   
   .el-main {
-    background-color: #E9EEF3;
+    /* background-color: #E9EEF3; */
     color: #333;
     text-align: center;
     /* line-height: 160px; */
@@ -227,14 +258,5 @@ export default {
   
   body > .el-container {
     margin-bottom: 40px;
-  }
-  
-  .el-container:nth-child(5) .el-aside,
-  .el-container:nth-child(6) .el-aside {
-    line-height: 260px;
-  }
-  
-  .el-container:nth-child(7) .el-aside {
-    line-height: 320px;
   }
 </style>

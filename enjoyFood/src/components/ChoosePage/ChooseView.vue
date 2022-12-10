@@ -6,6 +6,7 @@
     <!-- <router-view name="chooseView"/> -->
     <el-button type="success" @click="chooseContent(1)">食物</el-button>
     <el-button type="success" @click="chooseContent(2)">运动</el-button>
+    <p></p>
     <FoodView1 v-if="(contentType == 1)" type="choose"></FoodView1>
     <SportView1 v-else-if="(contentType == 2)" type="choose"></SportView1>
 </template>

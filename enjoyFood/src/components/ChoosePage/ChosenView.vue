@@ -1,6 +1,7 @@
 <template>
     <el-button type="success" @click="chooseContent(1)">食物</el-button>
     <el-button type="success" @click="chooseContent(2)">运动</el-button>
+    <p></p>
     <FoodView2 v-if="(contentType == 1)" type="chosen"></FoodView2>
     <SportView2 v-else-if="(contentType == 2)" type="chosen"></SportView2>
 </template>
