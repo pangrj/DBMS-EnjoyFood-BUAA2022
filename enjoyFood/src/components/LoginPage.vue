@@ -2,13 +2,12 @@
 import { useRouter } from 'vue-router'
 
 import {ref} from 'vue'
-import HelloWorld from './HelloWorld.vue'
 import SignupPage from './SignupPage.vue'
 const userName = ref('')
 const passWord = ref('')
 
 export default {
-  components: { HelloWorld , SignupPage },
+  components: { SignupPage },
     data(){
         return {
             userName,
@@ -22,11 +21,13 @@ export default {
     methods: {
         async onClickLogin(){
             console.log(userName, passWord)
-            /*const {data:res} = await request.post(
-                '/student/login',
-                {   s_id: userName,
-                    s_passWord: passWord,}
-            )*/
+            const {code:res, message:mes} = await request.post(
+                '/user/login',
+                {   u_name: userName,
+                    u_password: passWord,}
+            )
+            console.assert(res);
+            console.assert(mes);
             this.$router.push({
                 path: '/ChoosePage',
                 query: {

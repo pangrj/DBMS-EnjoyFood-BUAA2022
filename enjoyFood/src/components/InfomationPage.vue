@@ -1,12 +1,11 @@
 <script>
-import EditInfoPage from './EditInfoPage.vue'
 import RecommendCard from './RecommendCard.vue'
 import {useRoute} from 'vue-router'
 import {ref, reactive} from 'vue'
 import { UploadFilled } from '@element-plus/icons-vue'
 
 export default {
-    components: { EditInfoPage, RecommendCard },
+    components: {RecommendCard },
     setup(){
         let route = useRoute()
         const userName = route.query.userName;
@@ -43,15 +42,21 @@ export default {
         async updateInfo(){
             this.dialogVisible = false;
             let formData = new FormData();
-            formData.append('username', this.information.username);
-            formData.append('password', this.information.password);
-            formData.append('email', this.information.email);
-            formData.append('profilePhoto', this.information.profilePhoto);
-            /*const {data:res} = await request.post(
-                '/student/modify',
-                formData);*/
-            //console.log(res);
-                
+            formData.append('u_name', this.information.username);
+            formData.append('u_password', this.information.password);
+            formData.append('u_height', '');
+            formData.append('u_weight', '');
+            formData.append('u_age', '');
+            formData.append('u_position', '');
+            formData.append('u_gender', '');
+            formData.append('u_email', this.information.email);
+            formData.append('u_avatar', this.information.profilePhoto);
+            formData.append('avatar_name', this.information.username + '.jpg');
+            const {code:res, message:mes} = await request.post(
+                '/user/modify',
+                formData);
+            console.assert(res);
+            console.assert(res);   
             /*const {data:res} = await request.post(
                 '/student/modify',
                 {   s_id: information.id,

@@ -2,7 +2,6 @@
 import LoginPage from './components/LoginPage.vue'
 import ChoosePage from './components/ChoosePage.vue'
 import InfomationPage from './components/InfomationPage.vue'
-import EditInfoPage from './components/EditInfoPage.vue'
 import SignupPage from './components/SignupPage.vue'
 
 export default {
@@ -11,7 +10,6 @@ export default {
     LoginPage,
     ChoosePage,
     InfomationPage, 
-    EditInfoPage,
     SignupPage,
   },
   data () {
@@ -24,6 +22,8 @@ export default {
 
 <template>
   <div>
+    <div>
+    </div>
     <router-view></router-view>
   </div>
 </template>

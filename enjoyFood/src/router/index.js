@@ -3,7 +3,6 @@ import { createRouter, createWebHistory } from "vue-router";
 import ChoosePage from '../components/ChoosePage.vue'
 import InfomationPage from '../components/InfomationPage.vue'
 import LoginPage from '../components/LoginPage.vue'
-import EditInfoPage from '../components/EditInfoPage.vue'
 import SignupPage from '../components/SignupPage.vue'
 
 const routes = [
@@ -11,7 +10,6 @@ const routes = [
         { path: '/ChoosePage', query:{userName:String, passWord:String} , component: ChoosePage},
         { path: '/InfomationPage', query:{userName:String, passWord:String} ,component: InfomationPage},
         { path: '/LoginPage', component: LoginPage},
-        { path: '/EditInfoPage', component: EditInfoPage},
         { path: '/SignupPage', component: SignupPage}
 ]
 
