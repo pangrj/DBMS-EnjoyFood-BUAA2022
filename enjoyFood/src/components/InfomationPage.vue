@@ -20,9 +20,6 @@ export default {
                 email : userName + "@buaa.edu.cn",
                 profilePhoto: '',
             });
-        var data = new FormData();
-        data.append('name', '')
-        data.append('page_url', '')
 
         /*this.createForm.file.forEach((file) => {
         if (file.raw) {
@@ -39,20 +36,23 @@ export default {
     },
     data(){
         return {
-            information: {
-                username: "pangrj",
-                id: '',
-                password: '',
-                email :"pangrj@buaa.edu.cn",
-                profilePhoto: '',
-            },
         }
     },
 
     methods: {
         async updateInfo(){
-            dialogVisible = false;
-            const {data:res} = await request.post(
+            this.dialogVisible = false;
+            let formData = new FormData();
+            formData.append('username', this.information.username);
+            formData.append('password', this.information.password);
+            formData.append('email', this.information.email);
+            formData.append('profilePhoto', this.information.profilePhoto);
+            /*const {data:res} = await request.post(
+                '/student/modify',
+                formData);*/
+            //console.log(res);
+                
+            /*const {data:res} = await request.post(
                 '/student/modify',
                 {   s_id: information.id,
                     s_passWord: information.passWord,
@@ -60,8 +60,12 @@ export default {
                     s_dorm: '',
                     s_gender: '',
                 }
-            )
-        }
+            )*/
+        },
+        getImageFile:function(e){
+            let file = e.target.files[0];
+            this.information.profilePhoto = file;
+        },
     }
 }
 
@@ -128,12 +132,6 @@ const handleClose = () => {
                         <p> &nbsp &nbsp Up-to-Date Notices </p>
                     </template>
                     <div>
-                    Consistent with real life: in line with the process and logic of real
-                    life, and comply with languages and habits that the users are used to;
-                    </div>
-                    <div>
-                    Consistent within interface: all elements should be consistent, such
-                    as: design style, icons and texts, position of elements, etc.
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="2">
@@ -149,15 +147,6 @@ const handleClose = () => {
                         <p> &nbsp &nbsp My Plans </p>
                     </template>
                     <div>
-                    Simplify the process: keep operating process simple and intuitive;
-                    </div>
-                    <div>
-                    Definite and clear: enunciate your intentions clearly so that the
-                    users can quickly understand and make decisions;
-                    </div>
-                    <div>
-                    Easy to identify: the interface should be straightforward, which helps
-                    the users to identify and frees them from memorizing and recalling.
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="4">
@@ -165,13 +154,6 @@ const handleClose = () => {
                         <p> &nbsp &nbsp Others </p>
                     </template>
                     <div>
-                    Decision making: giving advices about operations is acceptable, but do
-                    not make decisions for the users;
-                    </div>
-                    <div>
-                    Controlled consequences: users should be granted the freedom to
-                    operate, including canceling, aborting or terminating current
-                    operation.
                     </div>
                 </el-collapse-item>
             </el-collapse>
@@ -196,18 +178,22 @@ const handleClose = () => {
         style="max-width: 460px; padding-top:20px"
         >
         <el-form-item label="username">
-        <el-input v-model="information.username" />
+            <el-input v-model="information.username" />
         </el-form-item>
         <el-form-item label="id">
-        <el-input v-model="information.id" />
+            <el-input v-model="information.id" />
         </el-form-item>
         <el-form-item label="email">
-        <el-input v-model="information.email" />
+            <el-input v-model="information.email" />
         </el-form-item>
         <el-form-item label="password">
-        <el-input v-model="information.password" />
+            <el-input v-model="information.password" />
+        </el-form-item>
+        <el-form-item label="profilePhoto">
+            <input type="file" @change="getImageFile" id="img" />
         </el-form-item>
         </el-form>
+        <!--
         <el-upload
             class="upload"
             drag
@@ -223,6 +209,7 @@ const handleClose = () => {
                 </div>
             </template>
         </el-upload>
+        -->
         <template #footer>
             <span class="dialog-footer">
             <el-button @click="dialogVisible = false">Cancel</el-button>

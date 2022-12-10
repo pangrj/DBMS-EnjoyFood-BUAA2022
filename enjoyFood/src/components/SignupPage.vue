@@ -84,11 +84,10 @@ const handleClose = () => {
 
 <template>
 <div class = 'SignupPage'>
-    <el-container>
-        <el-header>
-            <h1 class='Head'> Welcome to EnjoyFood! </h1>
-        </el-header>
-        <el-main>
+    <div class = "SignUpBox">
+        <h1 class="title">注册点菜系统</h1>
+        <div style="margin: 20px 0"/>
+        <div class = "SignUpBox">
              <el-form
                 :label-position="labelPosition"
                 :model="information"
@@ -96,25 +95,38 @@ const handleClose = () => {
                 class="signUpForm"
             >
                 <el-form-item>
-                    <template #label>
-                        <h2 class="label">UserName</h2>
-                    </template>
-                    <el-input v-model="information.username" />
+                    <el-input 
+                        v-model="information.username" 
+                        placeholder="请输入用户名" >
+                        <template #prefix>
+                            <el-icon><UserFilled /></el-icon>
+                        </template>
+                    </el-input>
                 </el-form-item>
                 <el-form-item>
-                    <template #label>
-                        <h2 class="label">Password</h2>
-                    </template>
-                    <el-input v-model="information.password" show-password />
+                    <el-input 
+                        v-model="information.password" 
+                        type="password" 
+                        placeholder="请输入密码" 
+                        show-password >
+                        <template #prefix>
+                            <el-icon><Key /></el-icon>
+                        </template>
+                    </el-input>
                 </el-form-item>
                 <el-form-item>
-                    <template #label>
-                        <h2 class="label">Ensure Password</h2>
-                    </template>
-                    <el-input v-model="information.ensurePassword" show-password />
+                    <el-input 
+                        v-model="information.ensurePassword" 
+                        type="password" 
+                        placeholder="请重复输入密码" 
+                        show-password >
+                        <template #prefix>
+                            <el-icon><Key /></el-icon>
+                        </template>
+                    </el-input>
                 </el-form-item>
             </el-form>
-            <el-button @click="submit()">
+            <el-button type="login" round @click="submit()">
                 <p class='buttonLabel'>Submit</p>
             </el-button>
             
@@ -127,35 +139,17 @@ const handleClose = () => {
                 <span>The id you get is {{information.id}}.</span>
                 <template #footer>
                     <el-button @click="back()"><p class='buttonLabel'>back</p></el-button>
-                    <el-button type="primary" @click="login()">
+                    <el-button type="login" @click="login()">
                         <p class='buttonLabel'>login</p>
                     </el-button>
                 </template>
             </el-dialog>
-
-        </el-main>
-    </el-container>
+        </div>
+    </div>
 </div>    
 </template>
 
 <style>
-.SignupPage {
-  background: url("./src/assets/background.jpg");
-  background-size: cover;
-  opacity: 0.75;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  padding-top: 120px;
-  position: fixed;
-}
-.head{
-    padding-bottom: 130px;
-    opacity: 1;
-}
 .Head{
     font-weight: 900;
     margin-bottom: 20px;
@@ -163,8 +157,11 @@ const handleClose = () => {
 }
 .signUpForm{
     padding-top: 5%;
-    padding-left: 35%;
     padding-bottom: 2%;
+}
+.SignUpBox {
+    padding-left: 10%;
+    padding-right: 20%;
 }
 .label{
     font-weight: bold;
