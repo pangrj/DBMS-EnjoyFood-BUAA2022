@@ -5,7 +5,7 @@ from User.models import *
 
 # Register your models here.
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ['s_id', 's_name', 's_dorm', 's_gender']
+    list_display = ['u_id', 'u_name']
 
 
 admin.site.register(User, StudentAdmin)

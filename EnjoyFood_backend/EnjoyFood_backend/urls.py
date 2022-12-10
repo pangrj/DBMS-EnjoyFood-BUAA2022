@@ -22,11 +22,10 @@ from Dish.views import *
 from Chose.views import *
 
 urlpatterns = [
-    path('', home),
 
     path('Hello/', Hello),
 
-    path('User/', include('User.urls')),
+    path('user/', include('User.urls')),
 
     path('dish/', include('Dish.urls')),
 

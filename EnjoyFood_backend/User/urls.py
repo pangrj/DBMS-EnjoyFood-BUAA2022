@@ -7,5 +7,7 @@ urlpatterns = [
     path('login/', login),
     path('register/', register),
 
-    path('modify/', modify_infor)
+    path('modify/', modify_infor),
+
+    path('load/', upLoadImg)
 ]
