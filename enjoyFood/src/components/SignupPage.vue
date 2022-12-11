@@ -34,15 +34,19 @@ export default{
 
                 console.log(this.information.username, this.information.password)
 
-                const res = await request.post(
-                    '/user/register/',
-                    {   u_name: information.username,
-                        u_passWord: information.password,
-                    }
-                )
-                console.log(res);
-            }
-        },
+                await request({
+                    method: 'POST',
+                    url: '/user/register/',
+                    data: { u_name: this.information.username,
+                            u_password: this.information.password,}
+                    }       
+                ).then(function(response) {
+                    console.log(response);
+                }).catch(function(error) {
+                    console.log(error);
+                })
+                }
+            },
 
         async login(){
             console.log(this.information.username, this.information.password)
