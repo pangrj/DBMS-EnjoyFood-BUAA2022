@@ -34,27 +34,25 @@ export default{
 
                 console.log(this.information.username, this.information.password)
 
-                const {code:res, message:mes} = await request.post(
+                const res = await request.post(
                     '/user/register/',
                     {   u_name: information.username,
                         u_passWord: information.password,
                     }
                 )
-                console.assert(res);
-                console.assert(mes);
+                console.log(res);
             }
         },
 
         async login(){
             console.log(this.information.username, this.information.password)
 
-            const {code:res, message:mes} = await request.post(
+            const res = await request.post(
                 '/user/login/',
                 {   u_name: this.information.username,
                     u_password: this.information.password,}
             )
-            console.assert(res);
-            console.assert(mes);
+            console.log(res);
             this.$router.push({
                 path: '/ChoosePage',
                 query: {

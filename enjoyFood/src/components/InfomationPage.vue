@@ -74,11 +74,10 @@ export default {
             formData.append('u_email', this.information.email);
             formData.append('u_avatar', this.information.profilePhoto);
             formData.append('avatar_name', this.information.username + '.jpg');
-            const {code:res, message:mes} = await request.post(
+            const res = await request.post(
                 '/user/modify/',
                 formData);
-            console.assert(res);
-            console.assert(res);   
+            console.log(res);  
             /*const {data:res} = await request.post(
                 '/student/modify',
                 {   s_id: information.id,
