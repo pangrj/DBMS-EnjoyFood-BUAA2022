@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import img from '../assets/yimian1.jpg' 
+import img from '../../assets/yimian1.jpg' 
 
 const currentDate = ref(new Date())
 const imgRef = ref(img)

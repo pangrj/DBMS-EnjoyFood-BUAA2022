@@ -1,12 +1,12 @@
 <script>
-import RecommendCard from './RecommendCard.vue'
 import {useRoute} from 'vue-router'
 import {ref, reactive, onMounted} from 'vue'
 import { UploadFilled } from '@element-plus/icons-vue'
 import request from '../https/axios.js'
+import Header from './Header.vue'
 
 export default {
-    components: {RecommendCard },
+    components: { Header },
     setup(){
         let route = useRoute()
         const userName = route.query.userName;
@@ -133,6 +133,8 @@ const handleClose = () => {
 </script>
 
 <template>
+<div>
+    <Header v-bind:userName="userName"/>
   <div class="InfomationPage">
     <el-container>
     <el-header>
@@ -276,8 +278,8 @@ const handleClose = () => {
         </span>
         </template>
     </el-dialog>
-
     </div>
+</div>
 </template>
 
 <style>

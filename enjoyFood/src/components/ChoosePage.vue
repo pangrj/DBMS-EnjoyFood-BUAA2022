@@ -12,9 +12,8 @@ export default {
     setup(){
         let route = useRoute()
         userName.value = route.query.userName;
-        passWord.value = route.query.passWord;
-        console.log(userName, passWord);
-        return {userName, passWord};
+        console.log(userName);
+        return {userName};
     },
     components: {
         ChooseView,
@@ -39,7 +38,7 @@ export default {
             this.deepSearch = !this.deepSearch
         },
         ClickUserFilled(){
-            console.log(userName, passWord);
+            console.log(userName);
             this.$router.push({
                 path: '/InfomationPage',
                 query: {
@@ -149,6 +148,7 @@ export default {
 </style> -->
 <template>
     <div class="ChoosePage">
+        <Header v-bind:userName="userName"/>
     <el-container>
       <el-header>
         Enjoy Your Life

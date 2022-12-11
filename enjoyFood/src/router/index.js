@@ -8,7 +8,7 @@ import MainPage from '../components/MainPage.vue'
 
 const routes = [
         { path: '/', redirect: '/LoginPage'},
-        { path: '/ChoosePage', query:{userName:String, passWord:String} , component: ChoosePage},
+        { path: '/ChoosePage', query:{userName:String} , component: ChoosePage},
         { path: '/InfomationPage', query:{userName:String} ,component: InfomationPage},
         { path: '/MainPage', query:{userName:String} ,component: MainPage},
         { path: '/LoginPage', component: LoginPage},
