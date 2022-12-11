@@ -1,6 +1,7 @@
 <script>
 import {ref, reactive} from 'vue'
 import { ElMessage } from 'element-plus'
+import request from '../https/axios.js'
 
 export default{
     setup(){
@@ -34,7 +35,7 @@ export default{
                 console.log(this.information.username, this.information.password)
 
                 const {code:res, message:mes} = await request.post(
-                    '/user/register',
+                    '/user/register/',
                     {   u_name: information.username,
                         u_passWord: information.password,
                     }
@@ -48,7 +49,7 @@ export default{
             console.log(this.information.username, this.information.password)
 
             const {code:res, message:mes} = await request.post(
-                '/user/login',
+                '/user/login/',
                 {   u_name: this.information.username,
                     u_password: this.information.password,}
             )

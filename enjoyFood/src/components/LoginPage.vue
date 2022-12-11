@@ -23,12 +23,17 @@ export default {
     methods: {
         async onClickLogin(){
             console.log(userName.value, passWord.value)
-            const res = await request.post(
-                '/user/login',
-                {   u_name: userName.value,
+            await request({
+                method: 'POST',
+                url: '/user/login/',
+                data: {   u_name: userName.value,
                     u_password: passWord.value,}
-            )
-            console.log(res);
+                }
+            ).then(function(response) {
+                console.log(response);
+            }).catch(function(error) {
+                console.log(error);
+            })
             this.$router.push({
                 path: '/ChoosePage',
                 query: {

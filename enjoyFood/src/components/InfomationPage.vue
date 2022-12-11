@@ -48,7 +48,7 @@ export default {
     methods: {
         async initInfor(){
             const ret = await request.post(
-                '/user/getInfor',
+                '/user/getInfor/',
                 this.userName,
             );
             console.log(ret);
@@ -75,7 +75,7 @@ export default {
             formData.append('u_avatar', this.information.profilePhoto);
             formData.append('avatar_name', this.information.username + '.jpg');
             const {code:res, message:mes} = await request.post(
-                '/user/modify',
+                '/user/modify/',
                 formData);
             console.assert(res);
             console.assert(res);   
