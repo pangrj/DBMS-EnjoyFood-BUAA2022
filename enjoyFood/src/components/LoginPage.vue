@@ -35,7 +35,7 @@ export default {
                 console.log(error);
             })
             this.$router.push({
-                path: '/ChoosePage',
+                path: '/MainPage',
                 query: {
                     userName: userName.value,
                     passWord: passWord.value,
