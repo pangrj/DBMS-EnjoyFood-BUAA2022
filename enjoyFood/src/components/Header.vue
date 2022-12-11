@@ -1,5 +1,8 @@
 <script>
 export default {
+    props: {
+        userName: String,
+    },
     setup(){
         
     },
@@ -8,9 +11,15 @@ export default {
 
         },
         clickToInfor(){
-
+            console.log(this.userName)
+            this.$router.push({
+                path: '/InfomationPage',
+                query: {
+                    userName: this.userName,
+                },
+            });
         },
-    }
+    },
 }
 </script>
 
@@ -28,7 +37,10 @@ export default {
                 <span>Enjoy Food !</span>
             </li>
             <li>
-
+                {{userName}}
+            </li>
+            <li>
+                <el-button @click="clickToInfor()" round>Infor</el-button>
             </li>
         </ul>
     </div>

@@ -1,9 +1,15 @@
 from django.db import models
 
+from EnjoyFood_backend.settings import MEDIA_ROOT
+
 
 # Create your models here.
 
 class User(models.Model):
+    def user_directory_path(self, filename):
+        # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+        return 'avatar/user_{0}/{1}'.format(self.id, filename)
+
     # u_id = models.IntegerField(primary_key=True, null=False)
     u_password = models.CharField(max_length=20, null=False)
     u_name = models.CharField(max_length=20, null=False, unique=True)
@@ -13,7 +19,14 @@ class User(models.Model):
     u_age = models.IntegerField(null=True)
     u_height = models.IntegerField(null=True)
     u_weight = models.IntegerField(null=True)
-    # u_avatar = models.FileField(upload_to='uploads/', null=True, verbose_name='头像')
+    u_avatar = models.FileField(upload_to=user_directory_path,
+                                default='avatar/default.png',
+                                null=True,
+                                verbose_name='头像')
+
+    def get_avatar_url(self):
+        return 'media/{0}'.format(self.u_avatar)
+        # return MEDIA_ROOT + str(self.u_avatar)
 
     def get_u_id(self):
         return self.id
@@ -52,6 +65,7 @@ class User(models.Model):
         return self.u_avatar
 
     def set_u_avatar(self, u_photo):
+        self.u_avatar.delete()
         self.u_avatar = u_photo
 
     def get_u_height(self):

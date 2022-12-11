@@ -44,7 +44,6 @@ export default {
                 path: '/InfomationPage',
                 query: {
                     userName: userName.value,
-                    passWord: passWord.value,
                 },
             });
         }
@@ -151,7 +150,9 @@ export default {
 <template>
     <div class="ChoosePage">
     <el-container>
-      <el-header>Enjoy Your Life</el-header>
+      <el-header>
+        Enjoy Your Life
+    </el-header>
       <el-main>
         <el-row :gutter="20" class="choose_title">
             <!-- 左侧的选择栏 -->

@@ -11,9 +11,8 @@ export default {
     setup(){
         let route = useRoute()
         userName.value = route.query.userName;
-        passWord.value = route.query.passWord;
-        console.log(userName, passWord);
-        return {userName, passWord};
+        console.log(userName);
+        return {userName};
     },
     components: {
         Header,
@@ -23,7 +22,7 @@ export default {
 
 <template>
     <div>
-        <Header />
+        <Header v-bind:userName="userName"/>
         MainPage
     </div>
 </template>

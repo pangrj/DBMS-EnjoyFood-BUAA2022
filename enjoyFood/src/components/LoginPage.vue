@@ -38,7 +38,6 @@ export default {
                 path: '/MainPage',
                 query: {
                     userName: userName.value,
-                    passWord: passWord.value,
                 },
             });
         },

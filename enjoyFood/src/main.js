@@ -7,8 +7,6 @@ import router from './router'
 import axios from 'axios'
 import store from './store'
 
-import request from './https/axios.js'
-
 import App from './App.vue'
 
 const app = createApp(App)

@@ -1,7 +1,7 @@
 <script>
 import RecommendCard from './RecommendCard.vue'
 import {useRoute} from 'vue-router'
-import {ref, reactive} from 'vue'
+import {ref, reactive, onMounted} from 'vue'
 import { UploadFilled } from '@element-plus/icons-vue'
 import request from '../https/axios.js'
 
@@ -10,12 +10,15 @@ export default {
     setup(){
         let route = useRoute()
         const userName = route.query.userName;
-        const passWord = route.query.passWord;
-        console.log(userName, passWord);
+        console.log(userName);
+        
+        const ava_path = new URL(`./src/assets/avatar.jpg`, import.meta.url).href
+
+        
 
         const dialogVisible = ref(false);
         const information = reactive( {
-                u_name: 'initial',
+                u_name: userName,
                 u_id: 'initial',
                 u_password: 'initial',
                 u_position: 'initial',
@@ -27,18 +30,37 @@ export default {
                 u_weight: '0',
             });
 
-        /*this.createForm.file.forEach((file) => {
-        if (file.raw) {
-            data.append('new_files', file.raw)
-        }else{
-            data.append('old_files', file.page_file_id)
-        }
-        })*/
+        // init:
+        /*function init() {
+            request({
+                method: 'POST',
+                url: '/user/getInfor/',
+                data: {   u_name: userName,
+                    }
+                }
+            ).then(function(response) {
+                console.log(response);
+                this.information.u_id = response.u_id;
+                this.information.u_position = response.u_position;
+                this.information.u_gender = response.u_gender;
+                this.information.u_email = response.u_email;
+                this.information.u_photo = response.u_photo;
+                this.information.u_age = response.u_age;
+                this.information.u_height = response.u_height;
+                this.information.u_weight = response.u_weight;
+            }).catch(function(error) {
+                console.log(error);
+            })
+        };
+
+        onMounted(() => {
+            init();
+        });*/
 
         const settings = reactive( {
             NightMode: false, 
         });
-        return {userName, passWord, dialogVisible, information};
+        return {userName, dialogVisible, information};
     },
     data(){
         return {
@@ -47,37 +69,39 @@ export default {
 
     methods: {
         async initInfor(){
-            const ret = await request.post(
+            const response = await request.post(
                 '/user/getInfor/',
                 this.userName,
             );
-            console.log(ret);
-            this.information.u_id = ret.u_id;
-            this.information.u_position = ret.u_position;
-            this.information.u_gender = ret.u_gender;
-            this.information.u_email = ret.u_email;
-            this.information.u_photo = ret.u_photo;
-            this.information.u_age = ret.u_age;
-            this.information.u_height = ret.u_height;
-            this.information.u_weight = ret.u_weight;
+            console.log(response);
+            this.information.u_id = response.u_id;
+            this.information.u_position = response.u_position;
+            this.information.u_gender = response.u_gender;
+            this.information.u_email = response.u_email;
+            this.information.u_photo = response.u_photo;
+            this.information.u_age = response.u_age;
+            this.information.u_height = response.u_height;
+            this.information.u_weight = response.u_weight;
         },
         async updateInfo(){
             this.dialogVisible = false;
+            console.log(this.information);
+
             let formData = new FormData();
-            formData.append('u_name', this.information.username);
-            formData.append('u_password', this.information.password);
+            formData.append('u_name', this.information.u_name);
+            formData.append('u_password', this.information.u_password);
             formData.append('u_height', '');
             formData.append('u_weight', '');
             formData.append('u_age', '');
             formData.append('u_position', '');
             formData.append('u_gender', '');
-            formData.append('u_email', this.information.email);
-            formData.append('u_avatar', this.information.profilePhoto);
-            formData.append('avatar_name', this.information.username + '.jpg');
+            formData.append('u_email', this.information.u_email);
+            formData.append('u_avatar', this.information.u_photo);
             const res = await request.post(
                 '/user/modify/',
                 formData);
             console.log(res);  
+            this.ava_path = res.img_path;
             /*const {data:res} = await request.post(
                 '/student/modify',
                 {   s_id: information.id,
@@ -89,8 +113,10 @@ export default {
             )*/
         },
         getImageFile:function(e){
+            console.log("in getImgFunc!")
             let file = e.target.files[0];
-            this.information.profilePhoto = file;
+            this.information.photo = file;
+            console.log(file)
         },
     }
 }
@@ -114,7 +140,7 @@ const handleClose = () => {
         <div class="Total">
             <div class="TotalIn">
             <div class="photo" >
-                <el-avatar :size="100" src= "./src/assets/avatar.jpg" />
+                <el-avatar :size="100" src= "ava_path" />
                 
             </div>
             <div class="nameAndemail">
@@ -203,18 +229,24 @@ const handleClose = () => {
         style="max-width: 460px; padding-top:20px"
         >
         <el-form-item label="username">
-            <el-input v-model="information.username" />
+            <el-input v-model="information.u_name" />
         </el-form-item>
         <el-form-item label="id">
-            <el-input v-model="information.id" />
+            <el-input v-model="information.u_id" />
         </el-form-item>
         <el-form-item label="email">
-            <el-input v-model="information.email" />
+            <el-input v-model="information.u_email" />
         </el-form-item>
         <el-form-item label="password">
-            <el-input v-model="information.password" />
+            <el-input v-model="information.u_password" />
         </el-form-item>
-        <el-form-item label="profilePhoto">
+        <el-form-item label="position">
+            <el-input v-model="information.u_position" />
+        </el-form-item>
+        <el-form-item label="age">
+            <el-input v-model="information.u_age" />
+        </el-form-item>
+        <el-form-item label="avatar">
             <input type="file" @change="getImageFile" id="img" />
         </el-form-item>
         </el-form>
