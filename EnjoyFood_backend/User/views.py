@@ -110,7 +110,6 @@ def modify_infor(request):
                 ret.set_code(200)
                 ret.set_message("Modify Success!")
                 avatar_addr = user.get_avatar_url()
-                print(avatar_addr)
                 ret.load_data({'img_path': avatar_addr})
         return JsonResponse(ret.json_type())
     else:
@@ -139,7 +138,6 @@ def upLoadImg(request):
         ret.set_code(200)
         ret.set_message('success')
         ret.load_data({'img_path': avatar_addr})
-        print(ret.data)
         return JsonResponse(ret.json_type())
     else:
         ret.Http_error()
