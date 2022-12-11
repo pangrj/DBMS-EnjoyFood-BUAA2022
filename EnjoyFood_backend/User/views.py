@@ -74,7 +74,7 @@ def modify_infor(request):
     ret = RET.get_instance()
     if request.method == 'POST':
         u_avatar = request.FILES.get('u_avatar')
-        avatar_name = request.POST.get('avatar_name')
+        # avatar_name = request.POST.get('avatar_name')
         data = request.POST
 
         u_name = data.get('u_name')
@@ -121,18 +121,22 @@ def upLoadImg(request):
 
     if request.method == 'POST':
         img = request.FILES.get('img')
-        img_name = request.POST.get('img_name')
-
-        image_path = os.path.join(MEDIA_ROOT, img_name)
+        u_name = request.POST.get('u_name')
+        user = User.objects.get(u_name__exact=u_name)
+        user.u_avatar.delete()
+        user.u_avatar = img
+        user.save()
+        avatar_addr = user.get_avatar_url()
+        '''image_path = os.path.join(MEDIA_ROOT, img_name)
         with open(image_path, 'wb') as fp:
             # 遍历图片的块数据（切块的传图片）
             for i in img.chunks():
                 # 将图片数据写入自己的那个文件
-                fp.write(i)
+                fp.write(i)'''
 
         ret.set_code(200)
         ret.set_message('success')
-        ret.load_data({'img_path': image_path})
+        ret.load_data({'img_path': user.u_avatar.url})
 
         return JsonResponse(ret.json_type())
     else:
