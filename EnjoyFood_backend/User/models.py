@@ -25,7 +25,8 @@ class User(models.Model):
                                 verbose_name='头像')
 
     def get_avatar_url(self):
-        return MEDIA_ROOT + str(self.u_avatar)
+        return 'media/{0}'.format(self.u_avatar)
+        # return MEDIA_ROOT + str(self.u_avatar)
 
     def get_u_id(self):
         return self.id

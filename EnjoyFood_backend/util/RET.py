@@ -21,7 +21,9 @@ class RET:
 
     def load_data(self, data):
         if type(data) == dict:
+            print(1)
             self.data = dict(self.data, **data)
+        print(3)
 
     def json_type(self):
         ret = {

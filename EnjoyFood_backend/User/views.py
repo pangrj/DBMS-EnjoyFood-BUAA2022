@@ -106,10 +106,12 @@ def modify_infor(request):
                 user.set_u_height(u_height)
                 user.set_u_weight(u_weight)
                 user.u_age = u_age
-
                 user.save()
                 ret.set_code(200)
                 ret.set_message("Modify Success!")
+                avatar_addr = user.get_avatar_url()
+                print(avatar_addr)
+                ret.load_data({'img_path': avatar_addr})
         return JsonResponse(ret.json_type())
     else:
         ret.Http_error()
@@ -136,8 +138,8 @@ def upLoadImg(request):
 
         ret.set_code(200)
         ret.set_message('success')
-        ret.load_data({'img_path': user.u_avatar.url})
-
+        ret.load_data({'img_path': avatar_addr})
+        print(ret.data)
         return JsonResponse(ret.json_type())
     else:
         ret.Http_error()
