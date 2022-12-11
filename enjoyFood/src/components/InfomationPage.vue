@@ -3,6 +3,7 @@ import RecommendCard from './RecommendCard.vue'
 import {useRoute} from 'vue-router'
 import {ref, reactive} from 'vue'
 import { UploadFilled } from '@element-plus/icons-vue'
+import request from '../https/axios.js'
 
 export default {
     components: {RecommendCard },
@@ -341,7 +342,7 @@ const handleClose = () => {
     font-weight: bold;
 }
 header{
-
+    
 }
 main{
     padding-top: 5%;

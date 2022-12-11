@@ -2,44 +2,25 @@
 import { useRouter } from 'vue-router'
 
 import {ref} from 'vue'
-import SignupPage from './SignupPage.vue'
 const userName = ref('')
 const passWord = ref('')
 
-import request from '../https/axios.js'
-
 export default {
-  components: { SignupPage },
     data(){
         return {
             userName,
             passWord,
         }
     },
-    setup(){
-        const inputMode = ref('Login')
-        return{ inputMode }
-    },
     methods: {
-        async onClickLogin(){
-            console.log(userName.value, passWord.value)
-            const res = await request.post(
-                '/user/login',
-                {   u_name: userName.value,
-                    u_password: passWord.value,}
-            )
-            console.log(res);
+        onClick(){
+            console.log(userName, passWord)
             this.$router.push({
                 path: '/ChoosePage',
                 query: {
                     userName: userName.value,
                     passWord: passWord.value,
                 },
-            });
-        },
-        onClickSignUp(){
-            this.$router.push({
-                path: '/SignupPage',
             });
         }
     }
@@ -49,21 +30,11 @@ export default {
 
 <template>
     <div class = "LoginPage">
-        <div class = "header">
-            <el-radio-group v-model="inputMode" label="input mode" class="control">
-                <el-radio-button label="Login">Login</el-radio-button>
-                <el-radio-button label="Signup">Signup</el-radio-button>
-            </el-radio-group>
-        </div>
         {{userName}}
-        <el-container>
-        <el-header class = 'head'>
-            <h1 class='Head'> Welcome to EnjoyFood! </h1>
-        </el-header>
         <el-container>
         <el-aside width="50%">
         <div title="WelcomeBox">
-            <h1 class='welcome'>Some of New Delicious Food </h1>
+            <h1>Welcome to EnjoyFood!</h1>
             <div class="runningPicture">
             <el-carousel height="175px">
                 <el-carousel-item v-for="item in 4" :key="item">
@@ -74,10 +45,10 @@ export default {
         </div>
         </el-aside>
         <el-main>
-        <div title="LoginBox" v-if="inputMode=='Login'">
+        <div title="LoginBox" >
             <div class = "InputBox">
             <!--el-card shadow="always"w-->
-                <h1 class="title">登录点菜系统</h1>
+                <h2 >登录点菜系统</h2>
                 <div style="margin: 20px 0"/>
                 <div class = "InputBox">
                 <el-input 
@@ -99,16 +70,11 @@ export default {
                 </el-input>
                 </div>
                 <div style="margin: 20px 0" />
-                <el-button @click="onClickLogin()" type="login" round style="margin-right: 15px"><p>login</p></el-button>
-                <el-button @click="onClickSignUp()" type="login" round><p>signUp</p></el-button>
+                <el-button @click="onClick()" type="login" round>login</el-button>
             <!--/el-card-->
             </div>
         </div>
-        <div title="SignupBox" v-if="inputMode=='Signup'">
-            <SignupPage />
-        </div>
         </el-main>
-        </el-container>
         </el-container>
     </div>
 </template>
@@ -126,18 +92,8 @@ export default {
   left: 0px;
   right: 0px;
   bottom: 0px;
-  padding-top: 50px;
+  padding-top: 250px;
   position: fixed;
-}
-.header{
-    height: 70px;
-}
-.control{
-    float: right;
-    margin-right: 10%;
-}
-.head{
-    padding-bottom: 130px;
 }
 /*.LoginPage > div {
   height: 22px;
@@ -150,12 +106,12 @@ export default {
 }
 .InputBox {
     padding-left: 10%;
-    padding-right: 20%;
+    padding-right: 25%;
 }
 .runningPicture{
     padding-left: 15%;
     padding-right: 10%;
-    padding-top: 0%;
+    padding-top: 5%;
 }
 .demonstration {
   color: var(--el-text-color-secondary);
@@ -176,26 +132,6 @@ export default {
   background-color: #d3dce6;
   background-image: url("./src/assets/yimian.jpg");
   background-size: 100%;
-}
-.Head{
-    font-weight: 900;
-    margin-bottom: 20px;
-    font-size: 200%;
-}
-.welcome{
-    font-weight: 700;
-    font-size: 150%;
-}
-.title{
-    font-weight: 700;
-    margin-right: 15px;
-    font-size: 150%;
-}
-h1{
-    font-weight: 800;
-}
-p{
-    font-weight: bold;
 }
 
 </style>
