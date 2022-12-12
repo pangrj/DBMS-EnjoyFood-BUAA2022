@@ -90,15 +90,15 @@ export default {
             let formData = new FormData();
             formData.append('u_name', this.information.u_name);
             formData.append('u_password', this.information.u_password);
-            formData.append('u_height', 0);
-            formData.append('u_weight', 0);
+            formData.append('u_height', this.information.u_height);
+            formData.append('u_weight', this.information.u_weight);
             formData.append('u_age', this.information.u_age);
-            formData.append('u_position', '');
-            formData.append('u_gender', true);
+            formData.append('u_position', this.information.position);
+            formData.append('u_gender', this.information.gender);
             formData.append('u_email', this.information.u_email);
             formData.append('u_avatar', this.information.u_photo);
 
-            console.log(formData);
+            console.log(formData.get('u_avatar'));
             const res = await request.post(
                 '/user/modify/',
                 formData);
