@@ -24,7 +24,7 @@ export default {
                 u_position: 'initial',
                 u_gender: true,
                 u_email : 'initial' + "@buaa.edu.cn",
-                u_photo: '',
+                u_photo: File,
                 u_age: '0',
                 u_height: '0',
                 u_weight: '0',
@@ -115,7 +115,7 @@ export default {
         getImageFile:function(e){
             console.log("in getImgFunc!")
             let file = e.target.files[0];
-            this.information.photo = file;
+            this.information.u_photo = file;
             console.log(file)
         },
     }
