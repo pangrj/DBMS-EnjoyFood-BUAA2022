@@ -94,7 +94,7 @@ export default {
             formData.append('u_weight', '');
             formData.append('u_age', '');
             formData.append('u_position', '');
-            formData.append('u_gender', '');
+            formData.append('u_gender', true);
             formData.append('u_email', this.information.u_email);
             formData.append('u_avatar', this.information.u_photo);
             const res = await request.post(
