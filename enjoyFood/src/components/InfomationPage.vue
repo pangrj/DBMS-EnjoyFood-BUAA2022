@@ -25,9 +25,9 @@ export default {
                 u_gender: true,
                 u_email : 'initial' + "@buaa.edu.cn",
                 u_photo: File,
-                u_age: '0',
-                u_height: '0',
-                u_weight: '0',
+                u_age: 0,
+                u_height: 0,
+                u_weight: 0,
             });
 
         // init:
@@ -90,13 +90,15 @@ export default {
             let formData = new FormData();
             formData.append('u_name', this.information.u_name);
             formData.append('u_password', this.information.u_password);
-            formData.append('u_height', '');
-            formData.append('u_weight', '');
-            formData.append('u_age', '');
+            formData.append('u_height', 0);
+            formData.append('u_weight', 0);
+            formData.append('u_age', this.information.u_age);
             formData.append('u_position', '');
             formData.append('u_gender', true);
             formData.append('u_email', this.information.u_email);
             formData.append('u_avatar', this.information.u_photo);
+
+            console.log(formData);
             const res = await request.post(
                 '/user/modify/',
                 formData);
