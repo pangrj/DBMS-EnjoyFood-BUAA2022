@@ -22,7 +22,7 @@ export default {
                 u_id: 'initial',
                 u_password: 'initial',
                 u_position: 'initial',
-                u_gender: true,
+                u_gender: "True",
                 u_email : 'initial' + "@buaa.edu.cn",
                 u_photo: File,
                 u_age: 0,
