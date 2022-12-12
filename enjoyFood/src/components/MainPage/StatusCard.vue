@@ -1,4 +1,5 @@
 <script>
+import * as echarts from 'echarts'
 
 export default({
     setup() {

@@ -4,9 +4,10 @@ import {ref, reactive, onMounted} from 'vue'
 import { UploadFilled } from '@element-plus/icons-vue'
 import request from '../https/axios.js'
 import Header from './Header.vue'
+import Personal from './InforPage/Personal.vue'
 
 export default {
-    components: { Header },
+    components: { Header, Personal, Personal },
     setup(){
         let route = useRoute()
         const userName = route.query.userName;
@@ -195,6 +196,7 @@ const handleClose = () => {
                         <p> Personal Information </p>
                     </template>
                     <div>
+                        <personal :information="information" />
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="3">

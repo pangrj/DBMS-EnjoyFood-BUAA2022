@@ -1,0 +1,126 @@
+<script>
+
+import {ref} from 'vue'
+
+export default({
+    props: {
+        information:{
+                u_name: String,
+                u_id: String,
+                u_password: String,
+                u_position: String,
+                u_gender: String,
+                u_email : String,
+                u_photo: File,
+                u_age: 0,
+                u_height: 0,
+                u_weight: 0,
+            }
+    },
+    setup() {
+        /*if(Data.u_gender=="True"){
+            gender = "male";
+        }else{
+            gender = "female";
+        }*/
+    },
+})
+
+const gender = ref("male")
+
+</script>
+
+<template>
+<div>
+     <el-descriptions
+        class="margin-top"
+        title="Information"
+        :column="3"
+        size="Large"
+        border
+    >
+    <template #extra>
+      <el-button type="primary">Operation</el-button>
+    </template>
+    <el-descriptions-item>
+      <template #label>
+        <div class="cell-item">
+          <el-icon :style="iconStyle">
+            <user />
+          </el-icon>
+          Username
+        </div>
+      </template>
+      <span>{{information.u_name}}</span>
+    </el-descriptions-item>
+    <el-descriptions-item>
+      <template #label>
+        <div class="cell-item">
+          <el-icon :style="iconStyle">
+            <Message />
+          </el-icon>
+            Emial
+        </div>
+      </template>
+      <span>{{information.u_email}}</span>
+    </el-descriptions-item>
+    <el-descriptions-item>
+      <template #label>
+        <div class="cell-item">
+          <el-icon :style="iconStyle">
+            <Male />
+          </el-icon>
+            Gender
+        </div>
+      </template>
+      <span>{{gender}}</span>
+    </el-descriptions-item>
+    <el-descriptions-item>
+      <template #label>
+        <div class="cell-item">
+          <el-icon :style="iconStyle">
+            <location />
+          </el-icon>
+          Position
+        </div>
+      </template>
+      Beijing
+    </el-descriptions-item>
+    <el-descriptions-item>
+      <template #label>
+        <div class="cell-item">
+          <el-icon :style="iconStyle">
+            <tickets />
+          </el-icon>
+          Remarks
+        </div>
+      </template>
+      <el-tag size="small">School</el-tag>
+    </el-descriptions-item>
+    <el-descriptions-item>
+      <template #label>
+        <div class="cell-item">
+          <el-icon :style="iconStyle">
+            <office-building />
+          </el-icon>
+          Address
+        </div>
+      </template>
+      No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province
+    </el-descriptions-item>
+  </el-descriptions>
+  </div>
+</template>
+
+<style scoped>
+.el-descriptions {
+  margin-top: 20px;
+}
+.cell-item {
+  display: flex;
+  align-items: center;
+}
+.margin-top {
+  margin-top: 20px;
+}
+</style>
