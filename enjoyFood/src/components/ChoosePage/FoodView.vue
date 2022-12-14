@@ -9,7 +9,7 @@
         <el-table-column prop="d_price" label="价格" min-width="10%" class="table-row" align="center"/>
         <el-table-column fixed="right" label="操作" min-width="10%" slot-scope="scope" class="table-row" align="center">
             <template v-slot="scope">
-                <el-button type="primary" size="small" @click="selectFood(scope.row)" v-show="isChoose">选择菜品</el-button>
+                <el-button link type="primary" size="small" @click="selectFood(scope.row)" v-show="isChoose">选择菜品</el-button>
                 <el-button link type="primary" size="small" @click="deleteFood(scope.row)" v-show="isChosen">删除菜品</el-button>
             </template>
         </el-table-column>
@@ -74,15 +74,16 @@ export default {
 
 <style scoped>
     /*最外层透明*/
-    .el-table, .el-table__expanded-cell, .header-cell-style, .el-table-column{
-        background-color: transparent !important;
-        text-align: center !important;
+    :deep(.el-table, .el-table__expanded-cell, .header-cell-style, .el-table-column){
+        background-color: rgba(239, 231, 224, 0.7);
+        text-align: center;
     }
     /* 表格内背景颜色 */
-    ::v-deep .el-table__header-wrapper .el-table th, .el-table tr, .el-table td {
-        background-color: transparent !important;
-        text-align: center !important;
+    :deep(.el-table__header-wrapper .el-table th, .el-table tr, .el-table td ){
+        background-color: rgba(239, 231, 224, 0.7);
+        text-align: center;
     }
+
     
 
 </style>

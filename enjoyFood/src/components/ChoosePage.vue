@@ -15,11 +15,11 @@ export default {
         const drawer2 = ref(false)
         const direction = ref('rtl')
         const radio1 = ref('Option 1')
-        let route = useRoute()
-        userName.value = route.query.userName;
-        console.log(userName);
+        // let route = useRoute()
+        // userName.value = route.query.userName;
+        // console.log(userName);
         return {
-            userName,
+            // userName,
             drawer2,
             direction,
             radio1
@@ -80,36 +80,30 @@ export default {
 </script>
 
 <template>
-    <div class="ChoosePage">
-        <Header v-bind:userName="userName"/>
+  <div class="ChoosePage">
     <el-container>
+        <Header></Header>
       <el-header>
         Enjoy Your Life
-    </el-header>
+      </el-header>
       <el-main>
         <el-row class="choose_title" justify="center"><div>
             可选列表
         </div></el-row>
-    
+
+        <!-- 列表栏 -->
         <el-row class="content">
-            <!-- 左侧的选择栏 -->
             <el-col :span="24">
                 <div class="grid-content bg-purple"> 
                     <ChooseView></ChooseView>
                 </div>
             </el-col>
-            <!-- 右侧的已选栏 -->
-            <!-- <el-col :span="10">
-                <div class="grid-content bg-purple">
-                <ChosenView></ChosenView>
-                </div>
-            </el-col> -->
         </el-row>
-
+        
+        <!-- 下方的总结栏 -->
         <el-row :gutter="20" class="conclusion">
-            <!-- 下方的总结栏 -->
             <el-col :span="15">
-                <el-descriptions title="计划总结" direction="vertical" :column="2" :size="size" border>
+                <el-descriptions title="计划总结" direction="vertical" :column="2" :size="size">
                     <el-descriptions-item label="摄入能量" align="center">500</el-descriptions-item>
                     <el-descriptions-item label="消耗能量" align="center">100</el-descriptions-item>
                 </el-descriptions>
@@ -121,10 +115,12 @@ export default {
             </el-col>
         </el-row>
         <p></p>
+
         <!-- 已选按钮 -->
         <el-button type="primary" @click="drawer2 = true">
             已选内容
         </el-button>
+
         <!-- 抽屉内容(弹出方向：ltr,rtl,ttb,btt) -->
         <el-drawer v-model="drawer2" direction="ltr" size="50%"> 
             <template #title>
@@ -155,6 +151,7 @@ export default {
 .content {
   height: 300px;
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .ChoosePage{
@@ -173,24 +170,24 @@ export default {
 
 body {
     margin: 0 !important;
-}
+} 
 
-::v-deep .el-drawer__header {
+:deep(.el-drawer__header)  {
     margin-bottom: 0;
     padding-top: 0;
     background-color:cadetblue;
 }
 
-::v-deep .el-drawer__body {
+:deep(.el-drawer__body) {
     padding: 10px 10px;
 }
 
-::v-deep .el-drawer__close-btn {
+:deep(.el-drawer__close-btn)  {
     background-color: coral;
 }
 
 .el-row {
-  /* margin-bottom: 20px; */
+   margin-bottom: 20px;
 }
 .el-col {
   border-radius: 4px;
