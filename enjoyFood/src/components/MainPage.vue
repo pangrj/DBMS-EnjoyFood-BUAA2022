@@ -8,6 +8,7 @@ const passWord = ref('')
 import Header from "./Header.vue"
 import RecommendCard from "./MainPage/RecommendCard.vue"
 import Chart from "./MainPage/Chart.vue"
+import Graph from './MainPage/Graph.vue';
 
 export default {
     setup(){
@@ -20,6 +21,7 @@ export default {
         Header, 
         RecommendCard,
         Chart,
+        Graph,
     },
 }
 </script>
@@ -32,10 +34,11 @@ export default {
         <el-header>
             <el-container>
                 <el-aside width="50%">
-                    
+                    <div title='chart'><Chart /></div>
+                    <span>123</span>
                 </el-aside>
                 <el-main>
-                    <Chart />
+                    <div title='graph'><Graph /></div>
                 </el-main>
             </el-container>
         </el-header>
@@ -64,8 +67,12 @@ export default {
     height: 500px;
     margin-bottom: 5%;
 }
-.Chart{
+Chart{
     size: 50%;
     height: 200px;
+}
+Graph{
+    size: 50%,
+    height 200px;
 }
 </style>

@@ -1,5 +1,5 @@
 <script>
-// import * as echarts from 'echarts'
+import * as echarts from 'echarts'
 
 export default({
     setup() {
@@ -7,14 +7,14 @@ export default({
     },
     data(){
         return {
-            charts: '',
-            opinionData: ["60", "61", "61", "62", "61", "59", "60"]
+            lineCharts: '',
+            lineOpinionData: ["60", "61", "61", "62", "61", "59", "60"],
         }
     },
     methods: {
         drawLine(id) {
-				this.charts = echarts.init(document.getElementById(id))
-				this.charts.setOption({
+				this.lineCharts = echarts.init(document.getElementById(id))
+				this.lineCharts.setOption({
                     title:{
                         left:'3%',
                         top:'4%',
@@ -85,15 +85,64 @@ export default({
 							}
                             
                         },
-						data: this.opinionData
+						data: this.lineOpinionData
 					}]
 				})
-			}
+			},
+            initData() {
+                this.requested = true;
+                var res = [{value: 200, name: 'takeIn'}, {value: 300, name: 'cost'}, {value: 100, name: 'left'}];
+                var getData = [];
+                for (let i = 0; i < res.length; i++) {
+                var obj = new Object();
+                obj.name = res[i].name;//回答调查问卷的答案
+                obj.value = res[i].value;//回答调查问卷的人数
+                getData[i] = obj;
+                }
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById("sectorChart"));
+                // 绘制图表
+                myChart.setOption({
+                title: {
+                    text: '调查问卷详情',
+                    x:'center'
+                },
+                tooltip: {
+                    trigger: "item",
+                    formatter: "{a} <br/>{b} : {c} ({d}%)",
+                },
+                legend: {
+                    orient: 'vertical',
+                    bottom: 'bottom',
+                    data: getData
+                },
+                series: [
+                    {
+                    name: "选项内容",
+                    type: "pie",
+                    radius: "55%",
+                    center: ["50%", "50%"],//位置
+                    data: getData,
+                    itemStyle: {
+                        emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: "rgba(0, 0, 0, 0.5)",
+                    },
+                },
+                },
+            ],
+            });
+        this.requested = false;
+        },
 		},
         mounted(){
             this.$nextTick(function() {
-				this.drawLine('main')
-			})
+				this.drawLine('lineChart');
+                setTimeout(() => {
+                    this.initData();
+                    }, 200);
+			    })
         }
 
 })
@@ -101,14 +150,20 @@ export default({
 </script>
 
 <template>
-    <div>
-        <div id="main" style="width: 100%;height: 500px;background:#fff"></div>
-    </div>
+<div title='body'>
+    <el-container>
+        <el-aside width="50%">
+            <div id="lineChart" style="width;100%; height: 300px;"></div>
+        </el-aside>
+        <el-main>
+            <div id="sectorChart" style="width:100%; height: 300px;"></div>
+        </el-main>
+    </el-container>
+</div>
 </template>
 
 <style scoped>
-.main{
+.body{
     padding-top: 5%;
-    size: 50%;
 }
 </style>
