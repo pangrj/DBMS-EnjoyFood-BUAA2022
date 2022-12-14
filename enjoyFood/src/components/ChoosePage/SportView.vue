@@ -1,13 +1,13 @@
 <template>
     <!-- 菜品表格 -->
-    <el-table :data="getSportListHandler()" style="width: 100%" height="250" max-height="500">
-        <el-table-column fixed prop="d_id" label="运动编号" width="100" />
-        <el-table-column prop="d_name" label="运动名称" width="200" />
-        <el-table-column prop="d_category" label="运动种类" width="100" />
-        <el-table-column prop="d_cuisine" label="菜系" width="100" />
-        <el-table-column prop="d_calories" label="热量" width="100" />
-        <el-table-column prop="d_price" label="价格" width="100" />
-        <el-table-column fixed="right" label="操作" width="100" slot-scope="scope">
+    <el-table :data="getSportListHandler()" style="width: 100%" height="250" max-height="500" >
+        <el-table-column fixed prop="d_id" label="运动编号" min-width="10%" align="center"/>
+        <el-table-column prop="d_name" label="运动名称" min-width="20%" align="center"/>
+        <el-table-column prop="d_category" label="运动种类" min-width="10%" align="center"/>
+        <el-table-column prop="d_cuisine" label="菜系" min-width="10%" align="center"/>
+        <el-table-column prop="d_calories" label="热量" min-width="10%" align="center"/>
+        <el-table-column prop="d_price" label="价格" min-width="10%" align="center"/>
+        <el-table-column fixed="right" label="操作" min-width="10%" slot-scope="scope" align="center">
             <template v-slot="scope">
                 <el-button link type="primary" size="small" @click="selectSport(scope.row)" v-show="isChoose">选择运动</el-button>
                 <el-button link type="primary" size="small" @click="deleteSport(scope.row)" v-show="isChosen">删除运动</el-button>

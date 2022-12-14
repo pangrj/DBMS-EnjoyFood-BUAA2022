@@ -1,19 +1,29 @@
 <script>
 import { useRoute } from "vue-router";
-
 import {ref} from 'vue'
-const userName = ref('')
-const passWord = ref('')
+import { ElMessageBox } from 'element-plus'
 
 import ChooseView from './ChoosePage/ChooseView.vue';
 import ChosenView from './ChoosePage/ChosenView.vue';
 
 export default {
     setup(){
+        const userName = ref('')
+        const passWord = ref('')
+
+        // 抽屉相关
+        const drawer2 = ref(false)
+        const direction = ref('rtl')
+        const radio1 = ref('Option 1')
         let route = useRoute()
         userName.value = route.query.userName;
         console.log(userName);
-        return {userName};
+        return {
+            userName,
+            drawer2,
+            direction,
+            radio1
+        };
     },
     components: {
         ChooseView,
@@ -34,118 +44,41 @@ export default {
         }
     },
     methods:{
-        toggleSearch(){
-            this.deepSearch = !this.deepSearch
+        // toggleSearch(){
+        //     this.deepSearch = !this.deepSearch
+        // },
+        // ClickUserFilled(){
+        //     console.log(userName);
+        //     this.$router.push({
+        //         path: '/InfomationPage',
+        //         query: {
+        //             userName: userName.value,
+        //         },
+        //     });
+        // },
+        handleClose(done) {
+            this.$confirm('确认关闭？')
+            .then(_ => {
+                done();
+            })
+            .catch(_ => {});
         },
-        ClickUserFilled(){
-            console.log(userName);
-            this.$router.push({
-                path: '/InfomationPage',
-                query: {
-                    userName: userName.value,
-                },
-            });
+        cancelClick() {
+            drawer2.value = false
+        },
+        confirmClick() {
+            ElMessageBox.confirm(`Are you confirm to chose ${radio1.value} ?`)
+                .then(() => {
+                    drawer2.value = false
+                })
+                .catch(() => {
+                    // catch error
+                })
         }
     }
 }
 </script>
 
-<!-- <template>
-    <div>
-    <el-header class = "header">
-        <h2 class = "name">{{userName}}</h2>
-        <el-button plain @click="ClickUserFilled()">
-            <el-icon><UserFilled /></el-icon>
-            Your Profile
-        </el-button>
-    </el-header>
-    <el-main>
-    <div class="ChoosePage">
-    <div class="leftTop">
-        <el-input 
-            class = "common"
-            v-if="!deepSearch"
-            v-model="searchRequset"
-            size="large"
-            placeholder="Search">
-            <template #suffix>
-                <el-icon><Search /></el-icon>
-            </template>
-        </el-input> 
-
-        <template calss="deep" v-if="deepSearch">
-            <el-form :model="deepRequest" label-width="120px">
-                <el-form-item label="Category">
-                    <el-input v-model="deepRequest.category" placeholder="please write category"
-                        :style="{width: '100%'}" />
-                </el-form-item>
-                <el-form-item label="cuisine">
-                    <el-select v-model="deepRequest.cuisine" placeholder="please select the cuisine">
-                        <el-option label="sweet" value="One" />
-                        <el-option label="soul" value="Two" />
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="calories">
-                    <el-input v-model="deepRequest.caloriesLeast" placeholder="least num of calories" 
-                        :style="{width: '30%'}" />
-                    <el-col :span="2" class="text-center">
-                        <span class="text-gray-500">-</span>
-                    </el-col>
-                    <el-input v-model="deepRequest.caloriesMost" placeholder="most num of calories" 
-                        :style="{width: '30%'}" />
-                </el-form-item>
-                <el-form-item label="price">
-                    <el-input v-model="deepRequest.priceLeast" placeholder="least num of price" 
-                        :style="{width: '30%'}" />
-                    <el-col :span="2" class="text-center">
-                        <span class="text-gray-500">-</span>
-                    </el-col>
-                    <el-input v-model="deepRequest.priceMost" placeholder="most num of price" 
-                        :style="{width: '30%'}" />
-                </el-form-item>
-            </el-form>
-        </template>
-    </div>
-    <div class="rightTop"> 
-        <el-button v-if="deepSearch" @click="toggleSearch" type="primary" plain>common search</el-button>
-        <el-button v-if="!deepSearch" @click="toggleSearch" type="primary" plain>deep search</el-button>
-    </div>
-    <div class="chooseBox">
-    </div>
-    </div>
-    </el-main>
-    </div>
-</template>
-
-<style scoped>
-.header{
-    background-color: rgba(0,50,255,0.6);
-}
-.name{
-    align-content: left;
-}
-.ChoosePage {
-  width: 100%;
-  height: 22px;
-  display: flex;
-  flex-direction: row;
-  padding-top: 3%;
-}
-.ChoosePage > div {
-  height: 22px;
-  flex: 1;
-}
-.common{
-    padding-left: 100px;
-    width: 100%;
-}
-.deep{
-    width: 100%;
-    border: 1px solid #409eff;
-    padding-left: 250px;
-    padding-top: 100px;
-}
-</style> -->
 <template>
     <div class="ChoosePage">
         <Header v-bind:userName="userName"/>
@@ -154,38 +87,31 @@ export default {
         Enjoy Your Life
     </el-header>
       <el-main>
-        <el-row :gutter="20" class="choose_title">
-            <!-- 左侧的选择栏 -->
-            <el-col :span="14"><div class="grid-content ep-bg-purple"> 
-                选择内容
-            </div></el-col>
-            <!-- 右侧的已选栏 -->
-            <el-col :span="10"><div class="grid-content ep-bg-purple">
-                已选内容
-            </div></el-col>
-        </el-row>
+        <el-row class="choose_title" justify="center"><div>
+            可选列表
+        </div></el-row>
     
-        <el-row :gutter="20" class="content">
+        <el-row class="content">
             <!-- 左侧的选择栏 -->
-            <el-col :span="14">
+            <el-col :span="24">
                 <div class="grid-content bg-purple"> 
-                <ChooseView></ChooseView>
+                    <ChooseView></ChooseView>
                 </div>
             </el-col>
             <!-- 右侧的已选栏 -->
-            <el-col :span="10">
+            <!-- <el-col :span="10">
                 <div class="grid-content bg-purple">
                 <ChosenView></ChosenView>
                 </div>
-            </el-col>
+            </el-col> -->
         </el-row>
 
         <el-row :gutter="20" class="conclusion">
             <!-- 下方的总结栏 -->
             <el-col :span="15">
                 <el-descriptions title="计划总结" direction="vertical" :column="2" :size="size" border>
-                    <el-descriptions-item label="摄入能量">500</el-descriptions-item>
-                    <el-descriptions-item label="消耗能量">100</el-descriptions-item>
+                    <el-descriptions-item label="摄入能量" align="center">500</el-descriptions-item>
+                    <el-descriptions-item label="消耗能量" align="center">100</el-descriptions-item>
                 </el-descriptions>
             </el-col>
             <el-col :span="8">
@@ -195,8 +121,27 @@ export default {
             </el-col>
         </el-row>
         <p></p>
-        <el-button type="success">确认提交</el-button>
-        
+        <!-- 已选按钮 -->
+        <el-button type="primary" @click="drawer2 = true">
+            已选内容
+        </el-button>
+        <!-- 抽屉内容(弹出方向：ltr,rtl,ttb,btt) -->
+        <el-drawer v-model="drawer2" direction="ltr" size="50%"> 
+            <template #title>
+                <h4 style="margin-left:16px; text-align: left; font-size: larger; color:antiquewhite;">已选内容</h4>
+            </template>
+            <template #default>
+                <div>
+                    <ChosenView></ChosenView>
+                </div>
+            </template>
+            <template #footer>
+                <div style="flex: auto">
+                    <!-- <el-button @click="cancelClick">关闭</el-button> -->
+                    <el-button type="primary" @click="confirmClick">确认提交</el-button>
+                </div>
+            </template>
+        </el-drawer>
 
       </el-main>
     </el-container>
@@ -209,6 +154,7 @@ export default {
 }
 .content {
   height: 300px;
+  text-align: center;
 }
 
 .ChoosePage{
@@ -219,7 +165,28 @@ export default {
 .choose_title{
     font-size: large;
     font-weight:bold;
-    color: antiquewhite;
+    color:antiquewhite;
+    text-align: center;
+    margin-bottom: 10px;
+    
+}
+
+body {
+    margin: 0 !important;
+}
+
+::v-deep .el-drawer__header {
+    margin-bottom: 0;
+    padding-top: 0;
+    background-color:cadetblue;
+}
+
+::v-deep .el-drawer__body {
+    padding: 10px 10px;
+}
+
+::v-deep .el-drawer__close-btn {
+    background-color: coral;
 }
 
 .el-row {
@@ -249,14 +216,15 @@ export default {
     line-height: 200px;
   }
   
-  .el-main {
+ .el-main {
     /* background-color: #E9EEF3; */
     color: #333;
     text-align: center;
     /* line-height: 160px; */
-    height: 600px;
+    height: 650px;
+    padding-top: 5 !important;
   }
-  
+
   body > .el-container {
     margin-bottom: 40px;
   }
