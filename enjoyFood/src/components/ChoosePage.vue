@@ -19,7 +19,7 @@ export default {
         // userName.value = route.query.userName;
         // console.log(userName);
         return {
-            // userName,
+            //userName,
             drawer2,
             direction,
             radio1
@@ -82,7 +82,6 @@ export default {
 <template>
   <div class="ChoosePage">
     <el-container>
-        <Header></Header>
       <el-header>
         Enjoy Your Life
       </el-header>
@@ -94,9 +93,7 @@ export default {
         <!-- 列表栏 -->
         <el-row class="content">
             <el-col :span="24">
-                <div class="grid-content bg-purple"> 
                     <ChooseView></ChooseView>
-                </div>
             </el-col>
         </el-row>
         
@@ -149,9 +146,9 @@ export default {
   height: 30px;
 }
 .content {
-  height: 300px;
+  height: 400px;
   text-align: center;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 .ChoosePage{
@@ -187,7 +184,7 @@ body {
 }
 
 .el-row {
-   margin-bottom: 20px;
+   /* margin-bottom: 20px; */
 }
 .el-col {
   border-radius: 4px;

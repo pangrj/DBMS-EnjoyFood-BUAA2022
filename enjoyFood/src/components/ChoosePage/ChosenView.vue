@@ -29,3 +29,36 @@ export default{
 }
 </script>
 
+<style scoped>
+.el-button {
+    text-align: left;
+}
+
+:deep(.search)  {
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+:deep(.el-input__wrapper){
+    background-color: rgba(239, 231, 224, 0.7);
+}
+
+:deep(.el-input__inner) {
+    color: black;
+}
+</style>
+
+<style scoped>
+:deep(.search)  {
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+:deep(.el-input__wrapper){
+    background-color: rgba(239, 231, 224, 0.7);
+}
+
+:deep(.el-input__inner) {
+    color: black;
+}
+</style>
