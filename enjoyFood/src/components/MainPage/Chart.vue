@@ -17,7 +17,7 @@ export default({
 				this.charts.setOption({
                     title:{
                         left:'3%',
-                        top:'5%',
+                        top:'4%',
                         text:"weight flows",//标题文本，支持使用 \n 换行。
                     },
 					tooltip: {
@@ -26,11 +26,11 @@ export default({
 					legend: {
                         align:'right',//文字在前图标在后
                         left:'3%',
-                        top:'15%',
+                        top:'5%',
 						data: ['week']
 					},
 					grid: {
-                        top:'30%',
+                        top:'15%',
 						left: '5%',
 						right: '5%',
 						bottom: '5%',
@@ -102,7 +102,7 @@ export default({
 
 <template>
     <div>
-        <div id="main" style="width: 100%;height: 520px;background:#fff"></div>
+        <div id="main" style="width: 100%;height: 500px;background:#fff"></div>
     </div>
 </template>
 

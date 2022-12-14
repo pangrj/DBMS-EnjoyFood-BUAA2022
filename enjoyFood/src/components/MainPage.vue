@@ -30,7 +30,14 @@ export default {
     <div class="MainPage">
         <el-container>
         <el-header>
-            <Chart />
+            <el-container>
+                <el-aside width="50%">
+                    
+                </el-aside>
+                <el-main>
+                    <Chart />
+                </el-main>
+            </el-container>
         </el-header>
         <el-main>
             Main
