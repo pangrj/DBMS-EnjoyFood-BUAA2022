@@ -9,6 +9,7 @@ import Header from "./Header.vue"
 import RecommendCard from "./MainPage/RecommendCard.vue"
 import Chart from "./MainPage/Chart.vue"
 import Graph from './MainPage/Graph.vue';
+import HistoryPlans from './MainPage/HistoryPlans.vue'
 
 export default {
     setup(){
@@ -22,6 +23,7 @@ export default {
         RecommendCard,
         Chart,
         Graph,
+        HistoryPlans,
     },
 }
 </script>
@@ -31,24 +33,21 @@ export default {
     <Header v-bind:userName="userName"/>
     <div class="MainPage">
         <el-container>
-        <el-header>
+        <el-aside width="70%">
             <el-container>
-                <el-aside width="50%">
+                <el-header>
                     <div title='chart'><Chart /></div>
-                    <span>123</span>
-                </el-aside>
+                </el-header>
                 <el-main>
-                    <div title='graph'><Graph /></div>
+                    <div class='cards'>
+                        <RecommendCard />
+                    </div>
                 </el-main>
             </el-container>
-        </el-header>
+        </el-aside>
         <el-main>
-            Main
-            <RecommendCard />
+            <HistoryPlans class='myplans' />
         </el-main>
-        <el-footer>
-            Footer
-        </el-footer>
         </el-container>
     </div>
 </div>
@@ -74,5 +73,11 @@ Chart{
 Graph{
     size: 50%,
     height 200px;
+}
+.myplans{
+    margin-top: 15%;
+}
+.cards{
+    margin-left: 5%;
 }
 </style>

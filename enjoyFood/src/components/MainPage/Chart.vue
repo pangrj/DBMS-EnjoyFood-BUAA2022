@@ -104,7 +104,7 @@ export default({
                 // 绘制图表
                 myChart.setOption({
                 title: {
-                    text: '调查问卷详情',
+                    text: '卡路里含量',
                     x:'center'
                 },
                 tooltip: {
@@ -118,7 +118,7 @@ export default({
                 },
                 series: [
                     {
-                    name: "选项内容",
+                    name: "部分",
                     type: "pie",
                     radius: "55%",
                     center: ["50%", "50%"],//位置
@@ -150,8 +150,8 @@ export default({
 </script>
 
 <template>
-<div title='body'>
-    <el-container>
+<div>
+    <el-container class = 'body'>
         <el-aside width="50%">
             <div id="lineChart" style="width;100%; height: 300px;"></div>
         </el-aside>
@@ -164,6 +164,6 @@ export default({
 
 <style scoped>
 .body{
-    padding-top: 5%;
+    padding-top: 7%;
 }
 </style>

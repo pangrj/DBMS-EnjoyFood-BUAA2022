@@ -1,0 +1,54 @@
+<script>
+import { ref } from 'vue'
+export default {
+  data() {
+    return {
+    };
+  },
+}
+</script>
+
+<template>
+<div class='body'>
+    <el-timeline>
+        <el-timeline-item timestamp="2018/4/12" placement="top">
+            <el-card>
+                <h4>Update Github template</h4>
+                <p>Tom committed 2018/4/12 20:46</p>
+            </el-card>
+        </el-timeline-item>
+        <el-timeline-item timestamp="2018/4/3" placement="top">
+            <el-card>
+                <h4>Update Github template</h4>
+                <p>Tom committed 2018/4/3 20:46</p>
+            </el-card>
+        </el-timeline-item>
+        <el-timeline-item timestamp="2018/4/2" placement="top">
+            <el-card>
+                <h4>Update Github template</h4>
+                <p>Tom committed 2018/4/2 20:46</p>
+            </el-card>
+        </el-timeline-item>
+        <el-timeline-item timestamp="2018/4/2" placement="top">
+            <el-card>
+                <h4>Update Github template</h4>
+                <p>Tom committed 2018/4/2 20:46</p>
+            </el-card>
+        </el-timeline-item>
+    </el-timeline>
+</div>
+</template>
+
+<style scoped>
+.scrollbar-demo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  margin: 10px;
+  text-align: center;
+  border-radius: 4px;
+  background: var(--el-color-primary-light-9);
+  color: var(--el-color-primary);
+}
+</style>
