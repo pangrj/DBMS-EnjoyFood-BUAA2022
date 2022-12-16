@@ -40,4 +40,7 @@ export default {
 </template>
 
 <style scoped>
+h4{
+    color: black;
+}
 </style>
