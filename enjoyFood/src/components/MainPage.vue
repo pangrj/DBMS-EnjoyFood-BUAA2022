@@ -46,7 +46,7 @@ export default {
             </el-container>
         </el-aside>
         <el-main>
-            <HistoryPlans class='myplans' />
+            <HistoryPlans class='myplans' v-bind:userName="userName"/>
         </el-main>
         </el-container>
     </div>
@@ -81,3 +81,9 @@ Graph{
     margin-left: 5%;
 }
 </style>
+
+12.21开始
+1. 设计文档
+2. 数据、图片搜集
+3. 前端优化
+4. 测试

@@ -1,5 +1,6 @@
 <script>
 import { reactive } from "vue"
+import Header from "./Header.vue"
 
 const clickoutside = {
     // 初始化指令

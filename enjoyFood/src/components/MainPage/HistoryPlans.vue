@@ -1,46 +1,133 @@
 <script>
 import { ref } from 'vue'
 export default {
+  props: {
+    userName: String,
+  },
+  setup(){
+    const centerDialogVisible = ref(false)
+    const plans = [{p_name:"plan1 GOGOGO", p_time:"2022/10/5"},
+        {p_name:"plan2 KFC", p_time:"2022/11/15"},
+        {p_name:"plan3 Crazy", p_time:"2022/12/1"},
+        {p_name:"plan4 Vme50", p_time:"2022/12/3"}];
+
+    //initInfor();
+    return {plans, centerDialogVisible};
+  },
   data() {
     return {
     };
   },
+  methods: {
+    async initInfor(){
+            const response = await request.post(
+                '/user/getPlans/',
+                this.userName,
+            );
+            console.log(response)
+            plans = response.p_Array
+    },
+    toPlanPage(pid){
+        this.$router.push({
+                path: '/PlanPage',
+                query: {
+                    planId: pid,
+                },
+            });    
+    },
+  }
 }
 </script>
 
 <template>
 <div class='body'>
     <el-timeline>
-        <el-timeline-item timestamp="2018/4/12" placement="top">
+        <el-timeline-item center v-bind:timestamp="plans[0].p_time" placement="top">
             <el-card>
-                <h4>Update Github template</h4>
-                <p>Tom committed 2018/4/12 20:46</p>
+                <h4>{{plans[0].p_name}}</h4>
+                <p>{{userName}} published at {{plans[0].p_time}}</p>
             </el-card>
         </el-timeline-item>
-        <el-timeline-item timestamp="2018/4/3" placement="top">
+        <el-timeline-item center v-bind:timestamp="plans[1].p_time" placement="top">
             <el-card>
-                <h4>Update Github template</h4>
-                <p>Tom committed 2018/4/3 20:46</p>
+                <h4>{{plans[1].p_name}}</h4>
+                <p>{{userName}} published at {{plans[1].p_time}}</p>
             </el-card>
         </el-timeline-item>
-        <el-timeline-item timestamp="2018/4/2" placement="top">
+        <el-timeline-item center v-bind:timestamp="plans[2].p_time" placement="top">
             <el-card>
-                <h4>Update Github template</h4>
-                <p>Tom committed 2018/4/2 20:46</p>
+                <h4>{{plans[2].p_name}}</h4>
+                <p>{{userName}} published at {{plans[2].p_time}}</p>
             </el-card>
         </el-timeline-item>
-        <el-timeline-item timestamp="2018/4/2" placement="top">
+        <el-timeline-item center v-bind:timestamp="plans[3].p_time" placement="top">
             <el-card>
-                <h4>Update Github template</h4>
-                <p>Tom committed 2018/4/2 20:46</p>
+                <h4>{{plans[3].p_name}}</h4>
+                <p>{{userName}} published at {{plans[3].p_time}}</p>
             </el-card>
         </el-timeline-item>
     </el-timeline>
+    <div class="more">
+        <el-button type="success" circle @click="centerDialogVisible = true" title="more">
+            <template #icon><el-icon><DArrowRight /></el-icon></template>
+        </el-button>
+    </div>
+
+    <el-dialog
+        v-model="centerDialogVisible"
+        title="Warning"
+        width="30%"
+        align-center
+    >
+        <el-timeline>
+            <el-timeline-item center v-for="plan in plans" :key="plan.p_id"
+                v-bind:timestamp="plan.p_time"  placement="top"
+            >
+                <el-card>
+                    <div class="bottom">
+                        <h4 class="title">{{plan.p_name}}</h4>
+                        <el-button text class="button" @click="toPlanPage(plan.p_id)">
+                            moreInfo
+                        </el-button>
+                    </div>
+                    <p>{{userName}} published at {{plan.p_time}}</p>
+                </el-card>
+            </el-timeline-item>
+        </el-timeline>
+        <template #footer>
+          <span class="dialog-footer">
+            <el-button type="primary" @click="centerDialogVisible = false">
+              Confirm
+         </el-button>
+         </span>
+        </template>
+    </el-dialog>
 </div>
 </template>
 
 <style scoped>
 h4{
+    color: black;
+}
+.dialog-footer button:first-child {
+  margin-right: 10px;
+}
+.more{
+    float: right;
+    padding-right: 15%;
+}
+.body{
+    padding-right: 6%;
+}
+.bottom {
+  margin-top: 13px;
+  line-height: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title{
+    padding-left: 10%;
     color: black;
 }
 </style>
