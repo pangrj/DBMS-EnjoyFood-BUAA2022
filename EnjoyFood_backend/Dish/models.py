@@ -1,5 +1,7 @@
 from django.db import models
 
+from Restaurant.models import Restaurant
+
 
 # Create your models here.
 class Dish(models.Model):
@@ -9,3 +11,4 @@ class Dish(models.Model):
     d_cuisine = models.CharField(max_length=30, null=True)
     d_calories = models.IntegerField(null=False)
     d_price = models.IntegerField(null=False)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, null=True)

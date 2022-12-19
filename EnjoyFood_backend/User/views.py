@@ -73,31 +73,44 @@ def login(request):
 def modify_infor(request):
     ret = RET.get_instance()
     if request.method == 'POST':
+        print(1)
         u_avatar = request.FILES.get('u_avatar')
+        print(u_avatar)
         # avatar_name = request.POST.get('avatar_name')
         data = request.POST
-
+        print(3)
         u_name = data.get('u_name')
+        print(u_name)
         u_password = data.get('u_password')
-
+        print(u_password)
         u_height = data.get('u_height')
+        print(u_height)
         u_weight = data.get('u_weight')
+        print(u_weight)
         u_age = data.get('u_age')
+        print(u_age)
         u_position = data.get('u_position')
+        print(u_position)
         u_gender = data.get('u_gender')
+        print(u_gender)
         u_email = data.get('u_email')
         # u_avatar = data.get('u_photo')
-
+        print(u_email)
         user_list = User.objects.filter(u_name__exact=u_name)
+        print(12)
         if len(user_list) == 0:
+            print(13)
             ret.set_code(400)
             ret.set_message("Did not Find the User!")
         else:
+            print(14)
             user = user_list[0]
             if len(u_password) == 0:
+                print(15)
                 ret.set_code(401)
                 ret.set_message("Please Enter A correct Password!")
             else:
+                print(16)
                 user.set_u_password(u_password)
                 user.set_u_position(u_position)
                 user.set_u_gender(u_gender)
@@ -106,7 +119,10 @@ def modify_infor(request):
                 user.set_u_height(u_height)
                 user.set_u_weight(u_weight)
                 user.u_age = u_age
+                print(user)
+                print(17)
                 user.save()
+                print(18)
                 ret.set_code(200)
                 ret.set_message("Modify Success!")
                 avatar_addr = user.get_avatar_url()
