@@ -6,6 +6,8 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import router from './router'
 import axios from 'axios'
 import store from './store'
+import V3Scroll from 'v3-scroll'
+import "v3-scroll/dist/library.mjs.css";
 
 import App from './App.vue'
 
@@ -19,6 +21,7 @@ app.config.globalProperties.$https = axios
 app.use(ElementPlus)
 app.use(router)
 app.use(store)
+app.use(V3Scroll)
 app.mount('#app')
 
 // axios.defaults.baseURL = 'http://0.0.0.0:8000';
