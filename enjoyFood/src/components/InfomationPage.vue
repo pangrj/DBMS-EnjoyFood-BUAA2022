@@ -15,8 +15,6 @@ export default {
         
         const ava_path = new URL(`./src/assets/avatar.jpg`, import.meta.url).href
 
-        
-
         const dialogVisible = ref(false);
         const information = reactive( {
                 u_name: userName,
