@@ -1,4 +1,5 @@
 <script>
+import { useRoute } from "vue-router";
 import {ref, reactive, onMounted} from 'vue'
 import { UploadFilled } from '@element-plus/icons-vue'
 import request from '../https/axios.js'
@@ -171,7 +172,7 @@ const handleClose = () => {
     </div>
     </el-header>
     <el-container class = "down">
-    <el-aside width="25%">
+    <el-aside width="20%">
     </el-aside>
 
     <el-main>
@@ -210,7 +211,7 @@ const handleClose = () => {
             </el-collapse>
         </div>
     </el-main>
-    <el-aside width="25%">
+    <el-aside width="20%">
     </el-aside>
     </el-container>
     </el-container>
@@ -295,7 +296,7 @@ const handleClose = () => {
 <style>
 .InfomationPage{
     background-color: #F8F8F8;
-    background: url("./src/assets/info3.jpg");
+    background: url("./src/assets/info4.jpg");
     padding-top: 3%;
     background-size: cover;
     opacity: 0.75;

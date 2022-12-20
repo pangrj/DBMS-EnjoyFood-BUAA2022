@@ -1,6 +1,7 @@
 <script>
-import { reactive } from "vue"
+import {ref, reactive, onMounted} from 'vue'
 import {useRoute} from 'vue-router'
+import request from '../https/axios.js'
 import Comments from './PlanPage/Comments.vue';
 import Header from "./Header.vue"
 
@@ -21,6 +22,37 @@ export default {
             p_name: "测试计划",
             p_description: "",
         });
+
+        // init:
+        function init() {
+            console.log("init")
+            request({
+                method: 'POST',
+                url: '/user/getInfor/',
+                data: {   
+                    p_id: planId,
+                    }
+                }
+            ).then(function(response) {
+                console.log("reponse: ")
+                console.log(response);
+                plan = response.data.code;
+                console.log("plan: ")
+                console.log(plan)
+                const foods = response.data.dishes;
+                const sports = response.data.exercises;
+                console.log(foods);
+                console.log(sports);
+            }).catch(function(error) {
+                console.log("error");
+                console.log(error);
+            })
+        };
+
+        onMounted(() => {
+            init();
+        });
+        
         const foods = [{id:'1'}, {id:'2'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}];
         const sports = [{id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}];
         const username = "pangrj";
@@ -32,15 +64,6 @@ export default {
         }
     },
     methods: {
-        async initInfor(){
-            const response = await request.post(
-                '/plan/getInfor/',
-                this.planId,
-            );
-            console.log(response)
-            this.plan = response.plan;
-            console(this.plan)
-        },  
     }
 }
 
@@ -76,6 +99,7 @@ export default {
                 </el-scrollbar>
             </div>
             <div class="comments">
+                <h2> comments </h2>
                 <comments></comments>
             </div>
         </el-main>
@@ -106,6 +130,6 @@ export default {
   color: var(--el-color-danger);
 }
 .comments{
-    padding-top: 8%;
+    padding-top: 3%;
 }
 </style>

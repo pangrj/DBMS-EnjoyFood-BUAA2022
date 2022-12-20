@@ -5,6 +5,7 @@ import { ElMessageBox } from 'element-plus'
 
 import ChooseView from './ChoosePage/ChooseView.vue';
 import ChosenView from './ChoosePage/ChosenView.vue';
+import Header from './Header.vue';
 
 export default {
     setup(){
@@ -15,11 +16,11 @@ export default {
         const drawer2 = ref(false)
         const direction = ref('rtl')
         const radio1 = ref('Option 1')
-        // let route = useRoute()
-        // userName.value = route.query.userName;
-        // console.log(userName);
+         let route = useRoute()
+         userName.value = route.query.userName;
+         console.log(userName);
         return {
-            //userName,
+            userName,
             drawer2,
             direction,
             radio1
@@ -27,7 +28,8 @@ export default {
     },
     components: {
         ChooseView,
-        ChosenView
+        ChosenView,
+        Header,
     },
     data(){
         return {
@@ -80,6 +82,8 @@ export default {
 </script>
 
 <template>
+<div>
+ <Header v-bind:userName="userName"/>
   <div class="ChoosePage">
     <el-container>
       <el-header>
@@ -138,6 +142,7 @@ export default {
 
       </el-main>
     </el-container>
+  </div>
   </div>
 </template>
 
