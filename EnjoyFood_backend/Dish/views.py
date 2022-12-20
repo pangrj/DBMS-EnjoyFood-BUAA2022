@@ -12,6 +12,26 @@ from util import RET
 
 
 # Create your views here.
+
+def showDishMenu(request):
+    ret = RET.get_instance()
+    if request.method == 'POST':
+        data = json.loads(request.body)
+
+        u_name = data.get('u_name')
+
+        dishes = Dish.objects.all()
+        retDishes = serializers.serialize('json', list(dishes))
+
+        ret.code = 200
+        ret.message = "Show Success!"
+        ret.load_data({'dishes': retDishes})
+        return JsonResponse(ret.json_type())
+    else:
+        ret.Http_error()
+        return JsonResponse(ret.json_type())
+
+
 def showNotSelectMenu(request):
     ret = RET.get_instance()
     if request.method == 'POST':

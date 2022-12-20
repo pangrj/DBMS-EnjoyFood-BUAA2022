@@ -3,15 +3,13 @@ import json
 from django.core import serializers
 from django.http import JsonResponse
 
-from Dish.models import Dish
-from Exercise.models import Exercise
 from Plan.models import *
 from User.models import User
 from util import RET
 
 
 # Create your views here.
-def get_plan_by_u_id(request):
+def get_plan_by_u_name(request):
     ret = RET.get_instance()
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -91,6 +89,45 @@ def add_plan(request):
         else:
             ret.set_code(400)
             ret.set_message('No Such Student')
+        return JsonResponse(ret.json_type())
+    else:
+        ret.Http_error()
+        return JsonResponse(ret.json_type())
+
+
+def get_latest_plan_calories(request):
+    ret = RET.get_instance()
+    if request.method == 'POST':
+        data = json.loads(request.body)
+
+        u_name = data.get('u_name')
+
+        plan_list = Plan.objects.filter(user__u_name=u_name).order_by('-pk', 'p_time')
+        calories_in = []
+        calories_minus = []
+        time = []
+        inClas = 0
+        outClas = 0
+        num = 0
+        for plan in plan_list:
+            num += 1
+            calories_in.append(plan.calories_in)
+            inClas += plan.calories_in
+            outClas += plan.calories_consume
+            calories_minus.append((plan.calories_in - plan.calories_consume))
+            time.append(plan.p_time)
+
+        # ret_plan = serializers.serialize('json', list(plan_list))
+
+        ret.set_code(200)
+        ret.set_message('get calories success')
+        ret.load_data({'num': num})
+        ret.load_data({'time': time})
+        ret.load_data({'cals_in_list': calories_in})
+        ret.load_data({'cals_minus_list': calories_minus})
+
+        ret.load_data({'inClas': inClas})
+        ret.load_data({'outClas': outClas})
         return JsonResponse(ret.json_type())
     else:
         ret.Http_error()
