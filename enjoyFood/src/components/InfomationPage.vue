@@ -30,7 +30,7 @@ export default {
             });
 
         // init:
-        /*function init() {
+        function init() {
             request({
                 method: 'POST',
                 url: '/user/getInfor/',
@@ -54,7 +54,7 @@ export default {
 
         onMounted(() => {
             init();
-        });*/
+        });
 
         const settings = reactive( {
             NightMode: false, 
@@ -103,15 +103,6 @@ export default {
                 formData);
             console.log(res);  
             this.ava_path = res.img_path;
-            /*const {data:res} = await request.post(
-                '/student/modify',
-                {   s_id: information.id,
-                    s_passWord: information.passWord,
-                    s_name: information.username,
-                    s_dorm: '',
-                    s_gender: '',
-                }
-            )*/
         },
         getImageFile:function(e){
             console.log("in getImgFunc!")

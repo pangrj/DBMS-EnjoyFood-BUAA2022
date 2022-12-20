@@ -1,17 +1,30 @@
 <script>
 import * as echarts from 'echarts'
+import { getCurrentInstance } from "vue";
+import {ref, reactive, onMounted} from 'vue'
 
 export default({
-    setup() {
-        
+    props: {
+        userName: String,
+    },
+    setup(props) {
     },
     data(){
         return {
-            lineCharts: '',
-            lineOpinionData: ["60", "61", "61", "62", "61", "59", "60"],
+            lineTimeData: [], 
+            lineOpinionData: [],
         }
     },
     methods: {
+        async initInfor(){
+            /*const response = await request.post(
+                '/user/getPlanCal/',
+                this.userName,
+            );
+            console.log(response);*/
+            this.lineTimeData = ["11.5", "11.21", "11.23", "11.30", "12.5", "12.6"]
+            this.lineOpinionData = ["100", "80", "10", "-50", "-30", "70"]
+        },
         drawLine(id) {
 				this.lineCharts = echarts.init(document.getElementById(id))
 				this.lineCharts.setOption({
@@ -48,7 +61,7 @@ export default({
                         axisTick:{
                             alignWithLabel:true //保证刻度线和标签对齐
                         },
-                        data: ["周一","周二","周三","周四","周五","周六","周日"] //x坐标的名称
+                        data: this.lineTimeData //x坐标的名称
 					
 					},
 					yAxis: {
@@ -137,6 +150,7 @@ export default({
         },
 		},
         mounted(){
+            this.initInfor();
             this.$nextTick(function() {
 				this.drawLine('lineChart');
                 setTimeout(() => {

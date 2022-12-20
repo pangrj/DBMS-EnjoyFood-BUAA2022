@@ -29,17 +29,6 @@ const clickoutside = {
 export default {
     name:'ArticleComment',
     setup() {
-        const plan = reactive({
-            p_id: "123321",
-            u_id: "123123",
-            p_name: "测试计划",
-            p_description: "",
-        });
-        const foods = [{id:'1'}, {id:'2'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}];
-        const sports = [{id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}];
-        const username = "pangrj";
-        const planUserName = "pangrj";
-        return {plan, foods, sports, username, planUserName}
     },
     data(){
         return{
