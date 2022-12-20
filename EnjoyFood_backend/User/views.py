@@ -77,13 +77,21 @@ def modify_infor(request):
         # avatar_name = request.POST.get('avatar_name')
         data = request.POST
         u_name = data.get('u_name')
+        print(u_name)
         u_password = data.get('u_password')
+        print(u_password )
         u_height = data.get('u_height')
+        print(u_height)
         u_weight = data.get('u_weight')
+        print(u_weight)
         u_age = data.get('u_age')
+        print(u_age)
         u_position = data.get('u_position')
+        print(u_position)
         u_gender = data.get('u_gender')
+        print(u_gender)
         u_email = data.get('u_email')
+        print(u_email)
         # u_avatar = data.get('u_photo')
         user_list = User.objects.filter(u_name__exact=u_name)
         if len(user_list) == 0:
@@ -152,7 +160,7 @@ def get_infor(request):
         if len(user_list) == 1:
             user = user_list[0]
             ret.set_code(200)
-            ret.set_message('get Infor')
+            ret.set_message('get Infor success')
 
             ret.load_data({'u_name': user.get_u_name()})
             ret.load_data({'u_height': user.get_u_height()})

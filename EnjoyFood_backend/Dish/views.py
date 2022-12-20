@@ -76,14 +76,15 @@ def searchByName(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         d_name = data.get("d_name")
-        s_id = data.get('s_id')
-        if len(User.objects.filter(s_id=s_id)) == 0:
+        u_name = data.get('u_name')
+        if len(User.objects.filter(u_name=u_name)) == 0:
             ret.code = 400
             ret.message = 'Enter right student_id!'
             # ret = {'success': False, 'message': "Enter right student_id!"}
             return JsonResponse(ret.json_type())
-        dishes = Dish.objects.exclude(
-            d_id__in=Chose.objects.filter(s_id__exact=s_id).values_list('d_id', flat=True)).filter(d_name=d_name)
+        dishes = Dish.objects.filter(d_name=d_name)
+        # dishes = Dish.objects.exclude(
+        #     d_id__in=Chose.objects.filter(s_id__exact=s_id).values_list('d_id', flat=True)).filter(d_name=d_name)
         # dishes = Dish.objects.filter(d_name=d_name)
         retDishes = serializers.serialize('json', list(dishes))
         if len(dishes) == 0:
@@ -99,4 +100,79 @@ def searchByName(request):
     else:
         ret.Http_error()
         # ret = {'success': False, 'message': "Error HTTP Method!"}
+        return JsonResponse(ret.json_type())
+
+
+def searchByCategory(request):
+    ret = RET.get_instance()
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        d_category = data.get("d_category")
+        u_name = data.get('u_name')
+        dishes = Dish.objects.filter(d_category=d_category)
+        retDishes = serializers.serialize('json', list(dishes))
+        if len(dishes) == 0:
+            ret.code = 401
+            ret.message = 'No Such Dishes Not Selected!'
+            # ret = {'success': False, 'message': "No Such Dishes Not Selected!"}
+        else:
+            ret.code = 200
+            ret.message = 'Find Dishes!'
+            ret.data = {'dishes': retDishes}
+            # ret = {'success': True, 'message': "Find Dishes!", 'dishes': retDishes}
+        return JsonResponse(ret.json_type())
+    else:
+        ret.Http_error()
+        return JsonResponse(ret.json_type())
+
+
+def searchByCalorie(request):
+    ret = RET.get_instance()
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        u_name = data.get('u_name')
+        d_calories = data.get('d_calories')
+
+        dishes = Dish.objects.filter(d_calories__lte=d_calories)
+        retDishes = serializers.serialize('json', list(dishes))
+        ret.code = 200
+        ret.message = 'Find Dishes!'
+        ret.load_data({'dishes': retDishes})
+        return JsonResponse(ret.json_type())
+    else:
+        ret.Http_error()
+        return JsonResponse(ret.json_type())
+
+
+def searchByCircle(request):
+    ret = RET.get_instance()
+    if request.method == 'POST':
+        data = json.loads(request.body)
+
+        c_name = data.get('c_name')
+        dishes = Dish.objects.filter(restaurant__lifeCircle__c_name__in=c_name)
+        retDishes = serializers.serialize('json', list(dishes))
+        ret.code = 200
+        ret.message = 'Find Dishes!'
+        ret.load_data({'dishes': retDishes})
+        return JsonResponse(ret.json_type())
+    else:
+        ret.Http_error()
+        return JsonResponse(ret.json_type())
+
+
+def searchByRestaurant(request):
+    ret = RET.get_instance()
+    if request.method == 'POST':
+        data = json.loads(request.body)
+
+        re_name = data.get('re_name')
+        dishes = Dish.objects.filter(restaurant__re_name=re_name)
+        retDishes = serializers.serialize('json', list(dishes))
+        ret.code = 200
+        ret.message = 'Find Dishes!'
+        ret.load_data({'dishes': retDishes})
+        return JsonResponse(ret.json_type())
+    else:
+        ret.Http_error()
         return JsonResponse(ret.json_type())

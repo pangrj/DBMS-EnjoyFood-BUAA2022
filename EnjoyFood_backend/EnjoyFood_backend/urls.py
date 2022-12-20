@@ -13,9 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls.static import static
 from django.contrib import admin
-from django.template.defaulttags import url
 from django.urls import path, include, re_path
 from django.views.static import serve
 
@@ -36,6 +34,8 @@ urlpatterns = [
     path('select/', include('Chose.urls')),
 
     path('plan/', include('Plan.urls')),
+
+    path('sport/', include('Exercise.urls')),
 
     # path('user/choose/', choose),
     path('admin/', admin.site.urls),
