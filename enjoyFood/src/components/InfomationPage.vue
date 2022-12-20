@@ -1,5 +1,4 @@
 <script>
-import {useRoute} from 'vue-router'
 import {ref, reactive, onMounted} from 'vue'
 import { UploadFilled } from '@element-plus/icons-vue'
 import request from '../https/axios.js'
