@@ -4,6 +4,7 @@ import ChoosePage from './components/ChoosePage.vue'
 import InfomationPage from './components/InfomationPage.vue'
 import SignupPage from './components/SignupPage.vue'
 import MainPage from './components/MainPage.vue'
+import PlanPage from './components/PlanPage.vue'
 
 export default {
   name: 'app',
@@ -13,6 +14,7 @@ export default {
     InfomationPage, 
     SignupPage,
     MainPage,
+    PlanPage,
   },
   data () {
     return {

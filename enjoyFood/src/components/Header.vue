@@ -70,6 +70,7 @@ export default {
     margin-top: 10%;
     font-display: 700;
     height: 64px;
+    position: fixed;
 }
 .ul{
     margin-top: 10%;

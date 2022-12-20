@@ -1,23 +1,37 @@
-<script>
-// import * as echarts from 'echarts'
+<script type="text/javascript">
+import * as echarts from 'echarts'
+import { getCurrentInstance } from "vue";
+import {ref, reactive, onMounted} from 'vue'
 
 export default({
-    setup() {
+    props: {
+        userName: String,
+    },
+    setup(props) {
         
     },
     data(){
         return {
-            charts: '',
-            opinionData: ["60", "61", "61", "62", "61", "59", "60"]
+            lineTimeData: [], 
+            lineOpinionData: [],
         }
     },
     methods: {
+        async initInfor(){
+            /*const response = await request.post(
+                '/user/getPlanCal/',
+                this.userName,
+            );
+            console.log(response);*/
+            this.lineTimeData = ["11.5", "11.21", "11.23", "11.30", "12.5", "12.6"]
+            this.lineOpinionData = ["100", "80", "10", "-50", "-30", "70"]
+        },
         drawLine(id) {
-				this.charts = echarts.init(document.getElementById(id))
-				this.charts.setOption({
+				this.lineCharts = echarts.init(document.getElementById(id))
+				this.lineCharts.setOption({
                     title:{
                         left:'3%',
-                        top:'5%',
+                        top:'4%',
                         text:"weight flows",//标题文本，支持使用 \n 换行。
                     },
 					tooltip: {
@@ -26,11 +40,11 @@ export default({
 					legend: {
                         align:'right',//文字在前图标在后
                         left:'3%',
-                        top:'15%',
+                        top:'5%',
 						data: ['week']
 					},
 					grid: {
-                        top:'30%',
+                        top:'15%',
 						left: '5%',
 						right: '5%',
 						bottom: '5%',
@@ -48,7 +62,7 @@ export default({
                         axisTick:{
                             alignWithLabel:true //保证刻度线和标签对齐
                         },
-                        data: ["周一","周二","周三","周四","周五","周六","周日"] //x坐标的名称
+                        data: this.lineTimeData //x坐标的名称
 					
 					},
 					yAxis: {
@@ -85,30 +99,85 @@ export default({
 							}
                             
                         },
-						data: this.opinionData
+						data: this.lineOpinionData
 					}]
 				})
-			}
-		},
-        mounted(){
-            this.$nextTick(function() {
-				this.drawLine('main')
+			},
+            initData() {
+                this.requested = true;
+                var res = [{value: 200, name: 'takeIn'}, {value: 300, name: 'cost'}, {value: 100, name: 'left'}];
+                var getData = [];
+                for (let i = 0; i < res.length; i++) {
+                var obj = new Object();
+                obj.name = res[i].name;//回答调查问卷的答案
+                obj.value = res[i].value;//回答调查问卷的人数
+                getData[i] = obj;
+                }
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById("sectorChart"));
+                // 绘制图表
+                myChart.setOption({
+                title: {
+                    text: '卡路里含量',
+                    x:'center'
+                },
+                tooltip: {
+                    trigger: "item",
+                    formatter: "{a} <br/>{b} : {c} ({d}%)",
+                },
+                legend: {
+                    orient: 'vertical',
+                    bottom: 'bottom',
+                    data: getData
+                },
+                series: [
+                    {
+                    name: "部分",
+                    type: "pie",
+                    radius: "55%",
+                    center: ["50%", "50%"],//位置
+                    data: getData,
+                    itemStyle: {
+                        emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: "rgba(0, 0, 0, 0.5)",
+                    },
+                },
+                },
+            ],
+            });
+        this.requested = false;
+        },
+	},
+    mounted(){
+        this.initInfor();
+        this.$nextTick(function() {
+		this.drawLine('lineChart');
+        setTimeout(() => {
+                this.initData();
+                }, 200);
 			})
         }
-
 })
 
 </script>
 
 <template>
-    <div>
-        <div id="main" style="width: 100%;height: 520px;background:#fff"></div>
-    </div>
+<div>
+    <el-container class = 'body'>
+        <el-aside width="50%">
+            <div id="lineChart" style="width;100%; height: 300px;"></div>
+        </el-aside>
+        <el-main>
+            <div id="sectorChart" style="width:100%; height: 300px;"></div>
+        </el-main>
+    </el-container>
+</div>
 </template>
 
 <style scoped>
-.main{
-    padding-top: 5%;
-    size: 50%;
+.body{
+    padding-top: 7%;
 }
 </style>

@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-p)#6e)&%xnv%j06ivlbrla)dprh6k*15_oz2+0*uz3fv3hjofn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']  # 允许全部IP访问项目
 # ALLOWED_HOSTS = []
@@ -33,6 +33,12 @@ INSTALLED_APPS = [
     'User',
     'Dish',
     'Chose',
+    'Restaurant',
+    'LifeCircle',
+    'Exercise',
+    'ExerArea',
+    'Plan',
+    'Comment',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -133,5 +139,3 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = (
     os.path.join(BASE_DIR, 'media')
 )
-
-

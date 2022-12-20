@@ -42,9 +42,7 @@ export default {
             });
         },
         onClickSignUp(){
-            this.$router.push({
-                path: '/SignupPage',
-            });
+            this.inputMode = 'Signup';
         }
     }
 }
@@ -59,7 +57,6 @@ export default {
                 <el-radio-button label="Signup">Signup</el-radio-button>
             </el-radio-group>
         </div>
-        {{userName}}
         <el-container>
         <el-header class = 'head'>
             <h1 class='Head'> Welcome to EnjoyFood! </h1>
@@ -83,7 +80,7 @@ export default {
             <!--el-card shadow="always"w-->
                 <h1 class="title">登录点菜系统</h1>
                 <div style="margin: 20px 0"/>
-                <div class = "InputBox">
+                <div class = "InputBody">
                 <el-input 
                     v-model="userName" 
                     placeholder="请输入用户名" >
@@ -121,7 +118,7 @@ export default {
 <style lang='postcss'>
 
 .LoginPage {
-  background: url("./src/assets/background.jpg");
+  background: url("./src/assets/tableinCM.jpg");
   background-size: cover;
   opacity: 0.75;
   width: 100%;
@@ -156,10 +153,15 @@ export default {
     padding-left: 10%;
     padding-right: 20%;
 }
+.InputBody {
+    padding-left: 10%;
+    padding-right: 20%;
+    padding-top: 7%;
+}
 .runningPicture{
     padding-left: 15%;
     padding-right: 10%;
-    padding-top: 0%;
+    padding-top: 5%;
 }
 .demonstration {
   color: var(--el-text-color-secondary);
@@ -185,15 +187,18 @@ export default {
     font-weight: 900;
     margin-bottom: 20px;
     font-size: 200%;
+    color: black;
 }
 .welcome{
     font-weight: 700;
     font-size: 150%;
+    color: black;
 }
 .title{
     font-weight: 700;
     margin-right: 15px;
     font-size: 150%;
+    color: black;
 }
 h1{
     font-weight: 800;

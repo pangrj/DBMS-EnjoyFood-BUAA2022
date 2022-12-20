@@ -7,15 +7,13 @@ import Header from './Header.vue'
 import Personal from './InforPage/Personal.vue'
 
 export default {
-    components: { Header, Personal, Personal },
+    components: { Header, Personal },
     setup(){
         let route = useRoute()
         const userName = route.query.userName;
         console.log(userName);
         
         const ava_path = new URL(`./src/assets/avatar.jpg`, import.meta.url).href
-
-        
 
         const dialogVisible = ref(false);
         const information = reactive( {
@@ -32,7 +30,8 @@ export default {
             });
 
         // init:
-        /*function init() {
+        function init() {
+            console.log("init")
             request({
                 method: 'POST',
                 url: '/user/getInfor/',
@@ -40,23 +39,27 @@ export default {
                     }
                 }
             ).then(function(response) {
+                console.log("reponse: ")
                 console.log(response);
-                this.information.u_id = response.u_id;
-                this.information.u_position = response.u_position;
-                this.information.u_gender = response.u_gender;
-                this.information.u_email = response.u_email;
-                this.information.u_photo = response.u_photo;
-                this.information.u_age = response.u_age;
-                this.information.u_height = response.u_height;
-                this.information.u_weight = response.u_weight;
+                information.u_id = response.data.u_id;
+                information.u_position = response.data.u_position;
+                information.u_gender = response.data.u_gender;
+                information.u_email = response.data.u_email;
+                information.u_photo = response.data.u_photo;
+                information.u_age = response.data.u_age;
+                information.u_height = response.data.u_height;
+                information.u_weight = response.data.u_weight;
+                console.log("information: ")
+                console.log(information)
             }).catch(function(error) {
+                console.log("error");
                 console.log(error);
             })
         };
 
         onMounted(() => {
             init();
-        });*/
+        });
 
         const settings = reactive( {
             NightMode: false, 
@@ -94,26 +97,18 @@ export default {
             formData.append('u_height', this.information.u_height);
             formData.append('u_weight', this.information.u_weight);
             formData.append('u_age', this.information.u_age);
-            formData.append('u_position', this.information.position);
-            formData.append('u_gender', this.information.gender);
+            formData.append('u_position', this.information.u_position);
+            formData.append('u_gender', this.information.u_gender);
             formData.append('u_email', this.information.u_email);
             formData.append('u_avatar', this.information.u_photo);
 
-            console.log(formData.get('u_avatar'));
+            console.log("formData:")
+            console.log(formData);
             const res = await request.post(
                 '/user/modify/',
                 formData);
             console.log(res);  
             this.ava_path = res.img_path;
-            /*const {data:res} = await request.post(
-                '/student/modify',
-                {   s_id: information.id,
-                    s_passWord: information.passWord,
-                    s_name: information.username,
-                    s_dorm: '',
-                    s_gender: '',
-                }
-            )*/
         },
         getImageFile:function(e){
             console.log("in getImgFunc!")
@@ -145,7 +140,7 @@ const handleClose = () => {
         <div class="Total">
             <div class="TotalIn">
             <div class="photo" >
-                <el-avatar :size="100" src= "ava_path" />
+                <el-avatar :size="100" src= "./src/assets/male.jpg" />
                 
             </div>
             <div class="nameAndemail">
@@ -252,6 +247,18 @@ const handleClose = () => {
         <el-form-item label="age">
             <el-input v-model="information.u_age" />
         </el-form-item>
+        <el-form-item label="height">
+            <el-input v-model="information.u_height" />
+        </el-form-item>
+        <el-form-item label="weight">
+            <el-input v-model="information.u_weight" />
+        </el-form-item>
+        <el-form-item label="Gender">
+            <el-radio-group v-model="information.u_gender">
+                <el-radio label="True" />
+                <el-radio label="False" />
+            </el-radio-group>
+        </el-form-item>
         <el-form-item label="avatar">
             <input type="file" @change="getImageFile" id="img" />
         </el-form-item>
@@ -289,7 +296,13 @@ const handleClose = () => {
 <style>
 .InfomationPage{
     background-color: #F8F8F8;
+    background: url("./src/assets/info3.jpg");
     padding-top: 3%;
+    background-size: cover;
+    opacity: 0.75;
+    width: 100%;
+    height: 100%;
+    position: fixed;
 }
 .down{
     padding-top: 3%;
