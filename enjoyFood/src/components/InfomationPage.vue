@@ -97,8 +97,8 @@ export default {
             formData.append('u_height', this.information.u_height);
             formData.append('u_weight', this.information.u_weight);
             formData.append('u_age', this.information.u_age);
-            formData.append('u_position', this.information.position);
-            formData.append('u_gender', this.information.gender);
+            formData.append('u_position', this.information.u_position);
+            formData.append('u_gender', this.information.u_gender);
             formData.append('u_email', this.information.u_email);
             formData.append('u_avatar', this.information.u_photo);
 
@@ -140,7 +140,7 @@ const handleClose = () => {
         <div class="Total">
             <div class="TotalIn">
             <div class="photo" >
-                <el-avatar :size="100" src= "ava_path" />
+                <el-avatar :size="100" src= "./src/assets/male.jpg" />
                 
             </div>
             <div class="nameAndemail">
@@ -247,6 +247,18 @@ const handleClose = () => {
         <el-form-item label="age">
             <el-input v-model="information.u_age" />
         </el-form-item>
+        <el-form-item label="height">
+            <el-input v-model="information.u_height" />
+        </el-form-item>
+        <el-form-item label="weight">
+            <el-input v-model="information.u_weight" />
+        </el-form-item>
+        <el-form-item label="Gender">
+            <el-radio-group v-model="information.u_gender">
+                <el-radio label="True" />
+                <el-radio label="False" />
+            </el-radio-group>
+        </el-form-item>
         <el-form-item label="avatar">
             <input type="file" @change="getImageFile" id="img" />
         </el-form-item>
@@ -284,7 +296,13 @@ const handleClose = () => {
 <style>
 .InfomationPage{
     background-color: #F8F8F8;
+    background: url("./src/assets/info3.jpg");
     padding-top: 3%;
+    background-size: cover;
+    opacity: 0.75;
+    width: 100%;
+    height: 100%;
+    position: fixed;
 }
 .down{
     padding-top: 3%;

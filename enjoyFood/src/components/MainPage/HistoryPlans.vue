@@ -1,17 +1,40 @@
 <script>
-import { ref } from 'vue'
+import {ref, reactive, onMounted} from 'vue'
+import request from '../../https/axios.js'
 export default {
   props: {
     userName: String,
   },
-  setup(){
+  setup(props){
     const centerDialogVisible = ref(false)
     const plans = [{p_name:"plan1 GOGOGO", p_time:"2022/10/5"},
         {p_name:"plan2 KFC", p_time:"2022/11/15"},
         {p_name:"plan3 Crazy", p_time:"2022/12/1"},
         {p_name:"plan4 Vme50", p_time:"2022/12/3"}];
 
-    //initInfor();
+    // init:
+        function init() {
+            console.log("init")
+            request({
+                method: 'POST',
+                url: '/user/getPlans/',
+                data: {  
+                    u_name: props.userName,
+                    }
+                }
+            ).then(function(response) {
+                console.log("reponse: ")
+                console.log(response);
+                plans = response.p_Array
+            }).catch(function(error) {
+                console.log("error");
+                console.log(error);
+            })
+        };
+
+        onMounted(() => {
+            init();
+        });
     return {plans, centerDialogVisible};
   },
   data() {
@@ -21,7 +44,7 @@ export default {
   methods: {
     async initInfor(){
             const response = await request.post(
-                '/user/getPlans/',
+                'c',
                 this.userName,
             );
             console.log(response)

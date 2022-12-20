@@ -85,8 +85,8 @@ export default {
 
 <style scoped>
 .header{
-    padding-top: 20%;
-    padding-bottom: 25%;
+    padding-top: 10%;
+    padding-bottom: 18%;
     background: url("./src/assets/yimian.jpg");
 }
 .scrollbar-flex-content {

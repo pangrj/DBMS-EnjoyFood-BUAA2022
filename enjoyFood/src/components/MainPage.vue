@@ -60,11 +60,11 @@ export default {
   opacity: 0.75;
   width: 100%;
   height: 100%;
+    position: fixed;
 }
 .el-header{
     margin-top: 5%;
-    height: 500px;
-    margin-bottom: 5%;
+    height: 450px;
 }
 Chart{
     size: 50%;

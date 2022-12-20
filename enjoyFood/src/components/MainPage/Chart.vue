@@ -1,4 +1,4 @@
-<script>
+<script type="text/javascript">
 import * as echarts from 'echarts'
 import { getCurrentInstance } from "vue";
 import {ref, reactive, onMounted} from 'vue'
@@ -8,6 +8,7 @@ export default({
         userName: String,
     },
     setup(props) {
+        
     },
     data(){
         return {
@@ -148,17 +149,16 @@ export default({
             });
         this.requested = false;
         },
-		},
-        mounted(){
-            this.initInfor();
-            this.$nextTick(function() {
-				this.drawLine('lineChart');
-                setTimeout(() => {
-                    this.initData();
-                    }, 200);
-			    })
+	},
+    mounted(){
+        this.initInfor();
+        this.$nextTick(function() {
+		this.drawLine('lineChart');
+        setTimeout(() => {
+                this.initData();
+                }, 200);
+			})
         }
-
 })
 
 </script>

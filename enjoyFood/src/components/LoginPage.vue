@@ -118,7 +118,7 @@ export default {
 <style lang='postcss'>
 
 .LoginPage {
-  background: url("./src/assets/background.jpg");
+  background: url("./src/assets/tableinCM.jpg");
   background-size: cover;
   opacity: 0.75;
   width: 100%;
