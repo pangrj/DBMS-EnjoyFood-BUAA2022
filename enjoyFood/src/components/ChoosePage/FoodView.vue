@@ -22,16 +22,23 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations} from 'vuex';
+import { mapGetters, mapMutations, mapActions} from 'vuex';
 import { toRaw } from 'vue';
+import axios from "axios";
+import request from '../../https/axios.js'
+import { useTransitionFallthroughEmits } from 'element-plus';
 
 export default {
     name: "FoodView",
     props: {
         type:{
-            type:String,
+            type: String,
             default:""
         },
+        lifeCircle:{
+            type: Number,
+            default:1
+        }
     },
     data(){
         return {
@@ -49,7 +56,7 @@ export default {
         // }
     },
     methods:{
-        ...mapMutations(["chooseFood", "deleteFood"]),
+        ...mapMutations(["initFoodList", "chooseFood", "deleteFood"]),
         chooseFoodHandler(val) {
             let array=toRaw(val)  
             console.log(array);
@@ -72,6 +79,15 @@ export default {
     beforeMount: function(){
         this.isChoose = (this.type == "choose");
         this.isChosen = (this.type == "chosen");
+
+        //获取后端的数据
+        axios.post("http://localhost:8000/dish/searchByCircle/", JSON.stringify({
+            u_name: 123456,
+            c_name: this.lifeCircle,
+        })).then(res => {
+            console.log(res.data);
+            this.initFoodList(res.data);
+        })
     },
     
 }

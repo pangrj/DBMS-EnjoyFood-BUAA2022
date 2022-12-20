@@ -4,6 +4,9 @@
         <el-button type="success"><router-link to="/choosePage/sportView/choose">运动</router-link></el-button>
     </nav> -->
     <!-- <router-view name="chooseView"/> -->
+    <el-button type="success" @click="chooseLifeCircle(1)">五道口生活圈</el-button>
+    <el-button type="success" @click="chooseLifeCircle(2)">知春路生活圈</el-button>
+    <p></p>
     <el-button type="success" @click="chooseContent(1)">食物</el-button>
     <el-button type="success" @click="chooseContent(2)">运动</el-button>
     <!-- 搜索栏 -->
@@ -20,8 +23,8 @@
     </div>
 
     <!-- 列表栏 -->
-    <FoodView1 v-if="(contentType == 1)" type="choose"></FoodView1>
-    <SportView1 v-else-if="(contentType == 2)" type="choose"></SportView1>
+    <FoodView1 v-if="(contentType == 1)" type="choose" :lifeCicle="lifeCircle"></FoodView1>
+    <SportView1 v-else-if="(contentType == 2)" type="choose" :lifeCicle="lifeCircle"></SportView1>
 </template>
 
 <script>
@@ -37,12 +40,16 @@ export default{
         return {
             searchRequset: "",
             contentType: 1, //用于选择展示什么页面
+            lifeCircle: 1
         }
     },
     methods: {
         chooseContent(type) {
             this.contentType = type;
             console.log(type);
+        },
+        chooseLifeCircle(type) {
+            this.lifeCircle = type;
         },
         search() {
             console.log("搜索")

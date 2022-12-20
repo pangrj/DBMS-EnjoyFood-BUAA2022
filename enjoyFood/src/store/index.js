@@ -136,11 +136,11 @@ export default createStore({
     }
   },
   mutations: {
-    getFoodList(state, food){
+    initFoodList(state, food){
       console.log(food)
       state.foodList = food;
     },
-    getSportList(state, sport){
+    initSportList(state, sport){
       console.log(sport)
       state.sportList = sport;
     },
@@ -166,18 +166,18 @@ export default createStore({
     }
   },
   actions: {
-    asyncgetFoodList({commit}) {
-        axios.get("http://iwenwiki.com/api/generator/list.php")
-        .then(res => {
-            commit.getFoodList(res.data)
-        })
-    },
-    asyncgetSportList({commit}) {
-        axios.get("http://iwenwiki.com/api/generator/list.php")
-        .then(res => {
-            commit.getSportList(res.data)
-        })
-    },
+    // asyncinitFoodList({commit}) {
+    //     axios.get("http://iwenwiki.com/api/generator/list.php")
+    //     .then(res => {
+    //         commit.getFoodList(res.data)
+    //     })
+    // },
+    // asyncinitSportList({commit}) {
+    //     axios.get("http://iwenwiki.com/api/generator/list.php")
+    //     .then(res => {
+    //         commit.getSportList(res.data)
+    //     })
+    // },
   },
   modules: {
   }

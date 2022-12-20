@@ -32,6 +32,10 @@ export default {
             type:String,
             default:""
         },
+        lifeCircle:{
+            type:Number,
+            default:1
+        }
     },
     data(){
         return {
