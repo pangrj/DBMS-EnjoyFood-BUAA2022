@@ -152,7 +152,7 @@ def get_infor(request):
         if len(user_list) == 1:
             user = user_list[0]
             ret.set_code(200)
-            ret.set_message('No Such Student')
+            ret.set_message('get Infor')
 
             ret.load_data({'u_name': user.get_u_name()})
             ret.load_data({'u_height': user.get_u_height()})
@@ -167,6 +167,18 @@ def get_infor(request):
         else:
             ret.set_code(400)
             ret.set_message('No Such Student')
+        return JsonResponse(ret.json_type())
+    else:
+        ret.Http_error()
+        return JsonResponse(ret.json_type())
+
+
+def initial(request):
+    ret = RET.get_instance()
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+
         return JsonResponse(ret.json_type())
     else:
         ret.Http_error()
