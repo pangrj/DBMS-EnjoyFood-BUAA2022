@@ -76,10 +76,8 @@ def modify_infor(request):
         u_avatar = request.FILES.get('u_avatar')
         # avatar_name = request.POST.get('avatar_name')
         data = request.POST
-
         u_name = data.get('u_name')
         u_password = data.get('u_password')
-
         u_height = data.get('u_height')
         u_weight = data.get('u_weight')
         u_age = data.get('u_age')
@@ -87,7 +85,6 @@ def modify_infor(request):
         u_gender = data.get('u_gender')
         u_email = data.get('u_email')
         # u_avatar = data.get('u_photo')
-
         user_list = User.objects.filter(u_name__exact=u_name)
         if len(user_list) == 0:
             ret.set_code(400)
@@ -138,6 +135,50 @@ def upLoadImg(request):
         ret.set_code(200)
         ret.set_message('success')
         ret.load_data({'img_path': avatar_addr})
+        return JsonResponse(ret.json_type())
+    else:
+        ret.Http_error()
+        return JsonResponse(ret.json_type())
+
+
+def get_infor(request):
+    ret = RET.get_instance()
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        u_name = data.get('u_name')
+        user_list = User.objects.filter(u_name=u_name)
+
+        if len(user_list) == 1:
+            user = user_list[0]
+            ret.set_code(200)
+            ret.set_message('get Infor')
+
+            ret.load_data({'u_name': user.get_u_name()})
+            ret.load_data({'u_height': user.get_u_height()})
+            ret.load_data({'u_weight': user.get_u_weight()})
+            ret.load_data({'u_age': user.u_age})
+            ret.load_data({'u_position': user.u_position})
+            ret.load_data({'u_gender': user.get_u_gender()})
+            ret.load_data({'u_email': user.u_email})
+            ret.load_data({'u_photo': user.get_avatar_url()})
+            ret.load_data({'id': user.get_u_id()})
+
+        else:
+            ret.set_code(400)
+            ret.set_message('No Such Student')
+        return JsonResponse(ret.json_type())
+    else:
+        ret.Http_error()
+        return JsonResponse(ret.json_type())
+
+
+def initial(request):
+    ret = RET.get_instance()
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+
         return JsonResponse(ret.json_type())
     else:
         ret.Http_error()

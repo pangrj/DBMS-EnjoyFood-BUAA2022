@@ -84,7 +84,7 @@ const gender = ref("male")
           Position
         </div>
       </template>
-      Beijing
+      <span>{{information.u_position}}</span>
     </el-descriptions-item>
     <el-descriptions-item>
       <template #label>
@@ -106,7 +106,6 @@ const gender = ref("male")
           Address
         </div>
       </template>
-      No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province
     </el-descriptions-item>
   </el-descriptions>
   </div>

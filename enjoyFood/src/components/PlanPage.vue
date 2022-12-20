@@ -1,12 +1,13 @@
 <script>
 import { reactive } from "vue"
 import {useRoute} from 'vue-router'
-import Header from "./Header.vue"
 import Comments from './PlanPage/Comments.vue';
+import Header from "./Header.vue"
 
 export default {
     name:'ArticleComment',
     components:{
+        Header,
         Comments,
     },
     setup() {
@@ -47,11 +48,11 @@ export default {
 
 <template>
     <div>
-    <Header v-bind:userName="userName"/>
+        <Header v-bind:userName="userName"/>
     <div class="Body">
-        <el-header>
-            <h1>{{plan.p_name}}</h1>
-            <h3>from {{planUserName}}</h3>
+        <el-header class="header">
+                <h1>{{plan.p_name}}</h1>
+                <h3>from {{planUserName}}</h3>
         </el-header>
         <el-main>
             <h2> foods </h2>
@@ -83,6 +84,11 @@ export default {
 </template>
 
 <style scoped>
+.header{
+    padding-top: 20%;
+    padding-bottom: 25%;
+    background: url("./src/assets/yimian.jpg");
+}
 .scrollbar-flex-content {
   display: flex;
 }

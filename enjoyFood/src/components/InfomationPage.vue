@@ -7,7 +7,7 @@ import Header from './Header.vue'
 import Personal from './InforPage/Personal.vue'
 
 export default {
-    components: { Header, Personal, Personal },
+    components: { Header, Personal },
     setup(){
         let route = useRoute()
         const userName = route.query.userName;
@@ -31,6 +31,7 @@ export default {
 
         // init:
         function init() {
+            console.log("init")
             request({
                 method: 'POST',
                 url: '/user/getInfor/',
@@ -38,16 +39,20 @@ export default {
                     }
                 }
             ).then(function(response) {
+                console.log("reponse: ")
                 console.log(response);
-                this.information.u_id = response.u_id;
-                this.information.u_position = response.u_position;
-                this.information.u_gender = response.u_gender;
-                this.information.u_email = response.u_email;
-                this.information.u_photo = response.u_photo;
-                this.information.u_age = response.u_age;
-                this.information.u_height = response.u_height;
-                this.information.u_weight = response.u_weight;
+                information.u_id = response.data.u_id;
+                information.u_position = response.data.u_position;
+                information.u_gender = response.data.u_gender;
+                information.u_email = response.data.u_email;
+                information.u_photo = response.data.u_photo;
+                information.u_age = response.data.u_age;
+                information.u_height = response.data.u_height;
+                information.u_weight = response.data.u_weight;
+                console.log("information: ")
+                console.log(information)
             }).catch(function(error) {
+                console.log("error");
                 console.log(error);
             })
         };
@@ -97,7 +102,8 @@ export default {
             formData.append('u_email', this.information.u_email);
             formData.append('u_avatar', this.information.u_photo);
 
-            console.log(formData.get('u_avatar'));
+            console.log("formData:")
+            console.log(formData);
             const res = await request.post(
                 '/user/modify/',
                 formData);
