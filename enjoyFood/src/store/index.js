@@ -136,6 +136,14 @@ export default createStore({
     }
   },
   mutations: {
+    getFoodList(state, food){
+      console.log(food)
+      state.foodList = food;
+    },
+    getSportList(state, sport){
+      console.log(sport)
+      state.sportList = sport;
+    },
     chooseFood(state, food) { //传入一个list，表示一个food的所有信息
       console.log(food)
       state.chosenFood.push(food);
@@ -158,6 +166,18 @@ export default createStore({
     }
   },
   actions: {
+    asyncgetFoodList({commit}) {
+        axios.get("http://iwenwiki.com/api/generator/list.php")
+        .then(res => {
+            commit.getFoodList(res.data)
+        })
+    },
+    asyncgetSportList({commit}) {
+        axios.get("http://iwenwiki.com/api/generator/list.php")
+        .then(res => {
+            commit.getSportList(res.data)
+        })
+    },
   },
   modules: {
   }
