@@ -33,7 +33,7 @@ def publish_comment(request):
                 comment = CommentPlan.objects.create(user=user, plan=plan_list[0],
                                                      r_star=r_star, r_content=r_content)
                 ret.set_code(200)
-                ret.set_message("Make A Plan!")
+                ret.set_message("Make A Comment!")
 
         return JsonResponse(ret.json_type())
     else:
@@ -58,7 +58,7 @@ def get_comment_of_Plan(request):
             ret_comment = serializers.serialize('json', list(comment_list))
             ret.set_code(200)
             ret.set_message("Make A Plan!")
-            ret.load_data({'comments:': ret_comment})
+            ret.load_data({'comments': ret_comment})
             return JsonResponse(ret.json_type())
     else:
         ret.Http_error()
