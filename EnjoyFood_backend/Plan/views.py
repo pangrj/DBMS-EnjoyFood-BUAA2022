@@ -24,7 +24,8 @@ def get_plan_by_u_name(request):
 
             ret.code = 200
             ret.message = "Get Plan Success!"
-            ret.load_data({'plans': ret_plans})
+            ret.load_data({'p_Array': ret_plans})
+            ret.load_data({'num': len(plan_list)})
         else:
             ret.set_code(400)
             ret.set_message('No Such Student')
