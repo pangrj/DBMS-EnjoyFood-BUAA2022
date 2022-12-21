@@ -21,7 +21,7 @@ def showDishMenu(request):
         u_name = data.get('u_name')
 
         dishes = Dish.objects.all()
-        retDishes = serializers.serialize('json', list(dishes))
+        retDishes = json.loads(serializers.serialize('json', list(dishes)))
 
         ret.code = 200
         ret.message = "Show Success!"
@@ -41,7 +41,7 @@ def showNotSelectMenu(request):
         # 找到此学生未选过的菜品
         dishes = Dish.objects.exclude(
             d_id__in=Chose.objects.filter(s_id__exact=s_id).values_list('d_id', flat=True))
-        retDishes = serializers.serialize('json', list(dishes))
+        retDishes = json.loads(serializers.serialize('json', list(dishes)))
 
         ret.code = 200
         ret.message = "Show Success!"
@@ -86,7 +86,7 @@ def searchByName(request):
         # dishes = Dish.objects.exclude(
         #     d_id__in=Chose.objects.filter(s_id__exact=s_id).values_list('d_id', flat=True)).filter(d_name=d_name)
         # dishes = Dish.objects.filter(d_name=d_name)
-        retDishes = serializers.serialize('json', list(dishes))
+        retDishes = json.loads(serializers.serialize('json', list(dishes)))
         if len(dishes) == 0:
             ret.code = 401
             ret.message = 'No Such Dishes Not Selected!'
@@ -110,7 +110,7 @@ def searchByCategory(request):
         d_category = data.get("d_category")
         u_name = data.get('u_name')
         dishes = Dish.objects.filter(d_category=d_category)
-        retDishes = serializers.serialize('json', list(dishes))
+        retDishes = json.loads(serializers.serialize('json', list(dishes)))
         if len(dishes) == 0:
             ret.code = 401
             ret.message = 'No Such Dishes Not Selected!'
@@ -134,7 +134,7 @@ def searchByCalorie(request):
         d_calories = data.get('d_calories')
 
         dishes = Dish.objects.filter(d_calories__lte=d_calories)
-        retDishes = serializers.serialize('json', list(dishes))
+        retDishes = json.loads(serializers.serialize('json', list(dishes)))
         ret.code = 200
         ret.message = 'Find Dishes!'
         ret.load_data({'dishes': retDishes})
@@ -151,7 +151,7 @@ def searchByCircle(request):
 
         c_name = data.get('c_name')
         dishes = Dish.objects.filter(restaurant__lifeCircle__c_name=c_name)
-        retDishes = serializers.serialize('json', list(dishes))
+        retDishes = json.loads(serializers.serialize('json', list(dishes)))
         ret.code = 200
         ret.message = 'Find Dishes!'
         ret.load_data({'dishes': retDishes})
@@ -168,7 +168,7 @@ def searchByRestaurant(request):
 
         re_name = data.get('re_name')
         dishes = Dish.objects.filter(restaurant__re_name=re_name)
-        retDishes = serializers.serialize('json', list(dishes))
+        retDishes = json.loads(serializers.serialize('json', list(dishes)))
         ret.code = 200
         ret.message = 'Find Dishes!'
         ret.load_data({'dishes': retDishes})
