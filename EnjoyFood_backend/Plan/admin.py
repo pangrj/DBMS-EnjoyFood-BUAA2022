@@ -10,11 +10,11 @@ class PlanAdmin(admin.ModelAdmin):
 
 
 class PlanOfDishAdmin(admin.ModelAdmin):
-    list_display = ['id', 'plan', 'dish']
+    list_display = ['id', 'plan', 'plan_id', 'dish', 'dish_id']
 
 
 class PlanOfExerciseAdmin(admin.ModelAdmin):
-    list_display = ['id', 'plan', 'exercise']
+    list_display = ['id', 'plan', 'plan_id', 'exercise', 'exercise_id']
 
 
 admin.site.register(Plan, PlanAdmin)
