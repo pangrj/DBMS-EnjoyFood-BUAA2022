@@ -11,7 +11,7 @@ export default {
     setup(){
         let route = useRoute()
         const userName = route.query.userName;
-        console.log(userName);
+        console.log("用户名：" + userName);
         
         const ava_path = new URL(`./src/assets/avatar.jpg`, import.meta.url).href
 

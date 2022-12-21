@@ -1,8 +1,8 @@
 <template>
     <!-- 菜品表格 -->
     <el-table :data="getFoodListHandler()" max-height="400" class="table">
-        <el-table-column fixed prop="d_id" label="菜品编号" min-width="10%" class="table-row" align="center"/>
-        <el-table-column prop="d_name" label="菜品名称" min-width="20%" class="table-row" align="center"/>
+        <!-- <el-table-column fixed prop="d_id" label="菜品编号" min-width="10%" class="table-row" align="center"/> -->
+        <el-table-column fixed prop="d_name" label="菜品名称" min-width="20%" class="table-row" align="center"/>
         <el-table-column prop="d_category" label="菜品种类" min-width="10%" class="table-row" align="center"/>
         <el-table-column prop="d_cuisine" label="菜系" min-width="10%" class="table-row" align="center"/>
         <el-table-column prop="d_calories" label="热量" min-width="10%" class="table-row" align="center"/>
@@ -34,19 +34,16 @@ export default {
             type: String,
             default:""
         },
-        lifeCircle:{
-            type: Number,
-            default:1
-        }
     },
     data(){
         return {
             isChoose: false,
             isChosen: false,
+            lifeCircle: 1,
         }
     },
     computed:{
-        ...mapGetters(["getFoodList", "getChosenFood"]),
+        ...mapGetters(["getFoodList", "getChosenFood", "getLifeCircle"]),
         // isChoose: function() {
         //     type == "choose";
         // },
@@ -81,6 +78,9 @@ export default {
     beforeMount: function(){
         this.isChoose = (this.type == "choose");
         this.isChosen = (this.type == "chosen");
+        console.log(this.lifeCircle)
+        this.lifeCircle = this.getLifeCircle;
+        console.log(this.lifeCircle)
         console.log((this.lifeCircle == 1)?"北航生活圈":"五道口生活圈")
         //获取后端的数据
         axios.post("http://localhost:8000/dish/searchByCircle/", JSON.stringify({
@@ -98,7 +98,7 @@ export default {
 <style scoped>
     .table {
         width: 80%;
-        margin-left: 150px;
+        margin: auto;
     }
     /*最外层透明*/
     :deep(.el-table, .el-table__expanded-cell, .header-cell-style, .el-table-column){

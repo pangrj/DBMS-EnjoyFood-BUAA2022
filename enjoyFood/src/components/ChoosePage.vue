@@ -1,20 +1,16 @@
 <script>
 import { useRoute } from "vue-router";
-import {ref} from 'vue'
+import {ref, toRaw} from 'vue'
 import { ElMessageBox } from 'element-plus'
 
 import ChooseView from './ChoosePage/ChooseView.vue';
 import ChosenView from './ChoosePage/ChosenView.vue';
-<<<<<<< HEAD
 import Header from "./Header.vue";
-=======
-import Header from './Header.vue';
->>>>>>> f1cddbfa5d977bd4e5367a2399b7cb1e63f1b9dc
 
 export default {
     setup(){
         const userName = ref('')
-        const passWord = ref('')
+        // const passWord = ref('')
 
         // 抽屉相关
         const drawer2 = ref(false)
@@ -22,7 +18,7 @@ export default {
         const radio1 = ref('Option 1')
          let route = useRoute()
          userName.value = route.query.userName;
-         console.log(userName);
+         console.log("用户名："+ userName);
         return {
             userName,
             drawer2,
@@ -31,7 +27,6 @@ export default {
         };
     },
     components: {
-<<<<<<< HEAD
     ChooseView,
     ChosenView,
     Header
@@ -41,11 +36,6 @@ export default {
             type:String,
             default:""
         }
-=======
-        ChooseView,
-        ChosenView,
-        Header,
->>>>>>> f1cddbfa5d977bd4e5367a2399b7cb1e63f1b9dc
     },
     data(){
         return {
@@ -104,12 +94,8 @@ export default {
 </script>
 
 <template>
-<<<<<<< HEAD
-    <Header v-bind:userName="userName"/>
-=======
 <div>
  <Header v-bind:userName="userName"/>
->>>>>>> f1cddbfa5d977bd4e5367a2399b7cb1e63f1b9dc
   <div class="ChoosePage">
     <el-container>
       <el-main>
@@ -120,7 +106,7 @@ export default {
         <!-- 列表栏 -->
         <el-row class="content">
             <el-col :span="24">
-                    <ChooseView></ChooseView>
+                    <ChooseView :userName="userName"></ChooseView>
             </el-col>
         </el-row>
         
@@ -134,12 +120,12 @@ export default {
 
         <!-- 抽屉内容(弹出方向：ltr,rtl,ttb,btt) -->
         <el-drawer v-model="drawer2" direction="ltr" size="50%"> 
-            <template #title>
+            <template #header>
                 <h4 style="margin-left:16px; text-align: left; font-size: larger; color:antiquewhite;">已选内容</h4>
             </template>
             <template #default>
                 <div>
-                    <ChosenView></ChosenView>
+                    <ChosenView :userName="userName"></ChosenView>
                 </div>
             </template>
             <template #footer>
@@ -153,7 +139,7 @@ export default {
       </el-main>
     </el-container>
   </div>
-  </div>
+</div>
 </template>
 
 <style scoped>
@@ -161,7 +147,7 @@ export default {
   height: 30px;
 }
 .content {
-  height: 550px;
+  height: 600px;
   text-align: center;
   /* margin-bottom: 10px; */
 }
@@ -232,7 +218,7 @@ body {
     color: #333;
     text-align: center;
     /* line-height: 160px; */
-    height: 650px;
+    height: 700px;
     padding-top: 5 !important;
   }
 

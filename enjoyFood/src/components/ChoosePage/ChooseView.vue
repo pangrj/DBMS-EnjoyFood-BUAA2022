@@ -4,6 +4,7 @@
         <el-button type="success"><router-link to="/choosePage/sportView/choose">运动</router-link></el-button>
     </nav> -->
     <!-- <router-view name="chooseView"/> -->
+    &nbsp;&nbsp;&nbsp;
     <el-button type="info" @click="chooseLifeCircle(1)">北航生活圈</el-button>
     <el-button type="info" @click="chooseLifeCircle(2)">五道口生活圈</el-button>
     <p></p>
@@ -35,8 +36,8 @@
     <p></p>
     <!-- 列表栏 -->
     <div class="list">
-        <FoodView1 v-if="(contentType == 1)" type="choose" :lifeCicle="lifeCircle"></FoodView1>
-        <SportView1 v-else-if="(contentType == 2)" type="choose" :lifeCicle="lifeCircle"></SportView1>
+        <FoodView1 v-if="(contentType == 1)" type="choose" :key="timer"></FoodView1>
+        <SportView1 v-else-if="(contentType == 2)" type="choose" :key="timer+1"></SportView1>
     </div>
 </template>
 
@@ -51,22 +52,30 @@ export default{
         FoodView1,
         SportView1
     },
+    props: {
+        userName:{
+            type:String,
+            default:""
+        }
+    },
     data() {
         return {
             searchRequset: "",
             contentType: 1, //用于选择展示什么页面
-            lifeCircle: 1,
             radio: 0,
+            timer: 0, //用于刷新子页面
         }
     },
     methods: {
-        ...mapMutations(["initFoodList"]),
+        ...mapMutations(["initFoodList", "initSportList", "changeLifeCircle"]),
         chooseContent(type) {
             this.contentType = type;
-            console.log(type);
+            //console.log("生活圈：" + this.lifeCircle);
         },
         chooseLifeCircle(type) {
-            this.lifeCircle = type;
+            this.changeLifeCircle(type);
+            this.timer++; //用于强制刷新子页面
+            //console.log("生活圈：" + this.lifeCircle);
         },
         search() {
             console.log("搜索" + this.radio)
@@ -76,43 +85,43 @@ export default{
                 case 1: 
                     url = "http://localhost:8000/dish/searchByName/";
                     content = {
-                        u_name: "123456",
+                        u_name: this.userName,
                         d_name: this.searchRequset
                     };
                     break;
                 case 2:
                     url = "http://localhost:8000/dish/searchByCategory/";
                     content = {
-                        u_name: "123456",
+                        u_name: this.userName,
                         d_category: this.searchRequset
                     };
                     break;
                 case 3:
                     url = "http://localhost:8000/dish/searchByCalorie/"
                     content = {
-                        u_name: "123456",
+                        u_name: this.userName,
                         d_calories: this.searchRequset
                     }
                     break;
                 case 4:
                     url = "http://localhost:8000/dish/searchByRestaurant/"
                     content = {
-                        u_name: "123456",
+                        u_name: this.userName,
                         re_name: this.searchRequset
                     }
                     break;
                 case 6:
                     url = "http://localhost:8000/sport/searchByDifficulty/"
                     content = {
-                        u_name: "123456",
-                        re_name: this.searchRequset
+                        u_name: this.userName,
+                        sp_difficulty: this.searchRequset
                     }
                     break;
                 case 7:
                     url = "http://localhost:8000/sport/searchByCalorie/"
                     content = {
-                        u_name: "123456",
-                        re_name: this.searchRequset
+                        u_name: this.userName,
+                        sp_calories: this.searchRequset
                     }
                     break;
                 default:
@@ -130,7 +139,11 @@ export default{
                 if(res.data.code != 200) {
                     alert(res.data.message)
                 } else{
-                    this.initFoodList(res.data);
+                    if(this.radio < 5) {
+                        this.initFoodList(res.data);
+                    } else{
+                        this.initSportList(res.data);
+                    }
                 }
             })
         }
@@ -153,12 +166,12 @@ export default{
     margin-bottom: 10px;
 }
 
-:deep(.el-input__wrapper){
+/* :deep(.el-input__wrapper){
     background-color: rgba(239, 231, 224, 0.7);
 }
 
 :deep(.el-input__inner) {
     color: black;
-}
+} */
 </style>
 
