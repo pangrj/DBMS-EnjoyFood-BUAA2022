@@ -55,6 +55,7 @@ export default {
                 path: '/PlanPage',
                 query: {
                     planId: pid,
+                    userName: this.userName,
                 },
             });    
     },

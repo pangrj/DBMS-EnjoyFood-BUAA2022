@@ -1,9 +1,50 @@
-<script lang="ts" setup>
-import { ref } from 'vue'
+<script lang="ts">
+import { reactive, ref } from 'vue'
 import img from '../../assets/yimian1.jpg' 
+import request from '../../https/axios.js'
 
-const currentDate = ref(new Date())
-const imgRef = ref(img)
+export default({
+    props: {
+        userName: String,
+    },
+    setup(props) {
+        const imgRef = ref(img)
+        return{imgRef}
+    },
+    date:{
+        planName: String,
+        planId: String,
+    },
+    methods: {
+      async initInfo(){
+        console.log("init")
+            request({
+                method: 'POST',
+                url: '/user/getInfor/',
+                data: {   
+                    p_id: this.planId,
+                    }
+                }
+            ).then(function(response) {
+                console.log("reponse: ")
+                console.log(response); 
+                this.planName = response.data.code.p_name;
+            }).catch(function(error) {
+                console.log("error");
+                console.log(error);
+            })
+      },
+      toPlanPage(pid){
+        this.$router.push({
+                path: '/PlanPage',
+                query: {
+                    planId: pid,
+                    userName: this.userName,
+                },
+            });    
+    },
+    }
+})
 
 </script>
 
@@ -21,10 +62,9 @@ const imgRef = ref(img)
           class="image"
         />
         <div style="padding: 14px">
-          <span>Yummy hamburger</span>
+          <span>{{planName}}</span>
           <div class="bottom">
-            <time class="time">{{ currentDate }}</time>
-            <el-button text class="button">Operating</el-button>
+            <el-button text class="button" @click="toPlanPage(this.planId)">more</el-button>
           </div>
         </div>
       </el-card>

@@ -14,7 +14,7 @@ const routes = [
         { path: '/MainPage', query:{userName:String} ,component: MainPage},
         { path: '/LoginPage', component: LoginPage},
         { path: '/SignupPage', component: SignupPage},
-        { path: '/PlanPage', query:{planId:String} , component: PlanPage}
+        { path: '/PlanPage', query:{planId:String, usaerName:String} , component: PlanPage}
 ]
 
 const router = createRouter({

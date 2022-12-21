@@ -3,7 +3,7 @@ import * as echarts from 'echarts'
 import { getCurrentInstance } from "vue";
 import {ref, reactive, onMounted} from 'vue'
 
-export default({
+export default {
     props: {
         userName: String,
     },
@@ -14,6 +14,8 @@ export default({
         return {
             lineTimeData: [], 
             lineOpinionData: [],
+            sectorPartName: [],
+            sectorPartData: [],
         }
     },
     methods: {
@@ -25,6 +27,8 @@ export default({
             console.log(response);*/
             this.lineTimeData = ["11.5", "11.21", "11.23", "11.30", "12.5", "12.6"]
             this.lineOpinionData = ["100", "80", "10", "-50", "-30", "70"]
+            this.sectorPartName =  ["takeIn", "cost", "left"]
+            this.sectorPartData = [300, 100, 200]
         },
         drawLine(id) {
 				this.lineCharts = echarts.init(document.getElementById(id))
@@ -103,17 +107,16 @@ export default({
 					}]
 				})
 			},
-            initData() {
-                this.requested = true;
-                var res = [{value: 200, name: 'takeIn'}, {value: 300, name: 'cost'}, {value: 100, name: 'left'}];
-                var getData = [];
-                for (let i = 0; i < res.length; i++) {
-                var obj = new Object();
-                obj.name = res[i].name;//回答调查问卷的答案
-                obj.value = res[i].value;//回答调查问卷的人数
-                getData[i] = obj;
-                }
-                // 基于准备好的dom，初始化echarts实例
+        drawSector() {
+            this.requested = true;
+            var getData = [];
+            for (let i = 0; i < 3; i++) {
+            var obj = new Object();
+            obj.name = this.sectorPartName[i];
+            obj.value = this.sectorPartData[i];
+            getData[i] = obj;
+            }
+            // 基于准备好的dom，初始化echarts实例
                 var myChart = echarts.init(document.getElementById("sectorChart"));
                 // 绘制图表
                 myChart.setOption({
@@ -155,11 +158,11 @@ export default({
         this.$nextTick(function() {
 		this.drawLine('lineChart');
         setTimeout(() => {
-                this.initData();
+                this.drawSector();
                 }, 200);
 			})
         }
-})
+}
 
 </script>
 

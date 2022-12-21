@@ -6,7 +6,7 @@ import Comments from './PlanPage/Comments.vue';
 import Header from "./Header.vue"
 
 export default {
-    name:'ArticleComment',
+    name:'',
     components:{
         Header,
         Comments,
@@ -14,6 +14,7 @@ export default {
     setup() {
         let route = useRoute()
         const planId = route.query.planId;
+        const username = route.query.userName;;
         console.log(planId);
 
         const plan = reactive({
@@ -22,6 +23,10 @@ export default {
             p_name: "测试计划",
             p_description: "",
         });
+
+        const foods = [{id:'1'}, {id:'2'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}];
+        const sports = [{id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}];
+        const planUserName = "";
 
         // init:
         function init() {
@@ -53,10 +58,6 @@ export default {
             init();
         });
         
-        const foods = [{id:'1'}, {id:'2'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}];
-        const sports = [{id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}];
-        const username = "pangrj";
-        const planUserName = "pangrj";
         return {planId, plan, foods, sports, username, planUserName}
     },
     data(){
