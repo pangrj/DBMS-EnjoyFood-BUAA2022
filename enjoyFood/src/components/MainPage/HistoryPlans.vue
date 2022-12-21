@@ -1,4 +1,4 @@
-<script>
+<script lang="js">
 import {ref, reactive, onMounted} from 'vue'
 import request from '../../https/axios.js'
 export default {
@@ -7,11 +7,12 @@ export default {
   },
   setup(props){
     const centerDialogVisible = ref(false)
-    const plans = [{p_name:"plan1 GOGOGO", p_time:"2022/10/5"},
-        {p_name:"plan2 KFC", p_time:"2022/11/15"},
-        {p_name:"plan3 Crazy", p_time:"2022/12/1"},
-        {p_name:"plan4 Vme50", p_time:"2022/12/3"}];
-
+    const plans = ref([
+        {id:"", p_name:"plan1 GOGOGO",p_description:"", p_time:"2022/10/5", calories_in:0,calories_consume:0},
+        {id:"", p_name:"plan2 KFC",p_description:"",  p_time:"2022/11/15", calories_in:0,calories_consume:0},
+        {id:"", p_name:"plan3 Crazy",p_description:"",  p_time:"2022/12/1", calories_in:0,calories_consume:0},
+        {id:"", p_name:"plan4 Vme50",p_description:"",  p_time:"2022/12/3", calories_in:0,calories_consume:0}
+        ]);
     // init:
         function init() {
             console.log("init")
@@ -25,7 +26,15 @@ export default {
             ).then(function(response) {
                 console.log("reponse: ")
                 console.log(response);
-                plans = response.p_Array
+                var field = {}
+                for(var i=0; i<response.data.num;i++){
+                    console.log(response.data.p_Array[i])
+                    field = response.data.p_Array[i].fields
+                    field["p_id"] = response.data.p_Array[i].pk
+                    console.log(field)
+                    plans.value.push(field);
+                }
+                console.log(plans);
             }).catch(function(error) {
                 console.log("error");
                 console.log(error);

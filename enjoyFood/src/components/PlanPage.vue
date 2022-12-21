@@ -22,10 +22,11 @@ export default {
             u_id: "123123",
             p_name: "测试计划",
             p_description: "",
+            username: "",
         });
 
-        const foods = [{id:'1'}, {id:'2'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}];
-        const sports = [{id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}, {id:'3'}, {id:'4'}];
+        const foods = ref([]);
+        const sports = ref([]);
         const planUserName = "";
 
         // init:
@@ -33,7 +34,7 @@ export default {
             console.log("init")
             request({
                 method: 'POST',
-                url: '/user/getInfor/',
+                url: '/plan/getInfor/',
                 data: {   
                     p_id: planId,
                     }
@@ -41,11 +42,28 @@ export default {
             ).then(function(response) {
                 console.log("reponse: ")
                 console.log(response);
-                plan = response.data.code;
+                plan.p_id = response.data.plan[0].pk;
                 console.log("plan: ")
+                var field = response.data.plan[0].fields
+                console.log(field)
+                plan.p_name = field.p_name
+                plan.p_description = field.p_description
+                plan.username = field.user.u_name
                 console.log(plan)
-                const foods = response.data.dishes;
-                const sports = response.data.exercises;
+                var foodList = []
+                field = {}
+                for (var p in response.data.dishes){
+                    field = response.data.dishes[p].fields
+                    foodList.push(field)
+                }
+                foods.value = foodList
+                var sportList = []
+                field = {}
+                for (var p in response.data.exercises){
+                    field = response.data.exercises[p].fields
+                    sportList.push(field)
+                }
+                sports.value = sportList;
                 console.log(foods);
                 console.log(sports);
             }).catch(function(error) {
@@ -72,11 +90,12 @@ export default {
 
 <template>
     <div>
-        <Header v-bind:userName="userName"/>
+        <Header v-bind:userName="username"/>
     <div class="Body">
         <el-header class="header">
                 <h1>{{plan.p_name}}</h1>
                 <h3>from {{planUserName}}</h3>
+                <h3>{{plan.p_description}}</h3>
         </el-header>
         <el-main>
             <h2> foods </h2>
@@ -84,7 +103,7 @@ export default {
                 <el-scrollbar>
                     <div class="scrollbar-flex-content">
                         <p v-for="food in foods" :key="food.id" class="scrollbar-demo-item">
-                        {{ food.id }}
+                        {{ food.d_name }}
                         </p>
                     </div>
                 </el-scrollbar>
@@ -94,14 +113,14 @@ export default {
                 <el-scrollbar>
                     <div class="scrollbar-flex-content">
                         <p v-for="sport in sports" :key="sport.id" class="scrollbar-demo-item">
-                        {{ sport.id }}
+                        {{ sport.sp_name }}
                         </p>
                     </div>
                 </el-scrollbar>
             </div>
             <div class="comments">
                 <h2> comments </h2>
-                <comments></comments>
+                <comments :userName="username" :planId="planId"></comments>
             </div>
         </el-main>
     </div>
@@ -111,7 +130,7 @@ export default {
 <style scoped>
 .header{
     padding-top: 10%;
-    padding-bottom: 18%;
+    padding-bottom: 20%;
     background: url("./src/assets/yimian.jpg");
 }
 .scrollbar-flex-content {

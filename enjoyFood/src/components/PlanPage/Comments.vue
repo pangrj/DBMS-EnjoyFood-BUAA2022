@@ -23,13 +23,20 @@ export default {
   },
   methods: {
     async initInfor(){
-            const response = await request.post(
-                '/comment/getCommentOfPlan/',
-                this.planId,
-            );
-            console.log(response);
-            this.comments = response.data.comments;
-            console.log(this.comments);
+            console.log(this.planId.toString())
+            request({
+                method: 'POST',
+                url: '/comment/getCommentOfPlan/',
+                data: this.planId.toString(),
+                header: {'Content-Type': 'application/json'},
+            }).then(function(response) {
+                console.log(response);
+                this.comments = response.data.comments;
+                console.log(this.comments);
+            }).catch(function(error) {
+                console.log("error");
+                console.log(error);
+            });
         },
     async send(){
         request({
@@ -49,7 +56,7 @@ export default {
     }
   },
   mounted(){
-        //this.initInfor();
+        this.initInfor();
   },
 }
 </script>

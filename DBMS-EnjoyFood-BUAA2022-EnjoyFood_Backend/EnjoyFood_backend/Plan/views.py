@@ -24,7 +24,8 @@ def get_plan_by_u_name(request):
 
             ret.code = 200
             ret.message = "Get Plan Success!"
-            ret.load_data({'plans': ret_plans})
+            ret.load_data({'p_Array': ret_plans})
+            ret.load_data({'num': len(plan_list)})
         else:
             ret.set_code(400)
             ret.set_message('No Such Student')
@@ -40,16 +41,25 @@ def get_plan_details(request):
         data = json.loads(request.body)
         p_id = data.get('p_id')
 
-        dishes = Dish.objects.filter(d_id__in=PlanOfDish.objects.filter(plan_id=p_id).values_list('dish_id'))
-        ret_dishes = json.loads(serializers.serialize('json', list(dishes)))
+        plan_list = Plan.objects.filter(id=p_id)
 
-        exercises = Exercise.objects.filter(planofexercise__plan_id=p_id)
-        ret_exercise = json.loads(serializers.serialize('json', list(exercises)))
+        if len(plan_list) == 0:
+            ret.set_code(400)
+            ret.set_message('No Such Plan!')
+        else:
+            plan = json.loads(serializers.serialize('json', list(plan_list)))
 
-        ret.code = 200
-        ret.message = "Show Success!"
-        ret.load_data({'dishes': ret_dishes})
-        ret.load_data({'exercises': ret_exercise})
+            dishes = Dish.objects.filter(d_id__in=PlanOfDish.objects.filter(plan_id=p_id).values_list('dish_id'))
+            ret_dishes = json.loads(serializers.serialize('json', list(dishes)))
+
+            exercises = Exercise.objects.filter(planofexercise__plan_id=p_id)
+            ret_exercise = json.loads(serializers.serialize('json', list(exercises)))
+
+            ret.code = 200
+            ret.message = "Show Success!"
+            ret.load_data({'dishes': ret_dishes})
+            ret.load_data({'exercises': ret_exercise})
+            ret.load_data({'plan': plan})
         return JsonResponse(ret.json_type())
     else:
         ret.Http_error()
