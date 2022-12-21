@@ -6,7 +6,7 @@ from LifeCircle.models import LifeCircle
 
 # Register your models here.
 class LifeCircleAdmin(admin.ModelAdmin):
-    list_display = ['c_name', 'c_location', 'c_description']
+    list_display = ['id', 'c_name', 'c_location', 'c_description']
 
 
 admin.site.register(LifeCircle, LifeCircleAdmin)

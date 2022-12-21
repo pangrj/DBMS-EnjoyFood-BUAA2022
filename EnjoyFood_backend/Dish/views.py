@@ -150,7 +150,7 @@ def searchByCircle(request):
         data = json.loads(request.body)
 
         c_name = data.get('c_name')
-        dishes = Dish.objects.filter(restaurant__lifeCircle__c_name__in=c_name)
+        dishes = Dish.objects.filter(restaurant__lifeCircle__c_name=c_name)
         retDishes = serializers.serialize('json', list(dishes))
         ret.code = 200
         ret.message = 'Find Dishes!'
