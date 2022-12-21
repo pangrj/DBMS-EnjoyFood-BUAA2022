@@ -16,10 +16,13 @@ export default{
                 ensurePassword: '',
             });
         const labelPosition = ref('top')
-        const openAlert = () => {
-            ElMessage.error('Wrong Password !')
+        const openAlert1 = () => {
+            ElMessage.error('Different Password !')
         }
-        return {information, labelPosition, dialogVisible, openAlert};
+        const openAlert2 = () => {
+            ElMessage.error('Username Already Exists !')
+        }
+        return {information, labelPosition, dialogVisible, openAlert1, openAlert2};
     },
 
     methods: {
@@ -27,26 +30,24 @@ export default{
             console.log(this.information.password, this.information.ensurePassword)
             if(this.information.password != this.information.ensurePassword){
                 console.log('in if');
-                this.openAlert();
+                this.openAlert1();
             }
             else{
-                this.dialogVisible = true;
-
                 console.log(this.information.username, this.information.password)
 
-                await request({
-                    method: 'POST',
-                    url: '/user/register/',
-                    data: { u_name: this.information.username,
-                            u_password: this.information.password,}
-                    }       
-                ).then(function(response) {
-                    console.log(response);
-                }).catch(function(error) {
-                    console.log(error);
-                })
+                const response = await request.post(
+                    '/user/register/',
+                    { u_name: this.information.username,
+                      u_password: this.information.password,}      
+                )
+                console.log(response);
+                if(response.data.code == 200){
+                    this.dialogVisible = true;
+                }else if(response.data.code == 400){
+                    this.openAlert2();
                 }
-            },
+            }
+        },
 
         async login(){
             console.log(this.information.username, this.information.password)
@@ -58,18 +59,15 @@ export default{
             )
             console.log(res);
             this.$router.push({
-                path: '/ChoosePage',
+                path: '/MainPage',
                 query: {
                     userName: this.information.username,
-                    passWord: this.information.password,
                 },
             });
         },
 
         async back(){
-            this.$router.push({
-                path: '/LoginPage',
-            });
+            this.dialogVisible = false;
         }
     }
 
@@ -140,7 +138,9 @@ const handleClose = () => {
                 width="30%"
                 :before-close="handleClose"
             >
-                <span>The id you get is {{information.id}}.</span>
+                <p> Your username is {{information.username}}.</p>
+                <p> Your password is {{information.password}}.</p>
+                <p> Please Complete Your Information. </p>
                 <template #footer>
                     <el-button @click="back()"><p class='buttonLabel'>back</p></el-button>
                     <el-button type="login" @click="login()">

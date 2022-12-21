@@ -1,6 +1,6 @@
 <script>
 import { useRouter } from 'vue-router'
-
+import { ElMessage } from 'element-plus'
 import {ref} from 'vue'
 import SignupPage from './SignupPage.vue'
 const userName = ref('')
@@ -18,28 +18,36 @@ export default {
     },
     setup(){
         const inputMode = ref('Login')
-        return{ inputMode }
+        const labelPosition = ref('top')
+        const openAlert1 = () => {
+            ElMessage.error('No Such Username !')
+        }
+        const openAlert2 = () => {
+            ElMessage.error('Wrong Password !')
+        }
+        return{ inputMode, labelPosition, openAlert1, openAlert2 }
     },
     methods: {
         async onClickLogin(){
             console.log(userName.value, passWord.value)
-            await request({
-                method: 'POST',
-                url: '/user/login/',
-                data: {   u_name: userName.value,
+            const response = await request.post(
+                '/user/login/',
+                {   u_name: userName.value,
                     u_password: passWord.value,}
-                }
-            ).then(function(response) {
-                console.log(response);
-            }).catch(function(error) {
-                console.log(error);
-            })
-            this.$router.push({
-                path: '/MainPage',
-                query: {
-                    userName: userName.value,
-                },
-            });
+            )
+            console.log(response);
+            if(response.data.code == 401){
+                this.openAlert1();
+            }else if(response.data.code == 400){
+                this.openAlert2();
+            }else if(response.data.code == 200){
+                this.$router.push({
+                    path: '/MainPage',
+                    query: {
+                        userName: userName.value,
+                    },
+                });
+            }
         },
         onClickSignUp(){
             this.inputMode = 'Signup';
