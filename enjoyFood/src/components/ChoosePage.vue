@@ -5,7 +5,11 @@ import { ElMessageBox } from 'element-plus'
 
 import ChooseView from './ChoosePage/ChooseView.vue';
 import ChosenView from './ChoosePage/ChosenView.vue';
+<<<<<<< HEAD
 import Header from "./Header.vue";
+=======
+import Header from './Header.vue';
+>>>>>>> f1cddbfa5d977bd4e5367a2399b7cb1e63f1b9dc
 
 export default {
     setup(){
@@ -16,17 +20,18 @@ export default {
         const drawer2 = ref(false)
         const direction = ref('rtl')
         const radio1 = ref('Option 1')
-        // let route = useRoute()
-        // userName.value = route.query.userName;
-        // console.log(userName);
+         let route = useRoute()
+         userName.value = route.query.userName;
+         console.log(userName);
         return {
-            //userName,
+            userName,
             drawer2,
             direction,
             radio1
         };
     },
     components: {
+<<<<<<< HEAD
     ChooseView,
     ChosenView,
     Header
@@ -36,6 +41,11 @@ export default {
             type:String,
             default:""
         }
+=======
+        ChooseView,
+        ChosenView,
+        Header,
+>>>>>>> f1cddbfa5d977bd4e5367a2399b7cb1e63f1b9dc
     },
     data(){
         return {
@@ -94,7 +104,12 @@ export default {
 </script>
 
 <template>
+<<<<<<< HEAD
     <Header v-bind:userName="userName"/>
+=======
+<div>
+ <Header v-bind:userName="userName"/>
+>>>>>>> f1cddbfa5d977bd4e5367a2399b7cb1e63f1b9dc
   <div class="ChoosePage">
     <el-container>
       <el-main>
@@ -137,6 +152,7 @@ export default {
 
       </el-main>
     </el-container>
+  </div>
   </div>
 </template>
 
