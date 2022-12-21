@@ -137,8 +137,15 @@ export default createStore({
   },
   mutations: {
     initFoodList(state, food){
-      console.log(food)
-      state.foodList = food;
+      var foodContent = []
+      var dishes = food.dishes
+      console.log(dishes)
+      for(var p in dishes) {
+        //console.log(dishes[p].src)
+        // foodContent.push(dishes[p].fields)
+      }
+      console.log(foodContent)
+      state.foodList = foodContent;
     },
     initSportList(state, sport){
       console.log(sport)

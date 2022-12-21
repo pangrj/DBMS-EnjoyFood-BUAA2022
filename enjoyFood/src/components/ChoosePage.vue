@@ -5,6 +5,7 @@ import { ElMessageBox } from 'element-plus'
 
 import ChooseView from './ChoosePage/ChooseView.vue';
 import ChosenView from './ChoosePage/ChosenView.vue';
+import Header from "./Header.vue";
 
 export default {
     setup(){
@@ -26,8 +27,15 @@ export default {
         };
     },
     components: {
-        ChooseView,
-        ChosenView
+    ChooseView,
+    ChosenView,
+    Header
+},
+    props: {
+        userName:{
+            type:String,
+            default:""
+        }
     },
     data(){
         return {
@@ -69,7 +77,13 @@ export default {
         confirmClick() {
             ElMessageBox.confirm(`Are you confirm to chose ${radio1.value} ?`)
                 .then(() => {
-                    drawer2.value = false
+                    axios.post("http://localhost:8000/dish/searchByCircle/", JSON.stringify({
+                        u_name: "123456",
+                        c_name: (this.lifeCircle == 1)?"北航生活圈":"五道口生活圈"
+                    })).then(res => {
+                        console.log(res.data);
+                        this.initFoodList(res.data);
+                    })
                 })
                 .catch(() => {
                     // catch error
@@ -80,15 +94,13 @@ export default {
 </script>
 
 <template>
+    <Header v-bind:userName="userName"/>
   <div class="ChoosePage">
     <el-container>
-      <el-header>
-        Enjoy Your Life
-      </el-header>
       <el-main>
-        <el-row class="choose_title" justify="center"><div>
+        <!-- <el-row class="choose_title" justify="center"><div>
             可选列表
-        </div></el-row>
+        </div></el-row> -->
 
         <!-- 列表栏 -->
         <el-row class="content">
@@ -97,20 +109,7 @@ export default {
             </el-col>
         </el-row>
         
-        <!-- 下方的总结栏 -->
-        <el-row :gutter="20" class="conclusion">
-            <el-col :span="15">
-                <el-descriptions title="计划总结" direction="vertical" :column="2" :size="size">
-                    <el-descriptions-item label="摄入能量" align="center">500</el-descriptions-item>
-                    <el-descriptions-item label="消耗能量" align="center">100</el-descriptions-item>
-                </el-descriptions>
-            </el-col>
-            <el-col :span="8">
-                <div class="grid-content bg-purple">
-                    饼状图
-                </div>
-            </el-col>
-        </el-row>
+        
         <p></p>
 
         <!-- 已选按钮 -->
@@ -146,7 +145,7 @@ export default {
   height: 30px;
 }
 .content {
-  height: 400px;
+  height: 550px;
   text-align: center;
   /* margin-bottom: 10px; */
 }
@@ -154,6 +153,8 @@ export default {
 .ChoosePage{
     background: url('../assets/chopping_board.jpg') no-repeat center;
     margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
 .choose_title{

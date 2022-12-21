@@ -1,9 +1,9 @@
 <template>
     <!-- 菜品表格 -->
-    <el-table :data="getSportListHandler()" style="width: 100%"  max-height="300" >
+    <el-table :data="getSportListHandler()"  max-height="300" class="table">
         <el-table-column fixed prop="sp_id" label="运动编号" min-width="10%" align="center"/>
-        <el-table-column prop="sp_name" label="运动名称" min-width="20%" align="center"/>
-        <el-table-column prop="sp_content" label="运动内容" min-width="10%" align="center"/>
+        <el-table-column prop="sp_name" label="运动名称" min-width="10%" align="center"/>
+        <el-table-column prop="sp_content" label="运动内容" min-width="20%" align="center"/>
         <el-table-column prop="sp_difficulty" label="运动难度" min-width="10%" align="center"/>
         <el-table-column prop="sp_calories" label="消耗热量" min-width="10%" align="center"/>
         <el-table-column prop="sp_time" label="花费时间" min-width="10%" align="center"/>
@@ -24,6 +24,7 @@
 <script>
 import { mapGetters, mapMutations} from 'vuex';
 import { toRaw } from 'vue';
+import axios from "axios";
 
 export default {
     name: "SportsView",
@@ -47,7 +48,7 @@ export default {
         ...mapGetters(["getSportList", "getChosenSport"]),
     },
     methods:{
-        ...mapMutations(["chooseSport", "deleteSport"]),
+        ...mapMutations(["initSportList", "chooseSport", "deleteSport"]),
         chooseSportHandler(val) {
             let array=toRaw(val)  
             console.log(array);
@@ -70,6 +71,14 @@ export default {
     beforeMount: function(){
         this.isChoose = (this.type == "choose");
         this.isChosen = (this.type == "chosen");
+        //获取后端的数据
+        axios.post("http://localhost:8000/dish/searchByCircle/", JSON.stringify({
+            u_name: 123456,
+            c_name: this.lifeCircle,
+        })).then(res => {
+            console.log(res.data);
+            this.initFoodList(res.data);
+        })
     },
     
 }
@@ -77,5 +86,8 @@ export default {
 </script>
 
 <style>
-
+    .table {
+        width: 80%;
+        margin-left: 150px;
+    }
 </style>
