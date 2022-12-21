@@ -55,7 +55,7 @@ def get_comment_of_Plan(request):
         else:
             comment_list = CommentPlan.objects.filter(plan_id=p_id)
 
-            ret_comment = serializers.serialize('json', list(comment_list))
+            ret_comment = json.loads(serializers.serialize('json', list(comment_list)))
             ret.set_code(200)
             ret.set_message("Make A Plan!")
             ret.load_data({'comments': ret_comment})

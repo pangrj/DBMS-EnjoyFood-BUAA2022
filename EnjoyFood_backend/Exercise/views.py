@@ -14,7 +14,7 @@ def showExerciseMenu(request):
         data = json.loads(request.body)
 
         exercises = Exercise.objects.all()
-        retExercises = serializers.serialize('json', list(exercises))
+        retExercises = json.loads(serializers.serialize('json', list(exercises)))
 
         ret.code = 200
         ret.message = "Show Success!"
@@ -33,7 +33,7 @@ def searchByCalorie(request):
         sp_calories = data.get('sp_calories')
 
         sports = Exercise.objects.filter(sp_calories__gte=sp_calories)
-        retSports = serializers.serialize('json', list(sports))
+        retSports = json.loads(serializers.serialize('json', list(sports)))
 
         ret.code = 200
         ret.message = 'Find Exercise!'
@@ -52,7 +52,7 @@ def searchByCircle(request):
         c_name = data.get('c_name')
 
         sports = Exercise.objects.filter(exerArea__lifeCircle__c_name=c_name)
-        retSports = serializers.serialize('json', list(sports))
+        retSports = json.loads(serializers.serialize('json', list(sports)))
 
         ret.code = 200
         ret.message = 'Find Exercise!'
@@ -71,7 +71,7 @@ def searchByDifficulty(request):
         sp_difficulty = data.get('sp_difficulty')
 
         sports = Exercise.objects.filter(sp_difficulty=sp_difficulty)
-        retSports = serializers.serialize('json', list(sports))
+        retSports = json.loads(serializers.serialize('json', list(sports)))
 
         ret.code = 200
         ret.message = 'Find Exercise!'

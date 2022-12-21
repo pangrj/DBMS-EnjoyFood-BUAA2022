@@ -39,7 +39,7 @@ def choose(request):
                     Chose.objects.create(s_id=s_id, d_id=d_id)
                     dishes = Dish.objects.exclude(
                         d_id__in=Chose.objects.filter(s_id__exact=s_id).values_list('d_id', flat=True))
-                    retDishes = serializers.serialize('json', list(dishes))
+                    retDishes = json.loads(serializers.serialize('json', list(dishes)))
 
                     ret.code = 200
                     ret.message = 'Choose success!'
@@ -80,7 +80,7 @@ def delete_dish(request):
                     chosen_unit.delete()
                     dishes = Dish.objects.exclude(
                         d_id__in=Chose.objects.filter(s_id__exact=s_id).values_list('d_id', flat=True))
-                    ret_dishes = serializers.serialize('json', list(dishes))
+                    ret_dishes = json.loads(serializers.serialize('json', list(dishes)))
                     ret.code = 200
                     ret.message = 'Delete Success!'
                     ret.data = {"dishes": ret_dishes}
@@ -104,7 +104,7 @@ def show_select_dishes(request):
         else:
             dishes = Dish.objects.filter(
                 d_id__in=Chose.objects.filter(s_id__exact=s_id).values_list('d_id', flat=True))
-            ret_dishes = serializers.serialize('json', list(dishes))
+            ret_dishes = json.loads(serializers.serialize('json', list(dishes)))
             ret.code = 200
             ret.message = 'Get Selected Dishes Success!'
             ret.data = {"dishes": ret_dishes}

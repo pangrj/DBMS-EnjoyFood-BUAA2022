@@ -20,7 +20,7 @@ def get_plan_by_u_name(request):
         if len(user_list) == 1:
             user = user_list[0]
             plan_list = Plan.objects.filter(user_id=user.get_u_id())
-            ret_plans = serializers.serialize('json', list(plan_list))
+            ret_plans = json.loads(serializers.serialize('json', list(plan_list)))
 
             ret.code = 200
             ret.message = "Get Plan Success!"
@@ -41,10 +41,10 @@ def get_plan_details(request):
         p_id = data.get('p_id')
 
         dishes = Dish.objects.filter(d_id__in=PlanOfDish.objects.filter(plan_id=p_id).values_list('dish_id'))
-        ret_dishes = serializers.serialize('json', list(dishes))
+        ret_dishes = json.loads(serializers.serialize('json', list(dishes)))
 
         exercises = Exercise.objects.filter(planofexercise__plan_id=p_id)
-        ret_exercise = serializers.serialize('json', list(exercises))
+        ret_exercise = json.loads(serializers.serialize('json', list(exercises)))
 
         ret.code = 200
         ret.message = "Show Success!"
