@@ -9,6 +9,8 @@ urlpatterns = [
     path('register/', register),
 
     path('modify/', modify_infor),
+    path('changePassword/', change_password),
+    path('getAvatar/', get_avatar),
 
     path('getInfor/', get_infor),
 
