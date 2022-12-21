@@ -36,7 +36,7 @@ export default {
         <el-aside width="70%">
             <el-container>
                 <el-header>
-                    <div title='chart'><Chart /></div>
+                    <div title='chart'><Chart v-bind:userName="userName"/></div>
                 </el-header>
                 <el-main>
                     <div class='cards'>

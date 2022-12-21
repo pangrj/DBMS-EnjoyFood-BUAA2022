@@ -79,7 +79,7 @@ def modify_infor(request):
         u_name = data.get('u_name')
         print(u_name)
         u_password = data.get('u_password')
-        print(u_password )
+        print(u_password)
         u_height = data.get('u_height')
         print(u_height)
         u_weight = data.get('u_weight')
@@ -187,6 +187,57 @@ def initial(request):
     if request.method == 'POST':
         data = json.loads(request.body)
 
+        return JsonResponse(ret.json_type())
+    else:
+        ret.Http_error()
+        return JsonResponse(ret.json_type())
+
+
+def change_password(request):
+    ret = RET.get_instance()
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        u_name = data.get('u_name')
+        u_password = data.get('u_password')
+        u_newPassword = data.get('u_newPassword')
+
+        user_list = User.objects.filter(u_name=u_name)
+
+        if len(user_list) == 1:
+            user = user_list[0]
+            if u_password == user.get_u_password():
+                user.set_u_password(u_newPassword)
+                ret.set_code(200)
+                ret.set_message('Change Success!')
+            else:
+                ret.set_code(401)
+                ret.set_message('Password Error!')
+        else:
+            ret.set_code(400)
+            ret.set_message('No Such Student!')
+        return JsonResponse(ret.json_type())
+    else:
+        ret.Http_error()
+        return JsonResponse(ret.json_type())
+
+
+def get_avatar(request):
+    ret = RET.get_instance()
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        u_name = data.get('u_name')
+        user_list = User.objects.filter(u_name=u_name)
+
+        if len(user_list) == 1:
+            user = user_list[0]
+            ret.set_code(200)
+            ret.set_message('Change Success!')
+            ret.load_data({'avatar_url': user.get_avatar_url()})
+        else:
+            ret.set_code(400)
+            ret.set_message('No Such Student!')
         return JsonResponse(ret.json_type())
     else:
         ret.Http_error()

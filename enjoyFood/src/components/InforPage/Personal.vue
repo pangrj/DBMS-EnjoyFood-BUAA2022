@@ -31,7 +31,7 @@ const gender = ref("male")
 </script>
 
 <template>
-<div>
+<div class="Body">
      <el-descriptions
         class="margin-top"
         title="Information"
@@ -112,6 +112,9 @@ const gender = ref("male")
 </template>
 
 <style scoped>
+.body{
+  padding-bottom: 5%;
+}
 .el-descriptions {
   margin-top: 20px;
 }

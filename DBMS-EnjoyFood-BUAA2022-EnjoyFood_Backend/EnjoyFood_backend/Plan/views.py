@@ -85,7 +85,7 @@ def add_plan(request):
             plan.calories_consume = calories_consume
             plan.save()
             ret.code = 200
-            ret.message = "Get Plan Success!"
+            ret.message = "Add Plan Success!"
         else:
             ret.set_code(400)
             ret.set_message('No Such Student')

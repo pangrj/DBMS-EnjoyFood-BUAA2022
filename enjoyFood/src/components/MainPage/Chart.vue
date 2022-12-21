@@ -1,6 +1,6 @@
 <script type="text/javascript">
 import * as echarts from 'echarts'
-import { getCurrentInstance } from "vue";
+import request from '../../https/axios.js'
 import {ref, reactive, onMounted} from 'vue'
 
 export default {
@@ -12,19 +12,21 @@ export default {
     },
     data(){
         return {
-            lineTimeData: [], 
-            lineOpinionData: [],
-            sectorPartName: [],
-            sectorPartData: [],
+            lineTimeData: ["11.5", "11.21", "11.23", "11.30", "12.5", "12.6"], 
+            lineOpinionData: ["100", "80", "10", "-50", "-30", "70"],
+            sectorPartName: ["takeIn", "cost", "left"],
+            sectorPartData: [300, 100, 200],
         }
     },
     methods: {
         async initInfor(){
-            /*const response = await request.post(
+            console.log(this.userName)
+            const response = await request.post(
                 '/user/getPlanCal/',
                 this.userName,
             );
-            console.log(response);*/
+            console.log("response");
+            console.log(response);
             this.lineTimeData = ["11.5", "11.21", "11.23", "11.30", "12.5", "12.6"]
             this.lineOpinionData = ["100", "80", "10", "-50", "-30", "70"]
             this.sectorPartName =  ["takeIn", "cost", "left"]

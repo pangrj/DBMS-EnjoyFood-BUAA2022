@@ -1,10 +1,11 @@
 <script>
 import { useRoute } from "vue-router";
 import {ref, reactive, onMounted} from 'vue'
-import { UploadFilled } from '@element-plus/icons-vue'
+import { UploadFilled, Edit } from '@element-plus/icons-vue'
 import request from '../https/axios.js'
 import Header from './Header.vue'
 import Personal from './InforPage/Personal.vue'
+import { ElMessage } from 'element-plus'
 
 export default {
     components: { Header, Personal },
@@ -15,10 +16,26 @@ export default {
         
         const ava_path = new URL(`./src/assets/avatar.jpg`, import.meta.url).href
 
-        const dialogVisible = ref(false);
+        const labelPosition = ref('top')
+        const openSuccess = () => {
+            ElMessage.success('Success !')
+        }
+        const openAlert1 = () => {
+            ElMessage.error('No Such Username !')
+        }
+        const openAlert2 = () => {
+            ElMessage.error('Wrong Password !')
+        }
+        const openAlert3 = () => {
+            ElMessage.error('Different new Password !')
+        }
+
+        const dialogVisibleEditInfo = ref(false);
+        const dialogVisibleChangePass = ref(false);
+
         const information = reactive( {
                 u_name: userName,
-                u_id: 'initial',
+                u_id: 0,
                 u_password: 'initial',
                 u_position: 'initial',
                 u_gender: "True",
@@ -41,7 +58,7 @@ export default {
             ).then(function(response) {
                 console.log("reponse: ")
                 console.log(response);
-                information.u_id = response.data.u_id;
+                information.u_id = response.data.id;
                 information.u_position = response.data.u_position;
                 information.u_gender = response.data.u_gender;
                 information.u_email = response.data.u_email;
@@ -61,10 +78,18 @@ export default {
             init();
         });
 
+        const newPassword = reactive({
+            old: "",
+            new: "",
+            newT: ""
+        });
+
         const settings = reactive( {
             NightMode: false, 
         });
-        return {userName, dialogVisible, information};
+        return {userName, dialogVisibleEditInfo, dialogVisibleChangePass, 
+                information, newPassword, settings,
+                labelPosition, openAlert1, openAlert2,openAlert3, openSuccess};
     },
     data(){
         return {
@@ -78,17 +103,17 @@ export default {
                 this.userName,
             );
             console.log(response);
-            this.information.u_id = response.u_id;
-            this.information.u_position = response.u_position;
-            this.information.u_gender = response.u_gender;
-            this.information.u_email = response.u_email;
-            this.information.u_photo = response.u_photo;
-            this.information.u_age = response.u_age;
-            this.information.u_height = response.u_height;
-            this.information.u_weight = response.u_weight;
+            this.information.u_id = response.data.u_id;
+            this.information.u_position = response.data.u_position;
+            this.information.u_gender = response.data.u_gender;
+            this.information.u_email = response.data.u_email;
+            this.information.u_photo = response.data.u_photo;
+            this.information.u_age = response.data.u_age;
+            this.information.u_height = response.data.u_height;
+            this.information.u_weight = response.data.u_weight;
         },
         async updateInfo(){
-            this.dialogVisible = false;
+            this.dialogVisibleEditInfo = false;
             console.log(this.information);
 
             let formData = new FormData();
@@ -108,7 +133,30 @@ export default {
                 '/user/modify/',
                 formData);
             console.log(res);  
+            this.openSuccess();
             this.ava_path = res.img_path;
+        },
+        async changePassword(){
+            console.log(this.newPassword);
+            if(this.newPassword.new != this.newPassword.newT){
+                this.openAlert3();
+            }
+            else{
+            const response = await request.post(
+                '/user/changePassword/',
+                { u_name:this.userName,
+                  u_password: this.newPassword.old,
+                  u_newPassword: this.newPassword.new}
+            );
+            if(response.data.code == 200){
+                console.log("Success !");
+                this.openSuccess();
+                this.dialogVisibleChangePass = false;
+            }else if(response.data.code == 401){
+                this.openAlert2();
+            }else if(response.data.code == 400){
+                this.openAlert1();
+            }}
         },
         getImageFile:function(e){
             console.log("in getImgFunc!")
@@ -154,9 +202,9 @@ const handleClose = () => {
         <div class="Items">
             <div class="ItemsIn">
             <div class="leftItem">
-                <el-button plain @click="dialogVisible = true">
+                <el-button plain @click="dialogVisibleChangePass = true">
                     <el-icon class="editIcon"><EditPen /></el-icon>
-                    Edit Information
+                    Change Password
                 </el-button>
             </div>
             <div class="rightItem">
@@ -192,6 +240,12 @@ const handleClose = () => {
                     </template>
                     <div>
                         <personal :information="information" />
+                        <el-button class="Edit" type="default" 
+                        @click="dialogVisibleEditInfo=true" circle>
+                            <template #icon>
+                            <el-icon><Edit /></el-icon>
+                            </template>
+                        </el-button>
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="3">
@@ -217,7 +271,7 @@ const handleClose = () => {
     </el-container>
 
     <el-dialog
-        v-model="dialogVisible"
+        v-model="dialogVisibleEditInfo"
         title="Tips"
         width="30%"
         :before-close="handleClose"
@@ -233,13 +287,10 @@ const handleClose = () => {
             <el-input v-model="information.u_name" />
         </el-form-item>
         <el-form-item label="id">
-            <el-input v-model="information.u_id" />
+            <el-input disabled v-model="information.u_id" />
         </el-form-item>
         <el-form-item label="email">
             <el-input v-model="information.u_email" />
-        </el-form-item>
-        <el-form-item label="password">
-            <el-input v-model="information.u_password" />
         </el-form-item>
         <el-form-item label="position">
             <el-input v-model="information.u_position" />
@@ -282,8 +333,65 @@ const handleClose = () => {
         -->
         <template #footer>
             <span class="dialog-footer">
-            <el-button @click="dialogVisible = false">Cancel</el-button>
+            <el-button @click="dialogVisibleEditInfo = false">Cancel</el-button>
             <el-button type="primary" @click="updateInfo()">
+            Confirm
+            </el-button>
+        </span>
+        </template>
+    </el-dialog>
+
+    <el-dialog
+        v-model="dialogVisibleChangePass"
+        title="Tips"
+        width="30%"
+        :before-close="handleClose"
+    >
+        <span>Change your Password</span>
+        <el-form
+        :label-position="labelPosition"
+        label-width="100px"
+        :model="newPassword"
+        style="max-width: 460px; padding-top:20px"
+        >
+        <el-form-item>
+            <el-input 
+                v-model="newPassword.old" 
+                type="password" 
+                placeholder="请输入原密码" 
+                show-password >
+                <template #prefix>
+                    <el-icon><Key /></el-icon>
+                </template>
+            </el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-input 
+                v-model="newPassword.new" 
+                type="password" 
+                placeholder="请输入新密码" 
+                show-password >
+                <template #prefix>
+                    <el-icon><Key /></el-icon>
+                </template>
+            </el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-input 
+                v-model="newPassword.newT" 
+                type="password" 
+                placeholder="请重复输入密码" 
+                show-password >
+                <template #prefix>
+                    <el-icon><Key /></el-icon>
+                </template>
+            </el-input>
+        </el-form-item>
+        </el-form>
+        <template #footer>
+            <span class="dialog-footer">
+            <el-button @click="dialogVisibleChangePass = false">Cancel</el-button>
+            <el-button type="primary" @click="changePassword()">
             Confirm
             </el-button>
         </span>
@@ -390,6 +498,9 @@ const handleClose = () => {
     padding-bottom: 80%;
     background-color: #fff;
     font-weight: bold;
+}
+.Edit{
+    padding-top: 5%;
 }
 header{
     
