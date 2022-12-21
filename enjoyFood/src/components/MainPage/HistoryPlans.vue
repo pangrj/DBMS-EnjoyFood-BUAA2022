@@ -13,24 +13,24 @@ export default {
         {p_name:"plan4 Vme50", p_time:"2022/12/3"}];
 
     // init:
-        // function init() {
-        //     console.log("init")
-        //     request({
-        //         method: 'POST',
-        //         url: '/user/getPlans/',
-        //         data: {  
-        //             u_name: props.userName,
-        //             }
-        //         }
-        //     ).then(function(response) {
-        //         console.log("reponse: ")
-        //         console.log(response);
-        //         plans = response.p_Array
-        //     }).catch(function(error) {
-        //         console.log("error");
-        //         console.log(error);
-        //     })
-        // };
+        function init() {
+            console.log("init")
+             request({
+                 method: 'POST',
+                url: '/user/getPlans/',
+                data: {  
+                    u_name: props.userName,
+                    }
+                }
+            ).then(function(response) {
+                console.log("reponse: ")
+                console.log(response);
+                plans = response.p_Array
+            }).catch(function(error) {
+                console.log("error");
+                console.log(error);
+            })
+        };
 
         onMounted(() => {
             init();
