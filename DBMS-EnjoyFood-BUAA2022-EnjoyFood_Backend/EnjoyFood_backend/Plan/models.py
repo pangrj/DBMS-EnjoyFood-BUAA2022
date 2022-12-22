@@ -2,6 +2,7 @@ from django.db import models
 
 from Dish.models import Dish
 from Exercise.models import Exercise
+from LifeCircle.models import LifeCircle
 from User.models import User
 
 
@@ -16,6 +17,11 @@ class Plan(models.Model):
 
     def get_p_id(self):
         return self.id
+
+
+class CircleOfPlan(models.Model):
+    plan = models.ForeignKey(Plan, on_delete=models.CASCADE, null=False)
+    circle = models.ForeignKey(LifeCircle, on_delete=models.CASCADE, null=False)
 
 
 class PlanOfDish(models.Model):

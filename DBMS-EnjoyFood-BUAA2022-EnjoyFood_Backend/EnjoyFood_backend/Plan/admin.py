@@ -17,6 +17,11 @@ class PlanOfExerciseAdmin(admin.ModelAdmin):
     list_display = ['id', 'plan', 'plan_id', 'exercise', 'exercise_id']
 
 
+class CircleOfPlanAdmin(admin.ModelAdmin):
+    list_display = ['id', 'plan', 'plan_id', 'circle', 'circle_id']
+
+
 admin.site.register(Plan, PlanAdmin)
 admin.site.register(PlanOfDish, PlanOfDishAdmin)
 admin.site.register(PlanOfExercise, PlanOfExerciseAdmin)
+admin.site.register(CircleOfPlan, CircleOfPlanAdmin)

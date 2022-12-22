@@ -116,7 +116,7 @@ export default {
         </el-header>
         <el-main>
             <el-container>
-            <el-aside width="50%">
+            <el-aside width="55%">
             <h2> foods </h2>
             <div class="scroll-food">
                 <el-scrollbar>
@@ -206,10 +206,14 @@ export default {
 .scroll-food{
     padding-top: 3%;
     padding-bottom: 5%;
+    padding-left: 8%;
+    padding-right: 8%;
 }
 .scroll-sport{
     padding-top: 3%;
     padding-bottom: 5%;
+    padding-left: 8%;
+    padding-right: 8%;
 }
 .comments{
     padding-top: 3%;

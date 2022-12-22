@@ -5,10 +5,11 @@ import { UploadFilled, Edit } from '@element-plus/icons-vue'
 import request from '../https/axios.js'
 import Header from './Header.vue'
 import Personal from './InforPage/Personal.vue'
+import BMI from './InforPage/BMI.vue'
 import { ElMessage } from 'element-plus'
 
 export default {
-    components: { Header, Personal },
+    components: { Header, Personal, BMI },
     setup(){
         let route = useRoute()
         const userName = route.query.userName;
@@ -253,7 +254,7 @@ const handleClose = () => {
                         <p> Health </p>
                     </template>
                     <div>
-                        
+                        <BMI :userName="userName"></BMI>
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="4">
