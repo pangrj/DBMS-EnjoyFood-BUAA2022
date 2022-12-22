@@ -56,6 +56,12 @@ def get_comment_of_Plan(request):
             comment_list = CommentPlan.objects.filter(plan_id=p_id)
 
             ret_comment = json.loads(serializers.serialize('json', list(comment_list)))
+
+            for comment in ret_comment:
+                id = comment.get('fields').get('user')
+                u_name = User.objects.get(id=id).get_u_name()
+                # comment = dict(comment, **{'u_name': u_name})
+                comment['fields'] = dict(comment['fields'], **{'u_name': u_name})
             ret.set_code(200)
             ret.set_message("Make A Plan!")
             ret.load_data({'comments': ret_comment})
