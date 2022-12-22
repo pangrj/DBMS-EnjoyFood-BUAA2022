@@ -1,4 +1,5 @@
 import json
+import math
 import os
 
 from django.http import JsonResponse
@@ -240,6 +241,52 @@ def get_avatar(request):
             ret.set_code(400)
             ret.set_message('No Such Student!')
         return JsonResponse(ret.json_type())
+    else:
+        ret.Http_error()
+        return JsonResponse(ret.json_type())
+
+
+def get_suggest(request):
+    ret = RET.get_instance()
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        u_name = data.get('u_name')
+        user_list = User.objects.filter(u_name=u_name)
+
+        if len(user_list) == 1:
+            user = user_list[0]
+
+            if user.u_weight == 0 or user.u_weight is None or \
+                    user.u_age == 0 or user.u_age is None or \
+                    user.u_height == 0 or user.u_height is None:
+                ret.set_code(401)
+                ret.set_message('请完善个人信息')
+            else:
+                if user.u_gender:
+                    suggest_cal = 10 * user.u_weight + 6.25 * user.u_height - 5 * user.u_age + 5
+                else:
+                    suggest_cal = 10 * user.u_weight + 6.25 * user.u_height - 5 * user.u_age - 161
+
+                BMI = user.u_weight / (math.sqrt(user.u_height / 100))
+
+                if BMI < 18.5:
+                    suggestion = 'BMI过低，建议多摄入热量'
+                elif BMI < 23.9:
+                    suggestion = 'BMI正常，继续坚持当前生活习惯'
+                elif BMI < 27:
+                    suggestion = 'BMI偏重，建议适当增加运动'
+                else:
+                    suggestion = 'BMI过重，建议多运动调整'
+
+                ret.set_code(200)
+                ret.set_message('Show Success!')
+                ret.load_data({'suggest_cal': suggest_cal})
+                ret.load_data({'BMI': BMI})
+                ret.load_data({'suggestion': suggestion})
+        else:
+            ret.set_code(400)
+            ret.set_message('No Such Student!')
     else:
         ret.Http_error()
         return JsonResponse(ret.json_type())

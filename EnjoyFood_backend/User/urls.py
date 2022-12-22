@@ -18,5 +18,7 @@ urlpatterns = [
 
     path('getPlans/', get_plan_by_u_name),
 
-    path('load/', upLoadImg)
+    path('load/', upLoadImg),
+
+    path('suggest/', get_suggest)
 ]
