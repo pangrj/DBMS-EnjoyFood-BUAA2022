@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from Plan.models import *
 from User.models import User
 from util import RET
+from util.RET import get_time
 
 
 # Create your views here.
@@ -21,6 +22,9 @@ def get_plan_by_u_name(request):
             user = user_list[0]
             plan_list = Plan.objects.filter(user_id=user.get_u_id())
             ret_plans = json.loads(serializers.serialize('json', list(plan_list)))
+
+            for plan in ret_plans:
+                plan['fields']['p_time'] = get_time(plan.get('fields').get('p_time'))
 
             ret.code = 200
             ret.message = "Get Plan Success!"
@@ -47,7 +51,10 @@ def get_plan_details(request):
             ret.set_code(400)
             ret.set_message('No Such Plan!')
         else:
-            plan = json.loads(serializers.serialize('json', list(plan_list)))
+            ret_plans = json.loads(serializers.serialize('json', list(plan_list)))
+
+            for plan in ret_plans:
+                plan['fields']['p_time'] = get_time(plan.get('fields').get('p_time'))
 
             dishes = Dish.objects.filter(d_id__in=PlanOfDish.objects.filter(plan_id=p_id).values_list('dish_id'))
             ret_dishes = json.loads(serializers.serialize('json', list(dishes)))
@@ -59,7 +66,7 @@ def get_plan_details(request):
             ret.message = "Show Success!"
             ret.load_data({'dishes': ret_dishes})
             ret.load_data({'exercises': ret_exercise})
-            ret.load_data({'plan': plan})
+            ret.load_data({'plan': ret_plans})
         return JsonResponse(ret.json_type())
     else:
         ret.Http_error()
@@ -125,7 +132,9 @@ def get_latest_plan_calories(request):
             inClas += plan.calories_in
             outClas += plan.calories_consume
             calories_minus.append((plan.calories_in - plan.calories_consume))
-            time.append(plan.p_time)
+            # print(plan.p_time)
+            time.append(get_time(str(plan.p_time)))
+            # time.append(plan.p_time)
 
         # ret_plan = serializers.serialize('json', list(plan_list))
 

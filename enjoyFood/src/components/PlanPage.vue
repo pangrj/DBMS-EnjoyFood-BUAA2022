@@ -1,9 +1,10 @@
-<script>
+<script type="text/javascript">
 import {ref, reactive, onMounted} from 'vue'
 import {useRoute} from 'vue-router'
 import request from '../https/axios.js'
 import Comments from './PlanPage/Comments.vue';
 import Header from "./Header.vue"
+import * as echarts from 'echarts'
 
 export default {
     name:'',
@@ -72,8 +73,23 @@ export default {
             })
         };
 
+        function draw(id) {
+		    var chart = echarts.init(document.getElementById(id))
+            chart.setOption({
+                xAxis: {
+                    data: ['摄入', '消耗']
+                },
+                yAxis: {},
+                series: [{
+                    type: 'bar',
+                    data: [100, 80]
+                }]
+            })
+        }
+
         onMounted(() => {
             init();
+            draw("chart");
         });
         
         return {planId, plan, foods, sports, username, planUserName}
@@ -83,6 +99,7 @@ export default {
         }
     },
     methods: {
+
     }
 }
 
@@ -98,13 +115,25 @@ export default {
                 <h3>{{plan.p_description}}</h3>
         </el-header>
         <el-main>
+            <el-container>
+            <el-aside width="50%">
             <h2> foods </h2>
             <div class="scroll-food">
                 <el-scrollbar>
                     <div class="scrollbar-flex-content">
-                        <p v-for="food in foods" :key="food.id" class="scrollbar-demo-item">
+                        <div v-for="food in foods" :key="food.id" class="scrollbar-demo-item">
+                        <el-tooltip 
+                            raw-content
+                            effect="customized">
+                            <template #content>
+                                <p></p>
+                                <span>口味：{{food.d_cuisine}}</span>
+                                <p></p>
+                                <span>卡路里：{{food.d_calories}}</span>
+                            </template>
                         {{ food.d_name }}
-                        </p>
+                        </el-tooltip>
+                        </div>
                     </div>
                 </el-scrollbar>
             </div>
@@ -112,13 +141,28 @@ export default {
             <div class="scroll-sport">
                 <el-scrollbar>
                     <div class="scrollbar-flex-content">
-                        <p v-for="sport in sports" :key="sport.id" class="scrollbar-demo-item">
-                        {{ sport.sp_name }}
-                        </p>
+                        <div v-for="sport in sports" :key="sport.id" class="scrollbar-demo-item">
+                        <el-tooltip 
+                            raw-content
+                            effect="customized">
+                            <template #content>
+                                <p></p>
+                                <span>内容：{{sport.sp_content}}</span>
+                                <p></p>
+                                <span>难度：{{sport.sp_difficulty}}</span>
+                            </template>
+                            {{ sport.sp_name }}
+                        </el-tooltip>
+                        </div>
                     </div>
                 </el-scrollbar>
             </div>
-            <div class="comments">
+            </el-aside>
+            <el-main>
+                <div id="chart" style="width:100%; height:350px;"></div>
+            </el-main>
+            </el-container>
+            <div class="comments"> 
                 <h2> comments </h2>
                 <comments :userName="username" :planId="planId"></comments>
             </div>
@@ -149,7 +193,26 @@ export default {
   background: var(--el-color-danger-light-9);
   color: var(--el-color-danger);
 }
+.el-popper.is-customized {
+  /* Set padding to ensure the height is 32px */
+  padding: 6px 20px;
+  background: linear-gradient(90deg, rgb(159, 229, 151), rgb(204, 229, 129));
+}
+
+.el-popper.is-customized .el-popper__arrow::before {
+  background: linear-gradient(45deg, #b2e68d, #bce689);
+  right: 0;
+}
+.scroll-food{
+    padding-top: 3%;
+    padding-bottom: 5%;
+}
+.scroll-sport{
+    padding-top: 3%;
+    padding-bottom: 5%;
+}
 .comments{
     padding-top: 3%;
 }
+
 </style>

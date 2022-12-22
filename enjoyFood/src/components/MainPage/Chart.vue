@@ -23,7 +23,7 @@ export default {
             console.log(this.userName)
             const response = await request.post(
                 '/user/getPlanCal/',
-                this.userName,
+                {u_name: this.userName},
             );
             console.log("response");
             console.log(response);
@@ -172,7 +172,7 @@ export default {
 <div>
     <el-container class = 'body'>
         <el-aside width="50%">
-            <div id="lineChart" style="width;100%; height: 300px;"></div>
+            <div id="lineChart" style="width:100%; height: 300px;"></div>
         </el-aside>
         <el-main>
             <div id="sectorChart" style="width:100%; height: 300px;"></div>

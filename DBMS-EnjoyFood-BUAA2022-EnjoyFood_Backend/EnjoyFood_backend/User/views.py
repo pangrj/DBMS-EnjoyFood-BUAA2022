@@ -208,6 +208,7 @@ def change_password(request):
             user = user_list[0]
             if u_password == user.get_u_password():
                 user.set_u_password(u_newPassword)
+                user.save()
                 ret.set_code(200)
                 ret.set_message('Change Success!')
             else:
