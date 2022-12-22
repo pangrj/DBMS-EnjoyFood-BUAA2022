@@ -1,3 +1,6 @@
+import re
+
+
 class RET:
     def __init__(self, code, message):
         self.code = code
@@ -38,3 +41,11 @@ class RET:
 
 def get_instance():
     return RET(-1, 'Have not initial the ret message')
+
+
+def get_time(time):
+    print(time)
+    matchObj = re.match('(\d+)-(\d+)-(\d+)\D(\d+):(\d+):(\d+).*', time, re.M | re.I)
+    ret_time = "{}-{} {}:{}".format(matchObj.group(2), matchObj.group(3), matchObj.group(4), matchObj.group(5))
+    print('1111              ', ret_time)
+    return ret_time

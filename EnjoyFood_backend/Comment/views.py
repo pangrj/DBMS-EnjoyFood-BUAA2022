@@ -8,6 +8,7 @@ from Comment.models import CommentPlan
 from Plan.models import Plan
 from User.models import User
 from util import RET
+from util.RET import get_time
 
 
 # Create your views here.
@@ -60,8 +61,11 @@ def get_comment_of_Plan(request):
             for comment in ret_comment:
                 id = comment.get('fields').get('user')
                 u_name = User.objects.get(id=id).get_u_name()
+
+                # get_time(comment.get('fields').get('r_data'))
                 # comment = dict(comment, **{'u_name': u_name})
                 comment['fields'] = dict(comment['fields'], **{'u_name': u_name})
+                comment['fields']['r_data'] = get_time(comment.get('fields').get('r_data'))
             ret.set_code(200)
             ret.set_message("Make A Plan!")
             ret.load_data({'comments': ret_comment})
