@@ -2,20 +2,47 @@
     <!-- 菜品表格 -->
     <el-table :data="getFoodListHandler()" max-height="400" class="table">
         <!-- <el-table-column fixed prop="d_id" label="菜品编号" min-width="10%" class="table-row" align="center"/> -->
-        <el-table-column fixed prop="d_name" label="菜品名称" min-width="20%" class="table-row" align="center"/>
+        <el-table-column fixed prop="d_name" label="菜品名称" min-width="15%" class="table-row" align="center"/>
         <el-table-column prop="d_category" label="菜品种类" min-width="10%" class="table-row" align="center"/>
         <el-table-column prop="d_cuisine" label="菜系" min-width="10%" class="table-row" align="center"/>
         <el-table-column prop="d_calories" label="热量" min-width="10%" class="table-row" align="center"/>
         <el-table-column prop="d_price" label="价格" min-width="10%" class="table-row" align="center"/>
-        <el-table-column label="店铺" min-width="10%" align="center">
-            <template #default>
+        <el-table-column prop="restaurant" label="餐厅" min-width="10%" align="center">
+            <!-- <template #default>
                 <el-button link type="primary" size="small" @click="showLocation">查看详情</el-button>
-            </template>
+            </template> -->
+            <template v-slot="scope">
+            <el-popover placement="right" :width="400" trigger="click">
+                <template #reference>
+                    <el-button class="details" size="small" @click="showLocation(scope.row)">查看详情</el-button>
+                </template>
+                <template #default>
+                    <div class="rich-conent" style="display: flex; gap: 16px; flex-direction: column">
+                        <el-avatar
+                            :size="60"
+                            :src= "dininghall"
+                            style="margin-bottom: 8px"
+                        />
+                        <!-- <div> -->
+                            <p class="re_name" style="margin: 0; font-weight: 1000">
+                                餐厅名称：{{location.re_name}}
+                            </p>
+                            <p class="re_mention" style="margin: 0; font-size: 14px; color: var(--el-color-info)">
+                                餐厅类别：{{location.re_category}}
+                            </p>
+                        <!-- </div> -->
+                            <p class="re_desc" style="margin: 0; font-weight:100">
+                                餐厅描述：{{location.re_description}}
+                            </p>
+                    </div>
+                </template>
+            </el-popover>
+        </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" min-width="10%" slot-scope="scope" class="table-row" align="center">
             <template v-slot="scope">
-                <el-button link type="primary" size="small" @click="chooseFoodHandler(scope.row)" v-show="isChoose">选择菜品</el-button>
-                <el-button link type="primary" size="small" @click="deleteFoodHandler(scope.row)" v-show="isChosen">删除菜品</el-button>
+                <el-button plain type="primary" size="small" @click="chooseFoodHandler(scope.row)" v-show="isChoose">选择菜品</el-button>
+                <el-button plain type="primary" size="small" @click="deleteFoodHandler(scope.row)" v-show="isChosen">删除菜品</el-button>
             </template>
         </el-table-column>
     </el-table>
@@ -25,7 +52,7 @@
 import { mapGetters, mapMutations, mapActions} from 'vuex';
 import { toRaw } from 'vue';
 import axios from "axios";
-import request from '../../https/axios.js'
+import dininghall from "../../assets/dininghall.jpeg"
 
 export default {
     name: "FoodView",
@@ -40,6 +67,8 @@ export default {
             isChoose: false,
             isChosen: false,
             lifeCircle: 1,
+            dininghall : dininghall,
+            location: {}
         }
     },
     computed:{
@@ -71,16 +100,20 @@ export default {
             console.log(array);
             this.deleteFood(array);
         },
-        showLocation() {
-            console.log("show location")
+        showLocation(val) {
+            let array=toRaw(val)
+            console.log(array)
+            axios.post("http://localhost:8000/restaurant/getInfo/", JSON.stringify({
+                re_id: array.restaurant
+            })).then(res => {
+                this.location = res.data.re_info[0].fields
+            })
         }
     },
     beforeMount: function(){
         this.isChoose = (this.type == "choose");
         this.isChosen = (this.type == "chosen");
-        console.log(this.lifeCircle)
         this.lifeCircle = this.getLifeCircle;
-        console.log(this.lifeCircle)
         console.log((this.lifeCircle == 1)?"北航生活圈":"五道口生活圈")
         //获取后端的数据
         axios.post("http://localhost:8000/dish/searchByCircle/", JSON.stringify({
@@ -96,8 +129,8 @@ export default {
 </script>
 
 <style scoped>
+
     .table {
-        width: 80%;
         margin: auto;
     }
     /*最外层透明*/

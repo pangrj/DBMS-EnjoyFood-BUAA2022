@@ -1,7 +1,9 @@
 <script>
 import { useRoute } from "vue-router";
-import {ref, toRaw} from 'vue'
+import {ref} from 'vue'
 import { ElMessageBox } from 'element-plus'
+import { mapGetters } from "vuex";
+import axios from "axios";
 
 import ChooseView from './ChoosePage/ChooseView.vue';
 import ChosenView from './ChoosePage/ChosenView.vue';
@@ -31,39 +33,30 @@ export default {
     ChosenView,
     Header
 },
-    props: {
-        userName:{
-            type:String,
-            default:""
-        }
-    },
+    // props: {
+    //     userName:{
+    //         type:String,
+    //         default:""
+    //     }
+    // },
     data(){
         return {
-            deepSearch: false,
-            searchRequset: '',
-            deepRequest: {
-                category: '',
-                cuisine: '',
-                caloriesMost: '',
-                caloriesLeast: '',
-                priceMost: '',
-                priceLeast: ''
-            },
+            p_name: "",
+            p_description: "",
         }
     },
+    computed:{
+        ...mapGetters(["getChosenFoodId", "getChosenSportId","totalCaloryIn", "totalCaloryOut"]),
+        caloryPrompt(){
+            if(this.totalCaloryIn - this.totalCaloryOut > 200) {
+                console.log("摄入热量超标啦!")
+                return "\n摄入热量超标啦!"
+            } else{
+                return "";
+            }
+        },
+    },
     methods:{
-        // toggleSearch(){
-        //     this.deepSearch = !this.deepSearch
-        // },
-        // ClickUserFilled(){
-        //     console.log(userName);
-        //     this.$router.push({
-        //         path: '/InfomationPage',
-        //         query: {
-        //             userName: userName.value,
-        //         },
-        //     });
-        // },
         handleClose(done) {
             this.$confirm('确认关闭？')
             .then(_ => {
@@ -75,18 +68,40 @@ export default {
             drawer2.value = false
         },
         confirmClick() {
-            ElMessageBox.confirm(`Are you confirm to chose ${radio1.value} ?`)
-                .then(() => {
-                    axios.post("http://localhost:8000/dish/searchByCircle/", JSON.stringify({
-                        u_name: "123456",
-                        c_name: (this.lifeCircle == 1)?"北航生活圈":"五道口生活圈"
+            ElMessageBox.confirm(`是否确实提交选择的菜品和运动？` + this.caloryPrompt,{
+                    // message: h,
+                    confirmButtonText: '确认提交',
+                    cancelButtonText: '我再想想',
+                    type: 'warning',
+                }).then(() => {
+                if(this.p_name == "") {
+                    ElMessage('计划名称不能为空');
+                    return
+                } else if(this.p_description == ""){
+                    ElMessage('计划内容不能为空');
+                    return
+                } else if(this.getChosenFoodId == null && this.getChosenSportId == null) {
+                    ElMessage('运动和食物不能全为空');
+                    return
+                }
+                console.log("queren")
+                    axios.post("http://localhost:8000/plan/addPlan/", JSON.stringify({
+                        u_name: "fire",
+                        d_id: this.getChosenFoodId,
+                        sp_id: this.getChosenSportId,
+                        p_name: this.p_name,
+                        p_description: this.p_description
                     })).then(res => {
-                        console.log(res.data);
-                        this.initFoodList(res.data);
+                        if(res.data.code != 200) {
+                            alert(res.data.message)
+                        } else{
+                            console.log(res.data);
+                        }
                     })
                 })
                 .catch(() => {
                     // catch error
+                    console.log("计划名称或描述不能为空，运动和食物不能全为空")
                 })
         }
     }
@@ -121,7 +136,19 @@ export default {
         <!-- 抽屉内容(弹出方向：ltr,rtl,ttb,btt) -->
         <el-drawer v-model="drawer2" direction="ltr" size="50%"> 
             <template #header>
-                <h4 style="margin-left:16px; text-align: left; font-size: larger; color:antiquewhite;">已选内容</h4>
+                <div>
+                    <el-col :span="23" style="height: 40px; margin-bottom: 10px;">
+                    <el-input v-model="p_name">
+                        <template #prepend>计划名称</template>
+                    </el-input>
+                    </el-col>
+                    <el-col :span="23">
+                    <el-input v-model="p_description">
+                        <template #prepend>计划简介</template>
+                    </el-input>
+                    </el-col>
+                </div>
+                <!-- <h4 style="margin-left:16px; text-align: left; font-size: larger; color:antiquewhite;">已选内容</h4> -->
             </template>
             <template #default>
                 <div>
@@ -143,6 +170,22 @@ export default {
 </template>
 
 <style scoped>
+input {
+    outline-style: none ;
+    border: 1px solid #ccc; 
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+::-webkit-input-placeholder :-ms-input-placeholder ::-moz-placeholder :-moz-placeholder {
+    font-size: larger;
+    color: aquamarine;
+    padding-left: 50px;
+}
+
+:deep(.el-drawer__header){
+    height: 120px;
+}
 .title {
   height: 30px;
 }

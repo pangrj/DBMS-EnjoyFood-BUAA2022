@@ -27,7 +27,9 @@ export default{
 
     methods: {
         async submit(){
-            console.log(this.information.password, this.information.ensurePassword)
+            if(this.information.username.length > 10){
+                
+            }
             if(this.information.password != this.information.ensurePassword){
                 console.log('in if');
                 this.openAlert1();

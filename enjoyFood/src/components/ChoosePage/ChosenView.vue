@@ -1,8 +1,5 @@
 <template>
-    <h4> 已选详情 </h4>
-    <el-button type="info" @click="chooseLifeCircle(1)">五道口生活圈</el-button>
-    <el-button type="info" @click="chooseLifeCircle(2)">知春路生活圈</el-button>
-    <p></p>
+    <h3> 已选详情 </h3>
     <el-button type="success" @click="chooseContent(1)">食物</el-button>
     <el-button type="success" @click="chooseContent(2)">运动</el-button>
     <p></p>
@@ -12,12 +9,12 @@
     </div>
     <!-- 下方的总结栏 -->
     <el-divider border-style="double" />
-    <h4> 热量总结 </h4>
+    <h3> 热量总结 </h3>
     <el-row :gutter="20" class="conclusion">
         <el-col :span="22">
             <el-descriptions  direction="vertical" :column="2" :size="size">
-                <el-descriptions-item label="摄入能量" align="center">500</el-descriptions-item>
-                <el-descriptions-item label="消耗能量" align="center">100</el-descriptions-item>
+                <el-descriptions-item label="摄入能量" align="center">{{totalCaloryIn}}</el-descriptions-item>
+                <el-descriptions-item label="消耗能量" align="center">{{totalCaloryOut}}</el-descriptions-item>
             </el-descriptions>
         </el-col>
     </el-row>
@@ -26,6 +23,8 @@
 <script>
 import FoodView2 from "./FoodView.vue"
 import SportView2 from "./SportView.vue"
+import { mapGetters } from "vuex"
+
 export default{
     name: "ChooseView",
     components: {
@@ -37,6 +36,9 @@ export default{
             contentType: 1, //用于选择展示什么页面
         }
     },
+    computed: {
+        ...mapGetters(["totalCaloryIn", "totalCaloryOut"])
+    },
     methods: {
         chooseContent(type) {
             this.contentType = type;
@@ -47,11 +49,16 @@ export default{
 </script>
 
 <style scoped>
+h3 {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
 .selected {
-    height: 250px;
+    height: 300px;
+    padding-right: 3%;
 }
 .conclusion {
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .el-descriptions__body .el-descriptions__table .el-descriptions-item__cell {

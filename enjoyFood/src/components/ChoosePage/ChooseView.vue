@@ -153,12 +153,14 @@ export default{
 
 <style scoped>
 .radio {
-    color: whitesmoke;
+    color: brown;
     background-color: rgba(239, 231, 224, 0.7);
 }
 
 .list {
     text-align: center;
+    width: 80%;
+    margin: auto;
 }
 
 :deep(.search)  {
