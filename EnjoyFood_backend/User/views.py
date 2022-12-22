@@ -287,6 +287,7 @@ def get_suggest(request):
         else:
             ret.set_code(400)
             ret.set_message('No Such Student!')
+        return JsonResponse(ret.json_type())
     else:
         ret.Http_error()
         return JsonResponse(ret.json_type())
