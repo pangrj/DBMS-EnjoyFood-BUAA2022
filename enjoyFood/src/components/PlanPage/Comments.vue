@@ -8,36 +8,43 @@ export default {
     planId: String,
   },
   setup(props) {
-    const stars = ref(null)
+    const stars = ref(null);
     const colors = ref(['#99A9BF', '#F7BA2A', '#FF9900'])
-    return {stars, colors}
-  },
-  data() {
-    return {
-        comments: [{r_comment:"GOGOGO!", r_data: "12.1", r_star: 3.5, user:{u_name:"John"}},
-            {r_comment:"KFC!", r_data: "12.2", r_star: 4.0, user:{u_name:"Bob"}},
-            {r_comment:"Vme50!", r_data: "12.3", r_star: 4.5, user:{u_name:"John"}},
-            ],
-        curComment: "",
-    };
-  },
-  methods: {
-    async initInfor(){
-            console.log(this.planId.toString())
+    const comments = ref([{r_content:"GOGOGO!", r_data: "12.1", r_star: 3.5, user:{u_name:"John"}},
+            {r_content:"KFC!", r_data: "12.2", r_star: 4.0, user:{u_name:"Bob"}},
+            {r_content:"Vme50!", r_data: "12.3", r_star: 4.5, user:{u_name:"John"}},
+            ]);
+    function initInfor(){
+            console.log(props.planId)
             request({
                 method: 'POST',
                 url: '/comment/getCommentOfPlan/',
-                data: this.planId.toString(),
-                header: {'Content-Type': 'application/json'},
+                data: {p_id: props.planId},
             }).then(function(response) {
                 console.log(response);
-                this.comments = response.data.comments;
-                console.log(this.comments);
+                var commentList = []
+                var field = {}
+                for( var p in response.data.comments){
+                    field = response.data.comments[p].fields
+                    field["p_id"] = response.data.comments[p].pk
+                    console.log(field)
+                    comments.value.push(field)
+                }
+                console.log(comments);
             }).catch(function(error) {
                 console.log("error");
                 console.log(error);
             });
-        },
+        };
+        initInfor();
+    return {stars, colors, comments}
+  },
+  data() {
+    return {
+        curComment: "",
+    };
+  },
+  methods: {
     async send(){
         request({
                 method: 'POST',
@@ -56,7 +63,6 @@ export default {
     }
   },
   mounted(){
-        this.initInfor();
   },
 }
 </script>
@@ -102,7 +108,7 @@ export default {
                 </el-container>
             </el-header>
             <el-main>
-                <p class="content">{{comment.r_comment}}</p>
+                <p class="content">{{comment.r_content}}</p>
             </el-main>
         </el-container>
     </div>

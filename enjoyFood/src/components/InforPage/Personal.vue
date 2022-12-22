@@ -17,16 +17,17 @@ export default({
                 u_weight: 0,
             }
     },
-    setup() {
-        /*if(Data.u_gender=="True"){
-            gender = "male";
+    setup(props) {
+        const gender = ref("")
+        if(props.information.u_gender=="True"){
+            gender.value = "male";
         }else{
-            gender = "female";
-        }*/
+            gender.value = "female";
+        }
+        return {gender}
     },
 })
 
-const gender = ref("male")
 
 </script>
 
@@ -103,9 +104,43 @@ const gender = ref("male")
           <el-icon :style="iconStyle">
             <office-building />
           </el-icon>
-          Address
+          Id
         </div>
       </template>
+      <span>{{information.u_id}}</span>
+    </el-descriptions-item>
+    <el-descriptions-item>
+      <template #label>
+        <div class="cell-item">
+          <el-icon :style="iconStyle">
+            <office-building />
+          </el-icon>
+          Age
+        </div>
+      </template>
+      <span>{{information.u_age}}</span>
+    </el-descriptions-item>
+    <el-descriptions-item>
+      <template #label>
+        <div class="cell-item">
+          <el-icon :style="iconStyle">
+            <office-building />
+          </el-icon>
+          Height
+        </div>
+      </template>
+      <span>{{information.u_height}}</span>
+    </el-descriptions-item>
+    <el-descriptions-item>
+      <template #label>
+        <div class="cell-item">
+          <el-icon :style="iconStyle">
+            <office-building />
+          </el-icon>
+          Weight
+        </div>
+      </template>
+      <span>{{information.u_weight}}</span>
     </el-descriptions-item>
   </el-descriptions>
   </div>

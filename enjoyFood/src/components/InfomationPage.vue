@@ -250,9 +250,10 @@ const handleClose = () => {
                 </el-collapse-item>
                 <el-collapse-item name="3">
                     <template #title style="font-weight: bold">
-                        <p> My Plans </p>
+                        <p> Health </p>
                     </template>
                     <div>
+                        
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="4">

@@ -38,7 +38,7 @@ export default {
                     title:{
                         left:'3%',
                         top:'4%',
-                        text:"weight flows",//标题文本，支持使用 \n 换行。
+                        text:"caloris flows",//标题文本，支持使用 \n 换行。
                     },
 					tooltip: {
 						trigger: 'axis'
@@ -79,7 +79,7 @@ export default {
 					},
  
 					series: [{
-						name: '近一周',
+						name: 'plan',
 						type: 'line', //折线图line;柱形图bar;饼图pie
 						stack: '总量',
                         areaStyle: {

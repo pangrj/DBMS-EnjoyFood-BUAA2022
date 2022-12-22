@@ -58,7 +58,7 @@ export default {
                 <span>{{userName}}</span>
             </li>
             <li>
-                <a @click="clickToInfor()" round>Infor</a>
+                <a @click="clickToInfor()" round>Information</a>
             </li>
             </div>
         </ul>
