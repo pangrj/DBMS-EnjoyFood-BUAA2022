@@ -41,6 +41,8 @@ urlpatterns = [
 
     path('restaurant/', include('Restaurant.urls')),
 
+    path('exerArea/', include('ExerArea.urls')),
+
     # path('user/choose/', choose),
     path('admin/', admin.site.urls),
     re_path(r'^media/(?P<path>.*)$', serve, {"document_root": settings.MEDIA_ROOT})
