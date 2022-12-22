@@ -268,16 +268,16 @@ def get_suggest(request):
                 else:
                     suggest_cal = 10 * user.u_weight + 6.25 * user.u_height - 5 * user.u_age - 161
 
-                BMI = user.u_weight / (math.sqrt(user.u_height / 100))
+                BMI = user.u_weight / ((user.u_height / 100) ** 2)
 
                 if BMI < 18.5:
                     suggestion = 'BMI过低，建议多摄入热量'
                 elif BMI < 23.9:
                     suggestion = 'BMI正常，继续坚持当前生活习惯'
                 elif BMI < 27:
-                    suggestion = 'BMI偏重，建议适当增加运动'
+                    suggestion = 'BMI偏大，建议适当增加运动'
                 else:
-                    suggestion = 'BMI过重，建议多运动调整'
+                    suggestion = 'BMI过大，建议多运动调整'
 
                 ret.set_code(200)
                 ret.set_message('Show Success!')
