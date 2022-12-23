@@ -7,7 +7,7 @@ export default {
     userName:String,
   },
   setup(props){
-    const BMI = ref(0)
+    const BMI = ref(20)
     const suggestion = ref("")
         function init() {
             console.log("init")
@@ -22,12 +22,18 @@ export default {
                 console.log("reponse: ")
                 console.log(response);
                 BMI.value = response.data.BMI;
+                suggestion.value = response.data.suggestion;
+                console.log(BMI.value)
+                console.log(suggestion.value)
+                setTimeout(() => {
+                draw("graph", BMI.value.toFixed(2));
+                }, 200);
             }).catch(function(error) {
                 console.log("error");
                 console.log(error);
             })
         };
-    function draw(id) {
+    function draw(id, value) {
 		    var chart = echarts.init(document.getElementById(id))
             chart.setOption({
                 tooltip: {
@@ -35,7 +41,7 @@ export default {
             },
             series: [
             {
-                name: 'Pressure',
+                name: 'BMI',
                 type: 'gauge',
                 progress: {
                     show: true
@@ -46,15 +52,14 @@ export default {
                 },
             data: [
             {
-                value: BMI.value,
+                value: value,
                 name: 'BMI指数'
             }]
             }]
             })
         }
     onMounted(() => {
-            init();
-            draw("graph");
+            init();        
         });
     return{BMI, suggestion};
   },
@@ -68,15 +73,22 @@ export default {
 <template>
 <div class='body'>
   <el-container>
-    <el-asider width='50%'>
-    </el-asider>
+    <el-aside width="50%">
+        <div class="suggest">
+            <h2>suggest:</h2>
+            <p style="font-size: 1.5em;">{{suggestion}}</p>
+        </div>
+    </el-aside>
     <el-main>  
-        <div id="graph" style="width:200px; height:200px;"></div>
+        <div id="graph" style="width:300px; height:300px;"></div>
     </el-main>
   </el-container>
 </div>
 </template>
 
 <style scoped>
-
+.suggest{
+    width: 100%;
+    padding-top: 20%;
+}
 </style>

@@ -124,5 +124,7 @@ export default {
 <style scoped>
     .table {
         margin: auto;
+        padding-top: 2%;
+        padding-bottom: 3%;
     }
 </style>

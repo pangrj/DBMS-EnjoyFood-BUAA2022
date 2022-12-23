@@ -127,6 +127,7 @@ export default {
         
         
         <p></p>
+        <div style="height:10%"></div>
 
         <!-- 已选按钮 -->
         <el-button type="primary" @click="drawer2 = true">
@@ -200,6 +201,9 @@ input {
     margin-bottom: 0px;
     margin-left: 0px;
     margin-right: 0px;
+    opacity: 0.75;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 .choose_title{
@@ -261,11 +265,11 @@ body {
     color: #333;
     text-align: center;
     /* line-height: 160px; */
-    height: 700px;
+    height: 800px;
     padding-top: 5 !important;
   }
 
   body > .el-container {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
 </style>

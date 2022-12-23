@@ -41,7 +41,7 @@ export default({
         border
     >
     <template #extra>
-      <el-button type="primary">Operation</el-button>
+      <el-button type="primary">Refresh</el-button>
     </template>
     <el-descriptions-item>
       <template #label>

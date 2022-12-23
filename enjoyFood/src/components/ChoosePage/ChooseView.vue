@@ -11,7 +11,7 @@
     <el-button type="success" @click="chooseContent(1)">食物</el-button>
     <el-button type="success" @click="chooseContent(2)">运动</el-button>
     <!-- 搜索栏 -->
-    <div style="margin-top: 5px;">
+    <div style="margin-top: 2%;">
         <el-input 
             class = "search"
             v-model="searchRequset"
@@ -161,6 +161,7 @@ export default{
     text-align: center;
     width: 80%;
     margin: auto;
+    margin-top: 3%;
 }
 
 :deep(.search)  {

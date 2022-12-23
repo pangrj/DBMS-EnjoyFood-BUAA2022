@@ -183,6 +183,10 @@ const handleClose = () => {
 <div>
     <Header v-bind:userName="userName"/>
   <div class="InfomationPage">
+    <div style="height:175px" class="back"></div>
+    <el-divider>
+      <el-icon><star-filled /></el-icon>
+    </el-divider>
     <el-container>
     <el-header>
     <div class="infoBox">
@@ -221,7 +225,7 @@ const handleClose = () => {
     </div>
     </el-header>
     <el-container class = "down">
-    <el-aside width="20%">
+    <el-aside width="15%">
     </el-aside>
 
     <el-main>
@@ -253,7 +257,7 @@ const handleClose = () => {
                     <template #title style="font-weight: bold">
                         <p> Health </p>
                     </template>
-                    <div>
+                    <div style="width=100%; height=100%">
                         <BMI :userName="userName"></BMI>
                     </div>
                 </el-collapse-item>
@@ -267,7 +271,7 @@ const handleClose = () => {
             </el-collapse>
         </div>
     </el-main>
-    <el-aside width="20%">
+    <el-aside width="15%">
     </el-aside>
     </el-container>
     </el-container>
@@ -405,14 +409,15 @@ const handleClose = () => {
 
 <style>
 .InfomationPage{
-    background-color: #F8F8F8;
-    background: url("./src/assets/info4.jpg");
-    padding-top: 3%;
+    background-color: #fffefe;
     background-size: cover;
     opacity: 0.75;
     width: 100%;
     height: 100%;
     position: fixed;
+}
+.back{  
+    background: url("./src/assets/title.jpg");
 }
 .down{
     padding-top: 3%;

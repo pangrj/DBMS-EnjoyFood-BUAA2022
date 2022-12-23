@@ -1,4 +1,5 @@
 <template>
+<div class="body">
     <!-- 菜品表格 -->
     <el-table :data="getFoodListHandler()" max-height="400" class="table">
         <!-- <el-table-column fixed prop="d_id" label="菜品编号" min-width="10%" class="table-row" align="center"/> -->
@@ -46,6 +47,7 @@
             </template>
         </el-table-column>
     </el-table>
+</div>
 </template>
 
 <script>
@@ -129,18 +131,19 @@ export default {
 </script>
 
 <style scoped>
-
     .table {
         margin: auto;
+        padding-top: 2%;
+        padding-bottom: 3%;
     }
     /*最外层透明*/
-    :deep(.el-table, .el-table__expanded-cell, .header-cell-style, .el-table-column){
+    /*:deep(.el-table, .el-table__expanded-cell, .header-cell-style, .el-table-column){
         background-color: rgba(239, 231, 224, 0.7);
         text-align: center;
-    }
+    }*/
     /* 表格内背景颜色 */
     :deep(.el-table__header-wrapper .el-table th, .el-table tr, .el-table td ){
-        background-color: rgba(239, 231, 224, 0.7);
+        background-color: rgba(221, 214, 208, 0.7);
         text-align: center;
     }
 
