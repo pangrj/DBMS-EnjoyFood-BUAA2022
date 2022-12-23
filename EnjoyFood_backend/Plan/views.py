@@ -132,11 +132,7 @@ def get_latest_plan_calories(request):
             inClas += plan.calories_in
             outClas += plan.calories_consume
             calories_minus.append((plan.calories_in - plan.calories_consume))
-            # print(plan.p_time)
             time.append(get_time(str(plan.p_time)))
-            # time.append(plan.p_time)
-
-        # ret_plan = serializers.serialize('json', list(plan_list))
 
         ret.set_code(200)
         ret.set_message('get calories success')

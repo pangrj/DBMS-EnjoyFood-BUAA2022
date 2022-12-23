@@ -134,13 +134,6 @@ def upLoadImg(request):
         user.u_avatar = img
         user.save()
         avatar_addr = user.get_avatar_url()
-        '''image_path = os.path.join(MEDIA_ROOT, img_name)
-        with open(image_path, 'wb') as fp:
-            # 遍历图片的块数据（切块的传图片）
-            for i in img.chunks():
-                # 将图片数据写入自己的那个文件
-                fp.write(i)'''
-
         ret.set_code(200)
         ret.set_message('success')
         ret.load_data({'img_path': avatar_addr})
@@ -162,7 +155,6 @@ def get_infor(request):
             user = user_list[0]
             ret.set_code(200)
             ret.set_message('get Infor success')
-
             ret.load_data({'u_name': user.get_u_name()})
             ret.load_data({'u_height': user.get_u_height()})
             ret.load_data({'u_weight': user.get_u_weight()})
@@ -172,7 +164,6 @@ def get_infor(request):
             ret.load_data({'u_email': user.u_email})
             ret.load_data({'u_photo': user.get_avatar_url()})
             ret.load_data({'id': user.get_u_id()})
-
         else:
             ret.set_code(400)
             ret.set_message('No Such Student')
