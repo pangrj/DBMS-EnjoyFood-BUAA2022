@@ -19,9 +19,9 @@ class Plan(models.Model):
         return self.id
 
 
-class CircleOfPlan(models.Model):
-    plan = models.ForeignKey(Plan, on_delete=models.CASCADE, null=False)
-    circle = models.ForeignKey(LifeCircle, on_delete=models.CASCADE, null=False)
+# class CircleOfPlan(models.Model):
+#     plan = models.ForeignKey(Plan, on_delete=models.CASCADE, null=False)
+#     circle = models.ForeignKey(LifeCircle, on_delete=models.CASCADE, null=False)
 
 
 class PlanOfDish(models.Model):
