@@ -25,6 +25,17 @@ export default {
         const openAlert2 = () => {
             ElMessage.error('Wrong Password !')
         }
+        /*function init() {
+            console.log("init")
+            request({
+                method: 'POST',
+                url: '/Hello/',
+                }
+            ).then(function(response) {
+                console.log(response)
+            });
+        }
+        init();*/
         return{ inputMode, labelPosition, openAlert1, openAlert2 }
     },
     methods: {
@@ -74,7 +85,7 @@ export default {
         <div title="WelcomeBox">
             <h1 class='welcome'> 最是美食， 不可辜负 </h1>
             <div class="runningPicture">
-            <el-carousel height="175px">
+            <el-carousel height="190px">
                 <el-carousel-item v-for="item in 4" :key="item">
                     <h3 class="small justify-center" text="2xl">{{ item }}</h3>
                 </el-carousel-item>
@@ -107,7 +118,7 @@ export default {
                     </template>
                 </el-input>
                 </div>
-                <div style="margin: 20px 0" />
+                <div style="margin: 30px 0" />
                 <el-button @click="onClickLogin()" type="login" round style="margin-right: 15px"><p>login</p></el-button>
                 <el-button @click="onClickSignUp()" type="login" round><p>signUp</p></el-button>
             <!--/el-card-->
@@ -177,16 +188,24 @@ export default {
 .el-carousel__item h3 {
   color: #475669;
   opacity: 0.75;
-  line-height: 150px;
+  line-height: 170px;
   margin: 0;
   text-align: center;
 }
 
-.el-carousel__item:nth-child(2n) {
+.el-carousel__item:nth-child(3n) {
   background-color: #99a9bf;
+  background-image: url("./src/assets/肉末粉条.png");
+  background-size: 100%;
 }
 
-.el-carousel__item:nth-child(2n+1) {
+.el-carousel__item:nth-child(3n+2) {
+  background-color: #99a9bf;
+  background-image: url("./src/assets/糖醋里脊.png");
+  background-size: 100%;
+}
+
+.el-carousel__item:nth-child(3n+1) {
   background-color: #d3dce6;
   background-image: url("./src/assets/yimian.jpg");
   background-size: 100%;

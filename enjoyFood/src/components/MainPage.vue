@@ -1,7 +1,9 @@
 <script>
 import { useRoute } from "vue-router";
+import { reactive, ref } from 'vue'
+import img from '../assets/yimian1.jpg' 
+import request from '../https/axios.js'
 
-import {ref} from 'vue'
 const userName = ref('')
 const passWord = ref('')
 
@@ -16,7 +18,44 @@ export default {
         let route = useRoute()
         userName.value = route.query.userName;
         console.log(userName);
-        return {userName};
+
+        const imgRef = ref(img)
+        const plans = ref([])
+        const num = ref(0)
+        var numV = 0
+        function initInfo(){
+          console.log("init")
+          console.log(userName);
+            request({
+                method: 'POST',
+                url: '/plan/suggest/',
+                data: {   
+                    u_name: userName.value,
+                    }
+                }
+            ).then(function(response) {
+                console.log("reponse: ")
+                console.log(response); 
+                var datas = response.data.plans;
+                var field = {}
+                for(var i in datas){
+                    field = datas[i].fields
+                    field["p_id"] = datas[i].pk
+                    plans.value.push(field);
+                    numV = numV + 1
+                }
+                num.value = numV
+                console.log(plans)
+                console.log("num")
+                console.log(numV)
+            }).catch(function(error) {
+                console.log("error");
+                console.log(error);
+            })
+          };
+        initInfo();
+
+        return {imgRef, userName, plans, numV};
     },
     components: {
         Header, 
@@ -25,6 +64,17 @@ export default {
         Graph,
         HistoryPlans,
     },
+    methods: {
+        toPlanPage(pid){
+        this.$router.push({
+                path: '/PlanPage',
+                query: {
+                    planId: pid,
+                    userName: this.userName,
+                },
+            });    
+        },
+    }
 }
 </script>
 
@@ -38,9 +88,28 @@ export default {
                 <el-header>
                     <div title='chart'><Chart v-bind:userName="userName"/></div>
                 </el-header>
-                <el-main>
+                <el-main style="margin-top: 5%; margin-right: 12%; margin-left: 5%">
                     <div class='cards'>
-                        <RecommendCard />
+                        <!--RecommendCard v-bind:userName="userName"/-->
+                        <el-scrollbar>
+                            <div class="scrollbar-flex-content">
+                            <p v-for="plan in plans" :key="plan.p_id" class="scrollbar-demo-item">
+                            <el-card :body-style="{ padding: '0px' }" shadow="hover">
+                                <img
+                                    :src= "imgRef"
+                                    class="image"
+                                />
+                                <div style="padding:3px">
+                                <h3>{{plan.p_name}}</h3> 
+                                <span >{{plan.p_description}}</span> 
+                                <div class="bottom">
+                                <el-button class="button" @click="toPlanPage(plan.p_id)"><p>更多</p></el-button>
+                                </div>
+                                </div>
+                            </el-card>
+                            </p>
+                            </div>
+                        </el-scrollbar>
                     </div>
                 </el-main>
             </el-container>
@@ -76,8 +145,47 @@ Graph{
 }
 .myplans{
     margin-top: 15%;
+    margin-right: 15%;
 }
 .cards{
     margin-left: 5%;
+}
+.time {
+  font-size: 12px;
+  color: #999;
+}
+.scrollbar-flex-content {
+  display: flex;
+}
+.scrollbar-demo-item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  height: 260px;
+  margin: 25px;
+  text-align: center;
+  border-radius: 4px;
+  background: var(--el-color-danger-light-9);
+  color: var(--el-color-danger);
+}
+
+.bottom {
+  margin-top: 13px;
+  line-height: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button {
+  min-height: auto;
+  margin-right: 15%;
+}
+
+.image {
+  width: 100%;
+  display: block;
 }
 </style>

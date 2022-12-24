@@ -7,6 +7,10 @@ import Header from './Header.vue'
 import Personal from './InforPage/Personal.vue'
 import BMI from './InforPage/BMI.vue'
 import { ElMessage } from 'element-plus'
+import { useDark, useToggle } from '@vueuse/core'
+
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
 
 export default {
     components: { Header, Personal, BMI },
@@ -33,6 +37,7 @@ export default {
 
         const dialogVisibleEditInfo = ref(false);
         const dialogVisibleChangePass = ref(false);
+        const dialogVisibleSettings = ref(false);
 
         const information = reactive( {
                 u_name: userName,
@@ -88,7 +93,7 @@ export default {
         const settings = reactive( {
             NightMode: false, 
         });
-        return {userName, dialogVisibleEditInfo, dialogVisibleChangePass, 
+        return {userName, dialogVisibleEditInfo, dialogVisibleChangePass, dialogVisibleSettings,
                 information, newPassword, settings,
                 labelPosition, openAlert1, openAlert2,openAlert3, openSuccess};
     },
@@ -165,6 +170,11 @@ export default {
             this.information.u_photo = file;
             console.log(file)
         },
+        async logout(){
+            this.$router.push({
+                    path: '/',
+                });
+        }
     }
 }
 
@@ -213,7 +223,7 @@ const handleClose = () => {
                 </el-button>
             </div>
             <div class="rightItem">
-                <el-button plain @click="ClickSettings()">
+                <el-button plain @click="dialogVisibleSettings = true">
                     <el-icon class="setIcon"><Setting /></el-icon>
                     Settings
                 </el-button>
@@ -394,6 +404,21 @@ const handleClose = () => {
             Confirm
             </el-button>
         </span>
+        </template>
+    </el-dialog>
+
+    <el-dialog
+        v-model="dialogVisibleSettings"
+        title="设置"
+        width="30%"
+        :before-close="handleClose"
+    >
+        <template #footer>
+            <span class="dialog-footer">
+            <el-button type="primary" @click="logout()" style="margin-right:43%">
+            登出
+            </el-button>
+            </span>
         </template>
     </el-dialog>
     </div>

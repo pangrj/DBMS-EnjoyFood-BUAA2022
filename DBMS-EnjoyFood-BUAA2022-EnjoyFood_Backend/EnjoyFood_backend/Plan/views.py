@@ -174,3 +174,49 @@ def delete_plan(request):
     else:
         ret.Http_error()
         return JsonResponse(ret.json_type())
+
+
+def get_suggest(request):
+    ret = RET.get_instance()
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        u_name = data.get('u_name')
+
+        user_list = User.objects.filter(u_name=u_name)
+
+        if len(user_list) == 0:
+            ret.set_code(400)
+            ret.set_message('No Such User!')
+        else:
+            BMI = user_list[0].get_BMI()
+
+            plan_list = list(Plan.objects.all())
+            ret_plans = json.loads(serializers.serialize('json', list(plan_list)))
+            # ret_plans.sort(key=lambda plan: abs(BMI - User.objects.get(plan['fields']['user']).get_BMI()))
+            # print(type(ret_plans))
+
+            for plan in ret_plans:
+                user = User.objects.get(id=plan['fields']['user'])
+
+                plan['fields'] = dict(plan['fields'], **{'u_name': user.get_u_name()})
+                plan['fields']['p_time'] = get_time(plan.get('fields').get('p_time'))
+
+
+            # for plan in ret_plans:
+            #     # print(plan)
+            #     # print(plan['fields']['user'])
+            #     user = User.objects.get(id=plan['fields']['user'])
+            #     # print(user)
+            #     print('sdadas', User.objects.get(id=plan['fields']['user']).get_BMI())
+            #     print(abs(BMI - User.objects.get(id=plan['fields']['user']).get_BMI()))
+
+            sorted(ret_plans, key=lambda plan:
+            abs(BMI - User.objects.get(id=plan['fields']['user']).get_BMI()))
+
+            ret.set_code(200)
+            ret.set_message('Suggest Success!')
+            ret.load_data({'plans': ret_plans})
+        return JsonResponse(ret.json_type())
+    else:
+        ret.Http_error()
+        return JsonResponse(ret.json_type())

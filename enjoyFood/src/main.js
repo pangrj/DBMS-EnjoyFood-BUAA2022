@@ -8,6 +8,7 @@ import axios from 'axios'
 import store from './store'
 import V3Scroll from 'v3-scroll'
 import "v3-scroll/dist/library.mjs.css";
+import 'element-plus/theme-chalk/dark/css-vars.css'
 
 import App from './App.vue'
 

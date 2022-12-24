@@ -9,31 +9,40 @@ export default({
     },
     setup(props) {
         const imgRef = ref(img)
-        return{imgRef}
-    },
-    date:{
-        plans: [{name: "意面计划", time: "12-17 10:38"},
-            {name: "考试后狠狠奖励自己", time: "12-18 23.11"}]
-    },
-    methods: {
-      async initInfo(){
-        console.log("init")
+        
+        const plans = ref([])
+        function initInfo(){
+          console.log("init")
+          console.log(props.userName);
             request({
                 method: 'POST',
-                url: '/user/getInfor/',
+                url: '/plan/suggest/',
                 data: {   
-                    p_id: this.planId,
+                    u_name: props.userName,
                     }
                 }
             ).then(function(response) {
                 console.log("reponse: ")
                 console.log(response); 
-                this.planName = response.data.code.p_name;
+                var field = {}
+                for(var i=0; i < response.data.plans.length; i++){
+                    field = response.data.p_Array[i].fields
+                    field["p_id"] = response.data.p_Array[i].pk
+                    plans[i] =(field);
+                }
+                console.log(plans)
             }).catch(function(error) {
                 console.log("error");
                 console.log(error);
             })
-      },
+          };
+        initInfo();
+        return{imgRef, plans}
+    },
+    data:{
+
+    },
+    methods: {
       toPlanPage(pid){
         this.$router.push({
                 path: '/PlanPage',
@@ -43,18 +52,37 @@ export default({
                 },
             });    
     },
-    }
+    },
 })
 
 </script>
 
 <template>
-  <el-row>
+<el-scrollbar>
+    <div class="scrollbar-flex-content">
+      <p v-for="item in 5" :key="item" class="scrollbar-demo-item">
+        <el-card :body-style="{ padding: '0px' }" shadow="hover">
+        <img
+          :src= "imgRef"
+          class="image"
+        />
+        <div style="padding:4px">
+          <h3 >努力干饭</h3> 
+          <span >Cedric 发布于 12-8 18:12</span> 
+          <div class="bottom">
+            <el-button text class="button" @click="toPlanPage(this.planId)">更多信息</el-button>
+          </div>
+        </div>
+      </el-card>
+      </p>
+    </div>
+  </el-scrollbar>
+  <!--el-row>
     <el-col
-      v-for="(o, index) in 2"
+      v-for="(o, index) in 3"
       :key="o"
       :span="8"
-      :offset="index > 0 ? 2 : 0"
+      :offset="index > 0 ? 3 : 0"
     >
       <el-card :body-style="{ padding: '0px' }" shadow="hover">
         <img
@@ -72,13 +100,29 @@ export default({
         </div>
       </el-card>
     </el-col>
-  </el-row>
+  </!--el-row-->
 </template>
 
 <style>
 .time {
   font-size: 12px;
   color: #999;
+}
+.scrollbar-flex-content {
+  display: flex;
+}
+.scrollbar-demo-item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  height: 240px;
+  margin: 20px;
+  text-align: center;
+  border-radius: 4px;
+  background: var(--el-color-danger-light-9);
+  color: var(--el-color-danger);
 }
 
 .bottom {

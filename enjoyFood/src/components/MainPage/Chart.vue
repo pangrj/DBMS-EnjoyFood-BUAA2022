@@ -40,7 +40,10 @@ export default {
             this.sectorPartName =  ["takeIn", "cost", "left"]
             this.sectorPartData = [toRaw(takein), toRaw(consume), toRaw(takein - consume)]
             console.log(toRaw(this.lineOpinionData))
-            this.drawLine('lineChart');
+            setTimeout( () => {
+                this.drawLine("lineChart");
+            }, 10);
+            
         },
         drawLine(id) {
 				this.lineCharts = echarts.init(document.getElementById(id))
@@ -166,7 +169,9 @@ export default {
         },
 	},
     mounted(){
-        this.initInfor();
+        setTimeout( () => {
+            this.initInfor()
+            }, 100);
         console.log(this.lineOpinionData)
         console.log(this.lineTimeData)
         console.log(["1","2","3"])
