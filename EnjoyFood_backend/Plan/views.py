@@ -195,6 +195,13 @@ def get_suggest(request):
             # ret_plans.sort(key=lambda plan: abs(BMI - User.objects.get(plan['fields']['user']).get_BMI()))
             # print(type(ret_plans))
 
+            for plan in ret_plans:
+                user = User.objects.get(id=plan['fields']['user'])
+
+                plan['fields'] = dict(plan['fields'], **{'u_name': user.get_u_name()})
+                plan['fields']['p_time'] = get_time(plan.get('fields').get('p_time'))
+
+
             # for plan in ret_plans:
             #     # print(plan)
             #     # print(plan['fields']['user'])
