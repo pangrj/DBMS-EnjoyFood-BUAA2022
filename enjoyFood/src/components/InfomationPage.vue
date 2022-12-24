@@ -141,6 +141,7 @@ export default {
             console.log(res);  
             this.openSuccess();
             this.ava_path = res.img_path;
+            this.$router.go(0);
         },
         async changePassword(){
             console.log(this.newPassword);
