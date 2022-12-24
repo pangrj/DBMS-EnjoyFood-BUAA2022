@@ -86,7 +86,7 @@ export default {
                     return
                 }
                 console.log("queren")
-                    axios.post("http://localhost:8000/plan/addPlan/", JSON.stringify({
+                    axios.post("http://59.110.212.35:8000/plan/addPlan/", JSON.stringify({
                         u_name: this.userName,
                         d_id: this.getChosenFoodId,
                         sp_id: this.getChosenSportId,

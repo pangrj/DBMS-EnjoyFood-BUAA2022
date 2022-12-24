@@ -83,42 +83,42 @@ export default{
             var content = {}
             switch(this.radio) {
                 case 1: 
-                    url = "http://localhost:8000/dish/searchByName/";
+                    url = "http://59.110.212.35:8000/dish/searchByName/";
                     content = {
                         u_name: this.userName,
                         d_name: this.searchRequset
                     };
                     break;
                 case 2:
-                    url = "http://localhost:8000/dish/searchByCategory/";
+                    url = "http://59.110.212.35:8000/dish/searchByCategory/";
                     content = {
                         u_name: this.userName,
                         d_category: this.searchRequset
                     };
                     break;
                 case 3:
-                    url = "http://localhost:8000/dish/searchByCalorie/"
+                    url = "http://59.110.212.35:8000/dish/searchByCalorie/"
                     content = {
                         u_name: this.userName,
                         d_calories: this.searchRequset
                     }
                     break;
                 case 4:
-                    url = "http://localhost:8000/dish/searchByRestaurant/"
+                    url = "http://59.110.212.35:8000/dish/searchByRestaurant/"
                     content = {
                         u_name: this.userName,
                         re_name: this.searchRequset
                     }
                     break;
                 case 6:
-                    url = "http://localhost:8000/sport/searchByDifficulty/"
+                    url = "http://59.110.212.35:8000/sport/searchByDifficulty/"
                     content = {
                         u_name: this.userName,
                         sp_difficulty: this.searchRequset
                     }
                     break;
                 case 7:
-                    url = "http://localhost:8000/sport/searchByCalorie/"
+                    url = "http://59.110.212.35:8000/sport/searchByCalorie/"
                     content = {
                         u_name: this.userName,
                         sp_calories: this.searchRequset

@@ -94,7 +94,7 @@ export default {
         showLocation(val) {
             let array=toRaw(val)
             console.log(array)
-            axios.post("http://localhost:8000/exerArea/getInfo/", JSON.stringify({
+            axios.post("http://59.110.212.35:8000/exerArea/getInfo/", JSON.stringify({
                 l_id: array.exerArea
             })).then(res => {
                 this.location = res.data.re_info[0].fields
@@ -108,7 +108,7 @@ export default {
         this.lifeCircle = this.getLifeCircle;
         console.log((this.lifeCircle == 1)?"北航生活圈":"五道口生活圈")
         //获取后端的数据
-        axios.post("http://localhost:8000/sport/searchByCircle/", JSON.stringify({
+        axios.post("http://59.110.212.35:8000/sport/searchByCircle/", JSON.stringify({
             u_name: 123456,
             c_name: (this.lifeCircle == 1)?"北航生活圈":"五道口生活圈"
         })).then(res => {
