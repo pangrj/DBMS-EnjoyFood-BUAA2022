@@ -124,7 +124,6 @@ export default {
 
             let formData = new FormData();
             formData.append('u_name', this.information.u_name);
-            formData.append('u_password', this.information.u_password);
             formData.append('u_height', this.information.u_height);
             formData.append('u_weight', this.information.u_weight);
             formData.append('u_age', this.information.u_age);

@@ -70,7 +70,7 @@ export default createStore({
         //console.log(fields)
         foodContent.push(fields)
       }
-      console.log(foodContent)
+      console.log(JSON.stringify(foodContent))
       state.foodList = foodContent;
     },
     initSportList(state, sport){
@@ -83,7 +83,7 @@ export default createStore({
         //console.log(fields)
         sportContent.push(fields)
       }
-      console.log(sportContent)
+      console.log(JSON.stringify(sportContent))
       state.sportList = sportContent;
     },
     chooseFood(state, food) { //传入一个list，表示一个food的所有信息
@@ -108,13 +108,13 @@ export default createStore({
     },
     changeLifeCircle(state, circle) {
       state.lifeCircle = circle;
+    },
+    clearChosenFood(state) {
+      state.chosenFood = []
+    },
+    clearChosenSport(state) {
+      state.chosenSport = []
     }
-  },
-  clearChosenFood(state) {
-    state.chosenFood = []
-  },
-  clearChosenSport(state) {
-    state.chosenSport = []
   },
   actions: {
     // asyncinitFoodList({commit}) {
