@@ -67,12 +67,12 @@ export default {
         </div>
         <el-container>
         <el-header class = 'head'>
-            <h1 class='Head'> Welcome to EnjoyFood! </h1>
+            <h1 class='Head'> Welcome to EnjoyLives! </h1>
         </el-header>
         <el-container>
         <el-aside width="50%">
         <div title="WelcomeBox">
-            <h1 class='welcome'>Some of New Delicious Food </h1>
+            <h1 class='welcome'> 最是美食， 不可辜负 </h1>
             <div class="runningPicture">
             <el-carousel height="175px">
                 <el-carousel-item v-for="item in 4" :key="item">
@@ -86,7 +86,7 @@ export default {
         <div title="LoginBox" v-if="inputMode=='Login'">
             <div class = "InputBox">
             <!--el-card shadow="always"w-->
-                <h1 class="title">登录点菜系统</h1>
+                <h1 class="title">登录系统</h1>
                 <div style="margin: 20px 0"/>
                 <div class = "InputBody">
                 <el-input 
@@ -169,7 +169,7 @@ export default {
 .runningPicture{
     padding-left: 15%;
     padding-right: 10%;
-    padding-top: 5%;
+    padding-top: 3%;
 }
 .demonstration {
   color: var(--el-text-color-secondary);
@@ -195,18 +195,18 @@ export default {
     font-weight: 900;
     margin-bottom: 20px;
     font-size: 200%;
-    color: black;
+    color: white;
 }
 .welcome{
     font-weight: 700;
     font-size: 150%;
-    color: black;
+    color: rgb(255, 255, 255);
 }
 .title{
     font-weight: 700;
     margin-right: 15px;
     font-size: 150%;
-    color: black;
+    color: white;
 }
 h1{
     font-weight: 800;

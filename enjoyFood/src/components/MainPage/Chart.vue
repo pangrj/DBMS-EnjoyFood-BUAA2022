@@ -12,8 +12,8 @@ export default {
     },
     data(){
         return {
-            lineTimeData: ["11.5", "11.21", "11.23", "11.30", "12.5", "12.6"], 
-            lineOpinionData: ["100", "80", "10", "-50", "-30", "70"],
+            lineTimeData: [], 
+            lineOpinionData: [],
             sectorPartName: ["takeIn", "cost", "left"],
             sectorPartData: [300, 100, 200],
         }
@@ -27,10 +27,14 @@ export default {
             );
             console.log("response");
             console.log(response);
-            this.lineTimeData = ["11.5", "11.21", "11.23", "11.30", "12.5", "12.6"]
-            this.lineOpinionData = ["100", "80", "10", "-50", "-30", "70"]
+            for(var i=0; i<response.data.num; i++){
+                var field = response.data.cals_in_list[i]-response.data.cals_minus_list[i];
+                this.lineOpinionData[i] = (field);
+                this.lineTimeData[i] = (response.data.time[i])
+            }
             this.sectorPartName =  ["takeIn", "cost", "left"]
             this.sectorPartData = [300, 100, 200]
+            console.log(this.lineOpinionData.Target)
         },
         drawLine(id) {
 				this.lineCharts = echarts.init(document.getElementById(id))
@@ -38,7 +42,7 @@ export default {
                     title:{
                         left:'3%',
                         top:'4%',
-                        text:"caloris flows",//标题文本，支持使用 \n 换行。
+                        text:"卡路里 flows",//标题文本，支持使用 \n 换行。
                     },
 					tooltip: {
 						trigger: 'axis'
@@ -47,7 +51,7 @@ export default {
                         align:'right',//文字在前图标在后
                         left:'3%',
                         top:'5%',
-						data: ['week']
+						data: ['Time']
 					},
 					grid: {
                         top:'15%',
@@ -105,7 +109,7 @@ export default {
 							}
                             
                         },
-						data: this.lineOpinionData
+						data: this.lineOpinionData.Target
 					}]
 				})
 			},
@@ -157,6 +161,9 @@ export default {
 	},
     mounted(){
         this.initInfor();
+        console.log(this.lineOpinionData)
+        console.log(this.lineTimeData)
+        console.log(["1","2","3"])
         this.$nextTick(function() {
 		this.drawLine('lineChart');
         setTimeout(() => {
@@ -172,10 +179,10 @@ export default {
 <div>
     <el-container class = 'body'>
         <el-aside width="50%">
-            <div id="lineChart" style="width:100%; height: 300px;"></div>
+            <div id="lineChart" style="width:90%; height: 350px;"></div>
         </el-aside>
         <el-main>
-            <div id="sectorChart" style="width:100%; height: 300px;"></div>
+            <div id="sectorChart" style="width:90%; height: 300px;"></div>
         </el-main>
     </el-container>
 </div>
@@ -184,5 +191,6 @@ export default {
 <style scoped>
 .body{
     padding-top: 7%;
+    padding-left: 7%;
 }
 </style>

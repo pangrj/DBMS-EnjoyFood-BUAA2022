@@ -15,22 +15,60 @@ export default createStore({
     getChosenFood(state) {
       return state.chosenFood;
     },
+    getChosenFoodId(state) {
+      var ids = []
+      for(var p in state.chosenFood) {
+        ids.push(state.chosenFood[p].d_id)
+      }
+      console.log("所有d_id：")
+      console.log(ids)
+      return ids
+    },
     getSportList(state) {
 			return state.sportList;
 		},
     getChosenSport(state) {
       return state.chosenSport;
     },
+    getChosenSportId(state) {
+      var ids = []
+      for(var p in state.chosenSport) {
+        ids.push(state.chosenSport[p].sp_id)
+      }
+      console.log("所有sp_id：")
+      console.log(ids)
+      return ids
+    },
     getLifeCircle(state) {
       return state.lifeCircle;
-    }
+    },
+    //计算总选中的热量
+    totalCaloryIn(state) {
+      var total = 0;
+      for(var p in state.chosenFood) {
+        total += state.chosenFood[p].d_calories;
+      }
+      return total;
+    },
+    totalCaloryOut(state) {
+      var total = 0;
+      for(var p in state.chosenSport) {
+        total += state.chosenSport[p].sp_calories;
+      }
+      return total;
+    },
   },
   mutations: {
     initFoodList(state, food){
+      //console.log(food)
       var foodContent = []
       var dishes = food.dishes
+      var fields = {}
       for(var p in dishes) {
-        foodContent.push(dishes[p].fields)
+        fields = dishes[p].fields
+        fields["d_id"] = dishes[p].pk
+        //console.log(fields)
+        foodContent.push(fields)
       }
       console.log(foodContent)
       state.foodList = foodContent;
@@ -38,8 +76,12 @@ export default createStore({
     initSportList(state, sport){
       var sportContent = []
       var sports = sport.sports
+      var fields = {}
       for(var p in sports) {
-        sportContent.push(sports[p].fields)
+        fields = sports[p].fields
+        fields["sp_id"] = sports[p].pk
+        //console.log(fields)
+        sportContent.push(fields)
       }
       console.log(sportContent)
       state.sportList = sportContent;

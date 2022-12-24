@@ -52,7 +52,7 @@ export default {
                 },
             data: [
             {
-                value: value,
+                value: BMI.value.toFixed(2),
                 name: 'BMI指数'
             }]
             }]
@@ -75,7 +75,7 @@ export default {
   <el-container>
     <el-aside width="50%">
         <div class="suggest">
-            <h2>suggest:</h2>
+            <h2>建议:</h2>
             <p style="font-size: 1.5em;">{{suggestion}}</p>
         </div>
     </el-aside>

@@ -89,7 +89,7 @@ const handleClose = () => {
 <template>
 <div class = 'SignupPage'>
     <div class = "SignUpBox">
-        <h1 class="title">注册点菜系统</h1>
+        <h1 class="title">注册系统</h1>
         <div style="margin: 20px 0"/>
         <div class = "SignUpBox">
              <el-form

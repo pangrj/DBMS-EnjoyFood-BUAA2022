@@ -44,21 +44,21 @@ export default {
             <div class="left">
             <li  style="padding-left:%5; margin-right:%200">
                 <el-icon><KnifeFork /></el-icon>
-                <a v-on:click="clickToMain()">MainPage</a>
+                <a v-on:click="clickToMain()">广场页面</a>
             </li>
-            <li  style="margin-left:5px; margin-right:30px">
-                <a v-on:click="clickToChoose()">MakePlan</a>
+            <li  style="margin-left:20px; margin-right:30px">
+                <a v-on:click="clickToChoose()">制订计划</a>
             </li>
             </div>
             <li>
-                <span style="margin-left:100px; margin-right:100px">Enjoy Food !</span>
+                <span style="font-weight:550 ;margin-left:100px; margin-right:100px">Enjoy Lives !</span>
             </li>
             <div class="right">
             <li>
                 <span>{{userName}}</span>
             </li>
             <li>
-                <a @click="clickToInfor()" round>Information</a>
+                <a @click="clickToInfor()" round>个人信息</a>
             </li>
             </div>
         </ul>
@@ -104,5 +104,6 @@ span{
 }
 a{
     font-size: 120%;
+    font-weight: 550;
 }
 </style>

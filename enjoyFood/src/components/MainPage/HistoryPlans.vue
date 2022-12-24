@@ -8,11 +8,12 @@ export default {
   setup(props){
     const centerDialogVisible = ref(false)
     const plans = ref([
-        {id:"", p_name:"plan1 GOGOGO",p_description:"", p_time:"2022/10/5", calories_in:0,calories_consume:0},
-        {id:"", p_name:"plan2 KFC",p_description:"",  p_time:"2022/11/15", calories_in:0,calories_consume:0},
-        {id:"", p_name:"plan3 Crazy",p_description:"",  p_time:"2022/12/1", calories_in:0,calories_consume:0},
-        {id:"", p_name:"plan4 Vme50",p_description:"",  p_time:"2022/12/3", calories_in:0,calories_consume:0}
-        ]);
+        /*{id:"", p_name:"plan1 GOGOGO",p_description:"", p_time:"12-3 10:16", calories_in:0,calories_consume:0},
+        {id:"", p_name:"plan2 KFC",p_description:"",  p_time:"12-5 12:15", calories_in:0,calories_consume:0},
+        {id:"", p_name:"plan3 Crazy",p_description:"",  p_time:"12-5 12:26", calories_in:0,calories_consume:0},
+        {id:"", p_name:"plan4 Vme50",p_description:"",  p_time:"12-6 00:17", calories_in:0,calories_consume:0}
+        */]);
+    const mode = ref("None");
     // init:
         function init() {
             console.log("init")
@@ -28,13 +29,17 @@ export default {
                 console.log(response);
                 var field = {}
                 for(var i=0; i<response.data.num;i++){
-                    console.log(response.data.p_Array[i])
                     field = response.data.p_Array[i].fields
                     field["p_id"] = response.data.p_Array[i].pk
-                    console.log(field)
                     plans.value.push(field);
                 }
+                if(response.data.num > 0 && response.data.num < 4){
+                    mode.value = "less";
+                }else if(response.data.num >= 4 ){
+                    mode.value = "more";
+                }
                 console.log(plans);
+                console.log(mode.value);
             }).catch(function(error) {
                 console.log("error");
                 console.log(error);
@@ -44,7 +49,7 @@ export default {
         onMounted(() => {
             init();
         });
-    return {plans, centerDialogVisible};
+    return {plans, centerDialogVisible, mode};
   },
   data() {
     return {
@@ -74,32 +79,54 @@ export default {
 
 <template>
 <div class='body'>
-    <el-timeline>
+    <h2 style="font-weight: 700;"> 我的计划 </h2>
+    <el-timeline v-if='(mode == "more")'>
         <el-timeline-item center v-bind:timestamp="plans[0].p_time" placement="top">
             <el-card>
                 <h4>{{plans[0].p_name}}</h4>
-                <p>{{userName}} published at {{plans[0].p_time}}</p>
+                <p>{{userName}} 发表于 {{plans[0].p_time}}</p>
             </el-card>
         </el-timeline-item>
         <el-timeline-item center v-bind:timestamp="plans[1].p_time" placement="top">
             <el-card>
                 <h4>{{plans[1].p_name}}</h4>
-                <p>{{userName}} published at {{plans[1].p_time}}</p>
+                <p>{{userName}} 发表于 {{plans[1].p_time}}</p>
             </el-card>
         </el-timeline-item>
         <el-timeline-item center v-bind:timestamp="plans[2].p_time" placement="top">
             <el-card>
                 <h4>{{plans[2].p_name}}</h4>
-                <p>{{userName}} published at {{plans[2].p_time}}</p>
+                <p>{{userName}} 发表于 {{plans[2].p_time}}</p>
             </el-card>
         </el-timeline-item>
         <el-timeline-item center v-bind:timestamp="plans[3].p_time" placement="top">
             <el-card>
                 <h4>{{plans[3].p_name}}</h4>
-                <p>{{userName}} published at {{plans[3].p_time}}</p>
+                <p>{{userName}} 发表于 {{plans[3].p_time}}</p>
             </el-card>
         </el-timeline-item>
     </el-timeline>
+
+    <el-timeline v-if='(mode == "less")'>
+            <el-timeline-item center v-for="plan in plans" :key="plan.p_id"
+                v-bind:timestamp="plan.p_time"  placement="top"
+            >
+                <el-card>
+                    <div class="bottom">
+                        <h4 class="title">{{plan.p_name}}</h4>
+                        <el-button text @click="toPlanPage(plan.p_id)">
+                            更多信息
+                        </el-button>
+                    </div>
+                    <p>{{userName}} 发表于 {{plan.p_time}}</p>
+                </el-card>
+            </el-timeline-item>
+        </el-timeline>
+
+    <el-timeline v-if='(mode == "none")'>
+            <p>还没有制定计划哦</p>
+        </el-timeline>
+
     <div class="more">
         <el-button type="success" circle @click="centerDialogVisible = true" title="more">
             <template #icon><el-icon><DArrowRight /></el-icon></template>
@@ -108,7 +135,7 @@ export default {
 
     <el-dialog
         v-model="centerDialogVisible"
-        title="Warning"
+        title="所有计划"
         width="30%"
         align-center
     >
@@ -119,11 +146,11 @@ export default {
                 <el-card>
                     <div class="bottom">
                         <h4 class="title">{{plan.p_name}}</h4>
-                        <el-button text class="button" @click="toPlanPage(plan.p_id)">
-                            moreInfo
+                        <el-button text @click="toPlanPage(plan.p_id)">
+                            更多信息
                         </el-button>
                     </div>
-                    <p>{{userName}} published at {{plan.p_time}}</p>
+                    <p>{{userName}} 发表于 {{plan.p_time}}</p>
                 </el-card>
             </el-timeline-item>
         </el-timeline>

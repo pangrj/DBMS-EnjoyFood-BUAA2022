@@ -12,8 +12,8 @@ export default({
         return{imgRef}
     },
     date:{
-        planName: String,
-        planId: String,
+        plans: [{name: "意面计划", time: "12-17 10:38"},
+            {name: "考试后狠狠奖励自己", time: "12-18 23.11"}]
     },
     methods: {
       async initInfo(){
@@ -61,10 +61,13 @@ export default({
           :src= "imgRef"
           class="image"
         />
-        <div style="padding: 14px">
-          <span>{{planName}}</span>
+        <div style="padding:4px">
+          <h3 v-if="index==0">努力干饭</h3> 
+          <h3 v-if="index==1">考完试狠狠庆祝</h3> 
+          <span v-if="index==0">Test 发布于 12-7 11:10</span> 
+          <span v-if="index==1">Cedric 发布于 12-8 18:12</span> 
           <div class="bottom">
-            <el-button text class="button" @click="toPlanPage(this.planId)">more</el-button>
+            <el-button text class="button" @click="toPlanPage(this.planId)">更多信息</el-button>
           </div>
         </div>
       </el-card>
@@ -87,7 +90,7 @@ export default({
 }
 
 .button {
-  padding: 0;
+  padding-left: 200px;
   min-height: auto;
 }
 

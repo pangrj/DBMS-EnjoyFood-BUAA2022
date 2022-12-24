@@ -1,5 +1,4 @@
 <template>
-<div class="body">
     <!-- 菜品表格 -->
     <el-table :data="getFoodListHandler()" max-height="400" class="table">
         <!-- <el-table-column fixed prop="d_id" label="菜品编号" min-width="10%" class="table-row" align="center"/> -->
@@ -47,7 +46,6 @@
             </template>
         </el-table-column>
     </el-table>
-</div>
 </template>
 
 <script>
@@ -131,6 +129,7 @@ export default {
 </script>
 
 <style scoped>
+
     .table {
         margin: auto;
         padding-top: 2%;

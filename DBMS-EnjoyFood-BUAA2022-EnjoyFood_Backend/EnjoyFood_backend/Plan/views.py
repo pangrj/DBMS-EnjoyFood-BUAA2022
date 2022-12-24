@@ -54,6 +54,9 @@ def get_plan_details(request):
             ret_plans = json.loads(serializers.serialize('json', list(plan_list)))
 
             for plan in ret_plans:
+                user = User.objects.get(id=plan['fields']['user'])
+
+                plan['fields'] = dict(plan['fields'], **{'u_name': user.get_u_name()})
                 plan['fields']['p_time'] = get_time(plan.get('fields').get('p_time'))
 
             dishes = Dish.objects.filter(d_id__in=PlanOfDish.objects.filter(plan_id=p_id).values_list('dish_id'))
@@ -132,11 +135,7 @@ def get_latest_plan_calories(request):
             inClas += plan.calories_in
             outClas += plan.calories_consume
             calories_minus.append((plan.calories_in - plan.calories_consume))
-            # print(plan.p_time)
             time.append(get_time(str(plan.p_time)))
-            # time.append(plan.p_time)
-
-        # ret_plan = serializers.serialize('json', list(plan_list))
 
         ret.set_code(200)
         ret.set_message('get calories success')
@@ -147,6 +146,30 @@ def get_latest_plan_calories(request):
 
         ret.load_data({'inClas': inClas})
         ret.load_data({'outClas': outClas})
+        return JsonResponse(ret.json_type())
+    else:
+        ret.Http_error()
+        return JsonResponse(ret.json_type())
+
+
+def delete_plan(request):
+    ret = RET.get_instance()
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        plan_id = data.get('plan_id')
+
+        plan_list = Plan.objects.filter(id=plan_id)
+
+        if len(plan_list) == 0:
+            ret.set_code(400)
+            ret.set_message('No Such Plan!')
+        else:
+            plan = plan_list[0]
+            plan.delete()
+
+            ret.set_code(200)
+            ret.set_message('Plan Delete Success!')
+
         return JsonResponse(ret.json_type())
     else:
         ret.Http_error()

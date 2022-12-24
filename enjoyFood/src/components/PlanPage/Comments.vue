@@ -10,9 +10,9 @@ export default {
   setup(props) {
     const stars = ref(null);
     const colors = ref(['#99A9BF', '#F7BA2A', '#FF9900'])
-    const comments = ref([{r_content:"GOGOGO!", r_data: "12.1", r_star: 3.5, user:{u_name:"John"}},
-            {r_content:"KFC!", r_data: "12.2", r_star: 4.0, user:{u_name:"Bob"}},
-            {r_content:"Vme50!", r_data: "12.3", r_star: 4.5, user:{u_name:"John"}},
+    const comments = ref([{r_content:"GOGOGO!", r_data: "12.1", r_star: 3.5, u_name:"John", date: "12-1"},
+            {r_content:"KFC!", r_data: "12.2", r_star: 4.0, u_name:"Bob", date: "12-2"},
+            {r_content:"Vme50!", r_data: "12.3", r_star: 4.5, u_name:"John", date: "12-3"},
             ]);
     function initInfor(){
             console.log(props.planId)
@@ -27,7 +27,8 @@ export default {
                 for( var p in response.data.comments){
                     field = response.data.comments[p].fields
                     field["p_id"] = response.data.comments[p].pk
-                    console.log(field)
+                    field["date"] = field["r_data"].match(/([0-9]*-[0-9]*)( )([0-9]*:[0-9]*)/)[1]
+                    console.log(field.date)
                     comments.value.push(field)
                 }
                 console.log(comments);
@@ -92,8 +93,8 @@ export default {
                         <el-avatar :size="50" src= "../src/assets/male.jpg" />
                     </el-aside>
                     <el-aside width="7%">
-                        <p class="name">{{comment.user.u_name}}</p>
-                        <span class="date">{{comment.r_data}}</span>
+                        <p class="name">{{comment.u_name}}</p>
+                        <span class="date">{{comment.date}}</span>
                     </el-aside>
                     <el-main>
                         <el-rate

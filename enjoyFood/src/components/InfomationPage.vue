@@ -199,7 +199,7 @@ const handleClose = () => {
             <div class="nameAndemail">
                 <h2>{{userName}}</h2>
                 <p inline='true'>
-                    <el-icon class="emailIcon"><Message /></el-icon>emial
+                    <el-icon class="emailIcon"><Message /></el-icon>123@qq.com
                 </p>
             </div>
             </div>
@@ -225,7 +225,7 @@ const handleClose = () => {
     </div>
     </el-header>
     <el-container class = "down">
-    <el-aside width="15%">
+    <el-aside width="10%">
     </el-aside>
 
     <el-main>
@@ -234,14 +234,14 @@ const handleClose = () => {
             <el-collapse v-model="activeName" accordion>
                 <el-collapse-item name="1">
                     <template #title style="font-weight: bold">
-                        <p> Up-to-Date Notices </p>
+                        <p class="th"> 通知信息 </p>
                     </template>
                     <div>
                     </div>
                 </el-collapse-item>
                 <el-collapse-item name="2">
                     <template #title style="font-weight: bold">
-                        <p> Personal Information </p>
+                        <p class="th"> 个人信息 </p>
                     </template>
                     <div>
                         <personal :information="information" />
@@ -255,30 +255,23 @@ const handleClose = () => {
                 </el-collapse-item>
                 <el-collapse-item name="3">
                     <template #title style="font-weight: bold">
-                        <p> Health </p>
+                        <p class="th"> 健康关注 </p>
                     </template>
                     <div style="width=100%; height=100%">
                         <BMI :userName="userName"></BMI>
                     </div>
                 </el-collapse-item>
-                <el-collapse-item name="4">
-                    <template #title style="font-weight: bold">
-                        <p> Others </p>
-                    </template>
-                    <div>
-                    </div>
-                </el-collapse-item>
             </el-collapse>
         </div>
     </el-main>
-    <el-aside width="15%">
+    <el-aside width="10%">
     </el-aside>
     </el-container>
     </el-container>
 
     <el-dialog
         v-model="dialogVisibleEditInfo"
-        title="Tips"
+        title="修改个人信息"
         width="30%"
         :before-close="handleClose"
     >
@@ -289,34 +282,34 @@ const handleClose = () => {
         :model="information"
         style="max-width: 460px; padding-top:20px"
         >
-        <el-form-item label="username">
+        <el-form-item label="用户名">
             <el-input v-model="information.u_name" />
         </el-form-item>
         <el-form-item label="id">
             <el-input disabled v-model="information.u_id" />
         </el-form-item>
-        <el-form-item label="email">
+        <el-form-item label="邮箱">
             <el-input v-model="information.u_email" />
         </el-form-item>
-        <el-form-item label="position">
+        <el-form-item label="位置">
             <el-input v-model="information.u_position" />
         </el-form-item>
-        <el-form-item label="age">
+        <el-form-item label="年龄">
             <el-input v-model="information.u_age" />
         </el-form-item>
-        <el-form-item label="height">
+        <el-form-item label="身高">
             <el-input v-model="information.u_height" />
         </el-form-item>
-        <el-form-item label="weight">
+        <el-form-item label="体重">
             <el-input v-model="information.u_weight" />
         </el-form-item>
-        <el-form-item label="Gender">
+        <el-form-item label="性别">
             <el-radio-group v-model="information.u_gender">
                 <el-radio label="True" />
                 <el-radio label="False" />
             </el-radio-group>
         </el-form-item>
-        <el-form-item label="avatar">
+        <el-form-item label="头像">
             <input type="file" @change="getImageFile" id="img" />
         </el-form-item>
         </el-form>
@@ -349,7 +342,7 @@ const handleClose = () => {
 
     <el-dialog
         v-model="dialogVisibleChangePass"
-        title="Tips"
+        title="修改密码"
         width="30%"
         :before-close="handleClose"
     >
@@ -436,6 +429,10 @@ const handleClose = () => {
     width: auto;
     height: auto;
     padding: 13px 100px 8px;
+}
+.th{
+    font-weight: 550;
+    font-size: 120%;
 }
 .photo{
     display: flex;

@@ -49,7 +49,7 @@ export default({
           <el-icon :style="iconStyle">
             <user />
           </el-icon>
-          Username
+          用户名
         </div>
       </template>
       <span>{{information.u_name}}</span>
@@ -60,7 +60,7 @@ export default({
           <el-icon :style="iconStyle">
             <Message />
           </el-icon>
-            Emial
+            邮箱
         </div>
       </template>
       <span>{{information.u_email}}</span>
@@ -71,7 +71,7 @@ export default({
           <el-icon :style="iconStyle">
             <Male />
           </el-icon>
-            Gender
+            性别
         </div>
       </template>
       <span>{{gender}}</span>
@@ -82,7 +82,7 @@ export default({
           <el-icon :style="iconStyle">
             <location />
           </el-icon>
-          Position
+          地址
         </div>
       </template>
       <span>{{information.u_position}}</span>
@@ -93,10 +93,11 @@ export default({
           <el-icon :style="iconStyle">
             <tickets />
           </el-icon>
-          Remarks
+          生活圈
         </div>
       </template>
-      <el-tag size="small">School</el-tag>
+      <el-tag size="small" style="margin-right:10px">北航生活圈</el-tag>
+      <el-tag size="small">五道口生活圈</el-tag>
     </el-descriptions-item>
     <el-descriptions-item>
       <template #label>
@@ -113,9 +114,9 @@ export default({
       <template #label>
         <div class="cell-item">
           <el-icon :style="iconStyle">
-            <office-building />
+            <el-icon><Memo /></el-icon>
           </el-icon>
-          Age
+          年龄
         </div>
       </template>
       <span>{{information.u_age}}</span>
@@ -124,23 +125,23 @@ export default({
       <template #label>
         <div class="cell-item">
           <el-icon :style="iconStyle">
-            <office-building />
+            <el-icon><Memo /></el-icon>
           </el-icon>
-          Height
+          身高
         </div>
       </template>
-      <span>{{information.u_height}}</span>
+      <span>{{information.u_height}}cm</span>
     </el-descriptions-item>
     <el-descriptions-item>
       <template #label>
         <div class="cell-item">
           <el-icon :style="iconStyle">
-            <office-building />
+            <el-icon><Memo /></el-icon>
           </el-icon>
-          Weight
+          体重
         </div>
       </template>
-      <span>{{information.u_weight}}</span>
+      <span>{{information.u_weight}}kg</span>
     </el-descriptions-item>
   </el-descriptions>
   </div>

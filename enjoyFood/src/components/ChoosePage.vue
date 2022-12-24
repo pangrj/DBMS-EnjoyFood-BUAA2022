@@ -128,7 +128,6 @@ export default {
         
         <p></p>
         <div style="height:10%"></div>
-
         <!-- 已选按钮 -->
         <el-button type="primary" @click="drawer2 = true">
             已选内容
@@ -192,16 +191,18 @@ input {
 }
 .content {
   height: 600px;
+  /* height: 70%; */
   text-align: center;
   /* margin-bottom: 10px; */
 }
 
 .ChoosePage{
-    background: url('../assets/chopping_board.jpg') no-repeat center;
+    background: url('../assets/123.jpg') no-repeat center;
+    opacity: 0.7;
+    background-size: cover;
     margin-bottom: 0px;
     margin-left: 0px;
     margin-right: 0px;
-    opacity: 0.75;
     padding-top: 50px;
     padding-bottom: 50px;
 }
@@ -265,11 +266,11 @@ body {
     color: #333;
     text-align: center;
     /* line-height: 160px; */
-    height: 800px;
+    height: 1000px;
     padding-top: 5 !important;
   }
 
   body > .el-container {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
 </style>

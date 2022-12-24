@@ -25,6 +25,8 @@ python manage.py makemigrations
 第二步
 ```shell
 python manage.py migrate
+或者
+python manage.py migrate --fake
 ```
 第三步
 ```shell
