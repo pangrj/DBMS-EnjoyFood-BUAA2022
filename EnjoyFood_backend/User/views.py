@@ -79,8 +79,8 @@ def modify_infor(request):
         data = request.POST
         u_name = data.get('u_name')
         print(u_name)
-        u_password = data.get('u_password')
-        print(u_password)
+        # u_password = data.get('u_password')
+        # print(u_password)
         u_height = data.get('u_height')
         print(u_height)
         u_weight = data.get('u_weight')
@@ -100,23 +100,23 @@ def modify_infor(request):
             ret.set_message("Did not Find the User!")
         else:
             user = user_list[0]
-            if len(u_password) == 0:
-                ret.set_code(401)
-                ret.set_message("Please Enter A correct Password!")
-            else:
-                user.set_u_password(u_password)
-                user.set_u_position(u_position)
-                user.set_u_gender(u_gender)
-                user.set_u_email(u_email)
-                user.set_u_avatar(u_avatar)
-                user.set_u_height(u_height)
-                user.set_u_weight(u_weight)
-                user.u_age = u_age
-                user.save()
-                ret.set_code(200)
-                ret.set_message("Modify Success!")
-                avatar_addr = user.get_avatar_url()
-                ret.load_data({'img_path': avatar_addr})
+            # if len(u_password) == 0:
+            #     ret.set_code(401)
+            #     ret.set_message("Please Enter A correct Password!")
+            # else:
+            #     user.set_u_password(u_password)
+            user.set_u_position(u_position)
+            user.set_u_gender(u_gender)
+            user.set_u_email(u_email)
+            user.set_u_avatar(u_avatar)
+            user.set_u_height(u_height)
+            user.set_u_weight(u_weight)
+            user.u_age = u_age
+            user.save()
+            ret.set_code(200)
+            ret.set_message("Modify Success!")
+            avatar_addr = user.get_avatar_url()
+            ret.load_data({'img_path': avatar_addr})
         return JsonResponse(ret.json_type())
     else:
         ret.Http_error()
