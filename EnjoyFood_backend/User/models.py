@@ -12,7 +12,7 @@ class User(models.Model):
 
     # u_id = models.IntegerField(primary_key=True, null=False)
     u_password = models.CharField(max_length=20, null=False)
-    u_name = models.CharField(max_length=20, null=False, unique=True)
+    u_name = models.CharField(max_length=20, null=False, unique=True, primary_key=False)
     u_position = models.CharField(max_length=30, null=True)
     u_gender = models.BooleanField(null=True)
     u_email = models.EmailField(null=True)
