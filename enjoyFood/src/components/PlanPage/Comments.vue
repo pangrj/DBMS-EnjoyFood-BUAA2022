@@ -57,7 +57,7 @@ export default {
             ).then(function(response) {
                 console.log(response);
             });
-        this.initInfor();
+            this.$router.go(0);
     }
   },
   mounted(){
