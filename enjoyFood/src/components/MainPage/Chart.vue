@@ -1,7 +1,7 @@
 <script type="text/javascript">
 import * as echarts from 'echarts'
 import request from '../../https/axios.js'
-import {ref, reactive, onMounted} from 'vue'
+import {ref, reactive, onMounted, toRaw} from 'vue'
 
 export default {
     props: {
@@ -12,8 +12,8 @@ export default {
     },
     data(){
         return {
-            lineTimeData: [], 
-            lineOpinionData: [],
+            lineTimeData: ["12-1","12-2","12-3"], 
+            lineOpinionData: [1,2,3],
             sectorPartName: ["takeIn", "cost", "left"],
             sectorPartData: [300, 100, 200],
         }
@@ -27,14 +27,20 @@ export default {
             );
             console.log("response");
             console.log(response);
+            var takein = 0
+            var consume = 0
+
             for(var i=0; i<response.data.num; i++){
                 var field = response.data.cals_in_list[i]-response.data.cals_minus_list[i];
                 this.lineOpinionData[i] = (field);
                 this.lineTimeData[i] = (response.data.time[i])
+                takein = takein + response.data.cals_in_list[i]
+                consume = consume + response.data.cals_minus_list[i]
             }
             this.sectorPartName =  ["takeIn", "cost", "left"]
-            this.sectorPartData = [300, 100, 200]
-            console.log(this.lineOpinionData.Target)
+            this.sectorPartData = [toRaw(takein), toRaw(consume), toRaw(takein - consume)]
+            console.log(toRaw(this.lineOpinionData))
+            this.drawLine('lineChart');
         },
         drawLine(id) {
 				this.lineCharts = echarts.init(document.getElementById(id))
@@ -72,7 +78,7 @@ export default {
                         axisTick:{
                             alignWithLabel:true //保证刻度线和标签对齐
                         },
-                        data: this.lineTimeData //x坐标的名称
+                        data: toRaw(this.lineTimeData) //x坐标的名称
 					
 					},
 					yAxis: {
@@ -109,7 +115,7 @@ export default {
 							}
                             
                         },
-						data: this.lineOpinionData.Target
+						data: toRaw(this.lineOpinionData)
 					}]
 				})
 			},
@@ -165,7 +171,6 @@ export default {
         console.log(this.lineTimeData)
         console.log(["1","2","3"])
         this.$nextTick(function() {
-		this.drawLine('lineChart');
         setTimeout(() => {
                 this.drawSector();
                 }, 200);

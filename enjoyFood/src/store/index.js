@@ -110,6 +110,12 @@ export default createStore({
       state.lifeCircle = circle;
     }
   },
+  clearChosenFood(state) {
+    state.chosenFood = []
+  },
+  clearChosenSport(state) {
+    state.chosenSport = []
+  },
   actions: {
     // asyncinitFoodList({commit}) {
     //     axios.get("http://iwenwiki.com/api/generator/list.php")

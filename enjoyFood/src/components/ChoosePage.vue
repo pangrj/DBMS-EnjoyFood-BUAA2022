@@ -2,7 +2,7 @@
 import { useRoute } from "vue-router";
 import {ref} from 'vue'
 import { ElMessageBox } from 'element-plus'
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import axios from "axios";
 
 import ChooseView from './ChoosePage/ChooseView.vue';
@@ -57,6 +57,7 @@ export default {
         },
     },
     methods:{
+        ...mapMutations(["clearChosenFood", "clearChosenSport"]),
         handleClose(done) {
             this.$confirm('确认关闭？')
             .then(_ => {
@@ -98,6 +99,17 @@ export default {
                             console.log(res.data);
                         }
                     })
+                    //清空已选
+                this.clearChosenFood();
+                this.clearChosenSport();
+                    //跳转主页面
+                    this.$router.push({
+                        path: '/MainPage',
+                        query: {
+                            userName: this.userName,
+                        },
+                    });
+                     
                 })
                 .catch(() => {
                     // catch error
