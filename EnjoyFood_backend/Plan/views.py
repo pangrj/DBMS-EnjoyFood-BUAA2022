@@ -190,7 +190,7 @@ def get_suggest(request):
         else:
             BMI = user_list[0].get_BMI()
 
-            plan_list = list(Plan.objects.all())
+            plan_list = list(Plan.objects.exclude(user_id=user_list[0].get_u_id()))
             ret_plans = json.loads(serializers.serialize('json', list(plan_list)))
             # ret_plans.sort(key=lambda plan: abs(BMI - User.objects.get(plan['fields']['user']).get_BMI()))
             # print(type(ret_plans))
@@ -200,7 +200,6 @@ def get_suggest(request):
 
                 plan['fields'] = dict(plan['fields'], **{'u_name': user.get_u_name()})
                 plan['fields']['p_time'] = get_time(plan.get('fields').get('p_time'))
-
 
             # for plan in ret_plans:
             #     # print(plan)
