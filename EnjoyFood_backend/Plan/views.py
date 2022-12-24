@@ -147,3 +147,27 @@ def get_latest_plan_calories(request):
     else:
         ret.Http_error()
         return JsonResponse(ret.json_type())
+
+
+def delete_plan(request):
+    ret = RET.get_instance()
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        plan_id = data.get('plan_id')
+
+        plan_list = Plan.objects.filter(id=plan_id)
+
+        if len(plan_list) == 0:
+            ret.set_code(400)
+            ret.set_message('No Such Plan!')
+        else:
+            plan = plan_list[0]
+            plan.delete()
+
+            ret.set_code(200)
+            ret.set_message('Plan Delete Success!')
+
+        return JsonResponse(ret.json_type())
+    else:
+        ret.Http_error()
+        return JsonResponse(ret.json_type())
