@@ -54,6 +54,9 @@ def get_plan_details(request):
             ret_plans = json.loads(serializers.serialize('json', list(plan_list)))
 
             for plan in ret_plans:
+                user = User.objects.get(id=plan['fields']['user'])
+
+                plan['fields'] = dict(plan['fields'], **{'u_name': user.get_u_name()})
                 plan['fields']['p_time'] = get_time(plan.get('fields').get('p_time'))
 
             dishes = Dish.objects.filter(d_id__in=PlanOfDish.objects.filter(plan_id=p_id).values_list('dish_id'))
