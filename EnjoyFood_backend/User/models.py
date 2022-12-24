@@ -79,3 +79,10 @@ class User(models.Model):
 
     def set_u_weight(self, u_weight):
         self.u_weight = u_weight
+
+    def get_BMI(self):
+        if self.u_weight == 0 or self.u_weight is None or \
+                self.u_height == 0 or self.u_height is None:
+            return 22.5
+
+        return self.u_weight / ((self.u_height / 100) ** 2)
