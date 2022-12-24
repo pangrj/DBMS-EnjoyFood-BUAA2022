@@ -79,7 +79,7 @@ export default {
 
 <template>
 <div class='body'>
-    <h2 style="font-weight: 700;"> 我的计划 </h2>
+    <h2 style="font-weight: 700; color:black"> 我的计划 </h2>
     <el-timeline v-if='(mode == "more")'>
         <el-timeline-item center v-bind:timestamp="plans[0].p_time" placement="top">
             <el-card>

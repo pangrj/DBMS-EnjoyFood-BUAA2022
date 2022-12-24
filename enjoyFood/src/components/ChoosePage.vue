@@ -87,7 +87,7 @@ export default {
                 }
                 console.log("queren")
                     axios.post("http://localhost:8000/plan/addPlan/", JSON.stringify({
-                        u_name: "fire",
+                        u_name: this.userName,
                         d_id: this.getChosenFoodId,
                         sp_id: this.getChosenSportId,
                         p_name: this.p_name,

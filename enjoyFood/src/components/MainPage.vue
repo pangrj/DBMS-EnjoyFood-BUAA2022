@@ -88,9 +88,9 @@ export default {
                 <el-header>
                     <div title='chart'><Chart v-bind:userName="userName"/></div>
                 </el-header>
-                <el-main style="margin-top: 5%; margin-right: 12%; margin-left: 5%">
+                <el-main style="margin-top: 0; margin-right: 12%; margin-left: 5%">
                     <div class='cards'>
-                        <!--RecommendCard v-bind:userName="userName"/-->
+                        <h2 style="margin-bottom:4%; margin-right:20%; opacity=1; font-weight:700; color:black ">个性化探索队列；</h2>
                         <el-scrollbar>
                             <div class="scrollbar-flex-content">
                             <p v-for="plan in plans" :key="plan.p_id" class="scrollbar-demo-item">

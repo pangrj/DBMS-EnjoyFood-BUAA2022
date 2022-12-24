@@ -413,6 +413,7 @@ const handleClose = () => {
         width="30%"
         :before-close="handleClose"
     >
+    <h2>点击登出</h2>
         <template #footer>
             <span class="dialog-footer">
             <el-button type="primary" @click="logout()" style="margin-right:43%">
