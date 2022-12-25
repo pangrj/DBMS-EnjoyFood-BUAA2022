@@ -116,12 +116,14 @@ export default {
                 console.log(response);
             })
             ElMessage.success('删除成功 !')
-            this.$router.push({
+            setTimeout( () => {
+                this.$router.push({
                     path: '/MainPage',
                     query: {
                         userName: this.username,
                     },
                 });
+            }, 50);
         },
         sureToDelete(){
             if(this.username != this.plan.username){

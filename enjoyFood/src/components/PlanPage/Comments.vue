@@ -57,7 +57,9 @@ export default {
             ).then(function(response) {
                 console.log(response);
             });
-            this.$router.go(0);
+            setTimeout( () => {
+                this.$router.go(0);
+            }, 500);
     }
   },
   mounted(){
