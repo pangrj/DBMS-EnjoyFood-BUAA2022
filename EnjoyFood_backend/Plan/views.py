@@ -209,7 +209,7 @@ def get_suggest(request):
             #     print('sdadas', User.objects.get(id=plan['fields']['user']).get_BMI())
             #     print(abs(BMI - User.objects.get(id=plan['fields']['user']).get_BMI()))
 
-            sorted(ret_plans, key=lambda plan:
+            ret_plans = sorted(ret_plans, key=lambda plan:
             abs(BMI - User.objects.get(id=plan['fields']['user']).get_BMI()))
 
             ret.set_code(200)
