@@ -141,7 +141,7 @@ export default {
     <div class="Body">
         <el-header class="header">
                 <h1 style="color: white">{{plan.p_name}}</h1>
-                <h3 style="color: white">from fire{{plan.User}}</h3>
+                <h3 style="color: white">from {{plan.username}}</h3>
                 <h3 style="color: white">{{plan.p_description}}</h3>
         </el-header>
         <el-main>
